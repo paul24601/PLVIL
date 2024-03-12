@@ -18,10 +18,10 @@
         
       </a-marker>
 
-      <a-marker type="barcode" value="1" on-markerfound="playSound">
+      <a-marker type="barcode" value="1">
         <a-plane id="imagePlane" position="0 0 0" rotation="-90 0 0" width="5.4" height="5.4" material="shader: flat; scale: 2 2 2" src="assets/sample-ar-2.png"></a-plane>
         <!--play sound when marker is found-->
-        <a-sound id="sound1" src="assets/kaching.mp3" autoplay="false"></a-sound>
+        <a-sound on="markerFound" src="assets/kaching.mp3" autoplay="true"></a-sound>
       </a-marker>
 
       <a-marker type="barcode" value="2">
@@ -34,7 +34,7 @@
       <a-assets>
         <a-asset-item id="animated-asset" src="https://raw.githubusercontent.com/nicolocarpignoli/nicolocarpignoli.github.io/master/ar-playground/models/CesiumMan.gltf"></a-asset-item>
       </a-assets>
-      
+
       <a-marker id="animated-marker" type="barcode" value="3">
           <a-entity
               gltf-model="#animated-asset"
@@ -80,10 +80,5 @@
         var box = document.querySelector('a-box');
         box.setAttribute('color', 'red');
     }
-    //play sound when marker is found
-    function playSound() {
-    var sound = document.querySelector('#sound1');
-    sound.components.sound.playSound();
-}
 </script>
 </html> 
