@@ -21,7 +21,7 @@
         <a-plane id="imagePlane" position="0 0 0" rotation="-90 0 0" width="5.4" height="5.4" material="shader: flat; scale: 2 2 2" src="assets/sample-ar-2.png"></a-plane></a-entity>
       </a-marker>
 
-      <a-marker preset="hiro">
+      <a-marker type="barcode" value="2">
         <a-box color="#1442CC" position="0 0 0" scale="1 1 1" rotation="-90 0 0" 
        animation="property: rotation; to: 0 90 0; loop: true; dur: 2000" material="opacity: 0.8;" onclick="changeColor"></a-box>
       </a-marker>
@@ -32,7 +32,7 @@
       </a-assets>
 
 
-      <a-marker id="animated-marker" preset="kanji">
+      <a-marker id="animated-marker" type="barcode" value="3">
           <a-entity
               gltf-model="#animated-asset"
               scale="2"
