@@ -21,9 +21,11 @@
       <a-marker type="barcode" value="1">
         <a-plane id="imagePlane" position="0 0 0" rotation="-90 0 0" width="5.4" height="5.4" material="shader: flat; scale: 2 2 2" src="assets/sample-ar-2.png"></a-plane>
         <!--play sound when marker is found-->
-        <a-sound on="markerFound" src="assets/kaching.mp3" autoplay="false"></a-sound>
+        <a-sound on="markerFound" src="assets/kaching.mp3" position="0 0 0"></a-sound>
       </a-marker>
 
+      <a-sound on="markerFound" src="assets/kaching.mp3" position="0 0 0"></a-sound>  
+      
       <a-marker type="barcode" value="2">
         <a-box color="#1442CC" position="0 0 0" scale="1 1 1" rotation="-90 0 0" 
        animation="property: rotation; to: 0 90 0; loop: true; dur: 2000" material="opacity: 0.8;" onclick="changeColor"></a-box>
