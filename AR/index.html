@@ -14,17 +14,19 @@
       id="scene">
 
       <a-marker type="barcode" value="0">
-        <a-plane id="imagePlane" position="0 1 0" rotation="-90 0 0" width="5.4" height="5.4" material="shader: flat; scale: 2 2 2 " src="assets/sample-ar-1.png"></a-plane></a-entity>
+        <a-plane id="imagePlane" position="0 1 0" rotation="-90 0 0" width="5.4" height="5.4" material="shader: flat; scale: 2 2 2 " src="assets/sample-ar-1.png"></a-plane>
         <a-sound src="assets/ding.mp3" autoplay="true"></a-sound>
       </a-marker>
 
       <a-marker type="barcode" value="1">
-        <a-plane id="imagePlane" position="0 0 0" rotation="-90 0 0" width="5.4" height="5.4" material="shader: flat; scale: 2 2 2" src="assets/sample-ar-2.png"></a-plane></a-entity>
+        <a-plane id="imagePlane" position="0 0 0" rotation="-90 0 0" width="5.4" height="5.4" material="shader: flat; scale: 2 2 2" src="assets/sample-ar-2.png"></a-plane>
+        <a-sound src="assets/kaching.mp3" autoplay="true"></a-sound>
       </a-marker>
 
       <a-marker type="barcode" value="2">
         <a-box color="#1442CC" position="0 0 0" scale="1 1 1" rotation="-90 0 0" 
        animation="property: rotation; to: 0 90 0; loop: true; dur: 2000" material="opacity: 0.8;" onclick="changeColor"></a-box>
+       <a-sound src="assets/level-up.mp3" autoplay="true"></a-sound>
       </a-marker>
 
       <!--3d model-->
@@ -39,6 +41,7 @@
               scale="2"
               rotation="-90 0 0">
           </a-entity>
+          <a-sound src="assets/level-up.mp3" autoplay="true"></a-sound>
       </a-marker>
 
 
