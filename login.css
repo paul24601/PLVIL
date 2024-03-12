@@ -1,0 +1,118 @@
+.container {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: url('login-bg.png') no-repeat center center fixed;
+    background-size: cover;
+    color: white; 
+}
+
+.body {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    height: 100vh; 
+}
+
+.login-container {
+    position: relative; 
+}
+
+.login-box {
+    width: 380px; 
+    height: 420px; 
+    background: rgba(255, 255, 255, 0.3); 
+    border-radius: 15px; 
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+    padding: 40px; 
+    text-align: center;
+}
+
+.shadow {
+    position: absolute;
+    top: calc(100% + 15px); 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    height: 25px; 
+    background: rgba(0, 0, 0, 0.2); 
+    border-radius: 50%;
+}
+
+.login-box .welcome {
+    margin-bottom: 30px; 
+}
+
+.login-box .welcome img {
+    max-width: 120px; 
+    height: auto;
+}
+
+.login-box .welcome p {
+    margin-top: 15px; 
+    font-weight: bolder;
+    font-size: 28px; 
+}
+
+.input-box {
+    margin-bottom: 20px;
+    text-align: center; 
+}
+
+.input-container {
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    position: relative;
+}
+
+.input-container input {
+    width: calc(100% - 80px); 
+    padding: 15px 40px 15px 50px;
+    border: none;
+    border-bottom: 2px solid #ccc; 
+    background: transparent;
+    box-sizing: border-box; 
+    outline: none; 
+    color: white; 
+    transition: border-bottom 0.3s; 
+    font-size: 18px; 
+}
+
+.input-container input::placeholder {
+    color: rgb(217, 222, 226); 
+}
+
+.input-container input:focus {
+    border-bottom: 3px solid white; 
+}
+
+.input-container img {
+    width: 25px; 
+    height: auto;
+    position: absolute;
+    left: 20px; 
+    margin-left: 35px;
+    margin-right: 15px; 
+}
+
+.button {
+    width: 90%;
+    padding: 10px 0; 
+    background-color: #648bb4;
+    color: white;
+    border: none;
+    border-radius: 30px; 
+    margin-top: 18px; 
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+    text-decoration: none; 
+    display: inline-block;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+

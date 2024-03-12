@@ -1,0 +1,11 @@
+Model Information:
+* title:	Velociraptor
+* source:	https://sketchfab.com/3d-models/velociraptor-59910f5d62f74e558499c166738b0e6d
+* author:	absol (https://sketchfab.com/absol_cg)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Velociraptor" (https://sketchfab.com/3d-models/velociraptor-59910f5d62f74e558499c166738b0e6d) by absol (https://sketchfab.com/absol_cg) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
