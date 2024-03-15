@@ -22,6 +22,13 @@
           curSound.components.sound.stopSound();
         });
     }});
+    
+
+    //change picture of a plane when clicked
+    function changePicture(planeId) {
+        var plane = document.getElementById(planeId);
+        plane.setAttribute('src', 'assets/asset.jpg'); // Change the image source accordingly
+    }
   </script>
   <body style="margin : 0px; overflow: hidden;">
     <a-scene 
@@ -44,6 +51,7 @@
         raycaster="objects: .clickable"
         emitevents="true"
         cursor="fuse: false; rayOrigin: mouse;"
+        onclick="changePicture('#imagePlane1')"
         >
         <a-plane 
           id="imagePlane1" 
