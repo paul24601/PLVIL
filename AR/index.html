@@ -56,9 +56,8 @@
     //when marker is found.
     AFRAME.registerComponent('markerhandler', {
     init: function () {
-      var soundEl = document.querySelector('#sound');
       this.el.sceneEl.addEventListener('markerFound', () => {
-        soundEl.playSound;
+        document.querySelector('#sound').components.sound.playSound();
       })
     }
   });
