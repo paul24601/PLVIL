@@ -4,7 +4,8 @@
   <!-- we import arjs version without NFT but with marker + location based support -->
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
   <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
-  <!--this is a sample comment-->
+  <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script> 
   <body style="margin : 0px; overflow: hidden;">
     <a-scene 
       embedded
@@ -15,9 +16,8 @@
 
       <a-marker type="barcode" value="0">
         <audio id="sound" src="assets/kaching.mp3"></audio>
-        <a-entity markerhandler>
-          <a-plane id="imagePlane" position="0 1 0" rotation="-90 0 0" width="5.4" height="5.4" material="shader: flat; scale: 2 2 2 " src="assets/sample-ar-1.png"></a-plane>
-        </a-entity>
+        <a-entity markerhandler></a-entity>
+        <a-plane id="imagePlane" position="0 1 0" rotation="-90 0 0" width="5.4" height="5.4" material="shader: flat; scale: 2 2 2 " src="assets/sample-ar-1.png"></a-plane>
       </a-marker>
 
       <a-marker type="barcode" value="1">
