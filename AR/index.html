@@ -14,7 +14,7 @@
       id="scene">
 
       <a-marker type="barcode" value="0">
-        
+        <audio id="sound" src="assets/kaching.mp3"></audio>
         <a-entity sound="src: url(assets/kaching.mp3); autoplay:false; on:click;">
           <a-plane id="imagePlane" position="0 1 0" rotation="-90 0 0" width="5.4" height="5.4" material="shader: flat; scale: 2 2 2 " src="assets/sample-ar-1.png"></a-plane>
         </a-entity>
@@ -22,8 +22,6 @@
 
       <a-marker type="barcode" value="1">
         <a-plane id="imagePlane" position="0 0 0" rotation="-90 0 0" width="5.4" height="5.4" material="shader: flat; scale: 2 2 2" src="assets/sample-ar-2.png"></a-plane>
-        <!--play sound when marker is found-->
-        <a-sound on="markerFound" src="assets/kaching.mp3" position="0 0 0"></a-sound>
       </a-marker>
 
       <a-sound on="markerFound" src="assets/kaching.mp3" position="0 0 0"></a-sound>  
@@ -55,6 +53,16 @@
   </body>
 
   <script>
+    //when marker is found.
+    AFRAME.registerComponent('markerhandler', {
+    init: function () {
+      var soundEl = document.querySelector('#sound');
+      this.el.sceneEl.addEventListener('markerFound', () => {
+        soundEl.playSound;
+      })
+    }
+  });
+
     window.addEventListener('load', () => {
     const camera = document.querySelector('[camera]');
     const marker = document.querySelector('a-marker');
