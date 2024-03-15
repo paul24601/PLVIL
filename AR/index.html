@@ -15,7 +15,7 @@
 
       <a-marker type="barcode" value="0">
         <audio id="sound" src="assets/kaching.mp3"></audio>
-        <a-entity sound="src: url(assets/kaching.mp3); autoplay:false; on:click;">
+        <a-entity markerhandler>
           <a-plane id="imagePlane" position="0 1 0" rotation="-90 0 0" width="5.4" height="5.4" material="shader: flat; scale: 2 2 2 " src="assets/sample-ar-1.png"></a-plane>
         </a-entity>
       </a-marker>
