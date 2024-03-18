@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="admin.css">
+    <script src="https://use.fontawesome.com/0c7a3095b5.js"></script>
+</head>
+<body>
+    <div id="container">
+        <div class="sidebar" id="sidebar">
+            <h3 class="logo">PLVIL</h3>
+            <div class="sidebar_user">
+                <div class="user-info">
+                    <img src="user-image.png" alt="user-image" id="userImage" />
+                    <span>Admin</span>
+                </div>
+            </div>
+            <div class="menu">
+                <ul class="menu_list">
+                    <li class="menuActive">
+                        <a href="index.php"> <i class="fa fa-book"></i> <span class="menuText">Books</span></a>
+                    </li>
+                    <li>
+                        <a href="tnc-ad.html" id="tnc-ad"> <i class="fa fa-braille"></i> <span class="menuText">Tables and Chairs</span></a>
+                    </li>                                      
+                </ul>
+            </div>
+        </div>
+        <div class="content_container" id="contentContainer">
+            <div class="topNav">
+                <a href="#" id="toggleBtn"><i class="fa fa-navicon"></i></a>
+                <a href="#" id="logoutBtn"><i class="fa fa-sign-out"></i> Logout</a>
+            </div>
+            <div class="content">
+                <div class="main_content"></div>
+            </div>
+        </div>    
+    </div>
+
+    <script src="admin.js"></script>    
+</body>
+</html>
