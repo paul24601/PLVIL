@@ -1,0 +1,79 @@
+/* Container styles */
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+}
+
+/* Header styles */
+.header {
+    background-color: rgb(255, 255, 255); /* White background */
+    display: flex;
+    align-items: center;
+    color: #004aad; /* Blue text */
+    text-align: center;
+}
+
+.header-bar {
+    display: flex;
+    align-items: center;
+}
+
+.bookInventory {
+    padding: 20px; /* Adjusted padding */
+    margin: 0; /* Remove default margin */
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Align to the right */
+}
+
+img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.add-book, .search {
+    width: 45%;
+}
+
+.add-book h2, .search h2 {
+    margin-top: 0;
+}
+
+.add-book button {
+    margin-bottom: 10px;
+}
+
+span {
+    color: rgb(53, 51, 51);
+    font-weight: bold;
+}
+
+.book,
+.inventory {
+    padding: 15px; /* Adjusted padding */
+    margin: 0; /* Remove default margin */
+    display: inline-block; /* Make the element inline-block */
+}
+
+.book {
+    background-color: #004aad; /* Blue background */
+    color: white; /* White text */
+}
+
+.inventory {
+    color: #004aad; /* Blue text */
+    background-color: white; /* White background */
+}

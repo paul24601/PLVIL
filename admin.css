@@ -16,7 +16,7 @@ body {
 .sidebar {
     width: 20%;
     background: #303030;
-    height: 100vh;
+    height: 100vh; 
     transition: width 0.3s ease;
 }
 
@@ -30,8 +30,9 @@ h3.logo {
     color: rgb(42, 42, 146);
     font-size: 42px; 
     text-align: center;
-    margin-top: 20px; 
-    margin-bottom: 20px; 
+    margin: 0; /* Add margin: 0; to remove default margin */
+    padding-top: 20px; /* Add padding to the top instead */
+    padding-bottom: 20px; /* Add padding to the bottom instead */
 }
 
 .sidebar_user {
@@ -122,4 +123,17 @@ ul.menu_list li:hover {
     color: #fff;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
+}
+
+.content {
+    display: flex; /* Use flexbox to align items vertically */
+    padding: 30px; /* Add padding to the content area */
+}
+
+.main_content {
+    background-color: #fff; /* Set background color for the main content */
+    border-radius: 5px; /* Add border radius for a rounded appearance */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow for a subtle depth effect */
+    width: 100%; /* Set width to fill up the entire available space */
+    height: 830px;
 }

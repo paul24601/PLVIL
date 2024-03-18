@@ -20,10 +20,10 @@
             <div class="menu">
                 <ul class="menu_list">
                     <li class="menuActive">
-                        <a href=""> <i class="fa fa-book"></i> <span class="menuText">Books</span></a>
+                        <a href="index.php"> <i class="fa fa-book"></i> <span class="menuText">Books</span></a>
                     </li>
                     <li>
-                        <a href=""> <i class="fa fa-braille"></i> <span class="menuText">Tables and Chairs</span></a>
+                        <a href="tnc-ad.html" id="tnc-ad"> <i class="fa fa-braille"></i> <span class="menuText">Tables and Chairs</span></a>
                     </li>                                      
                 </ul>
             </div>
@@ -39,43 +39,6 @@
         </div>    
     </div>
 
-    <script>
-        var toggleBtn = document.getElementById('toggleBtn');
-        var sideBarIsOpen = true;
-
-        toggleBtn.addEventListener('click', (event) => {
-            event.preventDefault();
-
-            const sidebar = document.getElementById('sidebar');
-            const contentContainer = document.getElementById('contentContainer');
-            const logo = document.querySelector('.logo');
-            const userImage = document.getElementById('userImage');
-            const menuIcons = document.querySelectorAll('.menu_list i');
-            const menuList = document.querySelector('.menu_list');
-
-            if (sideBarIsOpen) {
-                sidebar.style.width = '10%'; 
-                sidebar.style.transition = '0.3s all';
-                contentContainer.style.width = '90%'; 
-                userImage.style.width = '80px';
-                userImage.style.height = '80px'; 
-                menuIcons.forEach(icon => {
-                    icon.style.display = 'none';
-                });
-                menuList.classList.add('centered');
-            } else {
-                sidebar.style.width = '20%'; 
-                contentContainer.style.width = '80%'; 
-                userImage.style.width = '80px';
-                userImage.style.height = '80px'; 
-                menuIcons.forEach(icon => {
-                    icon.style.display = 'block';
-                });
-            }
-
-            sideBarIsOpen = !sideBarIsOpen;
-        });
-    </script>    
-    
+    <script src="admin.js"></script>    
 </body>
 </html>

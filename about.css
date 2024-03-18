@@ -11,7 +11,7 @@ body {
 
 .header {
     position: fixed;
-    top: 10px;
+    top: 0px;
     left: 5px;
     width: 100%;
     padding: 10px ;
