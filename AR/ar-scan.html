@@ -99,8 +99,9 @@
   <a-scene embedded vr-mode-ui="enabled: false;" renderer="logarithmicDepthBuffer: true;" arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3_HAMMING63;' id="scene" gesture-detector>
 
     <!--sound files-->
-    <a-sound id="sound1" src="assets/phonk1.mp3"></a-sound>
-    <a-sound id="sound2" src="assets/phonk2.mp3"></a-sound>
+    <a-sound id="sound1" src="assets/Intro to PLVIL.wav"></a-sound>
+    <a-sound id="sound2" src="assets/Intro to AR.wav"></a-sound>
+    <a-sound id="sound3" src="assets/Intro to Highlights.wav"></a-sound>
 
     <!--markers: planes-->
     <a-marker markerhandler="soundSrc: #sound1" type="barcode" value="0" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;" onclick="changePicture('imagePlane1')" smooth-count="4" smooth-tolerance="0.05" smooth-threshold="1">
