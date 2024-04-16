@@ -138,8 +138,8 @@ body {
     font-size: 20px;
     font-family: "Poppins", sans-serif;
     font-weight: bold;
-    top: 215px;
-    right: 80%;
+    top: 20rem;
+    right: 72%;
 }
 /*book cards display*/
 .container {
@@ -227,3 +227,4 @@ body {
     background-color: #3D5BAD;
     color: #ffffff;
 }
+

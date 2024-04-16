@@ -1,5 +1,5 @@
 <?php 
-    include $_SERVER['DOCUMENT_ROOT'] . '/PLVIL/utility/DBConnection.php';
+    include $_SERVER['DOCUMENT_ROOT'] . '/PLVIL-main/utility/DBConnection.php';
 
     class Book{
         public $conn;
@@ -93,6 +93,7 @@
                 return json_encode(array('type' => 'fail', 'message' => 'Unable delete book details '));
             }
         }
+        
     }
 
 

@@ -1,198 +1,137 @@
 <!DOCTYPE html>
-<html>
-  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-  <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
-  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script> 
-  <script src="https://raw.githack.com/fcor/arjs-gestures/master/dist/gestures.js"></script>
-  <script>
-    //marker found
-    AFRAME.registerComponent('markerhandler', {
-      schema: {
-          soundSrc: { type: 'string'}
-        },
-      init: function () {
-        let curSound = document.querySelector(this.data.soundSrc);
-        this.el.addEventListener('markerFound', () => {
-          // Play the current sound file
-          curSound.components.sound.playSound();
-        });
+<html lang="en">
 
-        this.el.addEventListener('markerLost', () => {
-          curSound.components.sound.stopSound();
-        });
-    }});
-    
-    var lastChangeTime = 0; // Variable to store the time of the last image change
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Augmented Reality (AR) Consent Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-function changePicture(planeId) {
-    var currentTime = Date.now(); // Get the current time
-    var timeSinceLastChange = currentTime - lastChangeTime; // Calculate the time since the last change
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            overflow: hidden;
+        }
 
-    // If less than 500 milliseconds have passed since the last change, exit the function
-    if (timeSinceLastChange < 500) {
-        return;
-    }
+        .scroll-box {
+            overflow-y: scroll;
+            height: 300px;
+            padding-right: 20px; /* Add space for scrollbar */
+            margin-bottom: 20px; /* Add some space at the bottom */
+        }
 
-    var plane = document.getElementById(planeId);
-    
-    // Check if the new source is different from the current one
-    var newSrc = plane.getAttribute('src') === 'assets/sample-ar-1.png' ? 'assets/asset1.jpg' : 'assets/sample-ar-1.png';
-    
-    // Update the image source and the time of the last change
-    plane.setAttribute('src', newSrc);
-    lastChangeTime = currentTime;
-};
+        h2 {
+            margin-top: 0;
+            color: #333;
+        }
 
-    sceneEl.addEventListener("markerFound", (e) => {
-        isMarkerVisible = true;
-    });
+        h3 {
+            margin-top: 20px;
+            color: #555;
+        }
 
-    sceneEl.addEventListener("markerLost", (e) => {
-        isMarkerVisible = false;
-    });
+        ol {
+            padding-left: 20px;
+            color: #777;
+        }
 
-    function handleRotation(event) {
-        if (isMarkerVisible) {
-          el.object3D.rotation.y +=
-            event.detail.positionChange.x * rotationFactor;
+        p {
+            color: #666;
+            line-height: 1.6;
+        }
 
-          el.object3D.rotation.x +=
-            event.detail.positionChange.y * rotationFactor;
-        };
-      };
+        .button-container {
+            text-align: center;
+        }
 
-    function handleScale(event) {
-    if (isMarkerVisible) {
-      this.scaleFactor *=
-        1 + event.detail.spreadChange / event.detail.startSpread;
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            transition: background-color 0.3s;
+        }
 
-      this.scaleFactor = Math.min(
-        Math.max(this.scaleFactor, this.data.minScale),
-        this.data.maxScale
-      );
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
 
-      el.object3D.scale.x = scaleFactor * initialScale.x;
-      el.object3D.scale.y = scaleFactor * initialScale.y;
-      el.object3D.scale.z = scaleFactor * initialScale.z;
-    }
-  }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
 
-  </script>
-  <body style="margin : 0px; overflow: hidden;">
-    <a-scene 
-      embedded
-      vr-mode-ui="enabled: false;"
-      renderer="logarithmicDepthBuffer: true;"
-      arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3_HAMMING63;'
-      id="scene"
-      gesture-detector>
+<body>
+    <div class="form-container">
+        <h2>Augmented Reality (AR) Consent Form</h2>
+        <div class="scroll-box">
+            <p>Dear Users,</p>
+            <p>We are excited to introduce the Augmented Reality (AR) feature as part of the PLVIL: Development of Library Management System with Book Locator and Augmented Reality Assisted Book Viewer for Pamantasan ng Lungsod ng Valenzuela (PLV) University Library. Before you proceed to use this feature, we would like to seek your consent regarding the collection and usage of certain data as required by law.</p>
+            <h3>Explanation of Augmented Reality (AR) Feature:</h3>
+            <p>The AR feature allows users to experience immersive and interactive views of selected library resources through their mobile devices. By accessing this feature, you will be able to visualize additional information, such as book details and related multimedia content, overlaid onto physical objects within the library environment.</p>
+            <h3>Consent for Camera and Speaker Access:</h3>
+            <p>In order to provide you with the AR experience, the PLVIL system requires access to your device's camera and speakers. This access is necessary to enable the AR technology to overlay digital content onto the physical environment and to deliver audiovisual feedback accordingly.</p>
+            <h3>Data Privacy Compliance:</h3>
+            <p>We are committed to protecting your privacy and ensuring compliance with the Data Privacy Act of the Philippines (Republic Act No. 10173) and its implementing rules and regulations. By providing your consent to access your device's camera and speakers for the AR feature, you acknowledge and agree to the following:</p>
+            <ol>
+                <li><strong>Purpose of Data Collection:</strong> The data collected (i.e., images captured by the camera and audio output through the speakers) will be used solely for the purpose of delivering the AR experience within the PLVIL system.</li>
+                <li><strong>Storage and Security:</strong> Any data collected will be stored securely and will not be shared with third parties without your explicit consent, except as required by law.</li>
+                <li><strong>User Control:</strong> You have the right to withdraw your consent at any time by disabling the AR feature in the PLVIL system settings. However, please note that disabling this feature will prevent you from accessing the AR content.</li>
+                <li><strong>Data Retention:</strong> Data collected for the AR feature will be retained only for as long as necessary to fulfill the purposes for which it was collected or as required by applicable laws and regulations.</li>
+            </ol>
+            <p><strong>Consent Acknowledgement:</strong> By clicking the "Accept" button below, you acknowledge that you have read and understood the information provided in this consent form. You voluntarily consent to the PLVIL system accessing your device's camera and speakers for the purpose of delivering the Augmented Reality (AR) experience. You also agree to abide by the terms outlined in this consent form and understand your rights regarding data privacy under the Data Privacy Act of the Philippines.</p>
+            <p>Thank you for your cooperation and participation in the PLVIL project. If you have any questions or concerns regarding this consent form or the AR feature, please do not hesitate to contact us.</p>
+        </div>
+        <div class="button-container">
+            <button id="acceptBtn" disabled>Accept</button>
+            <button id="declineBtn">Decline</button>
+        </div>
+    </div>
 
-      <!--sound files-->
-      <a-sound id="sound1" src="assets/phonk1.mp3"></a-sound>
-      <a-sound id="sound2" src="assets/phonk2.mp3"></a-sound>
+    <script>
+        //modal handling script
+        var scrollBox = document.querySelector(".scroll-box");
+        var acceptBtn = document.getElementById("acceptBtn");
+        var declineBtn = document.getElementById("declineBtn");
 
-      <!--markers: planes-->
-      <a-marker 
-        markerhandler="soundSrc: #sound1" 
-        type="barcode" 
-        value="0"
-        raycaster="objects: .clickable"
-        emitevents="true"
-        cursor="fuse: false; rayOrigin: mouse;"
-        onclick="changePicture('imagePlane1')"
-        smooth-count="4"
-        smooth-tolerance="0.05"
-        smooth-threshold="1"
-        >
-        <a-plane 
-          id="imagePlane1" 
-          position="0 0 0" 
-          rotation="-90 0 0" 
-          width="5.4" 
-          height="5.4" 
-          material="shader: flat; scale: 2 2 2 " 
-          src="assets/sample-ar-1.png" 
-          class="clickable"
-          gesture-handler
-        ></a-plane>
-      </a-marker>
+        scrollBox.addEventListener('scroll', toggleAcceptButton);
 
-      <a-marker 
-        markerhandler="soundSrc: #sound2" 
-        type="barcode" 
-        value="1" 
-        raycaster="objects: .clickable"
-        emitevents="true"
-        cursor="fuse: false; rayOrigin: mouse;"
-        onclick="changePicture('imagePlane2')">
-        <a-plane 
-          id="imagePlane2" 
-          position="0 0 0" 
-          rotation="-90 0 0" 
-          width="5.4" 
-          height="5.4" 
-          material="shader: flat; scale: 2 2 2" 
-          src="assets/sample-ar-2.png" 
-          class="clickable"
-          gesture-handler></a-plane>
-      </a-marker>
+        function toggleAcceptButton() {
+            // Check if user has scrolled to the bottom
+            var isScrolledToBottom = scrollBox.scrollHeight - scrollBox.scrollTop === scrollBox.clientHeight;
+            // Enable or disable the Accept button based on scroll position
+            acceptBtn.disabled = !isScrolledToBottom;
+        }
 
-      <!--marker: 3d box-->
-      <a-marker type="barcode" value="2">
-        <a-box color="#1442CC" position="0 0 0" scale="3 3 3" rotation="-90 0 0" animation="property: rotation; to: 0 90 0; loop: true; dur: 2000" material="opacity: 0.8;" onclick="changeColor"></a-box>
-      </a-marker>
+        acceptBtn.onclick = function () {
+            window.location.href = "ar-scan.html";
+            // Proceed to the main content or another page
+        }
 
-      <!--marker: 3d model-->
-      <a-assets>
-        <a-asset-item id="animated-asset" src="https://raw.githubusercontent.com/nicolocarpignoli/nicolocarpignoli.github.io/master/ar-playground/models/CesiumMan.gltf"></a-asset-item>
-      </a-assets>
+        declineBtn.onclick = function () {
+            window.location.href = "../index.html";
+        }
+    </script>
 
-      <a-marker id="animated-marker" type="barcode" value="3">
-          <a-entity
-              gltf-model="#animated-asset"
-              scale="3 3 3"
-              rotation="0 0 0">
-          </a-entity>
-          <a-sound src="assets/level-up.mp3" autoplay="false"></a-sound>
-      </a-marker>
+</body>
 
-
-      <a-entity camera></a-entity>
-
-    </a-scene>
-  </body>
-
-  <script>
-    //when marker is found.
-    window.addEventListener('load', () => {
-    const camera = document.querySelector('[camera]');
-    const marker = document.querySelector('a-marker');
-    let check;
-
-    marker.addEventListener('markerFound', () => {
-        let cameraPosition = camera.object3D.position;
-        let markerPosition = marker.object3D.position;
-        let distance = cameraPosition.distanceTo(markerPosition)
-
-        check = setInterval(() => {
-            cameraPosition = camera.object3D.position;
-            markerPosition = marker.object3D.position;
-            distance = cameraPosition.distanceTo(markerPosition)
-
-            // do what you want with the distance:
-            //console.log(distance);
-        }, 100);
-    });
-
-    marker.addEventListener('markerLost', () => {
-      clearInterval(check);
-    })
-})
-
-    function changeColor() {
-        var box = document.querySelector('a-box');
-        box.setAttribute('color', 'red');
-    }
-</script>
-</html> 
+</html>

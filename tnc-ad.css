@@ -18,6 +18,7 @@ body {
   flex-direction: column;
   align-items: center;
   font-family: "Poppins", sans-serif;
+  margin-top: 30px;
 }
 
 h1 {
@@ -27,24 +28,26 @@ h1 {
 
 .layout {
   display: grid;
-  grid-template-columns: repeat(8, 40px); /* Adjusted width for columns */
-  grid-template-rows: repeat(10, 40px); /* Adjusted height for rows */
+  grid-template-columns: repeat(8, 20px); /* Adjusted width for columns */
+  grid-template-rows: repeat(10, 50px); /* Adjusted height for rows */
   grid-gap: 20px;
 }
 
 .seat {
-  width: 40px; /* Adjusted width for seat */
-  height: 40px; /* Adjusted height for seat */
+  width: 25px; /* Adjusted width for seat */
+  height: 25px; /* Adjusted height for seat */
   background-color: #e0e0e0; /* Gray for available */
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .occupied {
   background-color: #64B5F6; /* Blue for occupied */
   color: #fff;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  width: 25px; /* Adjusted width for seat */
+  height: 25px; 
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .legend {
@@ -84,4 +87,14 @@ h1 {
 .available-seats {
   margin-top: 20px;
   font-size: 1.2em;
+}
+
+.seat-image {
+  position: absolute;
+  left: 500px; /* Adjust the distance from the left edge */
+  top: calc(var(--index) * 70px + 30px); /* Position each image in a row */
+  /*transform: translateY(-50%);*/
+  width: 80px; /* Adjust the width as needed */
+  height: auto; /* Maintain aspect ratio */
+  margin-bottom: 20px; /* Add margin bottom to create space under each image */
 }

@@ -1,7 +1,7 @@
 <?php 
-    include $_SERVER['DOCUMENT_ROOT'].'/PLVIL/classes/book.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/PLVIL-main/classes/book.php';
     $db = new DBConnection();
-?> 
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,6 +22,21 @@
         <div class="content">
             <div class="add-book">
                 <button class="btn btn-success btn-md" data-toggle="modal" data-target="#addBook"><i class="fa-solid fa-plus"></i>Add New Book</button>
+            <div class="filter">
+                <label for="categoryFilter">Filter by Category:</label>
+                <select class="form-select" id="categoryFilter">
+                    <option value="all">All Categories</option>
+                    <option value="Literature">Literature</option>
+                    <option value="Education">Education</option>
+                    <option value="Novel">Novel</option>
+                    <option value="Entertainment">Entertainment</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Engineering">Engineering</option>
+                    <option value="Laws">Laws</option>
+                    <option value="Architecture">Architecture</option>
+                    <option value="Fiction">Fiction</option>
+                </select>
+            </div>
             </div>
             <div class="search">
                 <input type="text" class="form-control" id="searchInput" placeholder="Search by Title...">
@@ -82,17 +97,17 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add New Book</h5>
+        <h5 class="modal-title">Add New Book</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form id="addBookForm">
+        <form id="addBookForm" method="POST" enctype="multipart/form-data">
             <div class="input-group mb-3">
-                <label class="input-group-text" for="inputGroupSelect01"> Category</label>
-                    <select class="form-select" id="inputGroupSelect01" name= "bookCategory">
-                        <option selected>Choose...</option>
+                <label class="input-group-text" for="inputGroupSelect01">Book Category</label>
+                    <select class="form-select" id="bookCategory" name= "bookCategory">
+                        <option selected>Choose Category...</option>
                         <option value="Literature">Literature</option>
                         <option value="Fantasy">Education</option>
                         <option value="Novel">Novel</option>
@@ -104,46 +119,50 @@
                         <option value="Fiction">Fiction</option>
                     </select>
             </div>
-            <div class="form-group">
-                <label form="Title">Title</label>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Title</span>
                 <input type="text"name="Title" class="form-control" required placeholder="Enter Book Title">
             </div>
-            <div class="mb-3">
-                <label for="formFileMultiple" class="form-label">Image for Book</label>
-                <input class="form-control" type="file" name="image1" multiple>
-            </div>
-            <div class="form-group">
-                <label form="Author">Author</label>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Author</span>
                 <input type="text"name="Author" class="form-control" required placeholder="Enter Book Author">
             </div>
-            <div class="form-group">
-                <label form="columnNumber">Column Number</label>
+            <div class="input-group mb-3">
+                <span class="input-group-text">column Number</span>
                 <input type="text"name="columnNumber" class="form-control" required placeholder="Enter Column Number">
             </div>
-            <div class="form-group">
-                <label form="Accession">Accession</label>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Accession</span>
                 <input type="text"name="Accession" class="form-control" required placeholder="Enter Book Accession">
             </div>
-            <div class="form-group">
-                <label form="bookEdition">Edition</label>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Edition</span>
                 <input type="text"name="bookEdition" class="form-control" required placeholder="Enter Edition">
             </div>
-            <div class="form-group">
-                <label form="bookYear">Year</label>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Year</span>
                 <input type="text"name="bookYear" class="form-control" required placeholder="Enter Year">
             </div>
-            <div class="form-group">
-                <label form="Property">Property</label>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Property</span>
                 <input type="text"name="Property" class="form-control" required placeholder="Enter Property">
             </div>
-            <div class="form-group">
-                <label form="isbn">ISBN</label>
+            <div class="input-group mb-3">
+                <span class="input-group-text">ISBN/ISN</span>
                 <input type="text"name="isbn" class="form-control" required placeholder="Enter ISBN">
+            </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupFile01">Image Front Cover</label>
+                <input type="file" class="form-control" id="inputGroupFile01" name="image1" accept= "jpg, png, svg" required>
+            </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupFile02">Image Book Stem</label>
+                <input type="file" class="form-control" id="inputGroupFile02" name="image2" accept= "jpg, png, svg" required>
             </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
         <button type="button" class="btn btn-primary" id="addBookBtn">Save changes</button>
       </div>
     </div>
@@ -253,7 +272,31 @@
             }   
             });
         });
-    });
+
+        //FUNCTION FOR SORT
+
+        $(document).ready(function() {
+        // Add event listener to category filter dropdown
+        $('#categoryFilter').on('change', function() {
+            var selectedCategory = $(this).val();
+            filterBooks(selectedCategory);
+        });
+        });
+
+        function filterBooks(category) {
+        $('tbody tr').hide(); // Hide all rows initially
+        if (category === 'all') {
+            $('tbody tr').show(); // Show all rows if 'All Categories' selected
+        } else {
+            $('tbody tr').each(function() {
+                var bookCategory = $(this).find('td:eq(1)').text(); // Index 1 corresponds to the Category column
+                if (bookCategory === category) {
+                    $(this).show(); // Show rows matching the selected category
+                }
+            });
+        }
+    }
+});
 </script>
 </body>
 </html>  
