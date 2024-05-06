@@ -18,7 +18,6 @@ body {
   flex-direction: column;
   align-items: center;
   font-family: "Poppins", sans-serif;
-  margin-top: 30px;
 }
 
 h1 {
@@ -91,9 +90,9 @@ h1 {
 
 .seat-image {
   position: absolute;
-  left: 500px; /* Adjust the distance from the left edge */
-  top: calc(var(--index) * 70px + 30px); /* Position each image in a row */
-  /*transform: translateY(-50%);*/
+  left: 700px; /* Adjust the distance from the left edge */
+  top: calc(var(--index) * 70px + 100px); /* Position each image in a row */
+  transform: translateY(-50%);
   width: 80px; /* Adjust the width as needed */
   height: auto; /* Maintain aspect ratio */
   margin-bottom: 20px; /* Add margin bottom to create space under each image */

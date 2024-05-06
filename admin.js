@@ -6,14 +6,12 @@ toggleBtn.addEventListener('click', (event) => {
 
     const sidebar = document.getElementById('sidebar');
     const contentContainer = document.getElementById('contentContainer');
-    const logo = document.querySelector('.logo');
     const userImage = document.getElementById('userImage');
     const menuIcons = document.querySelectorAll('.menu_list i');
     const menuList = document.querySelector('.menu_list');
 
     if (sideBarIsOpen) {
         sidebar.style.width = '10%'; 
-        sidebar.style.transition = '0.3s all';
         contentContainer.style.width = '90%'; 
         userImage.style.width = '80px';
         userImage.style.height = '80px'; 
@@ -47,18 +45,11 @@ document.getElementById('tnc-ad').addEventListener('click', function(event) {
     // Add 'menuActive' class to the clicked menu item
     this.closest('li').classList.add('menuActive');
 
-    loadTablesChairsContent();
+    loadContent('tnc-ad.html');
 });
 
-// Function to load Tables and Chairs content
-function loadTablesChairsContent() {
-    const mainContent = document.querySelector('.main_content');
-    mainContent.innerHTML = ''; // Clear existing content
-    mainContent.innerHTML = '<object type="text/html" data="tnc-ad.html" style="width: 100%; height: 100%;"></object>';
-}
-
 // Event listener for Books menu item
-document.querySelector('.menu_list li.menuActive').addEventListener('click', function(event) {
+document.querySelector('.menu_list li').addEventListener('click', function(event) {
     event.preventDefault();
     console.log('Books menu clicked'); // Check if event listener is triggered
     
@@ -70,13 +61,12 @@ document.querySelector('.menu_list li.menuActive').addEventListener('click', fun
     // Add 'menuActive' class to the clicked menu item
     this.classList.add('menuActive');
 
-    loadBooksContent();
+    loadContent('index.php');
 });
 
-// Function to load Books content
-function loadBooksContent() {
+// Function to load content dynamically
+function loadContent(url) {
     const mainContent = document.querySelector('.main_content');
     mainContent.innerHTML = ''; // Clear existing content
-    mainContent.innerHTML = '<object type="text/html" data="index.php" style="width: 100%; height: 100%;"></object>';
+    mainContent.innerHTML = `<object type="text/html" data="${url}" style="width: 100%; height: 100%;"></object>`;
 }
-

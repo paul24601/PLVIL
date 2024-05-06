@@ -113,11 +113,11 @@ ul.menu_list li:hover {
     font-size: 18px; 
     text-decoration: none;
 }
-/*
+
 a#logoutBtn {
-    float: left;
+    float: right;
 }
-*/
+
 ul.menu_list li:hover {
     background: rgba(58, 58, 126, 0.8); 
     color: #fff;
@@ -127,7 +127,7 @@ ul.menu_list li:hover {
 
 .content {
     display: flex; /* Use flexbox to align items vertically */
-    padding: 20px; /* Add padding to the content area */
+    padding: 30px; /* Add padding to the content area */
 }
 
 .main_content {
@@ -135,5 +135,5 @@ ul.menu_list li:hover {
     border-radius: 5px; /* Add border radius for a rounded appearance */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow for a subtle depth effect */
     width: 100%; /* Set width to fill up the entire available space */
-    height: 800px;
+    height: 830px;
 }

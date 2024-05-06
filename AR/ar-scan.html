@@ -38,26 +38,33 @@
       <a-plane id="imagePlane2" position="0 0 0" rotation="-90 0 0" width="5.4" height="5.4" material="shader: flat; scale: 2 2 2" src="assets/sample-ar-2.png" class="clickable"></a-plane>
     </a-marker>
 
-    <a-marker markerhandler="soundSrc: #sound3" type="barcode" value="2" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;">
+    <a-marker markerhandler="soundSrc: #sound3" type="barcode" value="7" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;">
       <a-plane id="imagePlane3" position="0 0 0" rotation="-90 0 0" width="5.4" height="5.4" material="shader: flat; scale: 2 2 2" src="assets/sample-ar-2.png" class="clickable"></a-plane>
     </a-marker>
 
     <!--marker: 3d box-->
-    <a-marker type="barcode" value="3">
+    <a-marker type="barcode" value="5">
       <a-box color="#1442CC" position="0 0 0" scale="3 3 3" rotation="-90 0 0" animation="property: rotation; to: 0 90 0; loop: true; dur: 2000" material="opacity: 0.8;"></a-box>
     </a-marker>
 
     <!--marker: 3d model-->
     <a-assets>
-      <a-asset-item id="animated-asset" src="https://raw.githubusercontent.com/nicolocarpignoli/nicolocarpignoli.github.io/master/ar-playground/models/CesiumMan.gltf"></a-asset-item>
+      <a-asset-item id="animated-asset1" src="assets/note_book/scene.gltf"></a-asset-item>
+      <a-asset-item id="animated-asset2" src="https://raw.githubusercontent.com/nicolocarpignoli/nicolocarpignoli.github.io/master/ar-playground/models/CesiumMan.gltf"></a-asset-item>
     </a-assets>
 
+    <a-marker id="animated-marker" type="barcode" value="2">
+      <a-entity gltf-model="#animated-asset1" scale="1 1 1" rotation="0 0 0" animation-mixer="clip: *"></a-entity>
+      <a-sound src="assets/level-up.mp3" autoplay="false"></a-sound>
+    </a-marker>
+    
+
     <a-marker id="animated-marker" type="barcode" value="4">
-      <a-entity gltf-model="#animated-asset" scale="3 3 3" rotation="0 0 0"></a-entity>
+      <a-entity gltf-model="#animated-asset2" scale="3 3 3" rotation="0 0 0"></a-entity>
       <a-sound src="assets/level-up.mp3" autoplay="false"></a-sound>
     </a-marker>
 
-    <a-entity camera fov="90"></a-entity>
+    <a-entity camera aspect="1.77"></a-entity>
 
   </a-scene>
 </body>

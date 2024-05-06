@@ -76,7 +76,7 @@ body {
   flex-direction: column;
   align-items: center;
   font-family: "Poppins", sans-serif;
-  margin-top: 200px; /* Add top margin to create space for the header */
+  margin-top: 100px; /* Add top margin to create space for the header */
 }
 
 
@@ -150,7 +150,7 @@ h1 {
 
 .seat-image {
   position: absolute;
-  left: 500px; /* Adjust the distance from the left edge */
+  left: 700px; /* Adjust the distance from the left edge */
   top: calc(var(--index) * 70px + 150px); /* Position each image in a row */
   transform: translateY(-50%);
   width: 80px; /* Adjust the width as needed */
