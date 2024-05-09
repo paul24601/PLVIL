@@ -28,12 +28,11 @@ body {
     height: auto;
 }
 
-/* for header*/
 .header {
     position: fixed;
-    top: 10px;
+    top: 0px;
     left: 5px;
-    width: 95%;
+    width: 100%;
     padding: 10px ;
     background: transparent;
     display: flex;
@@ -42,9 +41,14 @@ body {
     z-index: 100;
 }
 
-/*.header-logo {
-
-}*/
+.header-logo {
+    padding-left: 10px;
+    font-weight: bold;
+    font-size: 38px; /* Adjust the font size of the logo */
+    color: #ffffff; /* Set the color of the logo */
+    text-decoration: none; /* Remove underline from the logo */
+    letter-spacing: 2px; /* Add letter spacing to the logo */
+}
 
 .navbar {
     height: 20px;
@@ -166,7 +170,7 @@ body {
     font-weight: 500;
     color: #1b1b1b;
     border: 0;
-    outline: 0;
+    outline: 0; 
     background: none;
 }
 
