@@ -1,0 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('browsebg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header {
+    position: fixed;
+    top: 10px;
+    left: 5px;
+    width: 95%;
+    padding: 10px ;
+    background: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.navbar {
+    height: 20px;
+    width: 70px;
+    min-width: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    
+}
+
+.navbar a {
+    position: relative;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 18px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+}
+
+.navbar a:hover {
+    opacity: 0.8;
+}
+
+.navbar a.active {
+    text-decoration: none;
+    position: relative;
+}
+
+.navbar a.active::after {
+    content: '';
+    position: absolute;
+    left: -6px;
+    bottom: -15px;
+    width: 80px;
+    height: 4px;
+    background-color: #ffffff;
+}
+/*BOOKS(text)*/
+.book-text {
+    position: absolute;
+    text-align: center;
+    color: #ffffff;
+    font-size: 55px;
+    font-family: "Poppins", sans-serif;
+    letter-spacing: 20px;
+    font-weight: bold;
+    top: 60px;
+}
+/*Book categories selection*/
+.book-categories {
+    position: absolute;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    top: 145px;
+}
+
+.book-categories ul {
+    display: flex;
+    margin: 0 -5px;
+}
+
+.book-categories ul li {
+    margin: 0 40px;
+    width: 70px;
+    height: 40px;
+    line-height: 34px;
+    list-style: none;
+    text-align: center;
+}
+
+.book-categories ul li a {
+    font-size: 12px;
+    text-decoration: none;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.book-categories ul li .active_page {
+    color: #3D5BAD;
+}
+
+.book-categories ul li a:hover {
+    opacity: 0.8;
+}
+
+.book-categories button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.book-categories button a {
+    padding: 0;
+    display: block;
+    color: #696969;
+    border-radius: 100px;
+    overflow: hidden;
+}
+
+.book-categories button a:hover {
+    background-color: rgba(255, 255, 255, 0.300);
+}
+/*Literature(text)*/
+.literature-text {
+    position: absolute;
+    text-align: center;
+    color: #000000;
+    font-size: 20px;
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    top: 215px;
+    right: 80%;
+}
+/*book cards display*/
+.container {
+    margin: 1550px auto 0;
+}
+
+.list {
+    display: grid;
+    grid-template-columns:  150px 150px 150px 150px 150px ;
+    column-gap: 30px;
+}
+
+.item a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.item .img img {
+    width: 200px;
+    height: 200px;
+    max-width: 100%;
+}
+
+.item .img {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.item .content {
+    background-color: #ffffff;
+    padding: 10px;
+    border: 2px solid #6d6d6d65;
+    margin-top: -5px;
+    margin-bottom: 50px;
+}
+
+.title {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: -8px;
+}
+
+.item .content .des {
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    text-align: center;
+}
+/*pagination*/
+.listPage {
+    padding: 8px;
+    text-align: center;
+    list-style: none;
+    background-color: #ffffff;
+    border-radius: 100px;
+    box-shadow: 0 10px 30px -10px rgb(0, 0, 0);
+    width: 40%;
+    margin: 0 auto 30px;
+}
+
+.listPage li {
+    background-color: #ffffff;
+    font-size: 12px;
+    font-family: "Poppins", sans-serif;
+    padding: 5px;
+    display: inline-block;
+    margin: 0 5px;
+    border-radius: 50px;
+    width: 20px; 
+    height: 20px; 
+    text-align: center; 
+    line-height: 20px;
+    cursor: pointer;
+}
+
+.listPage li:hover {
+    color: #3D5BAD;
+}
+
+.listPage .active {
+    background-color: #3D5BAD;
+    color: #ffffff;
+}
+

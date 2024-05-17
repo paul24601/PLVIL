@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+  background-color: #242333;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Hide horizontal overflow */
+}
+
+.header {
+  position:relative;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  padding: 10px ;
+  background-image: url('tnc-bg.jpg');
+  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('tnc-bg.jpg');
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+}
+
+.header-logo {
+  padding-left: 10px;
+  font-weight: bold;
+  font-size: 38px; /* Adjust the font size of the logo */
+  color: #ffffff; /* Set the color of the logo */
+  text-decoration: none; /* Remove underline from the logo */
+  letter-spacing: 2px; /* Add letter spacing to the logo */
+}
+
+.navbar {
+  height: 20px;
+  width: 70px;
+  margin-right: 30px;
+  min-width: 600px; 
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-left: 20px; /* Adjust the left padding of the navbar */
+}
+
+.navbar a {
+  position: relative;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.navbar a.active {
+  text-decoration: none;
+  position: relative;
+}
+
+.navbar a.active::after {
+  content: '';
+  position: absolute;
+  left: 50%; /* Position the line in the middle of the link */
+  transform: translateX(-50%); /* Move the line back by half of its width */
+  bottom: -15px;
+  width: 80px;
+  height: 4px;
+  background-color: #ffffff;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  overflow-y: auto; /* Enable vertical scrolling if needed */
+  width: 100%; /* Ensure full width */
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h3 {
+  text-align: center;
+}
+
+.seat {
+  width: 25px; /* Adjusted width for seat */
+  height: 25px; /* Adjusted height for seat */
+  background-color: #e0e0e0; /* Gray for available */
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.occupied {
+  background-color: #64B5F6; /* Blue for occupied */
+  color: #fff;
+  width: 25px; /* Adjusted width for seat */
+  height: 25px; 
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.legend-item span {
+  margin-left: 5px;
+}
+
+.available {
+  width: 20px;
+  height: 20px;
+  background-color: #e0e0e0;
+  border: 1px solid #ccc;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.occupied-legend {
+  width: 20px;
+  height: 20px;
+  background-color: #64B5F6;
+  border: 1px solid #ccc;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.available-seats {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 1.2em;
+  text-align: center; /* Center text */
+}
+
+.layout.tables-chairs {
+  display: grid;
+  grid-template-columns: repeat(8, 40px); /* Adjusted width for columns */
+  grid-template-rows: repeat(20, 40px); /* Adjusted height for rows */
+  grid-gap: 10px; /* Adjusted gap between seats */
+}
+
+.layout.computer {
+  display: grid;
+  grid-template-columns: repeat(9, 40px); /* Adjusted width for columns */
+  grid-template-rows: repeat(1, 40px); /* Adjusted height for rows */
+  grid-gap: 10px; /* Adjusted gap between seats */
+}
+
+.layout.graduate {
+  display: grid;
+  grid-template-columns: repeat(10, 40px); /* Adjusted width for columns */
+  grid-template-rows: repeat(3, 40px); /* Adjusted height for rows */
+  grid-gap: 10px; /* Adjusted gap between seats */
+}

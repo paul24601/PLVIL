@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Location</title>
+    <link rel="stylesheet" href="Bookloc.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
+<body>
+    <header class="header">
+        <a href="#" class="header-logo">header logo</a>
+
+        <nav class="navbar">
+            <a href="index.html" id="homeLink">Home</a>
+            <a href="Browse.html" id="browseLink">Browse</a>
+            <a href="Scan.html" id="scanLink">Ar Scan</a>
+            <a href="Chairs.html" id="chairsLink">Chairs</a>
+            <a href="About.html" id="aboutLink">About</a>
+        </nav>
+    </header>
+
+    <div class="location-text">LOCATION</div>
+    
+    <div class="ymal">You may also like</div>
+
+    <div class="box"></div>
+    <h2 class="book-title">Book Title</h2>
+
+    <div class="book-stem">
+        <img src="bookstempic.png">
+    </div>
+
+    <div class="book-suggestion-container">
+        <a href="book1.html" class="book-link">
+            <div class="book-suggest">
+                <div class="image-container">
+                    <img src="books1.jpg" alt="Book 1">
+                </div>
+                <div class="info">
+                    <div class="btitle">Book Title</div>
+                    <p>Author 1</p>
+                </div>
+                <i><span class="material-symbols-rounded">chevron_right</span></i>
+            </div>
+        </a>
+    
+        <a href="book2.html" class="book-link">
+            <div class="book-suggest">
+                <div class="image-container">
+                    <img src="books2.jpg" alt="Book 2">
+                </div>
+                <div class="info">
+                    <div class="btitle">Book Title</div>
+                    <p>Author 2</p>
+                </div>
+                <i><span class="material-symbols-rounded">chevron_right</span></i>
+            </div>
+        </a>
+    
+        <a href="book3.html" class="book-link">
+            <div class="book-suggest">
+                <div class="image-container">
+                    <img src="books3.jpg" alt="Book 3">
+                </div>
+                <div class="info">
+                    <div class="btitle">Book Title</div>
+                    <p>Author 3</p>
+                </div>
+                <i><span class="material-symbols-rounded">chevron_right</span></i>
+            </div>
+        </a>
+    </div>
+    
+
+    <div class="bookloc-container">
+        <div class="bookloc-cont">
+            <div class="bookloc" id="img-loc">
+                <img src="locsample.gif" id="imggif" onclick="change(this)">
+            </div>
+        </div>
+    </div>
+    <script src="Bookloc.js"></script>
+</body>
+</html>
