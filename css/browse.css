@@ -1,0 +1,109 @@
+body {
+    background-image: url('../assets/homebg.png');
+    background-size: cover; /* Cover the entire body */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-position: center; /* Center the image */
+}
+
+/*Book categories selection*/
+.book-categories {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    top: 145px;
+}
+
+.book-categories ul {
+    display: flex;
+    margin: 0 -5px;
+}
+
+.book-categories ul li {
+    margin: 0 40px;
+    width: 70px;
+    height: 40px;
+    line-height: 34px;
+    list-style: none;
+    text-align: center;
+}
+
+.book-categories ul li a {
+    font-size: 12px;
+    text-decoration: none;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    color: #000000;
+}
+
+.book-categories ul li .active_page {
+    color: #3D5BAD;
+}
+
+.book-categories ul li a:hover {
+    opacity: 0.8;
+}
+
+.book-categories button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.book-categories button a {
+    padding: 0;
+    display: block;
+    color: #696969;
+    border-radius: 100px;
+    overflow: hidden;
+}
+
+.book-categories button a:hover {
+    background-color: rgba(255, 255, 255, 0.300);
+}
+/*Literature(text)*/
+.literature-text {
+    position: absolute;
+    text-align: center;
+    color: #000000;
+    font-size: 20px;
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    top: 20rem;
+    right: 72%;
+}
+
+/*pagination*/
+.listPage {
+    padding: 8px;
+    text-align: center;
+    list-style: none;
+    background-color: #ffffff;
+    border-radius: 100px;
+    box-shadow: 0 10px 30px -10px rgb(0, 0, 0);
+    width: 40%;
+    margin: 0 auto 30px;
+}
+
+.listPage li {
+    background-color: #ffffff;
+    font-size: 12px;
+    font-family: "Poppins", sans-serif;
+    padding: 5px;
+    display: inline-block;
+    margin: 0 5px;
+    border-radius: 50px;
+    width: 20px; 
+    height: 20px; 
+    text-align: center; 
+    line-height: 20px;
+    cursor: pointer;
+}
+
+.listPage li:hover {
+    color: #3D5BAD;
+}
+
+.listPage .active {
+    background-color: #3D5BAD;
+    color: #ffffff;
+}

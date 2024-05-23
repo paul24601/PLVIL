@@ -1,0 +1,212 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chairs</title>
+    <link rel="stylesheet" href="css/chairs-user.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md">
+        <div class="container-lg">
+            <a href="index.html" class="navbar-brand">
+                <span class="fw-bold text-light display-5">PLVIL</span>
+            </a>
+
+            <!--toggle button for mobile-->
+            <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav"
+                aria-controls="main-nav" aria-expanded="false" aria-label="Toggle Navigation">
+                <span class="navbar-toggler-icon"></span></button>
+
+            <!--navbar links-->
+            <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
+                <ul class="navbar-nav">
+                    <li class="class-item">
+                        <a href="index.html" class="fs-5 text-light fw-bold nav-link">Home</a>
+                    </li>
+                    <li class="class-item">
+                        <a href="browse.html" class="fs-5 text-light fw-bold nav-link">Browse</a>
+                    </li>
+                    <li class="class-item">
+                        <a href="../AR/index.html" class="fs-5 text-light fw-bold nav-link">AR Scan</a>
+                    </li>
+                    <li class="class-item">
+                        <a href="chairs.html" class="ms-3 fs-5 text-light fw-bold nav-link active">Chairs</a>
+                    </li>
+                    <li class="class-item">
+                        <a href="about.html" class="fs-5 text-light fw-bold nav-link">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section>
+        <div class="container-fluid p-3 text-light text-center">
+            <h1>Library Seat Viewer</h1>
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="available"></div>
+                    <span>Available</span>
+                </div>
+                <div class="legend-item">
+                    <div class="occupied-legend"></div>
+                    <span>Occupied</span>
+                </div>
+            </div>
+            <div class="allseats pt-3">
+                <h3>Tables and Chairs</h3>
+                <div class="container justify-content-center">
+                    <div class="row row-cols-2">
+                        <div class="col-2">
+                            <div class="row row-cols-1 pt-1">
+                                <div class="col">
+                                    <img src="assets/seat-images/1.png" alt="" class="seat-img">
+                                </div>
+                                <div class="col">
+                                    <img src="assets/seat-images/2.png" alt="" class="seat-img">
+                                </div>
+                                <div class="col">
+                                    <img src="assets/seat-images/3.png" alt="" class="seat-img">
+                                </div>
+                                <div class="col">
+                                    <img src="assets/seat-images/4.png" alt="" class="seat-img">
+                                </div>
+                                <div class="col">
+                                    <img src="assets/seat-images/5.png" alt="" class="seat-img">
+                                </div>
+                                <div class="col">
+                                    <img src="assets/seat-images/6.png" alt="" class="seat-img">
+                                </div>
+                                <div class="col">
+                                    <img src="assets/seat-images/7.png" alt="" class="seat-img">
+                                </div>
+                                <div class="col">
+                                    <img src="assets/seat-images/8.png" alt="" class="seat-img">
+                                </div>
+                                <div class="col">
+                                    <img src="assets/seat-images/9.png" alt="" class="seat-img">
+                                </div>
+                                <div class="col">
+                                    <img src="assets/seat-images/10.png" alt="" class="seat-img">
+                                </div>
+                                <div class="col">
+                                    <img src="assets/seat-images/11.png" alt="" class="seat-img">
+                                </div>
+                                <div class="col">
+                                    <img src="assets/seat-images/12.png" alt="" class="seat-img">
+                                </div>
+                                <div class="col">
+                                    <img src="assets/seat-images/13.png" alt="" class="seat-img">
+                                </div>
+                                <div class="col">
+                                    <img src="assets/seat-images/14.png" alt="" class="seat-img">
+                                </div>
+                                <div class="col">
+                                    <img src="assets/seat-images/15.png" alt="" class="seat-img">
+                                </div>
+                                <div class="col">
+                                    <img src="assets/seat-images/16.png" alt="" class="seat-img">
+                                </div>
+                                <div class="col">
+                                    <img src="assets/seat-images/17.png" alt="" class="seat-img">
+                                </div>
+                                <div class="col">
+                                    <img src="assets/seat-images/18.png" alt="" class="seat-img">
+                                </div>
+                                <div class="col">
+                                    <img src="assets/seat-images/19.png" alt="" class="seat-img">
+                                </div>
+                                <div class="col">
+                                    <img src="assets/seat-images/20.png" alt="" class="seat-img">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-10">
+                            <div id="tables-chairs" class="pt-3 layout tables-chairs">
+                                <!-- Tables and chairs layout will be dynamically generated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="available-seats">Available Seats: <span id="tables-chairs-available-seat-count">160</span>
+                    Seats
+                </div>
+                
+            </div>
+            <h3>Computer Seats</h3>
+            <div class="container justify-content-center">
+                <div class="row row-cols-2">
+                    <div class="col-2">
+                        <div class="row row-cols-1 pt-1">
+                            <div class="col">
+                                <img src="assets/seat-images/24.png" alt="" class="seat-img">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-10">
+                        <div id="computer-seats" class="layout computer pt-3">
+                            <!-- Computer seats layout will be dynamically generated here -->
+                        </div>
+                    </div>
+                </div>           
+            </div>
+
+            <div class="available-seats">Available Seats: <span id="computer-seats-available-seat-count">9</span> Seats
+            </div>
+
+            <h3>Graduate Study</h3>
+            <div class="container justify-content-center">
+                <div class="row row-cols-2">
+                    <div class="col-2">
+                        <div class="row row-cols-1 g-1">
+                            <div class="col">
+                                <img src="assets/seat-images/21.png" alt="" class="seat-img">
+                            </div>
+                            <div class="col">
+                                <img src="assets/seat-images/22.png" alt="" class="seat-img">
+                            </div>
+                            <div class="col">
+                                <img src="assets/seat-images/23.png" alt="" class="seat-img">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-10">
+                        <div id="graduate-seats" class="layout graduate pt-3">
+                            <!-- Graduate study seats layout will be dynamically generated here -->
+                        </div>
+                    </div>
+                </div>           
+            </div>
+            
+            <div class="available-seats">Available Seats: <span id="graduate-seats-available-seat-count">30</span> Seats
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <script src="js/chairs-user.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+        </script>
+</body>
+
+</html>

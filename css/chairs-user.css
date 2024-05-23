@@ -1,0 +1,111 @@
+body {
+    background-image: url('../assets/homebg.png');
+    background-size: cover; /* Cover the entire body */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-position: center; /* Center the image */
+}
+
+.container-fluid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #242333;
+  }
+
+.seat {
+    width: 25px;
+    /* Adjusted width for seat */
+    height: 25px;
+    /* Adjusted height for seat */
+    background-color: #e0e0e0;
+    /* Gray for available */
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.occupied {
+    background-color: #64B5F6;
+    /* Blue for occupied */
+    color: #fff;
+    width: 25px;
+    /* Adjusted width for seat */
+    height: 25px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.legend {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.legend-item span {
+    margin-left: 5px;
+}
+
+.available {
+    width: 20px;
+    height: 20px;
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.occupied-legend {
+    width: 20px;
+    height: 20px;
+    background-color: #64B5F6;
+    border: 1px solid #ccc;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.available-seats {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 1.2em;
+    text-align: center;
+    /* Center text */
+}
+
+.layout.tables-chairs {
+    display: grid;
+    grid-template-columns: repeat(8, 40px);
+    /* Adjusted width for columns */
+    grid-template-rows: repeat(20, 40px);
+    /* Adjusted height for rows */
+    grid-gap: 10px;
+    /* Adjusted gap between seats */
+}
+
+.layout.computer {
+    display: grid;
+    grid-template-columns: repeat(9, 40px);
+    /* Adjusted width for columns */
+    grid-template-rows: repeat(1, 40px);
+    /* Adjusted height for rows */
+    grid-gap: 10px;
+    /* Adjusted gap between seats */
+}
+
+.layout.graduate {
+    display: grid;
+    grid-template-columns: repeat(10, 40px);
+    /* Adjusted width for columns */
+    grid-template-rows: repeat(3, 40px);
+    /* Adjusted height for rows */
+    grid-gap: 10px;
+    /* Adjusted gap between seats */
+}
+
+.seat-img {
+    width: 50px;
+}
