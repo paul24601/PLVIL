@@ -24,6 +24,11 @@
 <body>
   <a-scene embedded vr-mode-ui="enabled: false;" renderer="logarithmicDepthBuffer: true;" arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3_HAMMING63;' id="scene" gesture-detector>
 
+    <!--assets-->
+    <a-assets>
+      <a-asset-item id="animated-asset1" src="assets/note_book/scene.gltf"></a-asset-item>
+      
+    </a-assets>
     <!--sound files-->
     <a-sound id="sound1" src="assets/Intro to PLVIL.wav"></a-sound>
     <a-sound id="sound2" src="assets/Intro to AR.wav"></a-sound>
@@ -48,11 +53,6 @@
     </a-marker>
 
     <!--marker: 3d model-->
-    <a-assets>
-      <a-asset-item id="animated-asset1" src="assets/note_book/scene.gltf"></a-asset-item>
-      <a-asset-item id="animated-asset2" src="https://raw.githubusercontent.com/nicolocarpignoli/nicolocarpignoli.github.io/master/ar-playground/models/CesiumMan.gltf"></a-asset-item>
-    </a-assets>
-
     <a-marker id="animated-marker" type="barcode" value="2">
       <a-entity gltf-model="#animated-asset1" scale=".5 .5 .5" rotation="0 0 0" animation-mixer="clip: *" ></a-entity>
       <a-sound src="assets/level-up.mp3" autoplay="false"></a-sound>
