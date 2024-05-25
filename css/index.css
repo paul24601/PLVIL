@@ -19,6 +19,10 @@ body {
     height: auto;
 }
 
+.search-sec {  
+    padding-top: 6rem;
+}
+
 /* for search bar/advance search*/
 .search-bar {
     display: flex;

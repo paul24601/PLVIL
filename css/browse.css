@@ -107,3 +107,8 @@ body {
     background-color: #3D5BAD;
     color: #ffffff;
 }
+
+.img-books {
+    scale: 0.3;
+    display: flex;
+}

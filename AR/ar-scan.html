@@ -1,34 +1,24 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
   <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
-  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
   <script src="https://raw.githack.com/fcor/arjs-gestures/master/dist/gestures.js"></script>
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/three.js/build/ar.js"></script>
   <script src="ar-scan.js"></script>
   <style>
     body {
-      margin: 0px;
+      margin: 0;
       overflow: hidden;
     }
-
     a-scene {
-      margin: 0px;
+      margin: 0;
     }
   </style>
 </head>
-
 <body>
-  <a-scene embedded vr-mode-ui="enabled: false;" renderer="logarithmicDepthBuffer: true;" arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3_HAMMING63;' id="scene" gesture-detector>
-
-    <!--assets-->
-    <a-assets>
-      <a-asset-item id="animated-asset1" src="assets/note_book/scene.gltf"></a-asset-item>
-      
-    </a-assets>
+  <a-scene embedded arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3_HAMMING63;">
     <!--sound files-->
     <a-sound id="sound1" src="assets/Intro to PLVIL.wav"></a-sound>
     <a-sound id="sound2" src="assets/Intro to AR.wav"></a-sound>
@@ -36,15 +26,13 @@
 
     <!--markers: planes-->
     <a-marker markerhandler="soundSrc: #sound1" type="barcode" value="0" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;">
-      <a-plane id="imagePlane1" position="0 0 0" rotation="-90 0 0" width="5.4" height="5.4" material="shader: flat; scale: 2 2 2 " src="assets/sample-ar-1.png" class="clickable" gesture-handler></a-plane>
+      <a-plane id="imagePlane1" position="0 0 0" rotation="-90 0 0" width="5.4" height="5.4" material="shader: flat; scale: 2 2 2" src="assets/sample-ar-1.png" class="clickable" gesture-handler touchmove="changePicture(#imagePlane2)">
+      </a-plane>
     </a-marker>
 
     <a-marker markerhandler="soundSrc: #sound2" type="barcode" value="1" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;">
-      <a-plane id="imagePlane2" position="0 0 0" rotation="-90 0 0" width="5.4" height="5.4" material="shader: flat; scale: 2 2 2" src="assets/sample-ar-2.png" class="clickable" gesture-handler></a-plane>
-    </a-marker>
-
-    <a-marker markerhandler="soundSrc: #sound3" type="barcode" value="7" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;">
-      <a-plane id="imagePlane3" position="0 0 0" rotation="-90 0 0" width="5.4" height="5.4" material="shader: flat; scale: 2 2 2" src="assets/sample-ar-2.png" class="clickable" gesture-handler></a-plane>
+      <a-plane id="imagePlane2" position="0 0 0" rotation="-90 0 0" width="5.4" height="5.4" material="shader: flat; scale: 2 2 2" src="assets/sample-ar-2.png" class="clickable" gesture-handler>
+      </a-plane>
     </a-marker>
 
     <!--marker: 3d box-->
@@ -53,20 +41,17 @@
     </a-marker>
 
     <!--marker: 3d model-->
-    <a-marker id="animated-marker" type="barcode" value="2">
-      <a-entity gltf-model="#animated-asset1" scale=".5 .5 .5" rotation="0 0 0" animation-mixer="clip: *" ></a-entity>
+    <a-marker type="barcode" value="2">
+      <a-entity gltf-model="#animated-asset1" scale="0.5 0.5 0.5" rotation="0 0 0" animation-mixer="clip: *"></a-entity>
       <a-sound src="assets/level-up.mp3" autoplay="false"></a-sound>
     </a-marker>
-    
 
-    <a-marker id="animated-marker" type="barcode" value="4">
+    <a-marker type="barcode" value="4">
       <a-entity gltf-model="#animated-asset2" scale="3 3 3" rotation="0 0 0"></a-entity>
       <a-sound src="assets/level-up.mp3" autoplay="false"></a-sound>
     </a-marker>
 
-    <a-entity camera aspect="1.77"></a-entity>
-
+    <a-entity camera></a-entity>
   </a-scene>
 </body>
-
 </html>

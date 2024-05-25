@@ -1,11 +1,10 @@
-// for advance search
 let dropdownBtn = document.getElementById("drop-text");
 let list = document.getElementById("list");
 let icon = document.getElementById("icon");
 let span = document.getElementById("span");
 let input = document.getElementById("search-input");
 let listItems = document.querySelectorAll(".dropdown-list-item");
-
+let searchCategory = document.getElementById("search-category");
 
 dropdownBtn.onclick = function () {
     if (list.classList.contains('show')) {
@@ -27,10 +26,10 @@ window.onclick = function (e) {
     }
 };
 
-for (item of listItems) {
+listItems.forEach(item => {
     item.onclick = function (e) {
         span.innerText = e.target.innerText;
-
         input.placeholder = "Search for " + e.target.innerText;
+        searchCategory.value = e.target.getAttribute('data-value');
     };
-}
+});
