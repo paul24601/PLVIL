@@ -31,9 +31,10 @@
     </a-assets>
 
     <!--markers: planes-->
-    <a-marker markerhandler="soundSrc: ##sound1" type="barcode" value="0" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;">
+    <a-marker markerhandler="soundSrc: ##sound1" type="barcode" value="0" cursor="fuse: false; rayOrigin: mouse;">
       <a-video src="#pio-vid" rotation="-90 0 0" width="3.2" height="1.8" position="0 0 0">
-
+        <a-plane id="imagePlane1" position="0 3 3" rotation="-90 0 0" width="5.4" height="5.4" material="shader: flat; scale: 2 2 2" src="assets/sample-ar-1.png" class="clickable" gesture-handler>
+        </a-plane>
       </a-video>
       
     </a-marker>
@@ -61,5 +62,11 @@
 
     <a-entity camera></a-entity>
   </a-scene>
+  <script>
+    window.addEventListener("click", ()=>{
+    const video = document.getElementById("plvil-id")
+    video.play()
+  })
+  </script>
 </body>
 </html>

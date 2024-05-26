@@ -36,7 +36,5 @@ AFRAME.registerComponent('markerhandler', {
     plane.setAttribute('src', newSrc);
     lastChangeTime = currentTime;
   }
-  window.addEventListener ("click", ()=>{
-    const video = document.getElementById("video" )
-    video.play()
-  })
+
+  
