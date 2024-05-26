@@ -21,7 +21,7 @@ $db = new DBConnection();
 <body>
     <nav class="navbar navbar-expand-md">
         <div class="container-lg">
-            <a href="index.html" class="navbar-brand">
+            <a href="index.php" class="navbar-brand">
                 <span class="fw-bold text-light display-5">PLVIL</span>
             </a>
 
@@ -34,7 +34,7 @@ $db = new DBConnection();
             <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
                 <ul class="navbar-nav">
                     <li class="class-item">
-                        <a href="index.html" class="ms-3 fs-5 text-light fw-bold nav-link">Home</a>
+                        <a href="index.php" class="ms-3 fs-5 text-light fw-bold nav-link">Home</a>
                     </li>
                     <li class="class-item">
                         <a href="browse.html" class="fs-5 text-light fw-bold nav-link">Browse</a>
