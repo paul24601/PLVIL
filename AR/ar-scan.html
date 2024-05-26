@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
   <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
   <script src="https://raw.githack.com/fcor/arjs-gestures/master/dist/gestures.js"></script>
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/three.js/build/ar.js"></script>
-  <script src="#ar-scan.js"></script>
+  <script src="ar-scan.js"></script>
   <style>
     body {
       margin: 0;
       overflow: hidden;
     }
+
     a-scene {
       margin: 0;
     }
   </style>
 </head>
+
 <body>
-  <a-scene embedded arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3_HAMMING63;">
+  <a-scene embedded
+    arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3_HAMMING63;">
     <!--sound files-->
     <a-sound id="sound1" src="assets/Intro to PLVIL.wav"></a-sound>
     <a-sound id="sound2" src="assets/Intro to AR.wav"></a-sound>
@@ -26,24 +30,30 @@
 
     <a-assets>
       <!-- Define assets here -->
-      <video id="plvil-vid" src="assets/vids/PLVIL.mp4"></video>
-      <video autoplay="false" loop="true" id="pio-vid" src="assets/vids/PIO.mp4"></video>
+      <video loop="true" id="plvil-vid" src="assets/vids/PLVIL.mp4"></video>
+      <video loop="true" id="pio-vid" src="assets/vids/PIO.mp4"></video>
     </a-assets>
 
-    <!--markers: planes-->
+    <!--PLVIL section-->
     <a-marker markerhandler="soundSrc: ##sound1" type="barcode" value="0">
-      <a-video id="vid1" src="#pio-vid" rotation="-90 0 0" width="6" height="3" position="0 0 0"></a-video>
-      <a-plane id="imagePlane1" position="0 2 3" rotation="-90 0 0" width="5.4" height="5.4" material="shader: flat; scale: 2 2 2" src="assets/sample-ar-1.png" class="clickable" gesture-handler scale=".5 .5 .5"></a-plane>
+      <a-video id="vid1" src="#plvil-vid" rotation="-90 0 0" width="9" height="4.5" position="-7 0 0"
+        video-handler="volume: 0.05"></a-video>
+      <a-plane id="imagePlane1" position="0 2 3" rotation="-90 0 0" width="5.4" height="5.4"
+        material="shader: flat; scale: 2 2 2" src="assets/sample-ar-1.png" class="clickable" gesture-handler
+        scale=".5 .5 .5"></a-plane>
     </a-marker>
 
-    <a-marker markerhandler="soundSrc: #sound2" type="barcode" value="1" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;">
-      <a-plane id="imagePlane2" position="0 0 0" rotation="-90 0 0" width="5.4" height="5.4" material="shader: flat; scale: 2 2 2" src="assets/sample-ar-2.png" class="clickable" gesture-handler>
+    <a-marker markerhandler="soundSrc: #sound2" type="barcode" value="1" raycaster="objects: .clickable"
+      emitevents="true" cursor="fuse: false; rayOrigin: mouse;">
+      <a-plane id="imagePlane2" position="0 0 0" rotation="-90 0 0" width="5.4" height="5.4"
+        material="shader: flat; scale: 2 2 2" src="assets/sample-ar-2.png" class="clickable" gesture-handler>
       </a-plane>
     </a-marker>
 
     <!--marker: 3d box-->
     <a-marker type="barcode" value="5">
-      <a-box color="#1442CC" position="0 0 0" scale="3 3 3" rotation="-90 0 0" animation="property: rotation; to: 0 90 0; loop: true; dur: 2000" material="opacity: 0.8;"></a-box>
+      <a-box color="#1442CC" position="0 0 0" scale="3 3 3" rotation="-90 0 0"
+        animation="property: rotation; to: 0 90 0; loop: true; dur: 2000" material="opacity: 0.8;"></a-box>
     </a-marker>
 
     <!--marker: 3d model-->
@@ -60,20 +70,42 @@
     <a-entity camera></a-entity>
   </a-scene>
   <script>
-    // Get the video element inside the marker
-    var video = document.querySelector('#pio-vid');
-    var videoMarker = document.querySelector('#vid1');
+    // Wait for the scene to be loaded
+    document.querySelector('a-scene').addEventListener('loaded', () => {
+      // Get the video element
+      const video = document.querySelector('#plvil-vid');
 
-    // Add click event listener to the video entity
-    videoMarker.addEventListener('click', function() {
-      if (video.paused) {
-        // If video is paused, play it
-        video.play();
-      } else {
-        // If video is playing, pause it
-        video.pause();
+      // Get the video entity
+      const videoEntity = document.querySelector('#vid1');
+
+      // Add click event listener to the video entity
+      videoEntity.addEventListener('click', () => {
+        if (video.paused) {
+          // If video is paused, play it
+          video.play();
+        } else {
+          // If video is playing, pause it
+          video.pause();
+        }
+      });
+
+      // Make the video element respond to clicks
+      videoEntity.setAttribute('raycaster', 'objects: .clickable');
+      videoEntity.setAttribute('cursor', 'rayOrigin: mouse; fuse: false;');
+    });
+
+    //Volume controller
+    AFRAME.registerComponent('video-handler', {
+      schema: {
+        volume: { type: 'number', default: 1.0 }
+      },
+      init: function () {
+        var videoEl = this.el.getAttribute('src');
+        var video = document.querySelector(videoEl);
+        video.volume = this.data.volume;
       }
     });
   </script>
 </body>
+
 </html>
