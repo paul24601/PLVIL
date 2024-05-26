@@ -27,14 +27,13 @@
     <a-assets>
       <!-- Define assets here -->
       <video id="plvil-vid" src="assets/vids/PLVIL.mp4"></video>
-      <video id="pio-vid" src="assets/vids/PIO.mp4"></video>
+      <video loop="true" id="pio-vid" src="assets/vids/PIO.mp4"></video>
     </a-assets>
 
     <!--markers: planes-->
-    <a-marker markerhandler="soundSrc: ##sound1" type="barcode" value="0" cursor="fuse: false; rayOrigin: mouse;">
-      <a-video src="#pio-vid" rotation="-90 0 0" width="3.2" height="1.8" position="0 0 0">
-        
-      </a-video>
+    <a-marker markerhandler="soundSrc: ##sound1" type="barcode" value="0">
+      <a-video src="#pio-vid" rotation="-90 0 0" width="3.2" height="1.8" position="0 0 0"></a-video>
+
       <a-plane id="imagePlane1" position="0 2 3" rotation="-90 0 0" width="5.4" height="5.4" material="shader: flat; scale: 2 2 2" src="assets/sample-ar-1.png" class="clickable" gesture-handler scale=".5 .5 .5"></a-plane>
     </a-marker>
 
@@ -63,7 +62,7 @@
   </a-scene>
   <script>
     window.addEventListener("click", ()=>{
-    const video = document.getElementById("plvil-id")
+    const video = document.getElementById("plvil-vid")
     video.play()
   })
   </script>
