@@ -45,10 +45,11 @@
     <!--PLVIL section-->
     <a-marker markerhandler="soundSrcs: #sound1, #bgm" type="barcode" value="0" raycaster="objects: .clickable"
       emitevents="true" cursor="fuse: false; rayOrigin: mouse;">
+      
       <a-video id="vid1" src="#plvil-vid" rotation="-90 0 0" width="10" height="5" position="-8 0 0"
         video-handler="volume: 0.05"></a-video>
 
-      <a-video src="#plvil-square" position="0 1 0" rotation="-90 0 0" width="5" height="5"></a-video>
+      <a-video id="vid1" src="#plvil-square" position="0 1 0" rotation="-90 0 0" width="5" height="5" video-handler="volume: 0"></a-video>
 
       <!-- Slideshow plane -->
       <a-plane id="imagePlane" src="#image1" rotation="-90 0 0" height="5" width="10" position="-3 1 6"
@@ -58,16 +59,16 @@
     <!--PIO section-->
     <a-marker markerhandler="soundSrcs: #sound3, #bgm" type="barcode" value="1" raycaster="objects: .clickable"
       emitevents="true" cursor="fuse: false; rayOrigin: mouse;">
-    
-    <a-video id="vid1" src="#pio-vid" rotation="-90 0 0" width="10" height="5" position="-8 0 0"
+
+      <a-video id="vid1" src="#pio-vid" rotation="-90 0 0" width="10" height="5" position="-8 0 0"
         video-handler="volume: 0.05"></a-video>
 
-      <a-video src="#plvil-square" position="0 1 0" rotation="-90 0 0" width="5" height="5"></a-video>
+      <a-video id="vid1" src="#plvil-square" position="0 1 0" rotation="-90 0 0" width="5" height="5"  video-handler="volume: 0"></a-video>
 
       <!-- Slideshow plane -->
       <a-plane id="imagePlane" src="#image1" rotation="-90 0 0" height="5" width="10" position="-3 1 6"
         class="clickable" slideshow-toggle></a-plane>
-</a-marker>
+    </a-marker>
     <a-entity camera cursor="fuse: false; rayOrigin:mouse;"></a-entity>
   </a-scene>
   <script>
@@ -78,7 +79,7 @@
       },
       init: function () {
         let soundSrcs = this.data.soundSrcs.map(src => document.querySelector(src));
-        
+
         this.el.addEventListener('markerFound', () => {
           // Play all sound sources when marker is found
           soundSrcs.forEach(sound => sound.components.sound.playSound());
