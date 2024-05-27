@@ -1,19 +1,10 @@
-<?php
-require_once('DBseatInitialize.php'); // Include the file containing the DBseatInitialize class
-
-// Initialize seats
-$dbSeatInitialize = new DBseatInitialize();
-$dbSeatInitialize->initializeSeats();
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin View - Library Seat Viewer</title>
-  <link rel="stylesheet" href="tnc-ad.css">
+  <link rel="stylesheet" href="chairs-admin.css">
 </head>
 <body>
   <div class="container">
@@ -64,6 +55,6 @@ $dbSeatInitialize->initializeSeats();
       <button onclick="removeSeat('graduate-seats')" class="remove-button">Remove Seat</button>
     </div>
   </div>
-  <script src="tnc-ad.js"></script>
+  <script src="chairs-admin.js"></script>
 </body>
 </html>
