@@ -56,43 +56,46 @@
     <section class="literature">
         <div class="container-fluid bg-light p-3">
             <div class="container">
-                <div class="mt-3 text-light book-categories justify-content-center d-none d-lg-flex">
-                    <button type="button" class="prev"><a href="#"><span class="material-symbols-rounded">chevron_left</span></a></button>
-                    <ul class="nav nav-underline" id="myTab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="category nav-link active" id="lit-tab-btn" data-bs-toggle="tab"
-                                data-bs-target="#lit-tab-pane" type="button" role="tab" aria-controls="lit-tab-pane"
-                                aria-selected="true" data-category="Literature">Literature</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="category nav-link" id="educ-tab-btn" data-bs-toggle="tab"
-                                data-bs-target="#educ-tab-pane" type="button" role="tab" aria-controls="educ-tab-pane"
-                                aria-selected="true" data-category="Education">Education</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="category nav-link" id="novel-tab-btn" data-bs-toggle="tab"
-                                data-bs-target="#novel-tab-pane" type="button" role="tab" aria-controls="novel-tab-pane"
-                                aria-selected="true" data-category="Novel">Novel</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="category nav-link" id="ent-tab-btn" data-bs-toggle="tab"
-                                data-bs-target="#ent-tab-pane" type="button" role="tab" aria-controls="ent-tab-pane"
-                                aria-selected="true" data-category="Entertainment">Entertainment</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="category nav-link" id="tech-tab-btn" data-bs-toggle="tab"
-                                data-bs-target="#tech-tab-pane" type="button" role="tab" aria-controls="tech-tab-pane"
-                                aria-selected="true" data-category="Technology">Technology</button>
-                        </li>
-                        <li><a href="#" class="category">Engineering</a></li>
-                        <li><a href="#" class="category">Laws</a></li>
-                        <li><a href="#" class="category">Accountancy</a></li>
-                        <li><a href="#" class="category">Architecture</a></li>
-                        <li><a href="#" class="category">Fiction</a></li>
-                    </ul>
-                    <button type="button" class="next"><a href="#"><span class="material-symbols-rounded">chevron_right</span></a></button>
-                </div>
+                
+                    <!--menu bar on lg screen-->
+                    <div class="mt-3 text-light book-categories justify-content-center d-none d-lg-flex">
+                        <button type="button" class="prev"><a href="#"><span class="material-symbols-rounded">chevron_left</span></a></button>
+                        <ul class="nav nav-underline" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="category nav-link active" id="lit-tab-btn" data-bs-toggle="tab"
+                                    data-bs-target="#lit-tab-pane" type="button" role="tab" aria-controls="lit-tab-pane"
+                                    aria-selected="true" data-category="Literature">Literature</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="category nav-link" id="educ-tab-btn" data-bs-toggle="tab"
+                                    data-bs-target="#educ-tab-pane" type="button" role="tab" aria-controls="educ-tab-pane"
+                                    aria-selected="true" data-category="Education">Education</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="category nav-link" id="novel-tab-btn" data-bs-toggle="tab"
+                                    data-bs-target="#novel-tab-pane" type="button" role="tab" aria-controls="novel-tab-pane"
+                                    aria-selected="true" data-category="Novel">Novel</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="category nav-link" id="ent-tab-btn" data-bs-toggle="tab"
+                                    data-bs-target="#ent-tab-pane" type="button" role="tab" aria-controls="ent-tab-pane"
+                                    aria-selected="true" data-category="Entertainment">Entertainment</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="category nav-link" id="tech-tab-btn" data-bs-toggle="tab"
+                                    data-bs-target="#tech-tab-pane" type="button" role="tab" aria-controls="tech-tab-pane"
+                                    aria-selected="true" data-category="Technology">Technology</button>
+                            </li>
+                            <li><a href="#" class="category">Engineering</a></li>
+                            <li><a href="#" class="category">Laws</a></li>
+                            <li><a href="#" class="category">Accountancy</a></li>
+                            <li><a href="#" class="category">Architecture</a></li>
+                            <li><a href="#" class="category">Fiction</a></li>
+                        </ul>
+                        <button type="button" class="next"><a href="#"><span class="material-symbols-rounded">chevron_right</span></a></button>
+                    </div>
 
+                <!--dropdown menu on md screen-->
                 <div class="btn-group d-block d-lg-none p-3">
                     <ul class="nav nav-pills" id="myTab" role="tablist">
                         <li class="nav-item dropdown">
@@ -100,42 +103,43 @@
                                 <span class="fw-bold fs-5">Select Category</span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" data-bs-toggle="tab" href="#lit-tab-pane"><span class="fw-bold fs-5">Literature</span></a></li>
-                                <li><a class="dropdown-item" data-bs-toggle="tab" href="#educ-tab-pane"><span class="fw-bold fs-5">Education</span></a></li>
-                                <li><a class="dropdown-item" data-bs-toggle="tab" href="#novel-tab-pane"><span class="fw-bold fs-5">Novel</span></a></li>
-                                <li><a class="dropdown-item" data-bs-toggle="tab" href="#ent-tab-pane"><span class="fw-bold fs-5">Entertainment</span></a></li>
-                                <li><a class="dropdown-item" data-bs-toggle="tab" href="#tech-tab-pane"><span class="fw-bold fs-5">Technology</span></a></li>
+                                <li><a class="dropdown-item" data-bs-toggle="tab" href="#lit-tab-pane" data-category="Literature"><span class="fw-bold fs-5">Literature</span></a></li>
+                                <li><a class="dropdown-item" data-bs-toggle="tab" href="#educ-tab-pane" data-category="Education"><span class="fw-bold fs-5">Education</span></a></li>
+                                <li><a class="dropdown-item" data-bs-toggle="tab" href="#novel-tab-pane" data-category="Novel"><span class="fw-bold fs-5">Novel</span></a></li>
+                                <li><a class="dropdown-item" data-bs-toggle="tab" href="#ent-tab-pane" data-category="Entertainment"><span class="fw-bold fs-5">Entertainment</span></a></li>
+                                <li><a class="dropdown-item" data-bs-toggle="tab" href="#tech-tab-pane" data-category="Technology"><span class="fw-bold fs-5">Technology</span></a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
 
+                <!--Tab Contents-->
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="lit-tab-pane" role="tabpanel" aria-labelledby="lit-tab" tabindex="0">
                         <div class="container">
                             <h1 class="fw-bold p-3">Literature</h1>
-                            <div id="book-list-literature" class="row row-cols-3 row-cols-lg-5 g-3"></div>
+                            <div id="book-list-literature" class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-3"></div>
                         </div>
                     </div>
 
                     <div class="tab-pane fade" id="educ-tab-pane" role="tabpanel" aria-labelledby="educ-tab" tabindex="0">
                         <div class="container">
                             <h1 class="fw-bold p-3">Education</h1>
-                            <div id="book-list-education" class="row row-cols-3 row-cols-lg-5 g-3"></div>
+                            <div id="book-list-education" class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-3"></div>
                         </div>
                     </div>
 
                     <div class="tab-pane fade" id="novel-tab-pane" role="tabpanel" aria-labelledby="novel-tab" tabindex="0">
                         <div class="container">
                             <h1 class="fw-bold p-3">Novel</h1>
-                            <div id="book-list-novel" class="row row-cols-3 row-cols-lg-5 g-3"></div>
+                            <div id="book-list-novel" class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-3"></div>
                         </div>
                     </div>
 
                     <div class="tab-pane fade" id="ent-tab-pane" role="tabpanel" aria-labelledby="ent-tab" tabindex="0">
                         <div class="container">
                             <h1 class="fw-bold p-3">Entertainment</h1>
-                            <div id="book-list-entertainment" class="row row-cols-3 row-cols-lg-5 g-3"></div>
+                            <div id="book-list-entertainment" class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-3"></div>
                         </div>
                     </div>
 
@@ -143,7 +147,7 @@
                     " tabindex="0">
                         <div class="container">
                             <h1 class="fw-bold p-3">Technology</h1>
-                            <div id="book-list-technology" class="row row-cols-3 row-cols-lg-5 g-3"></div>
+                            <div id="book-list-technology" class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-3"></div>
                         </div>
                     </div>
                 </div>
@@ -155,6 +159,10 @@
         document.addEventListener("DOMContentLoaded", function () {
             // Automatically load the literature category on page load
             fetchBooksByCategory('Literature');
+            fetchBooksByCategory('Education');
+            fetchBooksByCategory('Novel');
+            fetchBooksByCategory('Entertainment');
+            fetchBooksByCategory('Technology');
             const categories = document.querySelectorAll('.category');
 
             categories.forEach(category => {
@@ -190,7 +198,7 @@
                     books.forEach(book => {
                         const bookCard = `
                             <div class="col">
-                                <div class="card p-1 text-center">
+                                <div class="card p-1 text-center h-100">
                                     <img src="Admin/uploads/${book.image2}" class="card-img-top">
                                     <div class="card-body">
                                         <div class="card-title pt-1 fw-bold fs-4">${book.Title}</div>

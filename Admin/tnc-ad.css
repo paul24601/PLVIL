@@ -96,21 +96,21 @@ h3 {
 
 .layout.tables-chairs {
   display: grid;
-  grid-template-columns: repeat(9, 40px); /* Adjusted width for columns */
+  grid-template-columns: repeat(8, 40px); /* Adjusted width for columns */
   grid-template-rows: repeat(20, 40px); /* Adjusted height for rows */
   grid-gap: 10px; /* Adjusted gap between seats */
 }
 
 .layout.computer {
   display: grid;
-  grid-template-columns: repeat(10, 40px); /* Adjusted width for columns */
+  grid-template-columns: repeat(9, 40px); /* Adjusted width for columns */
   grid-template-rows: repeat(1, 40px); /* Adjusted height for rows */
   grid-gap: 10px; /* Adjusted gap between seats */
 }
 
 .layout.graduate {
   display: grid;
-  grid-template-columns: repeat(11, 40px); /* Adjusted width for columns */
+  grid-template-columns: repeat(10, 40px); /* Adjusted width for columns */
   grid-template-rows: repeat(3, 40px); /* Adjusted height for rows */
   grid-gap: 10px; /* Adjusted gap between seats */
 }

@@ -34,7 +34,7 @@ toggleBtn.addEventListener('click', (event) => {
 
 // Function to load content dynamically
 function loadContent(url) {
-    const mainContent = document.getElementById('mainContent');
+    const mainContent = document.querySelector('.main_content');
     
     // Clear existing content
     mainContent.innerHTML = '';
@@ -50,6 +50,7 @@ function loadContent(url) {
     mainContent.appendChild(iframe);
 }
 
+
 // Event listener for Tables and Chairs menu item
 document.getElementById('tnc-ad').addEventListener('click', function(event) {
     event.preventDefault();
@@ -63,7 +64,7 @@ document.getElementById('tnc-ad').addEventListener('click', function(event) {
     // Add 'menuActive' class to the clicked menu item
     this.closest('li').classList.add('menuActive');
 
-    loadContent('chairs-admin.html'); // Load content dynamically
+    loadContent('tnc-ad.html'); // Load content dynamically
 });
 
 // Event listener for Books menu item
@@ -90,3 +91,4 @@ if (userType === "seat-admin") {
 } else if (userType === "library-admin") {
     document.getElementById('userType').textContent = 'Library Admin';
 }
+

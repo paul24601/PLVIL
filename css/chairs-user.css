@@ -104,6 +104,7 @@ body {
     /* Adjusted height for rows */
     grid-gap: 10px;
     /* Adjusted gap between seats */
+    place-items: center;
 }
 
 .seat-img {

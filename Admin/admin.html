@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,30 +14,27 @@
             <div class="sidebar_user">
                 <div class="user-info">
                     <img src="user-image.png" alt="user-image" id="userImage" />
-                    <span>Admin</span>
+                    <span id="userType">Admin</span>
                 </div>
             </div>
-
             <div class="menu">
                 <ul class="menu_list">
-                    <li class="menuActive" id="booksMenu">
-                        <a href="index.php"> <i class="fa fa-book"></i> <span class="menuText">Books</span></a>
+                    <li id="booksMenu">
+                        <a href="#"> <i class="fa fa-book"></i> <span class="menuText">Books</span></a>
                     </li>
-                    <li id="chairsMenu">
-                        <a href="chairs-admin.html" id="tnc-ad"> <i class="fa fa-braille"></i> <span class="menuText">Tables and Chairs</span></a>
+                    <li>
+                        <a href="#" id="tnc-ad"> <i class="fa fa-braille"></i> <span class="menuText">Tables and Chairs</span></a>
                     </li>                                      
-                </ul>
+                </ul>                                             
             </div>
-
         </div>
-        
         <div class="content_container" id="contentContainer">
             <div class="topNav">
                 <a href="#" id="toggleBtn"><i class="fa fa-navicon"></i></a>
                 <a href="login.html" id="logoutBtn"><i class="fa fa-sign-out"></i> Logout</a>
             </div>
             <div class="content">
-                <div class="main_content" id="mainContent"></div>
+                <div class="main_content"></div>
             </div>
         </div>    
     </div>

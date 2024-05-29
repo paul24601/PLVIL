@@ -7,6 +7,7 @@
   <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
   <script src="https://raw.githack.com/fcor/arjs-gestures/master/dist/gestures.js"></script>
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/three.js/build/ar.js"></script>
+    <script src="https://unpkg.com/aframe-extras/dist/aframe-extras.min.js"></script>
   <style>
     body {
       margin: 0;
@@ -40,35 +41,42 @@
       <img id="image3" src="assets/slides/3.png">
       <img id="image4" src="assets/slides/4.png">
       <img id="image5" src="assets/slides/5.png">
+      <a-asset-item id="3d-plvil" src="assets/PLVIL.glb"></a-asset-item>
+      <a-asset-item id="3d-pio" src="assets/PIO.glb"></a-asset-item>
     </a-assets>
 
     <!--PLVIL section-->
     <a-marker markerhandler="soundSrcs: #sound1, #bgm" type="barcode" value="0" raycaster="objects: .clickable"
       emitevents="true" cursor="fuse: false; rayOrigin: mouse;">
       
-      <a-video id="vid1" src="#plvil-vid" rotation="-90 0 0" width="10" height="5" position="-8 0 0"
-        video-handler="volume: 0.05"></a-video>
+      <a-video id="vid1" src="#plvil-vid" rotation="-90 0 0" width="10" height="5" position="-9 0 0"
+      video-handler="volume: 0.05"></a-video>
 
-      <a-video id="vid1" src="#plvil-square" position="0 1 0" rotation="-90 0 0" width="5" height="5" video-handler="volume: 0"></a-video>
+      <a-video id="vid1" src="#plvil-square" position="0 1 0" rotation="-90 0 0" width="6" height="6" video-handler="volume: 0"></a-video>
 
       <!-- Slideshow plane -->
-      <a-plane id="imagePlane" src="#image1" rotation="-90 0 0" height="5" width="10" position="-3 1 6"
-        class="clickable" slideshow-toggle></a-plane>
+      <a-plane id="imagePlane" src="#image1" rotation="-90 0 0" height="5" width="10" position="9 0 0"
+      class="clickable" slideshow-toggle1 gesture-handler></a-plane>
+
+      <a-entity gltf-model="#3d-plvil" scale="7 7 7" rotation="0 0 0" position="0 1 -4.5"></a-entity>
     </a-marker>
 
     <!--PIO section-->
     <a-marker markerhandler="soundSrcs: #sound3, #bgm" type="barcode" value="1" raycaster="objects: .clickable"
       emitevents="true" cursor="fuse: false; rayOrigin: mouse;">
 
-      <a-video id="vid1" src="#pio-vid" rotation="-90 0 0" width="10" height="5" position="-8 0 0"
-        video-handler="volume: 0.05"></a-video>
+      <a-video id="vid1" src="#pio-vid" rotation="-90 0 0" width="10" height="5" position="-9 0 0"
+      video-handler="volume: 0.05"></a-video>
 
-      <a-video id="vid1" src="#plvil-square" position="0 1 0" rotation="-90 0 0" width="5" height="5"  video-handler="volume: 0"></a-video>
+      <a-video id="vid1" src="#plvil-square" position="0 1 0" rotation="-90 0 0" width="6" height="6"  video-handler="volume: 0"></a-video>
 
       <!-- Slideshow plane -->
-      <a-plane id="imagePlane" src="#image1" rotation="-90 0 0" height="5" width="10" position="-3 1 6"
-        class="clickable" slideshow-toggle></a-plane>
+      <a-plane id="imagePlane" src="#image1" rotation="-90 0 0" height="5" width="10" position="9 0 0"
+      class="clickable" slideshow-toggle2 gesture-handler></a-plane>
+
+      <a-entity gltf-model="#3d-pio" scale="5 5 5" rotation="0 0 0" position="0 1 -4"></a-entity>
     </a-marker>
+
     <a-entity camera cursor="fuse: false; rayOrigin:mouse;"></a-entity>
   </a-scene>
   <script>
@@ -113,7 +121,20 @@
     });
 
     // Slideshow toggle
-    AFRAME.registerComponent('slideshow-toggle', {
+    AFRAME.registerComponent('slideshow-toggle1', {
+      init: function () {
+        var plane = this.el;
+        var images = ['#image1', '#image4', '#image5', '#image2', '#image3'];
+        var currentIndex = 0;
+
+        plane.addEventListener('click', function () {
+          currentIndex = (currentIndex + 1) % images.length;
+          plane.setAttribute('src', images[currentIndex]);
+        });
+      }
+    });
+    // Slideshow toggle
+    AFRAME.registerComponent('slideshow-toggle2', {
       init: function () {
         var plane = this.el;
         var images = ['#image1', '#image4', '#image5', '#image2', '#image3'];
