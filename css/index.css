@@ -1,8 +1,8 @@
 body {
     background-image: url('../assets/homebg.png');
     background-size: cover; /* Cover the entire body */
-    background-repeat: no-repeat; /* Do not repeat the image */
     background-position: center; /* Center the image */
+    background-attachment: fixed;
 }
 
 /* Custom CSS to center the container */

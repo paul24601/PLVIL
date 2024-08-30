@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PLVIL</title>
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <script src="https://code.jquery.com/jquery-3.7.1.js"
+    integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md">
+    <div class="container-lg">
+      <a href="index.php" class="navbar-brand">
+        <span class="fw-bold text-light display-5">PLVIL</span>
+      </a>
+
+      <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav"
+        aria-controls="main-nav" aria-expanded="false" aria-label="Toggle Navigation">
+        <span class="navbar-toggler-icon"></span></button>
+
+      <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
+        <ul class="navbar-nav">
+          <li class="class-item">
+            <a href="index.php" class="ms-3 fs-5 text-light fw-bold nav-link">Home</a>
+          </li>
+          <li class="class-item">
+            <a href="browse.html" class="fs-5 text-light fw-bold nav-link">Browse</a>
+          </li>
+          <li class="class-item">
+            <a href="index.html" class="fs-5 text-light fw-bold nav-link">AR Scan</a>
+          </li>
+          <li class="class-item">
+            <a href="Admin/chairs-user.html" class="fs-5 text-light fw-bold nav-link">Chairs</a>
+          </li>
+          <li class="class-item">
+            <a href="about.html" class="fs-5 text-light fw-bold nav-link active">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="search-sec">
+    <div class="container-fluid pt-5">
+      <div class="logo">
+        <img src="assets/plvlogo.png" class="img-fluid rounded mx-auto d-block my-5" alt="PLV Logo">
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-11 col-md-8 col-lg-6">
+          <div class="search container mb-5">
+            <div class="input-group">
+              <select id="searchType" class="form-select rounded-start-pill">
+                <option value="title">Title</option>
+                <option value="author">Author</option>
+                <option value="year">Year</option>
+                <option value="category">Category</option>
+              </select>
+
+              <input type="text" class="form-control  rounded-end-pill" id="searchInput"
+                placeholder="Search...">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="resultsContainer">
+        </div>
+
+      <div id="noMatchesMessage"
+        class="d-none d-flex justify-content-center align-items-center text-center bg-light container mx-auto py-5">
+        <h1>No matches found.</h1>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+  </script>
+
+  <script>
+    $(document).ready(function () {
+      // Function to fetch and display books
+      function fetchBooks(searchType, searchText) {
+        $.ajax({
+          url: 'books.php',
+          type: 'POST',
+          data: { searchType: searchType, searchText: searchText },
+          success: function (data) {
+            $('#resultsContainer').html(data);
+            checkMatchesFound();
+          },
+          error: function (error) {
+            console.error('Error fetching books:', error);
+          }
+        });
+      }
+
+      // Function to check if there are matches found during search
+      function checkMatchesFound() {
+        var matchesFound = $('#resultsContainer').find('tbody tr').length > 0;
+        if (!matchesFound) {
+          $('#noMatchesMessage').removeClass('d-none');
+        } else {
+          $('#noMatchesMessage').addClass('d-none');
+        }
+      }
+
+      // Function to check if the search input is empty
+      function checkSearchInput() {
+        var searchInput = $('#searchInput').val().trim();
+        if (searchInput === '') {
+          $('#resultsContainer').html(''); // Clear results
+          $('#noMatchesMessage').addClass('d-none');
+        } else {
+          fetchBooks($('#searchType').val(), searchInput.toLowerCase());
+        }
+      }
+
+      // Call the function on page load
+      checkSearchInput();
+
+      // Function for search
+      $('#searchInput').on('input', function () {
+        checkSearchInput();
+      });
+    });
+  </script>
+</body>
+
+</html>

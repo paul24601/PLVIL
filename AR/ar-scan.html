@@ -7,7 +7,6 @@
   <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
   <script src="https://raw.githack.com/fcor/arjs-gestures/master/dist/gestures.js"></script>
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/three.js/build/ar.js"></script>
-    <script src="https://unpkg.com/aframe-extras/dist/aframe-extras.min.js"></script>
   <style>
     body {
       margin: 0;
@@ -25,14 +24,12 @@
     arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3_HAMMING63;"
     renderer="logarithmicDepthBuffer: true;" vr-mode-ui="enabled: false" gesture-detector id="scene">
 
-    <!--sound files-->
     <a-sound id="sound1" src="assets/Intro to PLVIL.wav"></a-sound>
     <a-sound id="sound2" src="assets/Intro to AR.wav"></a-sound>
     <a-sound id="sound3" src="assets/Intro to Highlights.wav"></a-sound>
     <a-sound id="bgm" src="assets/bg-music.mp3"></a-sound>
 
     <a-assets>
-      <!-- Define assets here -->
       <video autoplay loop="true" id="plvil-vid" src="assets/vids/PLVIL.mp4"></video>
       <video loop="true" id="pio-vid" src="assets/vids/PIO.mp4"></video>
       <video autoplay loop="true" id="plvil-square" src="assets/vids/plvil-square.mp4"></video>
@@ -45,32 +42,28 @@
       <a-asset-item id="3d-pio" src="assets/PIO.glb"></a-asset-item>
     </a-assets>
 
-    <!--PLVIL section-->
-    <a-marker markerhandler="soundSrcs: #sound1, #bgm" type="barcode" value="0" raycaster="objects: .clickable"
+    <a-marker markerhandler="soundSrc: #sound1" type="barcode" value="0" raycaster="objects: .clickable"
       emitevents="true" cursor="fuse: false; rayOrigin: mouse;">
-      
-      <a-video id="vid1" src="#plvil-vid" rotation="-90 0 0" width="10" height="5" position="-9 0 0"
+
+      <a-video id="marker-video" src="#plvil-vid" rotation="-90 0 0" width="10" height="5" position="-9 0 0"
       video-handler="volume: 0.05"></a-video>
 
-      <a-video id="vid1" src="#plvil-square" position="0 1 0" rotation="-90 0 0" width="6" height="6" video-handler="volume: 0"></a-video>
+      <a-video id="marker-video" src="#plvil-square" position="0 1 0" rotation="-90 0 0" width="6" height="6" video-handler="volume: 0"></a-video>
 
-      <!-- Slideshow plane -->
       <a-plane id="imagePlane" src="#image1" rotation="-90 0 0" height="5" width="10" position="9 0 0"
       class="clickable" slideshow-toggle1 gesture-handler></a-plane>
 
       <a-entity gltf-model="#3d-plvil" scale="7 7 7" rotation="0 0 0" position="0 1 -4.5"></a-entity>
     </a-marker>
 
-    <!--PIO section-->
-    <a-marker markerhandler="soundSrcs: #sound3, #bgm" type="barcode" value="1" raycaster="objects: .clickable"
+    <a-marker markerhandler="soundSrc: #sound3" type="barcode" value="1" raycaster="objects: .clickable"
       emitevents="true" cursor="fuse: false; rayOrigin: mouse;">
 
-      <a-video id="vid1" src="#pio-vid" rotation="-90 0 0" width="10" height="5" position="-9 0 0"
+      <a-video id="marker-video" src="#pio-vid" rotation="-90 0 0" width="10" height="5" position="-9 0 0"
       video-handler="volume: 0.05"></a-video>
 
-      <a-video id="vid1" src="#plvil-square" position="0 1 0" rotation="-90 0 0" width="6" height="6"  video-handler="volume: 0"></a-video>
+      <a-video id="marker-video" src="#plvil-square" position="0 1 0" rotation="-90 0 0" width="6" height="6" video-handler="volume: 0"></a-video>
 
-      <!-- Slideshow plane -->
       <a-plane id="imagePlane" src="#image1" rotation="-90 0 0" height="5" width="10" position="9 0 0"
       class="clickable" slideshow-toggle2 gesture-handler></a-plane>
 
@@ -83,19 +76,17 @@
     // Marker handler component
     AFRAME.registerComponent('markerhandler', {
       schema: {
-        soundSrcs: { type: 'array' }
+        soundSrc: { type: 'string' }
       },
       init: function () {
-        let soundSrcs = this.data.soundSrcs.map(src => document.querySelector(src));
+        this.soundEl = document.querySelector(this.data.soundSrc);
 
         this.el.addEventListener('markerFound', () => {
-          // Play all sound sources when marker is found
-          soundSrcs.forEach(sound => sound.components.sound.playSound());
+          this.soundEl.components.sound.playSound();
         });
 
         this.el.addEventListener('markerLost', () => {
-          // Stop all sound sources when marker is lost
-          soundSrcs.forEach(sound => sound.components.sound.stopSound());
+          this.soundEl.components.sound.stopSound();
         });
       }
     });
@@ -133,6 +124,7 @@
         });
       }
     });
+
     // Slideshow toggle
     AFRAME.registerComponent('slideshow-toggle2', {
       init: function () {
