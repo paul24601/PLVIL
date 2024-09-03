@@ -48,7 +48,7 @@
     /* Styling for the navbar toggler */
     .navbar-toggler {
       border-color: transparent;
-      color: white;
+      color: rgb(255, 255, 255);
     }
 
     .navbar-toggler-icon {
@@ -101,8 +101,9 @@
     </div>
 
   </div>
+
   <a-scene embedded
-    arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3_HAMMING63;"
+    arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 4x4_BCH_13_5_5;"
     renderer="logarithmicDepthBuffer: true;" vr-mode-ui="enabled: false" gesture-detector id="scene">
 
     <a-sound id="sound1" src="assets/Intro to PLVIL.wav"></a-sound>
@@ -160,21 +161,9 @@
     <!-- BOOKS -->
     <a-marker markerhandler="soundSrc: #" type="barcode" value="3" raycaster="objects: .clickable" emitevents="true"
       cursor="fuse: false; rayOrigin: mouse;">
-      <!-- Author Information -->
-      <a-plane position="0 0 9" rotation="-90 0 0" width="7" height="7" color="#ffffff" opacity="0.8">
-        <a-text value="Author: John Doe" align="center" width="10" height="5"  color="#000000"></a-text>
-        <a-image src="" position="0 0.4 0.01" width="1.5" height="1"></a-image>
-      </a-plane>
-
-      <!-- Synopsis -->
-      <a-plane position="0 0 -9" rotation="-90 0 0" width="3" height="2" color="#ffffff" opacity="0.8">
-        <a-text value="Synopsis: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit, quae?" align="center" width="7" height="7"  color="#000000"></a-text>
-      </a-plane>
-
-      <!-- Multimedia -->
-      <a-plane position="0 0 " rotation="-90 0 0" width="7" height="7" color="#ffffff" opacity="0.8">
-        <a-image src="#author-photo" position="0 0.4 0.01" width="1.5" height="1"></a-image>
-      </a-plane>
+      
+      <!-- Text overlay on the AR graphic -->
+      <a-text value="Goyo: Ang Batang Heneral" position="1.5 1 -1" align="center" rotation="-90 0 0" width="15" color="#121212"></a-text>
     </a-marker>
 
   <a-entity camera cursor="fuse: false; rayOrigin:mouse;"></a-entity>
