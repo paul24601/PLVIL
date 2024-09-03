@@ -20,7 +20,7 @@ echo "  <table>
               <th>Title</th>
               <th>Author</th>
               <th class='d-none d-lg-table-cell'>Column Number</th>
-              <th class='d-none d-lg-table-cell'>Accession</th>
+              <th cl  ass='d-none d-lg-table-cell'>Accession</th>
               <th class='d-none d-lg-table-cell'>Edition</th>
               <th class='d-none d-lg-table-cell'>Year</th>
               <th class='d-none d-lg-table-cell'>Property</th>

@@ -118,3 +118,25 @@ function changePage(i) {
     thisPage = i;
     loadItem();
 }
+
+
+$(document).ready(function () {
+    // Fetch recent books from the PHP file
+    $.getJSON('recent_books.php', function (data) {
+        var booksContainer = $('#recent-books');
+
+        $.each(data, function (index, book) {
+            var bookCard = `
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <img src="`+ book.image2 + `" class="card-img-top" alt="`+ book.Title + ` cover">
+                        <div class="card-body">
+                            <h5 class="card-title">`+ book.Ttile + `</h5>
+                            <p class="card-text">by `+ book.Author + `</p>
+                        </div>
+                    </div>
+                </div>`;
+            booksContainer.append(bookCard);
+        });
+    });
+});

@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5;
+}
+
+#container {
+    display: flex;
+    flex-direction: row;
+    transition: all 0.3s ease;
+}
+
+.sidebar {
+    width: 20%;
+    background: #303030;
+    height: 100vh; 
+    transition: width 0.3s ease;
+}
+
+.content_container {
+    width: 80%;
+    background: #f4f6f9;
+    transition: width 0.3s ease;
+}
+
+h3.logo {
+    color: rgb(42, 42, 146);
+    font-size: 42px; 
+    text-align: center;
+    margin: 0; /* Add margin: 0; to remove default margin */
+    padding-top: 20px; /* Add padding to the top instead */
+    padding-bottom: 20px; /* Add padding to the bottom instead */
+}
+
+.sidebar_user {
+    text-align: center;
+    position: relative;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #fff;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+}
+
+.sidebar_user img {
+    width: 80px;
+    height: 80px;
+    display: inline-block;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    border: 3px solid #fff; 
+    object-fit: cover;
+}
+
+.sidebar_user span {
+    font-size: 20px; 
+    text-transform: uppercase;
+    color: #fff;
+}
+
+ul.menu_list {
+    padding: 0;
+    margin: 0;
+}
+
+ul.menu_list li {
+    padding: 15px 20px; 
+    font-size: 18px; 
+    text-transform: uppercase;
+    list-style: none;
+    transition: background-color 0.3s;
+}
+
+ul.menu_list li a {
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+ul.menu_list li.menuActive {
+    background: rgb(42, 42, 146);
+    color: #fff;
+}
+
+ul.menu_list li:hover {
+    background: rgba(75, 75, 109, 0.8); 
+    color: #fff;
+}
+
+.menu_list i {
+    margin-right: 10px;
+    font-size: 24px; 
+}
+
+.topNav {
+    background: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+.topNav a {
+    color: #848383;
+    font-size: 18px; 
+    text-decoration: none;
+}
+
+a#logoutBtn {
+    float: right;
+}
+
+ul.menu_list li:hover {
+    background: rgba(58, 58, 126, 0.8); 
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.content {
+    display: flex; /* Use flexbox to align items vertically */
+    padding: 30px; /* Add padding to the content area */
+}
+
+.main_content {
+    background-color: #fff; /* Set background color for the main content */
+    border-radius: 5px; /* Add border radius for a rounded appearance */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow for a subtle depth effect */
+    width: 100%; /* Set width to fill up the entire available space */
+    height: 830px;
+}
+

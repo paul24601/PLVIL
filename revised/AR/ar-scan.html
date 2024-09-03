@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+  <script src="https://raw.githack.com/fcor/arjs-gestures/master/dist/gestures.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/three.js/build/ar.js"></script>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      color: white;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      border-radius: 5px;
+      z-index: 10;
+      /* Make sure it's above the AR scene */
+      max-width: 98%;
+    }
+
+    .scene-wrapper {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      /* 16:9 Aspect Ratio */
+    }
+
+    a-scene {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Styling for the navbar toggler */
+    .navbar-toggler {
+      border-color: transparent;
+      color: white;
+    }
+
+    .navbar-toggler-icon {
+      filter: invert(1);
+    }
+
+    .navbar {
+      justify-content: flex-end;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Responsive Overlay element using Bootstrap -->
+  <div class="overlay container-fluid">
+    <!-- Navbar -->
+    <nav class="navbar sticky-top custom-navbar">
+      <div class="container-lg d-flex justify-content-end">
+        <!-- Toggler -->
+        <button class="navbar-toggler p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu"
+          aria-controls="offcanvasMenu" aria-expanded="false" aria-label="Toggle Navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Offcanvas Menu -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+      <div class="offcanvas-header">
+        <h5 id="offcanvasMenuLabel">Menu</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav">
+          <li class="class-item">
+            <a href="../index.html" class="fs-6 text-dark fw-bold nav-link active">Home</a>
+          </li>
+          <li class="class-item">
+            <a href="#" class="fs-6 text-dark fw-bold nav-link" data-bs-toggle="modal" data-bs-target="#arModal">AR
+              Scan</a>
+          </li>
+          <li class="class-item">
+            <a href="Admin/chairs-user.html" class="fs-6 text-dark fw-bold nav-link">Chairs</a>
+          </li>
+          <li class="class-item">
+            <a href="about.html" class="fs-6 text-dark fw-bold nav-link active">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+  <a-scene embedded
+    arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3_HAMMING63;"
+    renderer="logarithmicDepthBuffer: true;" vr-mode-ui="enabled: false" gesture-detector id="scene">
+
+    <a-sound id="sound1" src="assets/Intro to PLVIL.wav"></a-sound>
+    <a-sound id="sound2" src="assets/Intro to AR.wav"></a-sound>
+    <a-sound id="sound3" src="assets/Intro to Highlights.wav"></a-sound>
+    <a-sound id="bgm" src="assets/bg-music.mp3"></a-sound>
+
+    <a-assets>
+      <video autoplay loop="true" id="plvil-vid" src="assets/vids/PLVIL.mp4"></video>
+      <video loop="true" id="pio-vid" src="assets/vids/PIO.mp4"></video>
+      <video autoplay loop="true" id="plvil-square" src="assets/vids/plvil-square.mp4"></video>
+      <video autoplay loop="true" id="book-trailer" src="assets/vids/PIO.mp4"></video>
+      <img id="image1" src="assets/slides/1.png">
+      <img id="image2" src="assets/slides/2.png">
+      <img id="image3" src="assets/slides/3.png">
+      <img id="image4" src="assets/slides/4.png">
+      <img id="image5" src="assets/slides/5.png">
+      <img id="author-photo" src="assets/Hiro_marker_ARjs.png">
+      <a-asset-item id="3d-plvil" src="assets/PLVIL.glb"></a-asset-item>
+      <a-asset-item id="3d-pio" src="assets/PIO.glb"></a-asset-item>
+    </a-assets>
+
+    <!-- PLVIL -->
+    <a-marker markerhandler="soundSrc: #sound1" type="barcode" value="0" raycaster="objects: .clickable"
+      emitevents="true" cursor="fuse: false; rayOrigin: mouse;">
+
+      <a-video id="marker-video" src="#plvil-vid" rotation="-90 0 0" width="10" height="5" position="-9 0 0"
+        video-handler="volume: 0.05"></a-video>
+
+      <a-video id="marker-video" src="#plvil-square" position="0 1 0" rotation="-90 0 0" width="6" height="6"
+        video-handler="volume: 0"></a-video>
+
+      <a-plane id="imagePlane" src="#image1" rotation="-90 0 0" height="5" width="10" position="9 0 0"
+        class="clickable" slideshow-toggle1 gesture-handler></a-plane>
+
+      <a-entity gltf-model="#3d-plvil" scale="7 7 7" rotation="0 0 0" position="0 1 -4.5"></a-entity>
+    </a-marker>
+
+    <!-- PIO -->
+    <a-marker markerhandler="soundSrc: #sound3" type="barcode" value="1" raycaster="objects: .clickable"
+      emitevents="true" cursor="fuse: false; rayOrigin: mouse;">
+
+      <a-video id="marker-video" src="#pio-vid" rotation="-90 0 0" width="10" height="5" position="-9 0 0"
+        video-handler="volume: 0.05"></a-video>
+
+      <a-video id="marker-video" src="#plvil-square" position="0 1 0" rotation="-90 0 0" width="6" height="6"
+        video-handler="volume: 0"></a-video>
+
+      <a-plane id="imagePlane" src="#image1" rotation="-90 0 0" height="5" width="10" position="9 0 0"
+        class="clickable" slideshow-toggle2 gesture-handler></a-plane>
+
+      <a-entity gltf-model="#3d-pio" scale="5 5 5" rotation="0 0 0" position="0 1 -4"></a-entity>
+    </a-marker>
+
+    <!-- BOOKS -->
+    <a-marker markerhandler="soundSrc: #" type="barcode" value="3" raycaster="objects: .clickable" emitevents="true"
+      cursor="fuse: false; rayOrigin: mouse;">
+      <!-- Author Information -->
+      <a-plane position="0 0 9" rotation="-90 0 0" width="7" height="7" color="#ffffff" opacity="0.8">
+        <a-text value="Author: John Doe" align="center" width="10" height="5"  color="#000000"></a-text>
+        <a-image src="" position="0 0.4 0.01" width="1.5" height="1"></a-image>
+      </a-plane>
+
+      <!-- Synopsis -->
+      <a-plane position="0 0 -9" rotation="-90 0 0" width="3" height="2" color="#ffffff" opacity="0.8">
+        <a-text value="Synopsis: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit, quae?" align="center" width="7" height="7"  color="#000000"></a-text>
+      </a-plane>
+
+      <!-- Multimedia -->
+      <a-plane position="0 0 " rotation="-90 0 0" width="7" height="7" color="#ffffff" opacity="0.8">
+        <a-image src="#author-photo" position="0 0.4 0.01" width="1.5" height="1"></a-image>
+      </a-plane>
+    </a-marker>
+
+  <a-entity camera cursor="fuse: false; rayOrigin:mouse;"></a-entity>
+  </a-scene>
+
+  
+
+  <!-- Modal -->
+  <div class="modal fade" id="arModal" tabindex="-1" aria-labelledby="arModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="arModalLabel">Augmented Reality Consent</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Do you accept the terms and conditions for using Augmented Reality?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Decline</button>
+          <button type="button" class="btn btn-primary" onclick="acceptAR()">Accept</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- JavaScript for the modal -->
+  <script>
+    function acceptAR() {
+      window.location.href = "AR/ar-scan.html";
+    }
+  </script>
+</body>
+
+</html>

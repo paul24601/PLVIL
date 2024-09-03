@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Augmented Reality (AR) Consent Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .scroll-box {
+            overflow-y: scroll;
+            height: 300px;
+            padding-right: 20px; /* Add space for scrollbar */
+            margin-bottom: 20px; /* Add some space at the bottom */
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        h3 {
+            margin-top: 20px;
+            color: #555;
+        }
+
+        ol {
+            padding-left: 20px;
+            color: #777;
+        }
+
+        p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .button-container {
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            transition: background-color 0.3s;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+        <h2>Augmented Reality (AR) Consent Form</h2>
+        <div class="scroll-box">
+            <p>Dear Users,</p>
+            <p>We are excited to introduce the Augmented Reality (AR) feature as part of the PLVIL: Development of Library Management System with Book Locator and Augmented Reality Assisted Book Viewer for Pamantasan ng Lungsod ng Valenzuela (PLV) University Library. Before you proceed to use this feature, we would like to seek your consent regarding the collection and usage of certain data as required by law.</p>
+            <h3>Explanation of Augmented Reality (AR) Feature:</h3>
+            <p>The AR feature allows users to experience immersive and interactive views of selected library resources through their mobile devices. By accessing this feature, you will be able to visualize additional information, such as book details and related multimedia content, overlaid onto physical objects within the library environment.</p>
+            <h3>Consent for Camera and Speaker Access:</h3>
+            <p>In order to provide you with the AR experience, the PLVIL system requires access to your device's camera and speakers. This access is necessary to enable the AR technology to overlay digital content onto the physical environment and to deliver audiovisual feedback accordingly.</p>
+            <h3>Data Privacy Compliance:</h3>
+            <p>We are committed to protecting your privacy and ensuring compliance with the Data Privacy Act of the Philippines (Republic Act No. 10173) and its implementing rules and regulations. By providing your consent to access your device's camera and speakers for the AR feature, you acknowledge and agree to the following:</p>
+            <ol>
+                <li><strong>Purpose of Data Collection:</strong> The data collected (i.e., images captured by the camera and audio output through the speakers) will be used solely for the purpose of delivering the AR experience within the PLVIL system.</li>
+                <li><strong>Storage and Security:</strong> Any data collected will be stored securely and will not be shared with third parties without your explicit consent, except as required by law.</li>
+                <li><strong>User Control:</strong> You have the right to withdraw your consent at any time by disabling the AR feature in the PLVIL system settings. However, please note that disabling this feature will prevent you from accessing the AR content.</li>
+                <li><strong>Data Retention:</strong> Data collected for the AR feature will be retained only for as long as necessary to fulfill the purposes for which it was collected or as required by applicable laws and regulations.</li>
+            </ol>
+            <p><strong>Consent Acknowledgement:</strong> By clicking the "Accept" button below, you acknowledge that you have read and understood the information provided in this consent form. You voluntarily consent to the PLVIL system accessing your device's camera and speakers for the purpose of delivering the Augmented Reality (AR) experience. You also agree to abide by the terms outlined in this consent form and understand your rights regarding data privacy under the Data Privacy Act of the Philippines.</p>
+            <p>Thank you for your cooperation and participation in the PLVIL project. If you have any questions or concerns regarding this consent form or the AR feature, please do not hesitate to contact us.</p>
+        </div>
+        <div class="button-container">
+            <button id="acceptBtn" disabled>Accept</button>
+            <button id="declineBtn">Decline</button>
+        </div>
+    </div>
+
+    <script>
+        //modal handling script
+        var scrollBox = document.querySelector(".scroll-box");
+        var acceptBtn = document.getElementById("acceptBtn");
+        var declineBtn = document.getElementById("declineBtn");
+
+        scrollBox.addEventListener('scroll', toggleAcceptButton);
+
+        function toggleAcceptButton() {
+            // Check if user has scrolled to the bottom
+            var isScrolledToBottom = scrollBox.scrollHeight - scrollBox.scrollTop === scrollBox.clientHeight;
+            // Enable or disable the Accept button based on scroll position
+            acceptBtn.disabled = !isScrolledToBottom;
+        }
+
+        acceptBtn.onclick = function () {
+            window.location.href = "AR/ar-scan.html";
+            // Proceed to the main content or another page
+        }
+
+        declineBtn.onclick = function () {
+            window.location.href = "index.html";
+        }
+    </script>
+
+</body>
+
+</html>
