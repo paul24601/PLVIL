@@ -30,21 +30,6 @@
       max-width: 98%;
     }
 
-    .scene-wrapper {
-      position: relative;
-      width: 100%;
-      padding-top: 56.25%;
-      /* 16:9 Aspect Ratio */
-    }
-
-    a-scene {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-
     /* Styling for the navbar toggler */
     .navbar-toggler {
       border-color: transparent;
@@ -151,7 +136,7 @@
 
       <a-video id="marker-video" src="#plvil-square" position="0 1 0" rotation="-90 0 0" width="6" height="6"
         video-handler="volume: 0"></a-video>
-
+/*
       <a-plane id="imagePlane" src="#image1" rotation="-90 0 0" height="5" width="10" position="9 0 0"
         class="clickable" slideshow-toggle2 gesture-handler></a-plane>
 
@@ -163,7 +148,7 @@
       cursor="fuse: false; rayOrigin: mouse;">
       
       <!-- Text overlay on the AR graphic -->
-      <a-text value="Goyo: Ang Batang Heneral" position="1.5 1 -1" align="center" rotation="-90 0 0" width="15" color="#121212"></a-text>
+      <a-text value="Goyo: Ang Batang Heneral" position="1.5 1 -1" align="center" rotation="-90 0 0" width="8" color="#121212"></a-text>
     </a-marker>
 
   <a-entity camera cursor="fuse: false; rayOrigin:mouse;"></a-entity>
