@@ -7,6 +7,25 @@
   <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
   <script src="https://raw.githack.com/fcor/arjs-gestures/master/dist/gestures.js"></script>
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/three.js/build/ar.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AR Scan</title>
+  <script>
+    // Function to add a timestamp to the image URLs to prevent caching
+    function updateImageSrc() {
+      var currentTime = new Date().getTime(); // Get current time in milliseconds
+
+      // Update the src attribute of images
+      document.getElementById('book1-title').src = 'assets/argraphics/book1info/b1title.png?' + currentTime;
+      document.getElementById('book1-auth').src = 'assets/argraphics/book1info/b1auth.png?' + currentTime;
+      document.getElementById('book1-gen').src = 'assets/argraphics/book1info/b1gen.png?' + currentTime;
+      document.getElementById('book1-syn').src = 'assets/argraphics/book1info/b1syn.png?' + currentTime;
+      document.getElementById('book1-lang').src = 'assets/argraphics/book1info/b1lang.png?' + currentTime;
+    }
+
+    // Call the function to update image URLs when the page loads
+    window.onload = updateImageSrc;
+  </script>
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -72,14 +91,14 @@
             <a href="../index.html" class="fs-6 text-dark fw-bold nav-link active">Home</a>
           </li>
           <li class="class-item">
-            <a href="#" class="fs-6 text-dark fw-bold nav-link" data-bs-toggle="modal" data-bs-target="#arModal">AR
+            <a href="" class="fs-6 text-dark fw-bold nav-link" data-bs-toggle="" data-bs-target="#">AR
               Scan</a>
           </li>
           <li class="class-item">
             <a href="Admin/chairs-user.html" class="fs-6 text-dark fw-bold nav-link">Chairs</a>
           </li>
           <li class="class-item">
-            <a href="about.html" class="fs-6 text-dark fw-bold nav-link active">About</a>
+            <a href="../about.html" class="fs-6 text-dark fw-bold nav-link active">About</a>
           </li>
         </ul>
       </div>
@@ -106,9 +125,17 @@
       <img id="image3" src="assets/slides/3.png">
       <img id="image4" src="assets/slides/4.png">
       <img id="image5" src="assets/slides/5.png">
-      <img id="author-photo" src="assets/Hiro_marker_ARjs.png">
+
       <a-asset-item id="3d-plvil" src="assets/PLVIL.glb"></a-asset-item>
       <a-asset-item id="3d-pio" src="assets/PIO.glb"></a-asset-item>
+
+      <!-- books -->
+      <img id="bookoftheweek" src="assets/argraphics/Bookoftheweek.png" alt="Book of the Week">
+      <img id="book1-title" src="assets/argraphics/book1info/b1title.png" alt="Book 1 Title">
+      <img id="book1-auth" src="assets/argraphics/book1info/b1auth.png" alt="Book 1 Author">
+      <img id="book1-gen" src="assets/argraphics/book1info/b1gen.png" alt="Book 1 Genre">
+      <img id="book1-syn" src="assets/argraphics/book1info/b1syn.png" alt="Book 1 Synopsis">
+      <img id="book1-lang" src="assets/argraphics/book1info/b1lang.png" alt="Book 1 Language">
     </a-assets>
 
     <!-- PLVIL -->
@@ -121,8 +148,8 @@
       <a-video id="marker-video" src="#plvil-square" position="0 1 0" rotation="-90 0 0" width="6" height="6"
         video-handler="volume: 0"></a-video>
 
-      <a-plane id="imagePlane" src="#image1" rotation="-90 0 0" height="5" width="10" position="9 0 0"
-        class="clickable" slideshow-toggle1 gesture-handler></a-plane>
+      <a-plane id="imagePlane" src="#image1" rotation="-90 0 0" height="5" width="10" position="9 0 0" class="clickable"
+        slideshow-toggle1 gesture-handler></a-plane>
 
       <a-entity gltf-model="#3d-plvil" scale="7 7 7" rotation="0 0 0" position="0 1 -4.5"></a-entity>
     </a-marker>
@@ -136,25 +163,40 @@
 
       <a-video id="marker-video" src="#plvil-square" position="0 1 0" rotation="-90 0 0" width="6" height="6"
         video-handler="volume: 0"></a-video>
-/*
-      <a-plane id="imagePlane" src="#image1" rotation="-90 0 0" height="5" width="10" position="9 0 0"
-        class="clickable" slideshow-toggle2 gesture-handler></a-plane>
+
+      <a-plane id="imagePlane" src="#image1" rotation="-90 0 0" height="5" width="10" position="9 0 0" class="clickable"
+        slideshow-toggle2 gesture-handler></a-plane>
 
       <a-entity gltf-model="#3d-pio" scale="5 5 5" rotation="0 0 0" position="0 1 -4"></a-entity>
     </a-marker>
 
     <!-- BOOKS -->
-    <a-marker markerhandler="soundSrc: #" type="barcode" value="3" raycaster="objects: .clickable" emitevents="true"
+    <a-marker markerhandler="soundSrc: #" type="barcode" value="2" raycaster="objects: .clickable" emitevents="true"
       cursor="fuse: false; rayOrigin: mouse;">
-      
-      <!-- Text overlay on the AR graphic -->
-      <a-text value="Goyo: Ang Batang Heneral" position="1.5 1 -1" align="center" rotation="-90 0 0" width="8" color="#121212"></a-text>
+      <!-- book of the week -->
+      <a-plane id="" src="#bookoftheweek" rotation="-90 0 0" align="center" height="2" width="8" position="1.85 1 -2"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+      <a-plane id="" src="#book1-title" rotation="-90 0 0" align="center" height="1" width="4" position="1.85 1 -1"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+
+      <!-- left -->
+      <a-plane id="" src="#book1-auth" rotation="-90 0 0" align="center" height="1" width="4" position="-2.5 1 0.5"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+      <a-plane id="" src="#book1-gen" rotation="-90 0 0" align="center" height="1" width="5" position="-3 1 2.5"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+      <a-plane id="" src="#book1-lang" rotation="-90 0 0" align="center" height="1" width="3" position="-2 1 4.5"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+
+      <!-- right -->
+      <a-plane id="" src="#book1-syn" rotation="-90 0 0" align="center" height="5" width="5" position="6.75 1 2.5"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+
     </a-marker>
 
-  <a-entity camera cursor="fuse: false; rayOrigin:mouse;"></a-entity>
+    <a-entity camera cursor="fuse: false; rayOrigin:mouse;"></a-entity>
   </a-scene>
 
-  
+
 
   <!-- Modal -->
   <div class="modal fade" id="arModal" tabindex="-1" aria-labelledby="arModalLabel" aria-hidden="true">

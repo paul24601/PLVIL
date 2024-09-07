@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container m-5">
+        <h2>Upload Images for Book Elements</h2>
+        <form action="upload.php" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="book1-title" class="form-label">Book Title Image</label>
+                <input type="file" name="book1-title" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="book1-auth" class="form-label">Author Image</label>
+                <input type="file" name="book1-auth" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="book1-gen" class="form-label">Genre Image</label>
+                <input type="file" name="book1-gen" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="book1-syn" class="form-label">Synopsis Image</label>
+                <input type="file" name="book1-syn" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="book1-lang" class="form-label">Language Image</label>
+                <input type="file" name="book1-lang" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Upload Images</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
