@@ -103,7 +103,7 @@
                         <a href="#" class="fs-6 text-dark fw-bold nav-link" data-bs-toggle="modal" data-bs-target="#arModal">AR Scan</a>
                     </li>
                     <li class="class-item">
-                        <a href="Admin/chairs-user.html" class="fs-6 text-dark fw-bold nav-link">Chairs</a>
+                        <a href="library-seat-viewer/CHAIRS/chairs-user.html" class="fs-6 text-dark fw-bold nav-link">Chairs</a>
                     </li>
                     <li class="class-item">
                         <a href="about.html" class="fs-6 text-dark fw-bold nav-link active">About</a>
@@ -256,6 +256,120 @@
         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     </div>
 
+    <!-- Footer -->
+<footer class="text-center text-lg-start bg-light text-muted mt-5">
+    <!-- Section: Social media -->
+    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+        <!-- Left -->
+        <div class="me-5 d-none d-lg-block">
+            <span>Get connected with us on social networks:</span>
+        </div>
+        <!-- Right -->
+        <div>
+            <a href="#" class="me-4 text-reset">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="me-4 text-reset">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="me-4 text-reset">
+                <i class="fab fa-google"></i>
+            </a>
+            <a href="#" class="me-4 text-reset">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="me-4 text-reset">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="#" class="me-4 text-reset">
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+    </section>
+    <!-- Section: Links  -->
+    <section class="">
+        <div class="container text-center text-md-start mt-5">
+            <!-- Grid row -->
+            <div class="row mt-3">
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                    <!-- Content -->
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        <i class="fas fa-gem me-3"></i>PLV: Interactive Library
+                    </h6>
+                    <p>
+                        The PLVIL project brings the library closer to students through interactive tools like AR, making knowledge more accessible.
+                    </p>
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <!-- Links -->
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        Quick Links
+                    </h6>
+                    <p>
+                        <a href="index.html" class="text-reset">Home</a>
+                    </p>
+                    <p>
+                        <a href="about.html" class="text-reset">About</a>
+                    </p>
+                    <p>
+                        <a href="browse.html" class="text-reset">Browse Books</a>
+                    </p>
+                    <p>
+                        <a href="#" class="text-reset" data-bs-toggle="modal" data-bs-target="#arModal">AR Scan</a>
+                    </p>
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <!-- Links -->
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        Useful links
+                    </h6>
+                    <p>
+                        <a href="terms.html" class="text-reset">Terms of Service</a>
+                    </p>
+                    <p>
+                        <a href="privacy.html" class="text-reset">Privacy Policy</a>
+                    </p>
+                    <p>
+                        <a href="#" class="text-reset">Support</a>
+                    </p>
+                    <p>
+                        <a href="#" class="text-reset">Help</a>
+                    </p>
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                    <!-- Links -->
+                    <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+                    <p><i class="fas fa-home me-3"></i> Valenzuela City, Metro Manila</p>
+                    <p><i class="fas fa-envelope me-3"></i> library@plvil.ph</p>
+                    <p><i class="fas fa-phone me-3"></i> + 63 123 456 7890</p>
+                    <p><i class="fas fa-print me-3"></i> + 63 123 456 7891</p>
+                </div>
+                <!-- Grid column -->
+            </div>
+            <!-- Grid row -->
+        </div>
+    </section>
+    <!-- Section: Links  -->
+
+    <!-- Copyright -->
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+        © 2024 Copyright:
+        <a class="text-reset fw-bold" href="#">PLV: Interactive Library</a>
+    </div>
+</footer>
+<!-- Footer -->
+
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
         // Handle Accept button click
@@ -326,7 +440,7 @@
                                     <img src="admin/uploads/${book.image2}" class="card-img-top">
                                     <div class="card-body">
                                         <div class="card-title pt-1 fw-bold fs-5">${book.Title}</div>
-                                        <a href="#" class="text-decoration-none stretched-link text-black fw-semibold">${book.Author}</a>
+                                        <a href="bookloc.html?bookId=${book.bookId}" class="text-decoration-none stretched-link text-black fw-semibold">${book.Author}</a>
                                     </div>
                                 </div>
                             </div>

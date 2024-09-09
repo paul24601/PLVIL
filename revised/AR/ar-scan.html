@@ -21,6 +21,18 @@
       document.getElementById('book1-gen').src = 'assets/argraphics/book1info/b1gen.png?' + currentTime;
       document.getElementById('book1-syn').src = 'assets/argraphics/book1info/b1syn.png?' + currentTime;
       document.getElementById('book1-lang').src = 'assets/argraphics/book1info/b1lang.png?' + currentTime;
+
+      document.getElementById('book2-title').src = 'assets/argraphics/book2info/b2title.png?' + currentTime;
+      document.getElementById('book2-auth').src = 'assets/argraphics/book2info/b2auth.png?' + currentTime;
+      document.getElementById('book2-gen').src = 'assets/argraphics/book2info/b2gen.png?' + currentTime;
+      document.getElementById('book2-syn').src = 'assets/argraphics/book2info/b2syn.png?' + currentTime;
+      document.getElementById('book2-lang').src = 'assets/argraphics/book2info/b2lang.png?' + currentTime;
+
+      document.getElementById('book3-title').src = 'assets/argraphics/book3info/b3title.png?' + currentTime;
+      document.getElementById('book3-auth').src = 'assets/argraphics/book3info/b3auth.png?' + currentTime;
+      document.getElementById('book3-gen').src = 'assets/argraphics/book3info/b3gen.png?' + currentTime;
+      document.getElementById('book3-syn').src = 'assets/argraphics/book3info/b3syn.png?' + currentTime;
+      document.getElementById('book3-lang').src = 'assets/argraphics/book3info/b3lang.png?' + currentTime;
     }
 
     // Call the function to update image URLs when the page loads
@@ -130,12 +142,27 @@
       <a-asset-item id="3d-pio" src="assets/PIO.glb"></a-asset-item>
 
       <!-- books -->
+       <!-- dekada -->
       <img id="bookoftheweek" src="assets/argraphics/Bookoftheweek.png" alt="Book of the Week">
       <img id="book1-title" src="assets/argraphics/book1info/b1title.png" alt="Book 1 Title">
       <img id="book1-auth" src="assets/argraphics/book1info/b1auth.png" alt="Book 1 Author">
       <img id="book1-gen" src="assets/argraphics/book1info/b1gen.png" alt="Book 1 Genre">
       <img id="book1-syn" src="assets/argraphics/book1info/b1syn.png" alt="Book 1 Synopsis">
       <img id="book1-lang" src="assets/argraphics/book1info/b1lang.png" alt="Book 1 Language">
+
+      <!-- goyo -->
+      <img id="book2-title" src="assets/argraphics/book2info/b2title.png" alt="Book 2 Title">
+      <img id="book2-auth" src="assets/argraphics/book2info/b2auth.png" alt="Book 2 Author">
+      <img id="book2-gen" src="assets/argraphics/book2info/b2gen.png" alt="Book 2 Genre">
+      <img id="book2-syn" src="assets/argraphics/book2info/b2syn.png" alt="Book 2 Synopsis">
+      <img id="book2-lang" src="assets/argraphics/book2info/b2lang.png" alt="Book 2 Language">
+
+      <!-- sounder -->
+      <img id="book3-title" src="assets/argraphics/book3info/b3title.png" alt="Book 3 Title">
+      <img id="book3-auth" src="assets/argraphics/book3info/b3auth.png" alt="Book 3 Author">
+      <img id="book3-gen" src="assets/argraphics/book3info/b3gen.png" alt="Book 3 Genre">
+      <img id="book3-syn" src="assets/argraphics/book3info/b3syn.png" alt="Book 3 Synopsis">
+      <img id="book3-lang" src="assets/argraphics/book3info/b3lang.png" alt="Book 3 Language">
     </a-assets>
 
     <!-- PLVIL -->
@@ -171,6 +198,7 @@
     </a-marker>
 
     <!-- BOOKS -->
+     <!-- dekada 70 -->
     <a-marker markerhandler="soundSrc: #" type="barcode" value="2" raycaster="objects: .clickable" emitevents="true"
       cursor="fuse: false; rayOrigin: mouse;">
       <!-- book of the week -->
@@ -189,6 +217,52 @@
 
       <!-- right -->
       <a-plane id="" src="#book1-syn" rotation="-90 0 0" align="center" height="5" width="5" position="6.75 1 2.5"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+
+    </a-marker>
+
+    <!-- Goyo -->
+    <a-marker markerhandler="soundSrc: #" type="barcode" value="3" raycaster="objects: .clickable" emitevents="true"
+      cursor="fuse: false; rayOrigin: mouse;">
+      <!-- book of the week -->
+      <a-plane id="" src="#bookoftheweek" rotation="-90 0 0" align="center" height="2" width="8" position="1.85 1 -2"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+      <a-plane id="" src="#book2-title" rotation="-90 0 0" align="center" height="1" width="3" position="1.85 1 -1"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+
+      <!-- left -->
+      <a-plane id="" src="#book2-auth" rotation="-90 0 0" align="center" height="1" width="3" position="-2 1 0.5"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+      <a-plane id="" src="#book2-gen" rotation="-90 0 0" align="center" height="1" width="4" position="-2.5 1 2.5"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+      <a-plane id="" src="#book2-lang" rotation="-90 0 0" align="center" height="1" width="2.5" position="-1.75 1 4.5"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+
+      <!-- right -->
+      <a-plane id="" src="#book2-syn" rotation="-90 0 0" align="center" height="8" width="5" position="6.75 1 3"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+
+    </a-marker>
+
+    <!-- Sounder -->
+    <a-marker markerhandler="soundSrc: #" type="barcode" value="4" raycaster="objects: .clickable" emitevents="true"
+      cursor="fuse: false; rayOrigin: mouse;">
+      <!-- book of the week -->
+      <a-plane id="" src="#bookoftheweek" rotation="-90 0 0" align="center" height="2" width="8" position="1.85 1 -2"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+      <a-plane id="" src="#book3-title" rotation="-90 0 0" align="center" height="1" width="3" position="1.85 1 -1"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+
+      <!-- left -->
+      <a-plane id="" src="#book3-auth" rotation="-90 0 0" align="center" height="1" width="3" position="-2 1 0.5"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+      <a-plane id="" src="#book3-gen" rotation="-90 0 0" align="center" height="1" width="4" position="-2.5 1 2.5"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+      <a-plane id="" src="#book3-lang" rotation="-90 0 0" align="center" height="1" width="2.5" position="-1.75 1 4.5"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+
+      <!-- right -->
+      <a-plane id="" src="#book3-syn" rotation="-90 0 0" align="center" height="6.5" width="5" position="6.75 1 3"
         opacity="0.9" class="clickable" gesture-handler></a-plane>
 
     </a-marker>

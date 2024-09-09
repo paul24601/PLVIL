@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+body {
+  background-color: #242333;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Hide horizontal overflow */
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  overflow-y: auto;
+  width: 100%;
+  padding: 20px; /* Add padding for better spacing */
+}
+
+h1 {
+  text-align: center;
+  padding-top: 20px;
+  margin-bottom: 30px;
+}
+
+h2 {
+  text-align: center;
+}
+
+.seat-img {
+  width: 100%; /* Make the image take the full width of its container */
+  max-width: 70px; /* Maximum width for the image */
+  height: auto; /* Keep the aspect ratio */
+  display: block; /* Ensure images do not have extra inline spacing */
+  margin: 0 auto; /* Center images horizontally */
+  padding: 0; /* Remove padding to avoid extra space */
+  object-fit: cover; /* Ensure the image covers the container without stretching */
+}
+
+.seat {
+  width: 50px;
+  height: 50px;
+  background-color: #e0e0e0;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.occupied {
+  background-color: #64B5F6; /* Blue for occupied */
+  width: 50px;
+  height: 50px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.legend-item span {
+  font-size: 24px;
+  margin-left: 5px;
+}
+
+.available {
+  width: 30px;
+  height: 30px;
+  background-color: #e0e0e0;
+  border: 1px solid #ccc;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.occupied-legend {
+  width: 30px;
+  height: 30px;
+  background-color: #64B5F6;
+  border: 1px solid #ccc;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.available-seats {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  font-size: 1em;
+  text-align: center; /* Center text */
+}
+
+.layout.tables-chairs {
+  display: grid;
+  grid-template-columns: repeat(8, 70px); /* Adjust to match the width of seat images */
+  grid-template-rows: repeat(23, 70px); /* Adjust to match the height of seat images */
+  grid-row-gap: 15px; /* Add gap between rows */
+  grid-column-gap: 10px; /* Maintain column gap */
+}
+
+.layout.computer {
+  display: grid;
+  grid-template-columns: repeat(9, 70px); /* Adjust to match the width of seat images */
+  grid-template-rows: repeat(1, 70px); /* Adjust to match the height of seat images */
+  grid-row-gap: 15px; /* Add gap between rows */
+  grid-column-gap: 10px; /* Maintain column gap */
+}
+
+.layout.graduate {
+  display: grid;
+  grid-template-columns: repeat(10, 70px); /* Adjust to match the width of seat images */
+  grid-template-rows: repeat(3, 70px); /* Adjust to match the height of seat images */
+  grid-row-gap: 15px; /* Add gap between rows */
+  grid-column-gap: 10px; /* Maintain column gap */
+}
+
+.col-12.col-md-4.d-flex.align-items-center {
+  display: flex;
+  flex-direction: column; /* Align items vertically */
+  justify-content: space-between; /* Space images evenly within the column */
+  height: 100%; /* Ensure column takes full height */
+  margin-right: -20px; /* Further reduce the space between the seat images and the layout */
+}
+
+.d-grid.gap-2 {
+  display: flex;
+  flex-direction: column; /* Stack images vertically */
+  align-items: center; /* Center images horizontally within the column */
+  gap: 15px; /* Add gap between each image */
+}
+
+.col-12.col-md-8 {
+  padding-left: 0; /* Remove left padding to bring closer to the seat images */
+  margin-left: -20px; /* Further reduce the space between the seat images and the layout */
+}
+
+/* Responsive image container */
+.image-container {
+  position: relative;
+  width: 100%; /* Full width */
+  max-width: 1200px; /* Max width based on needs */
+  margin-bottom: 20px; /* Margin below image */
+}
+
+/* Responsive floor image */
+#floor-image {
+  width: 100%; /* Full width */
+  height: auto; /* Maintain aspect ratio */
+}
+
+/* Container for positioning navigation buttons (Up, Down) */
+.button-container.position-absolute.bottom-0.end-0.p-3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Style for navigation buttons */
+.btn-image {
+  background: transparent; /* Transparent background */
+  border: none; /* No border */
+  cursor: pointer; /* Pointer cursor on hover */
+  opacity: 0.5; /* Less visible when not hovered */
+  transition: opacity 0.3s; /* Smooth transition for hover effect */
+}
+
+/* Responsive navigation button images */
+.btn-image img {
+  width: 40px; /* Image width */
+  height: 40px; /* Image height */
+  display: block; /* Remove inline spacing */
+  object-fit: cover; /* Ensure image fills the button without distortion */
+}
+
+/* Hover effect for navigation buttons */
+.btn-image:hover {
+  opacity: 1; /* Fully visible when hovered */
+}
+
+/* Space between navigation buttons */
+#up-button {
+  margin-bottom: 5px; /* Margin below Up button */
+}
+
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .add-button,
+  .remove-button {
+    padding: 8px 16px; /* Smaller padding on smaller screens */
+    font-size: 12px; /* Smaller font size */
+  }
+
+  .btn-image img {
+    width: 30px; /* Smaller button images */
+    height: 30px; /* Smaller button images */
+  }
+}
