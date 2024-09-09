@@ -1,7 +1,8 @@
-<?php 
-    include $_SERVER['DOCUMENT_ROOT'].'/PLVIL/Admin/classes/book.php';
-    $db = new DBConnection();
+<?php
+include 'D:/laragon/www/PLVIL/revised/admin/classes/Book.php';
+$db = new DBConnection();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
