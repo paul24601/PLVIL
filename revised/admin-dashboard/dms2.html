@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Production Form</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container my-5">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white text-center">
+                <h3>Production Data Entry</h3>
+            </div>
+            <div class="card-body">
+                <!-- Form starts here -->
+                <form action="process_form.php" method="POST">
+                    <!-- Date -->
+                    <div class="mb-3">
+                        <label for="date" class="form-label">Date</label>
+                        <input type="date" class="form-control" id="date" name="date" required>
+                    </div>
+                    
+                    <!-- Machine -->
+                    <div class="mb-3">
+                        <label for="machine" class="form-label">Machine</label>
+                        <input type="text" class="form-control" id="machine" name="machine" placeholder="Enter machine name/number" required>
+                    </div>
+                    
+                    <!-- PRN -->
+                    <div class="mb-3">
+                        <label for="prn" class="form-label">PRN</label>
+                        <input type="text" class="form-control" id="prn" name="prn" placeholder="Enter PRN" required>
+                    </div>
+                    
+                    <!-- Product Name -->
+                    <div class="mb-3">
+                        <label for="product-name" class="form-label">Product Name</label>
+                        <input type="text" class="form-control" id="product-name" name="product_name" placeholder="Enter product name" required>
+                    </div>
+        
+                    <!-- Cycle Time -->
+                    <div class="mb-4">
+                        <h5 class="mb-3">Cycle Time</h5>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="cycle-time-target" class="form-label">Target</label>
+                                <input type="number" class="form-control" id="cycle-time-target" name="cycle_time_target" placeholder="Enter target cycle time" min="0" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="cycle-time-actual" class="form-label">Actual</label>
+                                <input type="number" class="form-control" id="cycle-time-actual" name="cycle_time_actual" placeholder="Enter actual cycle time" min="0" required>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Weight -->
+                    <div class="mb-4">
+                        <h5 class="mb-3">WEIGHT (grams/pc)</h5>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label for="weight-standard" class="form-label">Standard</label>
+                                <input type="number" step="0.01" class="form-control" id="weight-standard" name="weight_standard" placeholder="Enter standard weight" min="0" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="weight-gross" class="form-label">Gross</label>
+                                <input type="number" step="0.01" class="form-control" id="weight-gross" name="weight_gross" placeholder="Enter gross weight" min="0" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="weight-net" class="form-label">Net</label>
+                                <input type="number" step="0.01" class="form-control" id="weight-net" name="weight_net" placeholder="Enter net weight" min="0" required>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Number of Cavity -->
+                    <div class="mb-4">
+                        <h5 class="mb-3">Number of Cavity</h5>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="cavity-designed" class="form-label">Designed</label>
+                                <input type="number" class="form-control" id="cavity-designed" name="cavity_designed" placeholder="Enter designed number of cavities" min="0" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="cavity-active" class="form-label">Active</label>
+                                <input type="number" class="form-control" id="cavity-active" name="cavity_active" placeholder="Enter active number of cavities" min="0" required>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Remarks -->
+                    <div class="mb-3">
+                        <label for="remarks" class="form-label">Remarks</label>
+                        <textarea class="form-control" id="remarks" name="remarks" rows="3" placeholder="Enter any remarks"></textarea>
+                    </div>
+        
+                    <!-- Name -->
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
+                    </div>
+        
+                    <!-- Shift -->
+                    <div class="mb-3">
+                        <label for="shift" class="form-label">Shift</label>
+                        <select class="form-select" id="shift" name="shift" required>
+                            <option value="" selected disabled>Select your shift</option>
+                            <option value="Day Shift">Day Shift</option>
+                            <option value="Night Shift">Night Shift</option>
+                        </select>
+                    </div>
+        
+                    <!-- Search -->
+                    <div class="mb-4">
+                        <label for="search" class="form-label">Search</label>
+                        <input type="text" class="form-control" id="search" name="search" placeholder="Search for previous entries">
+                    </div>
+        
+                    <!-- Submit Button -->
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-muted text-center">
+                &copy; 2024 Sentinel OJT    
+            </div>
+            <a href="process_form.php" class="btn btn-secondary mt-3">View Submitted Records</a>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
