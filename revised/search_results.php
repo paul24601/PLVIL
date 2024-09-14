@@ -184,176 +184,172 @@ $result = $conn->query($sql);
             </ul>
         </div>
     </div>
+
+    <!-- Results -->
     <div class="container mt-5">
-        <h1 class="text-light">Search Results</h1>
+        <h1 class="text-light p-3 rounded">Search Results</h1>
 
         <?php if ($result->num_rows > 0): ?>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>bookId</th>
-                        <th>bookCategory</th>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th>columnNumber</th>
-                        <th>Accession</th>
-                        <th>bookEdition</th>
-                        <th>bookYear</th>
-                        <th>Property</th>
-                        <th>CallNumber</th>
-                        <th>isbn</th>
-                        <th>image1</th>
-                        <th>image2</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php while ($row = $result->fetch_assoc()): ?>
-                        <tr>
-                            <td><?php echo htmlspecialchars($row['bookId']); ?></td>
-                            <td><?php echo htmlspecialchars($row['bookCategory']); ?></td>
-                            <td><?php echo htmlspecialchars($row['Title']); ?></td>
-                            <td><?php echo htmlspecialchars($row['Author']); ?></td>
-                            <td><?php echo htmlspecialchars($row['columnNumber']); ?></td>
-                            <td><?php echo htmlspecialchars($row['Accession']); ?></td>
-                            <td><?php echo htmlspecialchars($row['bookEdition']); ?></td>
-                            <td><?php echo htmlspecialchars($row['bookYear']); ?></td>
-                            <td><?php echo htmlspecialchars($row['Property']); ?></td>
-                            <td><?php echo htmlspecialchars($row['callNumber']); ?></td>
-                            <td><?php echo htmlspecialchars($row['isbn']); ?></td>
-                            <td>
-                                <?php if (!empty($row['image1'])): ?>
-                                    <img src="<?php echo htmlspecialchars($row['image1']); ?>" alt="Image 1" style="max-width: 100px; max-height: 100px;">
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <?php if (!empty($row['image2'])): ?>
-                                    <img src="<?php echo htmlspecialchars($row['image2']); ?>" alt="Image 2" style="max-width: 100px; max-height: 100px;">
-                                <?php endif; ?>
-                            </td>
-                        </tr>
-                    <?php endwhile; ?>
-                </tbody>
-            </table>
+            <?php while ($row = $result->fetch_assoc()): ?>
+                <div class="card mb-4 position-relative">
+                    <div class="row g-0">
+                        <!-- Left part: Cover Image -->
+                        <div class="col-md-4">
+                            <?php if (!empty($row['image2'])): ?>
+                                <img src="../Admin/uploads/<?php echo htmlspecialchars($row['image2']); ?>" class="img-fluid rounded-start" alt="Cover Page" style="width: 100%; height: auto;">
+                            <?php else: ?>
+                                <img src="default-cover.jpg" class="img-fluid rounded-start" alt="No Cover Available" style="width: 100%; height: auto;">
+                            <?php endif; ?>
+                        </div>
+                        <!-- Right part: Book Details -->
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo htmlspecialchars($row['Title']); ?></h5>
+                                <p class="card-text">
+                                    <strong>Author:</strong>
+                                    <a href="bookloc.html?bookId=<?php echo htmlspecialchars($row['bookId']); ?>" class="text-decoration-none stretched-link text-black fw-semibold">
+                                        <?php echo htmlspecialchars($row['Author']); ?>
+                                    </a>
+                                </p>
+                                <p class="card-text"><strong>Category:</strong> <?php echo htmlspecialchars($row['bookCategory']); ?></p>
+                                <p class="card-text"><strong>Book ID:</strong> <?php echo htmlspecialchars($row['bookId']); ?></p>
+                                <p class="card-text"><strong>Column Number:</strong> <?php echo htmlspecialchars($row['columnNumber']); ?></p>
+                                <p class="card-text"><strong>Accession:</strong> <?php echo htmlspecialchars($row['Accession']); ?></p>
+                                <p class="card-text"><strong>Edition:</strong> <?php echo htmlspecialchars($row['bookEdition']); ?></p>
+                                <p class="card-text"><strong>Year:</strong> <?php echo htmlspecialchars($row['bookYear']); ?></p>
+                                <p class="card-text"><strong>Property:</strong> <?php echo htmlspecialchars($row['Property']); ?></p>
+                                <p class="card-text"><strong>Call Number:</strong> <?php echo htmlspecialchars($row['CallNumber']); ?></p>
+                                <p class="card-text"><strong>ISBN:</strong> <?php echo htmlspecialchars($row['isbn']); ?></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endwhile; ?>
         <?php else: ?>
-            <p>No results found for "<?php echo htmlspecialchars($query); ?>".</p>
+            <div class="alert alert-warning">
+                No results found for "<?php echo htmlspecialchars($query); ?>".
+            </div>
         <?php endif; ?>
 
         <?php $conn->close(); ?>
-
     </div>
 
-        <!-- Footer -->
-<footer class="text-center text-lg-start bg-light text-muted mt-5">
-    <!-- Section: Social media -->
-    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-        <!-- Left -->
-        <div class="me-5 d-none d-lg-block">
-            <span>Get connected with us on social networks:</span>
-        </div>
-        <!-- Right -->
-        <div>
-            <a href="#" class="me-4 text-reset">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="#" class="me-4 text-reset">
-                <i class="fab fa-twitter"></i>
-            </a>
-            <a href="#" class="me-4 text-reset">
-                <i class="fab fa-google"></i>
-            </a>
-            <a href="#" class="me-4 text-reset">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="#" class="me-4 text-reset">
-                <i class="fab fa-linkedin"></i>
-            </a>
-            <a href="#" class="me-4 text-reset">
-                <i class="fab fa-github"></i>
-            </a>
-        </div>
-    </section>
-    <!-- Section: Links  -->
-    <section class="">
-        <div class="container text-center text-md-start mt-5">
-            <!-- Grid row -->
-            <div class="row mt-3">
-                <!-- Grid column -->
-                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                    <!-- Content -->
-                    <h6 class="text-uppercase fw-bold mb-4">
-                        <i class="fas fa-gem me-3"></i>PLV: Interactive Library
-                    </h6>
-                    <p>
-                        The PLVIL project brings the library closer to students through interactive tools like AR, making knowledge more accessible.
-                    </p>
-                </div>
-                <!-- Grid column -->
 
-                <!-- Grid column -->
-                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                    <!-- Links -->
-                    <h6 class="text-uppercase fw-bold mb-4">
-                        Quick Links
-                    </h6>
-                    <p>
-                        <a href="index.html" class="text-reset">Home</a>
-                    </p>
-                    <p>
-                        <a href="about.html" class="text-reset">About</a>
-                    </p>
-                    <p>
-                        <a href="browse.html" class="text-reset">Browse Books</a>
-                    </p>
-                    <p>
-                        <a href="#" class="text-reset" data-bs-toggle="modal" data-bs-target="#arModal">AR Scan</a>
-                    </p>
-                </div>
-                <!-- Grid column -->
 
-                <!-- Grid column -->
-                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                    <!-- Links -->
-                    <h6 class="text-uppercase fw-bold mb-4">
-                        Useful links
-                    </h6>
-                    <p>
-                        <a href="terms.html" class="text-reset">Terms of Service</a>
-                    </p>
-                    <p>
-                        <a href="privacy.html" class="text-reset">Privacy Policy</a>
-                    </p>
-                    <p>
-                        <a href="#" class="text-reset">Support</a>
-                    </p>
-                    <p>
-                        <a href="#" class="text-reset">Help</a>
-                    </p>
-                </div>
-                <!-- Grid column -->
 
-                <!-- Grid column -->
-                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                    <!-- Links -->
-                    <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-                    <p><i class="fas fa-home me-3"></i> Valenzuela City, Metro Manila</p>
-                    <p><i class="fas fa-envelope me-3"></i> library@plvil.ph</p>
-                    <p><i class="fas fa-phone me-3"></i> + 63 123 456 7890</p>
-                    <p><i class="fas fa-print me-3"></i> + 63 123 456 7891</p>
-                </div>
-                <!-- Grid column -->
+    <!-- Footer -->
+    <footer class="text-center text-lg-start bg-light text-muted mt-5">
+        <!-- Section: Social media -->
+        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+            <!-- Left -->
+            <div class="me-5 d-none d-lg-block">
+                <span>Get connected with us on social networks:</span>
             </div>
-            <!-- Grid row -->
-        </div>
-    </section>
-    <!-- Section: Links  -->
+            <!-- Right -->
+            <div>
+                <a href="#" class="me-4 text-reset">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="me-4 text-reset">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="me-4 text-reset">
+                    <i class="fab fa-google"></i>
+                </a>
+                <a href="#" class="me-4 text-reset">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="me-4 text-reset">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="#" class="me-4 text-reset">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </section>
+        <!-- Section: Links  -->
+        <section class="">
+            <div class="container text-center text-md-start mt-5">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <!-- Content -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            <i class="fas fa-gem me-3"></i>PLV: Interactive Library
+                        </h6>
+                        <p>
+                            The PLVIL project brings the library closer to students through interactive tools like AR, making knowledge more accessible.
+                        </p>
+                    </div>
+                    <!-- Grid column -->
 
-    <!-- Copyright -->
-    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-        © 2024 Copyright:
-        <a class="text-reset fw-bold" href="#">PLV: Interactive Library</a>
-    </div>
-</footer>
-<!-- Footer -->
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Quick Links
+                        </h6>
+                        <p>
+                            <a href="index.html" class="text-reset">Home</a>
+                        </p>
+                        <p>
+                            <a href="about.html" class="text-reset">About</a>
+                        </p>
+                        <p>
+                            <a href="browse.html" class="text-reset">Browse Books</a>
+                        </p>
+                        <p>
+                            <a href="#" class="text-reset" data-bs-toggle="modal" data-bs-target="#arModal">AR Scan</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Useful links
+                        </h6>
+                        <p>
+                            <a href="terms.html" class="text-reset">Terms of Service</a>
+                        </p>
+                        <p>
+                            <a href="privacy.html" class="text-reset">Privacy Policy</a>
+                        </p>
+                        <p>
+                            <a href="#" class="text-reset">Support</a>
+                        </p>
+                        <p>
+                            <a href="#" class="text-reset">Help</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+                        <p><i class="fas fa-home me-3"></i> Valenzuela City, Metro Manila</p>
+                        <p><i class="fas fa-envelope me-3"></i> library@plvil.ph</p>
+                        <p><i class="fas fa-phone me-3"></i> + 63 123 456 7890</p>
+                        <p><i class="fas fa-print me-3"></i> + 63 123 456 7891</p>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+            </div>
+        </section>
+        <!-- Section: Links  -->
+
+        <!-- Copyright -->
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+            © 2024 Copyright:
+            <a class="text-reset fw-bold" href="#">PLV: Interactive Library</a>
+        </div>
+    </footer>
+    <!-- Footer -->
+
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
