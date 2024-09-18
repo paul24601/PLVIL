@@ -19,6 +19,8 @@ $db = new DBConnection();
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 </head>
 
 <body>
@@ -63,8 +65,8 @@ $db = new DBConnection();
         <!-- Table Section -->
         <div class="row mt-4 justify-content-between">
             <div class="col-12">
-                <table class="table table-bordered table-striped">
-                    <thead class="table-dark">
+                <table class="table table-bordered display" id="datatablesSimple">
+                    <thead class="table-secondary">
                         <tr>
                             <th class="text-center" width="5%">No.</th>
                             <th class="text-center" width="10%">Category</th>
@@ -536,6 +538,21 @@ $db = new DBConnection();
         });
 
     </script>
+    <script>
+        $(document).ready(function() {
+            $('#datatablesSimple').DataTable({
+                "paging": true,        // Enable pagination
+                "searching": false,     // Enable search
+                "ordering": true,      // Enable column sorting
+                "info": true           // Show table information
+            });
+        });
+    </script>
+     <!-- jQuery -->
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    
 </body>
 
 </html>

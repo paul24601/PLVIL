@@ -46,16 +46,43 @@
             /* Optional: Adds a blur effect to the background */
         }
 
-        .scroll-box {
-            max-height: 500px;
-            overflow-y: auto;
+        /* Hover effect for cards */
+        .card:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Smooth transitions */
+        .social-icons i:hover {
+            color: #007bff;
+            transition: color 0.3s ease;
+        }
+
+        /* Image hover zoom effect */
+        .img-fluid:hover {
+            transform: scale(1.1);
+            transition: transform 0.3s ease;
         }
 
         .offcanvas {
             background-color: rgba(255, 255, 255, 0.7);
-            /* White with 70% opacity */
             backdrop-filter: blur(10px);
-            /* Optional: Adds a blur effect to the background */
+        }
+
+        /* Custom background overlay */
+
+        .header-title {
+            color: #e2e2e2;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .social-icons a {
+            color: #000;
+            font-size: 20px;
+            margin: 0 10px;
         }
     </style>
 </head>
@@ -184,8 +211,8 @@
 
 
     <!-- Header Section -->
-    <header class="text-white text-center py-5 mb-4">
-        <div class="container">
+    <header class="text-center py-5 mb-4">
+        <div class="container header-title">
             <h1 class="fw-light">About PLV: Interactive Library</h1>
             <p class="lead">Empowering Learning through Interactive Experiences</p>
         </div>
@@ -249,7 +276,7 @@
                         </div>
                     </div>
                 </div>
-            </div>            
+            </div>
         </div>
 
     </div>
