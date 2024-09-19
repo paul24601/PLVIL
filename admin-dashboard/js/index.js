@@ -1,4 +1,3 @@
-
 function setupTabs() {
     console.log('setupTabs called');
     const userType = localStorage.getItem('userType');
@@ -11,10 +10,8 @@ function setupTabs() {
     if (userType === "admin") {
         // Hide Books tab for admin
         document.getElementById('books-tab').style.display = 'none';
-        console.log("library-admin");
-    } else if (userType === "admin") {
+    } else if (userType === "library-admin") {
         // No need to change anything for library-admin as all tabs are shown by default
-            console.log("library-admin");
     } else {
         // Default case, hide all tabs if no user type is set
         document.getElementById('books-tab').style.display = 'none';

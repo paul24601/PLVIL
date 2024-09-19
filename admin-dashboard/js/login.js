@@ -22,15 +22,14 @@ function login() {
     // Check fixed usernames and passwords for each user type
     if (userType === "admin") {
         if (username === "admin" && password === "iloveplvil") {
-            window.location.href = "index.php"; // Redirect to Chairs page
+            window.location.href = "index.html"; // Redirect to Chairs page
             localStorage.setItem('userType', 'admin'); // Store user type in local storage
-            console.log("admin");
         } else {
             alert("Incorrect username or password.");
         }
     } else if (userType === "library-admin") {
         if (username === "libraryadmin" && password === "iloveplvil") {
-            window.location.href = "index.php"; // Redirect to index page with all tabs
+            window.location.href = "index.html"; // Redirect to index page with all tabs
             localStorage.setItem('userType', 'library-admin'); // Store user type in local storage
         } else {
             alert("Incorrect username or password.");

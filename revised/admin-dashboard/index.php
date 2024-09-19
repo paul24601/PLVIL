@@ -83,19 +83,19 @@ $result = $conn->query($sql);
                         <!-- Systems -->
                         <div class="sb-sidenav-menu-heading">Systems</div>
                         <!-- Books -->
-                        <a class="nav-link" href="book-admin.html">
+                        <a class="nav-link" id="books-tab"  href="book-admin.html">
                             <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
                             Books
                         </a>
 
                         <!-- Chairs -->
-                        <a class="nav-link" href="chair-admin.html">
+                        <a class="nav-link" id="chairs-tab"  href="chair-admin.html">
                             <div class="sb-nav-link-icon"><i class="fas fa-chair"></i></div>
                             Chairs
                         </a>
 
                         <!-- AR -->
-                        <a class="nav-link" href="ar-admin.html">
+                        <a class="nav-link"  id="ar-tab" href="ar-admin.html">
                             <div class="sb-nav-link-icon"><i class="fas fa-eye"></i></div>
                             Augmented Reality
                         </a>
@@ -114,7 +114,7 @@ $result = $conn->query($sql);
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item active">Dashboard</li>
                     </ol>
-                    <!-- Cards -->
+                    <!-- Cards 
                     <div class="row">
                         <div class="col-xl-3 col-md-6">
                             <div class="card bg-primary text-white mb-4">
@@ -152,7 +152,7 @@ $result = $conn->query($sql);
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
 
                     <!-- Charts -->
                     <div class="row">
@@ -234,14 +234,14 @@ $result = $conn->query($sql);
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>
-    <script src="js/scripts.js"></script>
-    <script src="js/login.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-    <script src="assets/demo/chart-area-demo.js"></script>
-    <script src="assets/demo/chart-bar-demo.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
         crossorigin="anonymous"></script>
-    <script src="js/datatables-simple-demo.js"></script>
+    <script src="js/scripts.js" crossorigin="anonymous"></script>
+    <script src="js/login.js" crossorigin="anonymous"></script>
+    <script src="assets/demo/chart-area-demo.js" crossorigin="anonymous"></script>
+    <script src="assets/demo/chart-bar-demo.js" crossorigin="anonymous"></script>
+    <script src="js/datatables-simple-demo.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
