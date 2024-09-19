@@ -70,6 +70,15 @@
         .logo {
             width: 250px;
         }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 5%;
+        }
+
+        .carousel-container {
+            position: relative;
+        }
     </style>
 </head>
 
@@ -100,10 +109,12 @@
                         <a href="index.html" class="ms-3 fs-6 text-dark fw-bold nav-link active">Home</a>
                     </li>
                     <li class="class-item">
-                        <a href="#" class="fs-6 text-dark fw-bold nav-link" data-bs-toggle="modal" data-bs-target="#arModal">AR Scan</a>
+                        <a href="#" class="fs-6 text-dark fw-bold nav-link" data-bs-toggle="modal"
+                            data-bs-target="#arModal">AR Scan</a>
                     </li>
                     <li class="class-item">
-                        <a href="library-seat-viewer/CHAIRS/chairs-user.html" class="fs-6 text-dark fw-bold nav-link">Chairs</a>
+                        <a href="library-seat-viewer/CHAIRS/chairs-user.html"
+                            class="fs-6 text-dark fw-bold nav-link">Chairs</a>
                     </li>
                     <li class="class-item">
                         <a href="about.html" class="fs-6 text-dark fw-bold nav-link active">About</a>
@@ -123,23 +134,44 @@
                 </div>
                 <div class="modal-body scroll-box p-3">
                     <p>Dear Users,</p>
-                    <p>We are excited to introduce the Augmented Reality (AR) feature as part of the PLVIL: Development of Library Management System with Book Locator and Augmented Reality Assisted Book Viewer for Pamantasan ng Lungsod ng Valenzuela (PLV) University Library. Before you proceed to use this feature, we would like to seek your consent regarding the collection and usage of certain data as required by law.</p>
+                    <p>We are excited to introduce the Augmented Reality (AR) feature as part of the PLVIL: Development
+                        of Library Management System with Book Locator and Augmented Reality Assisted Book Viewer for
+                        Pamantasan ng Lungsod ng Valenzuela (PLV) University Library. Before you proceed to use this
+                        feature, we would like to seek your consent regarding the collection and usage of certain data
+                        as required by law.</p>
                     <h3>Explanation of Augmented Reality (AR) Feature:</h3>
-                    <p>The AR feature allows users to experience immersive and interactive views of selected library resources through their mobile devices. By accessing this feature, you will be able to visualize additional information, such as book details and related multimedia content, overlaid onto physical objects within the library environment.</p>
+                    <p>The AR feature allows users to experience immersive and interactive views of selected library
+                        resources through their mobile devices. By accessing this feature, you will be able to visualize
+                        additional information, such as book details and related multimedia content, overlaid onto
+                        physical objects within the library environment.</p>
                     <h3>Consent for Camera and Speaker Access:</h3>
-                    <p>In order to provide you with the AR experience, the PLVIL system requires access to your device's camera and speakers. This access is necessary to enable the AR technology to overlay digital content onto the physical environment and to deliver audiovisual feedback accordingly.</p>
+                    <p>In order to provide you with the AR experience, the PLVIL system requires access to your device's
+                        camera and speakers. This access is necessary to enable the AR technology to overlay digital
+                        content onto the physical environment and to deliver audiovisual feedback accordingly.</p>
                     <h3>Data Privacy Compliance:</h3>
-                    <p>We are committed to protecting your privacy and ensuring compliance with the Data Privacy Act of the Philippines (Republic Act No. 10173) and its implementing rules and regulations. By providing your consent to access your device's camera and speakers for the AR feature, you acknowledge and agree to the following:</p>
+                    <p>We are committed to protecting your privacy and ensuring compliance with the Data Privacy Act of
+                        the Philippines (Republic Act No. 10173) and its implementing rules and regulations. By
+                        providing your consent to access your device's camera and speakers for the AR feature, you
+                        acknowledge and agree to the following:</p>
                     <ol>
-                        <li><strong>Purpose of Data Collection:</strong> The data collected (i.e., images captured by the camera and audio output through the speakers) will be used solely for the purpose of delivering the AR experience within the PLVIL system.</li>
-                        <li><strong>Storage and Security:</strong> Any data collected will be stored securely and will not be shared with third parties without your explicit consent, except as required by law.</li>
-                        <li><strong>User Control:</strong> You have the right to withdraw your consent at any time by disabling the AR feature in the PLVIL system settings. However, please note that disabling this feature will prevent you from accessing the AR content.</li>
-                        <li><strong>Data Retention:</strong> Data collected for the AR feature will be retained only for as long as necessary to fulfill the purposes for which it was collected or as required by applicable laws and regulations.</li>
+                        <li><strong>Purpose of Data Collection:</strong> The data collected (i.e., images captured by
+                            the camera and audio output through the speakers) will be used solely for the purpose of
+                            delivering the AR experience within the PLVIL system.</li>
+                        <li><strong>Storage and Security:</strong> Any data collected will be stored securely and will
+                            not be shared with third parties without your explicit consent, except as required by law.
+                        </li>
+                        <li><strong>User Control:</strong> You have the right to withdraw your consent at any time by
+                            disabling the AR feature in the PLVIL system settings. However, please note that disabling
+                            this feature will prevent you from accessing the AR content.</li>
+                        <li><strong>Data Retention:</strong> Data collected for the AR feature will be retained only for
+                            as long as necessary to fulfill the purposes for which it was collected or as required by
+                            applicable laws and regulations.</li>
                     </ol>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" id="acceptBtn">Accept</button>
-                    <button type="button" class="btn btn-secondary" id="declineBtn" data-bs-dismiss="modal">Decline</button>
+                    <button type="button" class="btn btn-secondary" id="declineBtn"
+                        data-bs-dismiss="modal">Decline</button>
                 </div>
             </div>
         </div>
@@ -159,7 +191,8 @@
                     <a href="index.html" class="fs-6 text-dark fw-bold nav-link active">Home</a>
                 </li>
                 <li class="class-item">
-                    <a href="#" class="fs-6 text-dark fw-bold nav-link" data-bs-toggle="modal" data-bs-target="#arModal">AR Scan</a>
+                    <a href="#" class="fs-6 text-dark fw-bold nav-link" data-bs-toggle="modal"
+                        data-bs-target="#arModal">AR Scan</a>
                 </li>
                 <li class="class-item">
                     <a href="Admin/chairs-user.html" class="fs-6 text-dark fw-bold nav-link">Chairs</a>
@@ -251,61 +284,173 @@
             </div>
         </div>
     </div>
-    
-    <div>
-        <br><br><br>
+
+    <!-- Featured Title -->
+    <div class="container mt-5">
+        <h2 class="text-white text-center mb-4">Featured</h2>
+
+        <!-- Carousel Container -->
+        <div class="carousel-container position-relative">
+            <!-- Card Carousel -->
+            <div id="featuredCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <!-- Slide 1 -->
+                    <div class="carousel-item active">
+                        <div class="container">
+                            <div class="row">
+                                <!-- Card 1 -->
+                                <div class="col-12 col-md-4 mb-4">
+                                    <div class="card" data-bs-toggle="modal" data-bs-target="#cardModal"
+                                        data-title="Workshop"
+                                        data-text="Meron ka bang talent o hobbies na gusto i-share sa kapwa mo PLVians? Baka ikaw na..."
+                                        data-image="https://via.placeholder.com/600x400?text=Workshop"
+                                        data-footer="<a href='#' class='btn btn-primary'>More Info</a>">
+                                        <img src="assets/img/featured1.jpg"
+                                            class="card-img-top img-fluid" alt="Card Image"
+                                            style="object-fit: cover; height: 200px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-dark">Workshop</h5>
+                                            <p class="card-text">Meron ka bang talent o hobbies na gusto i-share sa
+                                                kapwa mo PLVians? Baka ikaw na... <br> <a href="#"
+                                                    class="btn btn-primary">More Info</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card 2 -->
+                                <div class="col-12 col-md-4 mb-4">
+                                    <div class="card" data-bs-toggle="modal" data-bs-target="#cardModal"
+                                        data-title="NLP E-Resources Portal"
+                                        data-text="Sharing again this post from the National Library of the Philippines for more online resources..."
+                                        data-image="https://via.placeholder.com/600x400?text=NLP+E-Resources+Portal"
+                                        data-footer="<a href='#' class='btn btn-primary'>More Info</a>">
+                                        <img src="assets/img/featured2.jpg"
+                                            class="card-img-top img-fluid" alt="Card Image"
+                                            style="object-fit: cover; height: 200px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-dark">NLP E-Resources Portal</h5>
+                                            <p class="card-text">Sharing again this post from the National Library of
+                                                the Philippines for more online resources... <br> <a href="#"
+                                                    class="btn btn-primary">More Info</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card 3 -->
+                                <div class="col-12 col-md-4 mb-4">
+                                    <div class="card" data-bs-toggle="modal" data-bs-target="#cardModal"
+                                        data-title="Event Highlight"
+                                        data-text="Catch the highlights from our latest event!"
+                                        data-image="https://via.placeholder.com/600x400?text=Event+Highlight"
+                                        data-footer="<a href='#' class='btn btn-primary'>More Info</a>">
+                                        <img src="https://via.placeholder.com/600x400?text=Event+Highlight"
+                                            class="card-img-top img-fluid" alt="Card Image"
+                                            style="object-fit: cover; height: 200px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-dark">Event Highlight</h5>
+                                            <p class="card-text">Catch the highlights from our latest event! <br> <a
+                                                    href="#" class="btn btn-primary">More Info</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="carousel-item">
+                        <div class="container">
+                            <div class="row">
+                                <!-- Card 4 -->
+                                <div class="col-12 col-md-4 mb-4">
+                                    <div class="card" data-bs-toggle="modal" data-bs-target="#cardModal"
+                                        data-title="New Library Books"
+                                        data-text="Check out the latest additions to our library!"
+                                        data-image="https://via.placeholder.com/600x400?text=New+Library+Books"
+                                        data-footer="<a href='#' class='btn btn-primary'>More Info</a>">
+                                        <img src="https://via.placeholder.com/600x400?text=New+Library+Books"
+                                            class="card-img-top img-fluid" alt="Card Image"
+                                            style="object-fit: cover; height: 200px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-dark">New Library Books</h5>
+                                            <p class="card-text">Check out the latest additions to our library! <br> <a
+                                                    href="#" class="btn btn-primary">More Info</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card 5 -->
+                                <div class="col-12 col-md-4 mb-4">
+                                    <div class="card" data-bs-toggle="modal" data-bs-target="#cardModal"
+                                        data-title="Community Service"
+                                        data-text="Learn about our community service initiatives and how you can get involved."
+                                        data-image="https://via.placeholder.com/600x400?text=Community+Service"
+                                        data-footer="<a href='#' class='btn btn-primary'>More Info</a>">
+                                        <img src="https://via.placeholder.com/600x400?text=Community+Service"
+                                            class="card-img-top img-fluid" alt="Card Image"
+                                            style="object-fit: cover; height: 200px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-dark">Community Service</h5>
+                                            <p class="card-text">Learn about our community service initiatives and how
+                                                you can get involved. <br> <a href="#" class="btn btn-primary">More
+                                                    Info</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card 6 -->
+                                <div class="col-12 col-md-4 mb-4">
+                                    <div class="card" data-bs-toggle="modal" data-bs-target="#cardModal"
+                                        data-title="Upcoming Workshops"
+                                        data-text="Don't miss out on our upcoming workshops."
+                                        data-image="https://via.placeholder.com/600x400?text=Upcoming+Workshops"
+                                        data-footer="<a href='#' class='btn btn-primary'>More Info</a>">
+                                        <img src="https://via.placeholder.com/600x400?text=Upcoming+Workshops"
+                                            class="card-img-top img-fluid" alt="Card Image"
+                                            style="object-fit: cover; height: 200px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-dark">Upcoming Workshops</h5>
+                                            <p class="card-text">Don't miss out on our upcoming workshops. <br> <a
+                                                    href="#" class="btn btn-primary">More Info</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carousel Controls -->
+                <button class="carousel-control-prev position-absolute top-50 start-0 translate-middle-y" type="button"
+                    data-bs-target="#featuredCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next position-absolute top-50 end-0 translate-middle-y" type="button"
+                    data-bs-target="#featuredCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
     </div>
 
-    <div class="container-fluid bg-light p-5">
-        <h4 class="text-center mb-4">Connect with Us on Facebook</h4>
-        <div class="row justify-content-center text-center">
-            <div class="col-12 col-md-8 col-lg-6">
-                <div id="fb-root"></div>
-                <!-- Correct Facebook Page Plugin Embed Code -->
-                <div class="fb-page" data-href="https://facebook.com/profile.php?id=100064626706651" 
-                    data-tabs="timeline" data-width="500" data-height="500" 
-                    data-small-header="false" data-adapt-container-width="true" 
-                    data-hide-cover="false" data-show-facepile="true">
+    <!-- Modal -->
+    <div class="modal fade" id="cardModal" tabindex="-1" aria-labelledby="cardModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <img id="modalImage" class="card-img-top" src="" alt="Card Image">
+                <div class="modal-body">
+                    <h5 id="modalTitle" class="modal-title">Card Title</h5>
+                    <p id="modalText">Card Summary</p>
+                </div>
+                <div id="modalFooter" class="modal-footer">
+                    <!-- Dynamic footer content will be inserted here -->
                 </div>
             </div>
         </div>
     </div>
-    
-    <script async defer crossorigin="anonymous" 
-            src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v14.0" 
-            nonce="abc123">
-    </script>
 
-    <!-- Card Section -->
-    <div class="col-md-5 col-lg-5 mb-4">
-        <h2 class="mb-4">Featured</h2>
-        <!-- Card 1 -->
-        <a href="https://www.facebook.com/photo/?fbid=798594235638126&set=a.459165596247660" class="text-decoration-none">
-            <div class="card mb-4">
-                <img src="featured1.jpg" class="card-img-top img-fluid" alt="Card Image" style="max-width: 100%; height: auto; aspect-ratio: 2 / 1;">
-                <div class="card-body">
-                    <h5 class="card-title text-dark">Workshop</h5>
-                    <p class="card-text text-dark">Meron ka bang talent o hobbies na gusto i-share sa kapwa mo PLVians? Baka ikaw na... <br> more info...</p>
-                </div>
-            </div>
-        </a>
-
-        <!-- Card 2 -->
-        <a href="https://www.facebook.com/permalink.php?story_fbid=pfbid035pZnjfvEPY5fww7j8QrtPvT19TEdQ8RmUyW9w6E17gep2EKYon418NPKY4kyoa8El&id=100064626706651" class="text-decoration-none">
-            <div class="card mb-4">
-                <img src="featured2.jpg" class="card-img-top img-fluid" alt="Card Image" style="max-width: 100%; height: auto; aspect-ratio: 2 / 1;">
-                <div class="card-body">
-                    <h5 class="card-title text-dark">NLP E-Resources Portal</h5>
-                    <p class="card-text text-dark">Sharing again this post from the National Library of the Philippines for more online resources... <br> more info...</p>
-                </div>
-            </div>
-        </a>
-    </div>
-    
-    
-    
-    
-    
 
     <!-- Footer -->
     <footer class="text-center text-lg-start bg-light text-muted mt-5">
@@ -349,7 +494,8 @@
                             <i class="fas fa-gem me-3"></i>PLV: Interactive Library
                         </h6>
                         <p>
-                            The PLVIL project brings the library closer to students through interactive tools like AR, making knowledge more accessible.
+                            The PLVIL project brings the library closer to students through interactive tools like AR,
+                            making knowledge more accessible.
                         </p>
                     </div>
                     <!-- Grid column -->
@@ -422,22 +568,22 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-        // Handle Accept button click
-        document.getElementById('acceptBtn').addEventListener('click', function () {
-            // Show confirmation message
-            alert('Thank you for your cooperation and participation in the PLVIL project. If you have any questions or concerns regarding this consent form or the AR feature, please do not hesitate to contact us.');
-            
-            // Redirect to AR scan page after a short delay
-            setTimeout(function() {
-                window.location.href = 'AR/ar-scan.html';
-            }, 1000); // Delay of 1 second
-        });
+            // Handle Accept button click
+            document.getElementById('acceptBtn').addEventListener('click', function () {
+                // Show confirmation message
+                alert('Thank you for your cooperation and participation in the PLVIL project. If you have any questions or concerns regarding this consent form or the AR feature, please do not hesitate to contact us.');
 
-        // Handle Decline button click (close modal by default)
-        document.getElementById('declineBtn').addEventListener('click', function () {
-            $('#arModal').modal('hide');
+                // Redirect to AR scan page after a short delay
+                setTimeout(function () {
+                    window.location.href = 'AR/ar-scan.html';
+                }, 1000); // Delay of 1 second
+            });
+
+            // Handle Decline button click (close modal by default)
+            document.getElementById('declineBtn').addEventListener('click', function () {
+                $('#arModal').modal('hide');
+            });
         });
-    });
 
         document.addEventListener("DOMContentLoaded", function () {
             // Automatically load the recent books on page load
@@ -450,17 +596,17 @@
                         'Content-Type': 'application/json'
                     }
                 })
-                .then(response => response.json())
-                .then(data => {
-                    displayBooks(data);
+                    .then(response => response.json())
+                    .then(data => {
+                        displayBooks(data);
 
-                    if (data.length < 6) {
-                        fetchAdditionalBooks(6 - data.length);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching books:', error);
-                });
+                        if (data.length < 6) {
+                            fetchAdditionalBooks(6 - data.length);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching books:', error);
+                    });
             }
 
             function fetchAdditionalBooks(remaining) {
@@ -501,8 +647,11 @@
             }
         });
     </script>
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
     <script src="js/index.js"></script>
     <script>
         // Send a request to track visitor data
@@ -510,6 +659,22 @@
             .then(response => response.text())
             .then(data => console.log(data))
             .catch(error => console.error('Error:', error));
+    </script>
+
+    <script>
+        // JavaScript to handle dynamic content for the modal
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', function () {
+                const title = this.getAttribute('data-title');
+                const text = this.getAttribute('data-text');
+                const image = this.getAttribute('data-image');
+                const footer = this.getAttribute('data-footer');
+                document.getElementById('modalTitle').textContent = title;
+                document.getElementById('modalText').textContent = text;
+                document.getElementById('modalImage').src = image;
+                document.getElementById('modalFooter').innerHTML = footer;
+            });
+        });
     </script>
 </body>
 
