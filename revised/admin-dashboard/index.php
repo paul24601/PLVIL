@@ -83,19 +83,19 @@ $result = $conn->query($sql);
                         <!-- Systems -->
                         <div class="sb-sidenav-menu-heading">Systems</div>
                         <!-- Books -->
-                        <a class="nav-link" id="books-tab"  href="book-admin.html">
+                        <a class="nav-link" id="books-tab" href="book-admin.html">
                             <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
                             Books
                         </a>
 
                         <!-- Chairs -->
-                        <a class="nav-link" id="chairs-tab"  href="chair-admin.html">
+                        <a class="nav-link" id="chairs-tab" href="chair-admin.html">
                             <div class="sb-nav-link-icon"><i class="fas fa-chair"></i></div>
                             Chairs
                         </a>
 
                         <!-- AR -->
-                        <a class="nav-link"  id="ar-tab" href="ar-admin.html">
+                        <a class="nav-link" id="ar-tab" href="ar-admin.html">
                             <div class="sb-nav-link-icon"><i class="fas fa-eye"></i></div>
                             Augmented Reality
                         </a>
@@ -155,25 +155,12 @@ $result = $conn->query($sql);
                     </div>-->
 
                     <!-- Charts -->
-                    <div class="row">
-                        <div class="col-xl-6">
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <i class="fas fa-chart-area me-1"></i>
-                                    Area Chart Example
-                                </div>
-                                <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
-                            </div>
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-chart-area me-1"></i>
+                            Visitors Chart
                         </div>
-                        <div class="col-xl-6">
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <i class="fas fa-chart-bar me-1"></i>
-                                    Bar Chart Example
-                                </div>
-                                <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
-                            </div>
-                        </div>
+                        <div class="card-body"><canvas id="visitorsChart" width="100%" height="40"></canvas></div>
                     </div>
 
                     <!-- Tables -->
@@ -231,7 +218,7 @@ $result = $conn->query($sql);
             </footer>
         </div>
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
@@ -239,9 +226,46 @@ $result = $conn->query($sql);
         crossorigin="anonymous"></script>
     <script src="js/scripts.js" crossorigin="anonymous"></script>
     <script src="js/login.js" crossorigin="anonymous"></script>
-    <script src="assets/demo/chart-area-demo.js" crossorigin="anonymous"></script>
-    <script src="assets/demo/chart-bar-demo.js" crossorigin="anonymous"></script>
     <script src="js/datatables-simple-demo.js" crossorigin="anonymous"></script>
+    <script>
+        // Fetch visitor data from the PHP script
+        fetch('../get-visitor-data.php')
+            .then(response => response.json())
+            .then(data => {
+                // Create the chart once the data is fetched
+                var ctx = document.getElementById('visitorsChart').getContext('2d');
+                var chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: data.dates,  // X-axis (Dates)
+                        datasets: [{
+                            label: 'Number of Visitors',
+                            data: data.counts,  // Y-axis (Counts)
+                            borderColor: 'rgb(75, 192, 192)',
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Date'
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'Number of Visitors'
+                                },
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
 </body>
 
 </html>
