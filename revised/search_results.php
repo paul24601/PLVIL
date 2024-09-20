@@ -14,17 +14,38 @@ if ($conn->connect_error) {
 }
 
 // Get the search query from the URL
-$query = $_GET['query'];
-
-// Sanitize the input
+$query = $_GET['query'] ?? '';
 $query = $conn->real_escape_string($query);
 
-// Prepare the SQL statement
-$sql = "SELECT * FROM book WHERE title LIKE '%$query%' OR author LIKE '%$query%'";
+// Pagination variables
+$results_per_page = 12; // Set how many records per page
+$page = isset($_GET['page']) ? (int) $_GET['page'] : 1; // Get current page number
+$start_from = ($page - 1) * $results_per_page; // Calculate the starting record
+
+// Get total number of results
+$sql_total = "SELECT COUNT(*) AS total FROM book WHERE title LIKE '%$query%' OR author LIKE '%$query%'";
+$total_result = $conn->query($sql_total);
+$row = $total_result->fetch_assoc();
+$total_records = $row['total'];
+$total_pages = ceil($total_records / $results_per_page); // Calculate total pages
+
+// Use prepared statements to prevent SQL injection and apply pagination with LIMIT
+$stmt = $conn->prepare("SELECT * FROM book WHERE title LIKE ? OR author LIKE ? LIMIT ?, ?");
+$searchQuery = "%$query%";
+$stmt->bind_param('ssii', $searchQuery, $searchQuery, $start_from, $results_per_page);
 
 // Execute the query
-$result = $conn->query($sql);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Get the total number of results from the database (e.g., $total_records is already calculated)
+$total_results_displayed = $result->num_rows; // Number of results on the current page
+
+// Close the statement when done
+$stmt->close();
+$conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +56,6 @@ $result = $conn->query($sql);
     <title>Search Results</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        
         body {
             background-image: url(assets/img/books.png);
             background-position: center;
@@ -84,6 +104,11 @@ $result = $conn->query($sql);
             backdrop-filter: blur(10px);
             /* Optional: Adds a blur effect to the background */
         }
+
+
+        .pagination {
+            justify-content: center;
+        }
     </style>
 </head>
 
@@ -114,10 +139,12 @@ $result = $conn->query($sql);
                         <a href="index.html" class="ms-3 fs-6 text-dark fw-bold nav-link active">Home</a>
                     </li>
                     <li class="class-item">
-                        <a href="#" class="fs-6 text-dark fw-bold nav-link" data-bs-toggle="modal" data-bs-target="#arModal">AR Scan</a>
+                        <a href="#" class="fs-6 text-dark fw-bold nav-link" data-bs-toggle="modal"
+                            data-bs-target="#arModal">AR Scan</a>
                     </li>
                     <li class="class-item">
-                        <a href="library-seat-viewer/CHAIRS/chairs-user.html" class="fs-6 text-dark fw-bold nav-link">Chairs</a>
+                        <a href="library-seat-viewer/CHAIRS/chairs-user.html"
+                            class="fs-6 text-dark fw-bold nav-link">Chairs</a>
                     </li>
                     <li class="class-item">
                         <a href="about.html" class="fs-6 text-dark fw-bold nav-link active">About</a>
@@ -137,23 +164,44 @@ $result = $conn->query($sql);
                 </div>
                 <div class="modal-body scroll-box p-3">
                     <p>Dear Users,</p>
-                    <p>We are excited to introduce the Augmented Reality (AR) feature as part of the PLVIL: Development of Library Management System with Book Locator and Augmented Reality Assisted Book Viewer for Pamantasan ng Lungsod ng Valenzuela (PLV) University Library. Before you proceed to use this feature, we would like to seek your consent regarding the collection and usage of certain data as required by law.</p>
+                    <p>We are excited to introduce the Augmented Reality (AR) feature as part of the PLVIL: Development
+                        of Library Management System with Book Locator and Augmented Reality Assisted Book Viewer for
+                        Pamantasan ng Lungsod ng Valenzuela (PLV) University Library. Before you proceed to use this
+                        feature, we would like to seek your consent regarding the collection and usage of certain data
+                        as required by law.</p>
                     <h3>Explanation of Augmented Reality (AR) Feature:</h3>
-                    <p>The AR feature allows users to experience immersive and interactive views of selected library resources through their mobile devices. By accessing this feature, you will be able to visualize additional information, such as book details and related multimedia content, overlaid onto physical objects within the library environment.</p>
+                    <p>The AR feature allows users to experience immersive and interactive views of selected library
+                        resources through their mobile devices. By accessing this feature, you will be able to visualize
+                        additional information, such as book details and related multimedia content, overlaid onto
+                        physical objects within the library environment.</p>
                     <h3>Consent for Camera and Speaker Access:</h3>
-                    <p>In order to provide you with the AR experience, the PLVIL system requires access to your device's camera and speakers. This access is necessary to enable the AR technology to overlay digital content onto the physical environment and to deliver audiovisual feedback accordingly.</p>
+                    <p>In order to provide you with the AR experience, the PLVIL system requires access to your device's
+                        camera and speakers. This access is necessary to enable the AR technology to overlay digital
+                        content onto the physical environment and to deliver audiovisual feedback accordingly.</p>
                     <h3>Data Privacy Compliance:</h3>
-                    <p>We are committed to protecting your privacy and ensuring compliance with the Data Privacy Act of the Philippines (Republic Act No. 10173) and its implementing rules and regulations. By providing your consent to access your device's camera and speakers for the AR feature, you acknowledge and agree to the following:</p>
+                    <p>We are committed to protecting your privacy and ensuring compliance with the Data Privacy Act of
+                        the Philippines (Republic Act No. 10173) and its implementing rules and regulations. By
+                        providing your consent to access your device's camera and speakers for the AR feature, you
+                        acknowledge and agree to the following:</p>
                     <ol>
-                        <li><strong>Purpose of Data Collection:</strong> The data collected (i.e., images captured by the camera and audio output through the speakers) will be used solely for the purpose of delivering the AR experience within the PLVIL system.</li>
-                        <li><strong>Storage and Security:</strong> Any data collected will be stored securely and will not be shared with third parties without your explicit consent, except as required by law.</li>
-                        <li><strong>User Control:</strong> You have the right to withdraw your consent at any time by disabling the AR feature in the PLVIL system settings. However, please note that disabling this feature will prevent you from accessing the AR content.</li>
-                        <li><strong>Data Retention:</strong> Data collected for the AR feature will be retained only for as long as necessary to fulfill the purposes for which it was collected or as required by applicable laws and regulations.</li>
+                        <li><strong>Purpose of Data Collection:</strong> The data collected (i.e., images captured by
+                            the camera and audio output through the speakers) will be used solely for the purpose of
+                            delivering the AR experience within the PLVIL system.</li>
+                        <li><strong>Storage and Security:</strong> Any data collected will be stored securely and will
+                            not be shared with third parties without your explicit consent, except as required by law.
+                        </li>
+                        <li><strong>User Control:</strong> You have the right to withdraw your consent at any time by
+                            disabling the AR feature in the PLVIL system settings. However, please note that disabling
+                            this feature will prevent you from accessing the AR content.</li>
+                        <li><strong>Data Retention:</strong> Data collected for the AR feature will be retained only for
+                            as long as necessary to fulfill the purposes for which it was collected or as required by
+                            applicable laws and regulations.</li>
                     </ol>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" id="acceptBtn">Accept</button>
-                    <button type="button" class="btn btn-secondary" id="declineBtn" data-bs-dismiss="modal">Decline</button>
+                    <button type="button" class="btn btn-secondary" id="declineBtn"
+                        data-bs-dismiss="modal">Decline</button>
                 </div>
             </div>
         </div>
@@ -173,7 +221,8 @@ $result = $conn->query($sql);
                     <a href="index.html" class="fs-6 text-dark fw-bold nav-link active">Home</a>
                 </li>
                 <li class="class-item">
-                    <a href="#" class="fs-6 text-dark fw-bold nav-link" data-bs-toggle="modal" data-bs-target="#arModal">AR Scan</a>
+                    <a href="#" class="fs-6 text-dark fw-bold nav-link" data-bs-toggle="modal"
+                        data-bs-target="#arModal">AR Scan</a>
                 </li>
                 <li class="class-item">
                     <a href="Admin/chairs-user.html" class="fs-6 text-dark fw-bold nav-link">Chairs</a>
@@ -186,52 +235,66 @@ $result = $conn->query($sql);
     </div>
 
     <!-- Results -->
-    <div class="container mt-5">
-        <h1 class="text-light p-3 rounded">Search Results</h1>
+    <div class="container">
+        <div class="mt-5 d-flex justify-content-between align-items-center">
+            <h1 class="text-light">Search Results</h1>
 
+            <form class="d-flex" action="search_results.php" method="GET">
+                <div class="input-group">
+                    <input type="text" name="query" class="form-control" placeholder="Search by title, author, etc." required>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Show "Showing X results out of Y books for 'query'" -->
+        <p class="text-light">Showing <?php echo $total_results_displayed; ?> results out of <?php echo $total_records; ?> books for "<?php echo htmlspecialchars($query); ?>"</p>
+        
         <?php if ($result->num_rows > 0): ?>
-            <?php while ($row = $result->fetch_assoc()): ?>
-                <div class="card mb-4 position-relative">
-                    <div class="row g-0">
-                        <!-- Left part: Cover Image -->
-                        <div class="col-md-4">
-                            <?php if (!empty($row['image2'])): ?>
-                                <img src="../Admin/uploads/<?php echo htmlspecialchars($row['image2']); ?>" class="img-fluid rounded-start" alt="Cover Page" style="width: 100%; height: auto;">
-                            <?php else: ?>
-                                <img src="default-cover.jpg" class="img-fluid rounded-start" alt="No Cover Available" style="width: 100%; height: auto;">
-                            <?php endif; ?>
-                        </div>
-                        <!-- Right part: Book Details -->
-                        <div class="col-md-8">
+            <div class="row">
+                <?php while ($row = $result->fetch_assoc()): ?>
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-6 mb-2">
+                        <div class="card h-100">
+                            <img src="<?php echo !empty($row['image2']) ? "../Admin/uploads/" . htmlspecialchars($row['image2']) : 'default-cover.jpg'; ?>"
+                                class="card-img-top" alt="Book Cover">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo htmlspecialchars($row['Title']); ?></h5>
-                                <p class="card-text">
-                                    <strong>Author:</strong>
-                                    <a href="bookloc.html?bookId=<?php echo htmlspecialchars($row['bookId']); ?>" class="text-decoration-none stretched-link text-black fw-semibold">
-                                        <?php echo htmlspecialchars($row['Author']); ?>
-                                    </a>
+                                <p class="card-text"><strong>Author:</strong> <?php echo htmlspecialchars($row['Author']); ?>
                                 </p>
-                                <p class="card-text"><strong>Category:</strong> <?php echo htmlspecialchars($row['bookCategory']); ?></p>
-                                <p class="card-text"><strong>Book ID:</strong> <?php echo htmlspecialchars($row['bookId']); ?></p>
-                                <p class="card-text"><strong>Column Number:</strong> <?php echo htmlspecialchars($row['columnNumber']); ?></p>
-                                <p class="card-text"><strong>Accession:</strong> <?php echo htmlspecialchars($row['Accession']); ?></p>
-                                <p class="card-text"><strong>Edition:</strong> <?php echo htmlspecialchars($row['bookEdition']); ?></p>
-                                <p class="card-text"><strong>Year:</strong> <?php echo htmlspecialchars($row['bookYear']); ?></p>
-                                <p class="card-text"><strong>Property:</strong> <?php echo htmlspecialchars($row['Property']); ?></p>
-                                <p class="card-text"><strong>Call Number:</strong> <?php echo htmlspecialchars($row['CallNumber']); ?></p>
-                                <p class="card-text"><strong>ISBN:</strong> <?php echo htmlspecialchars($row['isbn']); ?></p>
+                                <a href="bookloc.html?bookId=<?php echo htmlspecialchars($row['bookId']); ?>"
+                                    class="btn btn-primary">Details</a>
                             </div>
                         </div>
                     </div>
-                </div>
-            <?php endwhile; ?>
-        <?php else: ?>
-            <div class="alert alert-warning">
-                No results found for "<?php echo htmlspecialchars($query); ?>".
+                <?php endwhile; ?>
             </div>
-        <?php endif; ?>
 
-        <?php $conn->close(); ?>
+            <!-- Pagination -->
+            <nav>
+                <ul class="pagination">
+                    <?php if ($page > 1): ?>
+                        <li class="page-item">
+                            <a class="page-link" href="?query=<?php echo $query; ?>&page=<?php echo $page - 1; ?>">Previous</a>
+                        </li>
+                    <?php endif; ?>
+
+                    <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                        <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
+                            <a class="page-link"
+                                href="?query=<?php echo $query; ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                        </li>
+                    <?php endfor; ?>
+
+                    <?php if ($page < $total_pages): ?>
+                        <li class="page-item">
+                            <a class="page-link" href="?query=<?php echo $query; ?>&page=<?php echo $page + 1; ?>">Next</a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+            </nav>
+        <?php else: ?>
+            <div class="alert alert-warning">No results found for "<?php echo htmlspecialchars($query); ?>"</div>
+        <?php endif; ?>
     </div>
 
 
@@ -279,7 +342,8 @@ $result = $conn->query($sql);
                             <i class="fas fa-gem me-3"></i>PLV: Interactive Library
                         </h6>
                         <p>
-                            The PLVIL project brings the library closer to students through interactive tools like AR, making knowledge more accessible.
+                            The PLVIL project brings the library closer to students through interactive tools like AR,
+                            making knowledge more accessible.
                         </p>
                     </div>
                     <!-- Grid column -->
@@ -353,24 +417,24 @@ $result = $conn->query($sql);
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        
-        document.addEventListener('DOMContentLoaded', function () {
-        // Handle Accept button click
-        document.getElementById('acceptBtn').addEventListener('click', function () {
-            // Show confirmation message
-            alert('Thank you for your cooperation and participation in the PLVIL project. If you have any questions or concerns regarding this consent form or the AR feature, please do not hesitate to contact us.');
-            
-            // Redirect to AR scan page after a short delay
-            setTimeout(function() {
-                window.location.href = 'AR/ar-scan.html';
-            }, 1000); // Delay of 1 second
-        });
 
-        // Handle Decline button click (close modal by default)
-        document.getElementById('declineBtn').addEventListener('click', function () {
-            $('#arModal').modal('hide');
+        document.addEventListener('DOMContentLoaded', function () {
+            // Handle Accept button click
+            document.getElementById('acceptBtn').addEventListener('click', function () {
+                // Show confirmation message
+                alert('Thank you for your cooperation and participation in the PLVIL project. If you have any questions or concerns regarding this consent form or the AR feature, please do not hesitate to contact us.');
+
+                // Redirect to AR scan page after a short delay
+                setTimeout(function () {
+                    window.location.href = 'AR/ar-scan.html';
+                }, 1000); // Delay of 1 second
+            });
+
+            // Handle Decline button click (close modal by default)
+            document.getElementById('declineBtn').addEventListener('click', function () {
+                $('#arModal').modal('hide');
+            });
         });
-    });
     </script>
 </body>
 

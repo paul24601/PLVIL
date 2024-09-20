@@ -128,10 +128,10 @@
     <a-sound id="bgm" src="assets/bg-music.mp3"></a-sound>
 
     <a-assets>
-      <video autoplay loop="true" id="plvil-vid" src="assets/vids/PLVIL.mp4"></video>
+      <video loop="true" id="plvil-vid" src="assets/vids/PLVIL.mp4"></video>
       <video loop="true" id="pio-vid" src="assets/vids/PIO.mp4"></video>
-      <video autoplay loop="true" id="plvil-square" src="assets/vids/plvil-square.mp4"></video>
-      <video autoplay loop="true" id="book-trailer" src="assets/vids/PIO.mp4"></video>
+      <video loop="true" id="plvil-square" src="assets/vids/plvil-square.mp4"></video>
+      <video loop="true" id="book-trailer" src="assets/vids/PIO.mp4"></video>
       <img id="image1" src="assets/slides/1.png">
       <img id="image2" src="assets/slides/2.png">
       <img id="image3" src="assets/slides/3.png">
@@ -264,7 +264,28 @@
       <!-- right -->
       <a-plane id="" src="#book3-syn" rotation="-90 0 0" align="center" height="6.5" width="5" position="6.75 1 3"
         opacity="0.9" class="clickable" gesture-handler></a-plane>
+    </a-marker>
 
+    <!-- ABNKKBSNPLAko? -->
+    <a-marker markerhandler="soundSrc: #" type="barcode" value="5" raycaster="objects: .clickable" emitevents="true"
+      cursor="fuse: false; rayOrigin: mouse;">
+      <!-- book of the week -->
+      <a-plane id="" src="#bookoftheweek" rotation="-90 0 0" align="center" height="2" width="8" position="1.85 1 -2"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+      <a-plane id="" src="#book3-title" rotation="-90 0 0" align="center" height="1" width="3" position="1.85 1 -1"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+
+      <!-- left -->
+      <a-plane id="" src="#book3-auth" rotation="-90 0 0" align="center" height="1" width="3" position="-2 1 0.5"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+      <a-plane id="" src="#book3-gen" rotation="-90 0 0" align="center" height="1" width="4" position="-2.5 1 2.5"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+      <a-plane id="" src="#book3-lang" rotation="-90 0 0" align="center" height="1" width="2.5" position="-1.75 1 4.5"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+
+      <!-- right -->
+      <a-plane id="" src="#book3-syn" rotation="-90 0 0" align="center" height="6.5" width="5" position="6.75 1 3"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
     </a-marker>
 
     <a-entity camera cursor="fuse: false; rayOrigin:mouse;"></a-entity>
