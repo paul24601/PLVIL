@@ -105,7 +105,6 @@ $conn->close();
             /* Optional: Adds a blur effect to the background */
         }
 
-
         .pagination {
             justify-content: center;
         }
@@ -213,228 +212,92 @@ $conn->close();
         aria-labelledby="offcanvasMenuLabel">
         <div class="offcanvas-header">
             <h5 id="offcanvasMenuLabel">Menu</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <ul class="navbar-nav">
-                <li class="class-item">
-                    <a href="index.html" class="fs-6 text-dark fw-bold nav-link active">Home</a>
+            <ul class="navbar-nav text-start">
+                <li class="nav-item">
+                    <a class="nav-link text-dark active" href="index.html">Home</a>
                 </li>
-                <li class="class-item">
-                    <a href="#" class="fs-6 text-dark fw-bold nav-link" data-bs-toggle="modal"
-                        data-bs-target="#arModal">AR Scan</a>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#" data-bs-toggle="modal" data-bs-target="#arModal">AR
+                        Scan</a>
                 </li>
-                <li class="class-item">
-                    <a href="Admin/chairs-user.html" class="fs-6 text-dark fw-bold nav-link">Chairs</a>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="library-seat-viewer/CHAIRS/chairs-user.html">Chairs</a>
                 </li>
-                <li class="class-item">
-                    <a href="about.html" class="fs-6 text-dark fw-bold nav-link active">About</a>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="about.html">About</a>
                 </li>
             </ul>
         </div>
     </div>
 
-    <!-- Results -->
-    <div class="container">
-        <div class="mt-5 d-flex justify-content-between align-items-center">
-            <h1 class="text-light">Search Results</h1>
-
-            <form class="d-flex" action="search_results.php" method="GET">
-                <div class="input-group">
-                    <input type="text" name="query" class="form-control" placeholder="Search by title, author, etc." required>
-                    <button type="submit" class="btn btn-primary">Search</button>
-                </div>
-            </form>
-        </div>
-
-        <!-- Show "Showing X results out of Y books for 'query'" -->
-        <p class="text-light">Showing <?php echo $total_results_displayed; ?> results out of <?php echo $total_records; ?> books for "<?php echo htmlspecialchars($query); ?>"</p>
-        
-        <?php if ($result->num_rows > 0): ?>
-            <div class="row">
-                <?php while ($row = $result->fetch_assoc()): ?>
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-6 mb-2">
-                        <div class="card h-100">
-                            <img src="<?php echo !empty($row['image2']) ? "../Admin/uploads/" . htmlspecialchars($row['image2']) : 'default-cover.jpg'; ?>"
-                                class="card-img-top" alt="Book Cover">
-                            <div class="card-body">
-                                <h5 class="card-title"><?php echo htmlspecialchars($row['Title']); ?></h5>
-                                <p class="card-text"><strong>Author:</strong> <?php echo htmlspecialchars($row['Author']); ?>
-                                </p>
-                                <a href="bookloc.html?bookId=<?php echo htmlspecialchars($row['bookId']); ?>"
-                                    class="btn btn-primary">Details</a>
-                            </div>
-                        </div>
-                    </div>
-                <?php endwhile; ?>
+    <!--Search results section-->
+    <div class="container my-5">
+        <h2>Search Results</h2>
+        <div class="d-flex flex-column align-items-center">
+            <div class="input-group mb-4 w-100">
+                <input type="text" class="form-control me-2" value="<?php echo htmlspecialchars($query); ?>" id="search-query" name="query" placeholder="Search for books..." aria-label="Search for books">
+                <button class="btn btn-primary" onclick="performSearch()">Search</button>
             </div>
 
-            <!-- Pagination -->
+            <!-- Pagination navigation -->
             <nav>
                 <ul class="pagination">
                     <?php if ($page > 1): ?>
-                        <li class="page-item">
-                            <a class="page-link" href="?query=<?php echo $query; ?>&page=<?php echo $page - 1; ?>">Previous</a>
-                        </li>
+                    <li class="page-item"><a class="page-link"
+                            href="search.php?query=<?php echo $query; ?>&page=<?php echo ($page - 1); ?>">Previous</a></li>
                     <?php endif; ?>
 
                     <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                        <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
-                            <a class="page-link"
-                                href="?query=<?php echo $query; ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                        </li>
+                    <li class="page-item <?php echo ($i === $page) ? 'active' : ''; ?>">
+                        <a class="page-link" href="search.php?query=<?php echo $query; ?>&page=<?php echo $i; ?>">
+                            <?php echo $i; ?>
+                        </a>
+                    </li>
                     <?php endfor; ?>
 
                     <?php if ($page < $total_pages): ?>
-                        <li class="page-item">
-                            <a class="page-link" href="?query=<?php echo $query; ?>&page=<?php echo $page + 1; ?>">Next</a>
-                        </li>
+                    <li class="page-item"><a class="page-link"
+                            href="search.php?query=<?php echo $query; ?>&page=<?php echo ($page + 1); ?>">Next</a></li>
                     <?php endif; ?>
                 </ul>
             </nav>
-        <?php else: ?>
-            <div class="alert alert-warning">No results found for "<?php echo htmlspecialchars($query); ?>"</div>
-        <?php endif; ?>
+
+            <!-- Results display -->
+            <div class="row">
+                <?php while ($row = $result->fetch_assoc()): ?>
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card h-100">
+                        <img src="path_to_image/<?php echo $row['image_path']; ?>" class="card-img-top" alt="Book image">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo $row['title']; ?></h5>
+                            <p class="card-text"><?php echo $row['author']; ?></p>
+                        </div>
+                    </div>
+                </div>
+                <?php endwhile; ?>
+            </div>
+        </div>
     </div>
 
-
-
-
-    <!-- Footer -->
-    <footer class="text-center text-lg-start bg-light text-muted mt-5">
-        <!-- Section: Social media -->
-        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-            <!-- Left -->
-            <div class="me-5 d-none d-lg-block">
-                <span>Get connected with us on social networks:</span>
-            </div>
-            <!-- Right -->
-            <div>
-                <a href="#" class="me-4 text-reset">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="#" class="me-4 text-reset">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="#" class="me-4 text-reset">
-                    <i class="fab fa-google"></i>
-                </a>
-                <a href="#" class="me-4 text-reset">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="#" class="me-4 text-reset">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="#" class="me-4 text-reset">
-                    <i class="fab fa-github"></i>
-                </a>
-            </div>
-        </section>
-        <!-- Section: Links  -->
-        <section class="">
-            <div class="container text-center text-md-start mt-5">
-                <!-- Grid row -->
-                <div class="row mt-3">
-                    <!-- Grid column -->
-                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                        <!-- Content -->
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            <i class="fas fa-gem me-3"></i>PLV: Interactive Library
-                        </h6>
-                        <p>
-                            The PLVIL project brings the library closer to students through interactive tools like AR,
-                            making knowledge more accessible.
-                        </p>
-                    </div>
-                    <!-- Grid column -->
-
-                    <!-- Grid column -->
-                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                        <!-- Links -->
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            Quick Links
-                        </h6>
-                        <p>
-                            <a href="index.html" class="text-reset">Home</a>
-                        </p>
-                        <p>
-                            <a href="about.html" class="text-reset">About</a>
-                        </p>
-                        <p>
-                            <a href="browse.html" class="text-reset">Browse Books</a>
-                        </p>
-                        <p>
-                            <a href="#" class="text-reset" data-bs-toggle="modal" data-bs-target="#arModal">AR Scan</a>
-                        </p>
-                    </div>
-                    <!-- Grid column -->
-
-                    <!-- Grid column -->
-                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                        <!-- Links -->
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            Useful links
-                        </h6>
-                        <p>
-                            <a href="terms.html" class="text-reset">Terms of Service</a>
-                        </p>
-                        <p>
-                            <a href="privacy.html" class="text-reset">Privacy Policy</a>
-                        </p>
-                        <p>
-                            <a href="#" class="text-reset">Support</a>
-                        </p>
-                        <p>
-                            <a href="#" class="text-reset">Help</a>
-                        </p>
-                    </div>
-                    <!-- Grid column -->
-
-                    <!-- Grid column -->
-                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                        <!-- Links -->
-                        <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-                        <p><i class="fas fa-home me-3"></i> Valenzuela City, Metro Manila</p>
-                        <p><i class="fas fa-envelope me-3"></i> library@plvil.ph</p>
-                        <p><i class="fas fa-phone me-3"></i> + 63 123 456 7890</p>
-                        <p><i class="fas fa-print me-3"></i> + 63 123 456 7891</p>
-                    </div>
-                    <!-- Grid column -->
-                </div>
-                <!-- Grid row -->
-            </div>
-        </section>
-        <!-- Section: Links  -->
-
-        <!-- Copyright -->
-        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-            © 2024 Copyright:
-            <a class="text-reset fw-bold" href="#">PLV: Interactive Library</a>
-        </div>
+    <!--Footer-->
+    <footer class="text-center mt-auto py-4">
+        <p>&copy; 2024 PLVIL: Interactive Library. All rights reserved.</p>
     </footer>
-    <!-- Footer -->
 
-    <!-- Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-
-        document.addEventListener('DOMContentLoaded', function () {
-            // Handle Accept button click
-            document.getElementById('acceptBtn').addEventListener('click', function () {
-                // Show confirmation message
-                alert('Thank you for your cooperation and participation in the PLVIL project. If you have any questions or concerns regarding this consent form or the AR feature, please do not hesitate to contact us.');
-
-                // Redirect to AR scan page after a short delay
-                setTimeout(function () {
-                    window.location.href = 'AR/ar-scan.html';
-                }, 1000); // Delay of 1 second
-            });
-
-            // Handle Decline button click (close modal by default)
-            document.getElementById('declineBtn').addEventListener('click', function () {
-                $('#arModal').modal('hide');
-            });
+        document.getElementById("acceptBtn").addEventListener("click", function () {
+            window.location.href = "AR/ar-scan.html";
         });
+
+        function performSearch() {
+            const query = document.getElementById("search-query").value;
+            window.location.href = "search.php?query=" + encodeURIComponent(query);
+        }
     </script>
 </body>
 
