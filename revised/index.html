@@ -11,43 +11,20 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+
     <style>
         body {
-            background-image: none
-        }
-
-        #bg-video {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1; /* Keeps video behind content */
-            filter: grayscale(100%) brightness(0.5) contrast(1.2);
-        }
-
-        .video-bg-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1; /* Ensure it stays in the background */
-            overflow: hidden;
-        }
-
-        .video-bg-overlay::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(9, 10, 68, 0.5); /* Dark blue overlay */
-            z-index: 1;
+            background-image: url(assets/img/books.png);
+            background-position: center;
+            /* Center the image */
+            background-attachment: fixed;
+            background-size: cover;
+            font-family: 'Roboto', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
         }
 
         .navbar {
@@ -73,11 +50,39 @@
             background-color: #e2e2e2;
         }
 
+        /* Initial state */
         .custom-navbar {
-            background-color: rgba(255, 255, 255, 0.6);
+            background-color: rgba(255, 255, 255, .9);
+            /* Translucent background */
+            transition: background-color 0.3s ease-in-out;
+            /* Smooth transition */
             backdrop-filter: blur(10px);
-            /* Optional: Adds a blur effect to the background */
         }
+
+        /* Opaque state */
+        .custom-navbar.scrolled {
+            background-color: rgba(255, 255, 255, .5);
+            /* Fully opaque background */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Ensure that the container occupies the full screen height */
+        .main-sec {
+            min-height: 70vh;
+            /* 70% of the viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* For medium screens and above (Bootstrap md breakpoint) */
+        @media (max-width: 767px) {
+            .main-sec {
+                height: 91vh;
+                /* Full height for medium and smaller screens */
+            }
+        }
+
 
         .scroll-box {
             max-height: 500px;
@@ -85,18 +90,15 @@
         }
 
         .offcanvas {
-            background-color: rgba(255, 255, 255, 0.7);
+            background-color: rgba(255, 255, 255, 0.5);
             /* White with 70% opacity */
             backdrop-filter: blur(10px);
             /* Optional: Adds a blur effect to the background */
         }
 
-        .PLVIL-title {
-            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        }
 
         .logo {
-            width: 250px;
+            width: 300px;
         }
 
         .carousel-control-prev,
@@ -107,18 +109,47 @@
         .carousel-container {
             position: relative;
         }
+
+        .search-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            /* Translucent white background */
+            backdrop-filter: blur(5px);
+            /* Apply the blur effect */
+        }
+
+        /* Navbar link hover effect */
+        .navbar-nav .nav-link {
+            transition: transform 0.3s ease;
+            /* Smooth transition for scaling */
+            padding: 10px 15px;
+            /* Ensure spacing around the links */
+        }
+
+        .navbar-nav .nav-link:hover {
+            transform: scale(1.1);
+            /* Slightly increase size on hover */
+            font-weight: bold;
+            /* Make active link bold */
+        }
+
+        /* Active link: Make the active link bold */
+        .navbar-nav .nav-link.active {
+            font-weight: bold;
+            /* Make active link bold */
+        }
     </style>
 </head>
 
 <body>
-    <!-- Background video -->
-     <div class="video-bg-overlay">
+    <!-- Background video 
+    <div class="video-bg-overlay">
         <video autoplay muted id="bg-video">
             <source id="bg-video-source" src="assets/bg-vid1.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
-     </div>
-    
+    </div>
+    -->
+
     <!--Header-->
     <div class="container-fluid row header-line">
         <div class="col-4 col-lg-3 black-line"></div>
@@ -128,10 +159,10 @@
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-md sticky-top custom-navbar">
-        <div class="container-lg">
+        <div class="container-fluid px-2 px-md-5 py-2">
             <a href="index.html" class="navbar-brand">
-                <span class="fw-bold text-dark fs-5 d-lg-none d-block PLVIL-title">PLVIL</span>
-                <span class="fw-bold text-dark fs-5 d-none d-lg-block PLVIL-title">PLV: Interactive Library</span>
+                <span class="fw-bolder text-dark fs-4 d-md-none d-block PLVIL-title">PLVIL</span>
+                <span class="fw-bolder text-dark fs-4 d-none d-md-block PLVIL-title">PLV: Interactive Library</span>
             </a>
             <!-- Toggler -->
             <button class="navbar-toggler d-md-none p-0" type="button" data-bs-toggle="offcanvas"
@@ -139,21 +170,22 @@
                 aria-label="Toggle Navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <!-- nav -->
             <div class="collapse navbar-collapse justify-content-end align-center d-none d-md-flex" id="main-nav">
                 <ul class="navbar-nav">
                     <li class="class-item">
-                        <a href="index.html" class="ms-3 fs-6 text-dark fw-bold nav-link active">Home</a>
+                        <a href="index.html" class="me-4 fs-6 text-dark fw-medium nav-link active">Home</a>
                     </li>
                     <li class="class-item">
-                        <a href="#" class="fs-6 text-dark fw-bold nav-link" data-bs-toggle="modal"
+                        <a href="#" class="me-4 fs-6 text-dark fw-medium nav-link" data-bs-toggle="modal"
                             data-bs-target="#arModal">AR Scan</a>
                     </li>
                     <li class="class-item">
                         <a href="library-seat-viewer/CHAIRS/chairs-user.html"
-                            class="fs-6 text-dark fw-bold nav-link">Chairs</a>
+                            class="me-4 fs-6 text-dark fw-medium nav-link">Chairs</a>
                     </li>
                     <li class="class-item">
-                        <a href="about.html" class="fs-6 text-dark fw-bold nav-link active">About</a>
+                        <a href="about.html" class="me-2 fs-6 text-dark fw-medium nav-link">About</a>
                     </li>
                 </ul>
             </div>
@@ -213,7 +245,6 @@
         </div>
     </div>
 
-
     <!-- Offcanvas Menu -->
     <div class="offcanvas offcanvas-end d-md-none" tabindex="-1" id="offcanvasMenu"
         aria-labelledby="offcanvasMenuLabel">
@@ -241,81 +272,102 @@
     </div>
 
     <!-- main section -->
-    <div class="container-fluid mb-5">
-        <div class="text-light text-center row d-flex justify-content-center align-items-center mt-5 mb-3">
+    <div class="container main-sec d-flex justify-content-center align-items-center text-light text-center">
+        <!-- Logo and Search Group -->
+        <div class="row w-100 justify-content-around align-items-center">
             <!-- logo -->
-            <div class="col-sm-4 col-12 d-flex justify-content-center">
-                <img src="../assets/plv-lib-logo.png" alt="plv library logo" class="logo img-fluid mb-md-0 mb-4">
+            <div class="col-md-4 col-12 d-flex justify-content-center">
+                <img src="../assets/plv-lib-logo.png" alt="plv library logo" class="logo img-fluid my-md-0 mb-5 ">
             </div>
-            <!-- search group -->
-            <form class="col-sm-8 col-12 d-flex justify-content-center align-items-center px-5"
+
+            <!-- Search Group -->
+            <form class="col-md-8 col-12 d-flex justify-content-between align-items-center px-3"
                 action="search_results.php" method="GET">
-                <div class="row w-100 align-items-center justify-content-center">
-                    <a href="browse.html" class="btn btn-primary col-sm-2 col-12 px-0" role="button">Browse</a>
-                    <div class="col-sm-1 col-12 d-flex align-items-center justify-content-center m-2">
-                        <p class="fw-bold mb-0">OR</p>
-                    </div>
-                    <div class="col-sm col-12 d-flex align-items-center justify-content-center input-group p-2 mx-2">
-                        <input type="text" name="query" class="form-control" placeholder="Search by title, author, year, or category"
-                            required>
-                        <button type="submit" class="btn btn-primary">Search</button>
+                <div
+                    class="p-4 rounded-4 shadow-lg search-card d-flex w-100  align-items-center justify-content-center">
+                    <!-- Bootstrap rounded, shadow, and custom search-card class -->
+                    <div class="row w-100 align-items-center justify-content-center">
+                        <!-- Search Section with Dropdown and Input -->
+                        <div
+                            class="col-md col-12 d-flex align-items-center justify-content-center py-2 px-0 mx-2 flex-column">
+                            <!-- Dropdown for Search Type -->
+                            <div class="input-group">
+                                <select class="form-select" name="search_type" id="searchType" aria-label="Search Type">
+                                    <option value="keyword">Keyword</option>
+                                    <option value="title">Title</option>
+                                    <option value="author">Author</option>
+                                    <option value="year">Year</option>
+                                    <option value="category">Category</option>
+                                </select>
+
+                                <!-- Search Input Field -->
+                                <input type="text" style="width: 60%;" name="query" id="searchQuery"
+                                    class="form-control" placeholder="Enter search term" required>
+                            </div>
+
+                            <!-- Search Button -->
+                            <button type="submit" class="btn btn-primary w-100 mt-2">Search</button>
+                        </div>
                     </div>
                 </div>
             </form>
         </div>
-
-        <!--big buttons
-        <div class="row d-flex justify-content-around align-items-center px-5 mb-5">
-            <a type="button"
-                class="col-md-2 col-sm-4 col-12 btn btn-secondary m-2 fw-medium fs-6 text-start d-flex justify-content-evenly align-items-center flex-fill">
-                <i class="fas fa-camera-retro fa-lg me-2"></i>
-                <div>
-                    AR <br> Scan
-
-                </div>
-            </a>
-            <a type="button"
-                class="col-md-2 col-sm-4 col-12 btn btn-secondary m-2 fw-medium fs-6 text-start d-flex justify-content-evenly align-items-center flex-fill">
-                <i class="fas fa-chair fa-lg me-2"></i>
-                <div>
-                    Seats <br> Occupancy
-
-                </div>
-            </a>
-            <a type="button"
-                class="col-md-2 col-sm-4 col-12 btn btn-secondary m-2 fw-medium fs-6 text-start d-flex justify-content-evenly align-items-center flex-fill">
-                <i class="fas fa-info-circle fa-lg me-2"></i>
-                <div>
-                    About <br> Us
-
-                </div>
-            </a>
-            <a type="button"
-                class="col-md-2 col-sm-4 col-12 btn btn-secondary m-2 fw-medium fs-6 text-start d-flex justify-content-evenly align-items-center flex-fill">
-                <i class="fas fa-info-circle fa-lg me-2"></i>
-                <div>
-                    Lorem <br> Ipsum
-
-                </div>
-            </a>
-        </div>-->
     </div>
 
-    <!-- Books Section -->
+    <!-- Recent Books Section -->
     <div class="container-fluid p-3" style="background-color: #ffffff;">
         <div class="container">
             <h3>Newly Added Books</h3>
+            <div class="container-fluid row header-line mb-3">
+                <div class="col-4 col-lg-3 black-line"></div>
+                <div class="col-4 col-lg-2 white-line"></div>
+                <div class="col-4 col-lg-7 blue-line"></div>
+            </div>
+            <!-- Recent Books Carousel -->
+            <div id="recentBooksCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                <div class="carousel-inner" id="recent-books-list">
+                    <!-- Dynamic book cards will be inserted here -->
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#recentBooksCarousel"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#recentBooksCarousel"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Books by Category Section -->
+    <div class="container-fluid p-3" style="background-color: #ffffff;">
+        <div class="container">
+            <h3>Books by Category</h3>
             <div class="container-fluid row header-line">
                 <div class="col-4 col-lg-3 black-line"></div>
                 <div class="col-4 col-lg-2 white-line"></div>
                 <div class="col-4 col-lg-7 blue-line"></div>
             </div>
-            <!-- Recent Books -->
-            <div class="container-fluid row my-5" id="books-container">
-                <div class="container">
-                    <div id="recent-books-list" class="row row-cols-2 row-cols-md-3 row-cols-lg-6 g-3">
-                        <!-- this is where the recent books would be put. -->
-                    </div>
+            
+            <!-- Category Dropdown and See All Link -->
+            <div class="my-3 d-flex justify-content-between align-items-center">
+                <select id="categorySelect" class="form-select custom-dropdown me-2 w-25" aria-label="Select Category">
+                    <option value="" selected disabled>Select Category</option>
+                    <!-- Categories will be populated here -->
+                </select>
+
+                <a id="seeAllLink" href="#" class="text-decoration-none text-primary">See All</a>
+            </div>
+
+
+
+            <!-- Books by Selected Category Carousel -->
+            <div id="categoryCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner" id="category-books-list">
+                    <!-- Carousel items will be populated here based on selected category -->
                 </div>
             </div>
         </div>
@@ -329,141 +381,14 @@
         <div class="carousel-container position-relative">
             <!-- Card Carousel -->
             <div id="featuredCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <!-- Slide 1 -->
-                    <div class="carousel-item active">
-                        <div class="container">
-                            <div class="row">
-                                <!-- Card 1 -->
-                                <div class="col-12 col-md-4 mb-4">
-                                    <div class="card" data-bs-toggle="modal" data-bs-target="#cardModal"
-                                        data-title="Workshop"
-                                        data-text="Meron ka bang talent o hobbies na gusto i-share sa kapwa mo PLVians? Baka ikaw na..."
-                                        data-image="assets/img/featured1.jpg"
-                                        data-footer="<a href='#' class='btn btn-primary'>More Info</a>">
-                                        <img src="assets/img/featured1.jpg"
-                                            class="card-img-top img-fluid" alt="Card Image"
-                                            style="object-fit: cover; height: 200px;">
-                                        <div class="card-body">
-                                            <h5 class="card-title text-dark">Workshop</h5>
-                                            <p class="card-text">Meron ka bang talent o hobbies na gusto i-share sa
-                                                kapwa mo PLVians? Baka ikaw na... <br> <a href="#"
-                                                    class="btn btn-primary">More Info</a></p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Card 2 -->
-                                <div class="col-12 col-md-4 mb-4">
-                                    <div class="card" data-bs-toggle="modal" data-bs-target="#cardModal"
-                                        data-title="NLP E-Resources Portal"
-                                        data-text="Sharing again this post from the National Library of the Philippines for more online resources..."
-                                        data-image="assets/img/featured2.jpg"
-                                        data-footer="<a href='#' class='btn btn-primary'>More Info</a>">
-                                        <img src="assets/img/featured2.jpg"
-                                            class="card-img-top img-fluid" alt="Card Image"
-                                            style="object-fit: cover; height: 200px;">
-                                        <div class="card-body">
-                                            <h5 class="card-title text-dark">NLP E-Resources Portal</h5>
-                                            <p class="card-text">Sharing again this post from the National Library of
-                                                the Philippines for more online resources... <br> <a href="#"
-                                                    class="btn btn-primary">More Info</a></p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Card 3 -->
-                                <div class="col-12 col-md-4 mb-4">
-                                    <div class="card" data-bs-toggle="modal" data-bs-target="#cardModal"
-                                        data-title="Event Highlight"
-                                        data-text="Catch the highlights from our latest event!"
-                                        data-image="https://via.placeholder.com/600x400?text=Event+Highlight"
-                                        data-footer="<a href='#' class='btn btn-primary'>More Info</a>">
-                                        <img src="https://via.placeholder.com/600x400?text=Event+Highlight"
-                                            class="card-img-top img-fluid" alt="Card Image"
-                                            style="object-fit: cover; height: 200px;">
-                                        <div class="card-body">
-                                            <h5 class="card-title text-dark">Event Highlight</h5>
-                                            <p class="card-text">Catch the highlights from our latest event! <br> <a
-                                                    href="#" class="btn btn-primary">More Info</a></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Slide 2 -->
-                    <div class="carousel-item">
-                        <div class="container">
-                            <div class="row">
-                                <!-- Card 4 -->
-                                <div class="col-12 col-md-4 mb-4">
-                                    <div class="card" data-bs-toggle="modal" data-bs-target="#cardModal"
-                                        data-title="New Library Books"
-                                        data-text="Check out the latest additions to our library!"
-                                        data-image="https://via.placeholder.com/600x400?text=New+Library+Books"
-                                        data-footer="<a href='#' class='btn btn-primary'>More Info</a>">
-                                        <img src="https://via.placeholder.com/600x400?text=New+Library+Books"
-                                            class="card-img-top img-fluid" alt="Card Image"
-                                            style="object-fit: cover; height: 200px;">
-                                        <div class="card-body">
-                                            <h5 class="card-title text-dark">New Library Books</h5>
-                                            <p class="card-text">Check out the latest additions to our library! <br> <a
-                                                    href="#" class="btn btn-primary">More Info</a></p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Card 5 -->
-                                <div class="col-12 col-md-4 mb-4">
-                                    <div class="card" data-bs-toggle="modal" data-bs-target="#cardModal"
-                                        data-title="Community Service"
-                                        data-text="Learn about our community service initiatives and how you can get involved."
-                                        data-image="https://via.placeholder.com/600x400?text=Community+Service"
-                                        data-footer="<a href='#' class='btn btn-primary'>More Info</a>">
-                                        <img src="https://via.placeholder.com/600x400?text=Community+Service"
-                                            class="card-img-top img-fluid" alt="Card Image"
-                                            style="object-fit: cover; height: 200px;">
-                                        <div class="card-body">
-                                            <h5 class="card-title text-dark">Community Service</h5>
-                                            <p class="card-text">Learn about our community service initiatives and how
-                                                you can get involved. <br> <a href="#" class="btn btn-primary">More
-                                                    Info</a></p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Card 6 -->
-                                <div class="col-12 col-md-4 mb-4">
-                                    <div class="card" data-bs-toggle="modal" data-bs-target="#cardModal"
-                                        data-title="Upcoming Workshops"
-                                        data-text="Don't miss out on our upcoming workshops."
-                                        data-image="https://via.placeholder.com/600x400?text=Upcoming+Workshops"
-                                        data-footer="<a href='#' class='btn btn-primary'>More Info</a>">
-                                        <img src="https://via.placeholder.com/600x400?text=Upcoming+Workshops"
-                                            class="card-img-top img-fluid" alt="Card Image"
-                                            style="object-fit: cover; height: 200px;">
-                                        <div class="card-body">
-                                            <h5 class="card-title text-dark">Upcoming Workshops</h5>
-                                            <p class="card-text">Don't miss out on our upcoming workshops. <br> <a
-                                                    href="#" class="btn btn-primary">More Info</a></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="carousel-inner" id="carouselInner">
+                    <!-- Cards will be inserted dynamically based on screen size -->
                 </div>
-
-                <!-- Carousel Controls -->
-                <button class="carousel-control-prev position-absolute top-50 start-0 translate-middle-y" type="button"
-                    data-bs-target="#featuredCarousel" data-bs-slide="prev">
+                <button class="carousel-control-prev" type="button" data-bs-target="#featuredCarousel" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next position-absolute top-50 end-0 translate-middle-y" type="button"
-                    data-bs-target="#featuredCarousel" data-bs-slide="next">
+                <button class="carousel-control-next" type="button" data-bs-target="#featuredCarousel" data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
@@ -471,17 +396,20 @@
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal for card details -->
     <div class="modal fade" id="cardModal" tabindex="-1" aria-labelledby="cardModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
+                <!-- Modal Image -->
                 <img id="modalImage" class="card-img-top" src="" alt="Card Image">
+                <!-- Modal Body -->
                 <div class="modal-body">
                     <h5 id="modalTitle" class="modal-title">Card Title</h5>
                     <p id="modalText">Card Summary</p>
                 </div>
+                <!-- Modal Footer -->
                 <div id="modalFooter" class="modal-footer">
-                    <!-- Dynamic footer content will be inserted here -->
+                    <!-- Dynamic footer content (e.g., buttons, links) will be inserted here -->
                 </div>
             </div>
         </div>
@@ -603,6 +531,7 @@
 
 
     <script>
+        //modal
         document.addEventListener('DOMContentLoaded', function () {
             // Handle Accept button click
             document.getElementById('acceptBtn').addEventListener('click', function () {
@@ -621,6 +550,7 @@
             });
         });
 
+        //fetch recent books
         document.addEventListener("DOMContentLoaded", function () {
             // Automatically load the recent books on page load
             fetchRecentBooks();
@@ -645,44 +575,93 @@
                     });
             }
 
-            function fetchAdditionalBooks(remaining) {
-                // Add logic to fetch more books, either by a different category or criteria
-                // Example: fetch from a different category
-            }
-
-
             function displayBooks(books) {
                 const bookList = document.getElementById('recent-books-list');
                 if (bookList) {
                     bookList.innerHTML = ''; // Clear previous books
 
-                    for (let i = 0; i < 6; i++) {
-                        let book = books[i];
-                        if (!book) {
-                            book = {
-                                Title: 'Coming Soon',
-                                Author: 'Unknown',
-                                image2: 'placeholder.jpg' // Use a placeholder image
-                            };
+                    // Get current screen width
+                    let colsLg = 6; // For lg screens
+                    let colsMd = 3; // For md screens
+                    let colsSm = 2; // For sm screens
+
+                    // Group books into carousel items
+                    let booksPerSlide;
+                    if (window.innerWidth >= 992) {
+                        booksPerSlide = 6;  // lg: 6 books per slide
+                    } else if (window.innerWidth >= 768) {
+                        booksPerSlide = 3;  // md: 3 books per slide
+                    } else {
+                        booksPerSlide = 2;  // sm: 1 book per slide
+                    }
+
+                    for (let i = 0; i < books.length; i += booksPerSlide) {
+                        const carouselItem = document.createElement('div');
+                        carouselItem.classList.add('carousel-item');
+                        if (i === 0) {
+                            carouselItem.classList.add('active'); // Make the first item active
                         }
 
-                        const bookCard = `
-                            <div class="col">
-                                <div class="card p-1 text-center h-100">
-                                    <img src="admin/uploads/${book.image2}" class="card-img-top">
-                                    <div class="card-body">
-                                        <div class="card-title pt-1 fw-bold fs-5">${book.Title}</div>
-                                        <a href="bookloc.html?bookId=${book.bookId}" class="text-decoration-none stretched-link text-black fw-semibold">${book.Author}</a>
-                                    </div>
-                                </div>
+                        const row = document.createElement('div');
+                        row.classList.add('row', `row-cols-${colsSm}`, `row-cols-md-${colsMd}`, `row-cols-lg-${colsLg}`, 'g-3');
+
+                        for (let j = 0; j < booksPerSlide; j++) {
+                            let book = books[i + j];
+                            if (!book) {
+                                book = {
+                                    Title: 'Coming Soon',
+                                    Author: 'Unknown',
+                                    image2: 'placeholder.jpg' // Use a placeholder image
+                                };
+                            }
+
+                            const bookCard = `
+                    <div class="col">
+                        <div class="card p-1 text-center h-100 border-0">
+                            <img src="admin/uploads/${book.image2}" class="card-img-top shadow rounded" style="max-height: 400px; max-width: 100%;" alt="${book.Title}">
+                            <div class="card-body">
+                                <div class="card-title pt-1 fw-bold fs-5">${book.Title}</div>
+                                <a href="bookloc.html?bookId=${book.bookId}" class="text-decoration-none stretched-link fw-light text-black">${book.Author}</a>
                             </div>
-                        `;
-                        bookList.innerHTML += bookCard;
+                        </div>
+                    </div>
+                `;
+                            row.innerHTML += bookCard;
+                        }
+
+                        carouselItem.appendChild(row);
+                        bookList.appendChild(carouselItem);
                     }
                 }
             }
+
+            window.addEventListener('resize', fetchRecentBooks); // Re-fetch and adjust on screen resize
+
+            document.addEventListener('DOMContentLoaded', function () {
+                var carousel = document.querySelector('#recentBooksCarousel');
+                var carouselInstance = new bootstrap.Carousel(carousel, {
+                    interval: false,  // Disable automatic sliding
+                    wrap: true        // Allow cycling through the carousel items
+                });
+
+                var items = document.querySelectorAll('#recent-books-list .carousel-item');
+                var itemCount = items.length;
+
+                // Add event listeners to the next and previous buttons
+                document.querySelector('.carousel-control-next').addEventListener('click', function () {
+                    carouselInstance.next();
+                });
+
+                document.querySelector('.carousel-control-prev').addEventListener('click', function () {
+                    carouselInstance.prev();
+                });
+            });
+
+
         });
     </script>
+
+    <!-- count visitor -->
     <script>
         // Send a request to track visitor data
         fetch('track-visitor.php')
@@ -691,6 +670,7 @@
             .catch(error => console.error('Error:', error));
     </script>
 
+    <!-- modals -->
     <script>
         // JavaScript to handle dynamic content for the modal
         document.querySelectorAll('.card').forEach(card => {
@@ -706,7 +686,8 @@
             });
         });
     </script>
-    
+
+    <!-- video bg -->
     <script>
         // List of video files
         const videos = [
@@ -717,46 +698,332 @@
             'assets/bg-vid5.mp4'
         ];
 
-    // Function to shuffle the videos array
-    function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
+        // Function to shuffle the videos array
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
         }
-    }
 
-    // Shuffle the videos array
-    shuffleArray(videos);
+        // Shuffle the videos array
+        shuffleArray(videos);
 
-    // Initial video index
-    let currentVideoIndex = 0;
+        // Initial video index
+        let currentVideoIndex = 0;
 
-    // Get the video element and its source
-    const videoElement = document.getElementById('bg-video');
-    const videoSource = document.getElementById('bg-video-source');
+        // Get the video element and its source
+        const videoElement = document.getElementById('bg-video');
+        const videoSource = document.getElementById('bg-video-source');
 
-    // Function to change the video
-    function changeVideo() {
-        // Increment the video index
-        currentVideoIndex = (currentVideoIndex + 1) % videos.length;
-        
-        // Set the new video source
-        videoSource.src = videos[currentVideoIndex];
-        
-        // Load the new video
-        videoElement.load();
-        videoElement.play();
-    }
+        // Function to change the video
+        function changeVideo() {
+            // Increment the video index
+            currentVideoIndex = (currentVideoIndex + 1) % videos.length;
 
-    // Change video every 3 seconds
-    videoElement.addEventListener('loadedmetadata', () => {
-        setTimeout(changeVideo, 3000); // Change every 3 seconds
-    });
+            // Set the new video source
+            videoSource.src = videos[currentVideoIndex];
 
-    // Start the video playback
-    changeVideo();
+            // Load the new video
+            videoElement.load();
+            videoElement.play();
+        }
+
+        // Change video every 3 seconds
+        videoElement.addEventListener('loadedmetadata', () => {
+            setTimeout(changeVideo, 3000); // Change every 3 seconds
+        });
+
+        // Start the video playback
+        changeVideo();
     </script>
-    
+
+    <!-- custom navbar -->
+    <script>
+        // Add a scroll event listener
+        window.addEventListener('scroll', function () {
+            // Select the navbar
+            var navbar = document.querySelector('.custom-navbar');
+
+            // Add or remove the 'scrolled' class based on scroll position
+            if (window.scrollY > 10) { // Adjust the value '50' as needed
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+
+    <!-- JavaScript to change placeholder dynamically -->
+    <script>
+        const searchTypeDropdown = document.getElementById('searchType');
+        const searchQueryInput = document.getElementById('searchQuery');
+
+        searchTypeDropdown.addEventListener('change', function () {
+            let placeholderText;
+
+            switch (this.value) {
+                case 'title':
+                    placeholderText = 'Enter book title';
+                    break;
+                case 'author':
+                    placeholderText = 'Enter author name';
+                    break;
+                case 'year':
+                    placeholderText = 'Enter publication year';
+                    break;
+                case 'category':
+                    placeholderText = 'Enter book category';
+                    break;
+                case 'keyword':
+                default:
+                    placeholderText = 'Enter search term';
+                    break;
+            }
+
+            // Update the placeholder of the input field
+            searchQueryInput.placeholder = placeholderText;
+        });
+    </script>
+
+    <!-- categories -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const categorySelect = document.getElementById('categorySelect');
+            const categoryBooksList = document.getElementById('category-books-list');
+            const seeAllLink = document.getElementById('seeAllLink'); // Ensure this link is defined in your HTML
+            let selectedCategory = "Literature"; // Default category
+
+            // Fetch categories and populate the dropdown
+            fetch('categories.php')
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(category => {
+                        const option = document.createElement('option');
+                        option.value = category;
+                        option.textContent = category;
+                        categorySelect.appendChild(option);
+                    });
+                    // Fetch books for the default category "Literature"
+                    fetchBooksByCategory(selectedCategory);
+                    // Set initial See All link
+                    seeAllLink.href = `search_results.php?search_type=category&query=${encodeURIComponent(selectedCategory)}`;
+                })
+                .catch(error => console.error('Error fetching categories:', error));
+
+            // Fetch books based on selected category
+            categorySelect.addEventListener('change', function () {
+                selectedCategory = this.value; // Store the selected category
+                fetchBooksByCategory(selectedCategory);
+                // Update the See All link's href
+                seeAllLink.href = `search_results.php?search_type=category&query=${encodeURIComponent(selectedCategory)}`;
+            });
+
+            // Function to fetch and display books by category
+            function fetchBooksByCategory(category) {
+                categoryBooksList.innerHTML = ''; // Clear previous books
+
+                fetch(`categories.php?category=${encodeURIComponent(category)}`)
+                    .then(response => response.json())
+                    .then(books => {
+                        // Adjust the number of books per slide based on screen size
+                        let booksPerSlide = getBooksPerSlide();
+
+                        const totalSlides = Math.ceil(books.length / booksPerSlide);
+
+                        for (let i = 0; i < totalSlides; i++) {
+                            const carouselItem = document.createElement('div');
+                            carouselItem.classList.add('carousel-item', i === 0 ? 'active' : ''); // Set the first item as active
+                            
+                            const rowDiv = document.createElement('div');
+                            rowDiv.classList.add('row', `row-cols-${booksPerSlide}`, 'g-3');
+
+                            for (let j = 0; j < booksPerSlide; j++) {
+                                const bookIndex = i * booksPerSlide + j;
+                                if (bookIndex < books.length) {
+                                    const book = books[bookIndex];
+                                    const bookCard = `
+                                        <div class="col">
+                                            <div class="card p-1 text-center h-100 border-0">
+                                                <img src="admin/uploads/${book.image2}" class="card-img-top shadow rounded" alt="${book.Title}">
+                                                <div class="card-body">
+                                                    <div class="card-title pt-1 fw-bold fs-5">${book.Title}</div>
+                                                    <a href="bookloc.html?bookId=${book.bookId}" class="text-decoration-none stretched-link text-black fw-light">${book.Author}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `;
+                                    rowDiv.innerHTML += bookCard;
+                                }
+                            }
+
+                            carouselItem.appendChild(rowDiv);
+                            categoryBooksList.appendChild(carouselItem);
+                        }
+                    })
+                    .catch(error => console.error('Error fetching books:', error));
+            }
+
+            // Function to determine the number of books per slide based on screen size
+            function getBooksPerSlide() {
+                if (window.innerWidth >= 992) {
+                    return 6;  // lg: 6 books per slide
+                } else if (window.innerWidth >= 768) {
+                    return 3;  // md: 3 books per slide
+                } else {
+                    return 2;  // sm: 2 books per slide
+                }
+            }
+
+            // Debounce function to optimize resize event
+            let resizeTimeout;
+            window.addEventListener('resize', function () {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    fetchBooksByCategory(selectedCategory); // Refetch and adjust layout on resize
+                }, 200); // Adjust the debounce time as needed (200 ms is a common choice)
+            });
+        });
+    </script>
+
+    <!-- featured -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var cards = [
+                {
+                    title: "Workshop",
+                    text: "Meron ka bang talent o hobbies na gusto i-share sa kapwa mo PLVians?",
+                    image: "assets/img/featured1.jpg"
+                },
+                {
+                    title: "NLP E-Resources Portal",
+                    text: "Sharing again this post from the National Library of the Philippines.",
+                    image: "assets/img/featured2.jpg"
+                },
+                {
+                    title: "Event Highlight",
+                    text: "Catch the highlights from our latest event!",
+                    image: "https://via.placeholder.com/600x400?text=Event+Highlight"
+                },
+                {
+                    title: "New Library Books",
+                    text: "Check out the latest additions to our library!",
+                    image: "https://via.placeholder.com/600x400?text=New+Library+Books"
+                },
+                {
+                    title: "Community Service",
+                    text: "Learn about our community service initiatives.",
+                    image: "https://via.placeholder.com/600x400?text=Community+Service"
+                },
+                {
+                    title: "Upcoming Workshops",
+                    text: "Don't miss out on our upcoming workshops.",
+                    image: "https://via.placeholder.com/600x400?text=Upcoming+Workshops"
+                }
+            ];
+        
+            var carouselInner = document.getElementById("carouselInner");
+        
+            function createCarouselItems(cardsPerSlide) {
+                carouselInner.innerHTML = "";  // Clear existing slides
+                var slideIndex = 0;
+        
+                for (var i = 0; i < cards.length; i += cardsPerSlide) {
+                    var carouselItem = document.createElement("div");
+                    carouselItem.classList.add("carousel-item");
+                    if (slideIndex === 0) carouselItem.classList.add("active");  // Make the first slide active
+        
+                    var row = document.createElement("div");
+                    row.classList.add("row");
+        
+                    for (var j = i; j < i + cardsPerSlide && j < cards.length; j++) {
+                        var col = document.createElement("div");
+                        col.classList.add("col-12", "col-md-6", "col-lg-4", "mb-4");
+        
+                        var card = document.createElement("div");
+                        card.classList.add("card");
+                        card.setAttribute("data-bs-toggle", "modal");
+                        card.setAttribute("data-bs-target", "#cardModal");
+                        card.setAttribute("data-title", cards[j].title);
+                        card.setAttribute("data-text", cards[j].text);
+                        card.setAttribute("data-image", cards[j].image);
+                        card.setAttribute("data-footer", "<a href='#' class='btn btn-primary'>More Info</a>");
+        
+                        var img = document.createElement("img");
+                        img.src = cards[j].image;
+                        img.classList.add("card-img-top", "img-fluid");
+                        img.alt = "Card Image";
+                        img.style.objectFit = "cover";
+                        img.style.height = "200px";
+        
+                        var cardBody = document.createElement("div");
+                        cardBody.classList.add("card-body");
+        
+                        var cardTitle = document.createElement("h5");
+                        cardTitle.classList.add("card-title", "text-dark");
+                        cardTitle.textContent = cards[j].title;
+        
+                        var cardText = document.createElement("p");
+                        cardText.classList.add("card-text");
+                        cardText.textContent = cards[j].text + " ";
+                        
+                        var moreInfoLink = document.createElement("a");
+                        moreInfoLink.href = "#";
+                        moreInfoLink.classList.add("btn", "btn-primary");
+                        moreInfoLink.textContent = "More Info";
+        
+                        cardText.appendChild(moreInfoLink);
+                        cardBody.appendChild(cardTitle);
+                        cardBody.appendChild(cardText);
+                        card.appendChild(img);
+                        card.appendChild(cardBody);
+                        col.appendChild(card);
+                        row.appendChild(col);
+                    }
+        
+                    carouselItem.appendChild(row);
+                    carouselInner.appendChild(carouselItem);
+                    slideIndex++;
+                }
+            }
+        
+            function adjustCarouselItems() {
+                var screenWidth = window.innerWidth;
+        
+                if (screenWidth >= 992) {
+                    createCarouselItems(3);  // Large screens (lg)
+                } else if (screenWidth >= 768) {
+                    createCarouselItems(2);  // Medium screens (md)
+                } else {
+                    createCarouselItems(1);  // Small screens (sm)
+                }
+            }
+        
+            window.addEventListener("resize", adjustCarouselItems);
+            adjustCarouselItems();  // Initial call to set the correct layout
+        
+            // Handle modal content dynamically
+            var cardModal = document.getElementById("cardModal");
+            cardModal.addEventListener('show.bs.modal', function(event) {
+                var button = event.relatedTarget;
+                var title = button.getAttribute("data-title");
+                var text = button.getAttribute("data-text");
+                var image = button.getAttribute("data-image");
+                var footer = button.getAttribute("data-footer");
+        
+                var modalTitle = document.getElementById("modalTitle");
+                var modalText = document.getElementById("modalText");
+                var modalImage = document.getElementById("modalImage");
+                var modalFooter = document.getElementById("modalFooter");
+        
+                modalTitle.textContent = title;
+                modalText.textContent = text;
+                modalImage.src = image;
+                modalFooter.innerHTML = footer;  // Insert the footer content (button/link) dynamically
+            });
+        });
+    </script>
+     
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

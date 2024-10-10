@@ -13,26 +13,55 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Get the search query from the URL
+// Get the search query and search type from the URL
 $query = $_GET['query'] ?? '';
+$search_type = $_GET['search_type'] ?? 'keyword'; // Default to keyword search
+
 $query = $conn->real_escape_string($query);
 
 // Pagination variables
-$results_per_page = 12; // Set how many records per page
+$results_per_page = 10; // Set how many records per page
 $page = isset($_GET['page']) ? (int) $_GET['page'] : 1; // Get current page number
 $start_from = ($page - 1) * $results_per_page; // Calculate the starting record
 
+// Build the SQL query based on search type
+switch ($search_type) {
+    case 'title':
+        $sql_total = "SELECT COUNT(*) AS total FROM book WHERE title LIKE '%$query%'";
+        $stmt = $conn->prepare("SELECT * FROM book WHERE title LIKE ? LIMIT ?, ?");
+        break;
+    case 'author':
+        $sql_total = "SELECT COUNT(*) AS total FROM book WHERE author LIKE '%$query%'";
+        $stmt = $conn->prepare("SELECT * FROM book WHERE author LIKE ? LIMIT ?, ?");
+        break;
+    case 'year':
+        $sql_total = "SELECT COUNT(*) AS total FROM book WHERE bookYear LIKE '%$query%'";
+        $stmt = $conn->prepare("SELECT * FROM book WHERE bookYear LIKE ? LIMIT ?, ?");
+        break;
+    case 'category':
+        $sql_total = "SELECT COUNT(*) AS total FROM book WHERE bookCategory LIKE '%$query%'";
+        $stmt = $conn->prepare("SELECT * FROM book WHERE bookCategory LIKE ? LIMIT ?, ?");
+        break;
+    case 'keyword':
+    default:
+        $sql_total = "SELECT COUNT(*) AS total FROM book WHERE title LIKE '%$query%' OR author LIKE '%$query%' OR bookYear LIKE '%$query%' OR bookCategory LIKE '%$query%'";
+        $stmt = $conn->prepare("SELECT * FROM book WHERE title LIKE ? OR author LIKE ? OR bookYear LIKE ? OR bookCategory LIKE ? LIMIT ?, ?");
+        break;
+}
+
 // Get total number of results
-$sql_total = "SELECT COUNT(*) AS total FROM book WHERE title LIKE '%$query%' OR author LIKE '%$query%' OR bookYear LIKE '%$query%' OR bookCategory LIKE '%$query%'";
 $total_result = $conn->query($sql_total);
 $row = $total_result->fetch_assoc();
 $total_records = $row['total'];
 $total_pages = ceil($total_records / $results_per_page); // Calculate total pages
 
-// Use prepared statements to prevent SQL injection and apply pagination with LIMIT
-$stmt = $conn->prepare("SELECT * FROM book WHERE title LIKE ? OR author LIKE ? OR bookYear LIKE ? OR bookCategory LIKE ? LIMIT ?, ?");
+// For keyword search, bind all parameters; otherwise, bind only one
 $searchQuery = "%$query%";
-$stmt->bind_param('ssssii', $searchQuery, $searchQuery, $searchQuery, $searchQuery, $start_from, $results_per_page);
+if ($search_type == 'keyword') {
+    $stmt->bind_param('ssssii', $searchQuery, $searchQuery, $searchQuery, $searchQuery, $start_from, $results_per_page);
+} else {
+    $stmt->bind_param('sii', $searchQuery, $start_from, $results_per_page);
+}
 
 // Execute the query
 $stmt->execute();
@@ -41,7 +70,7 @@ $result = $stmt->get_result();
 // Get the total number of results from the database (e.g., $total_records is already calculated)
 $total_results_displayed = $result->num_rows; // Number of results on the current page
 
-// Close the statement when done
+// Close the statement and connection when done
 $stmt->close();
 $conn->close();
 ?>
@@ -53,7 +82,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Results</title>
+    <title>Search Results | PLVIL</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -207,7 +236,6 @@ $conn->close();
         </div>
     </div>
 
-
     <!-- Offcanvas Menu -->
     <div class="offcanvas offcanvas-end d-md-none" tabindex="-1" id="offcanvasMenu"
         aria-labelledby="offcanvasMenuLabel">
@@ -239,10 +267,27 @@ $conn->close();
         <div class="mt-5 row justify-content-between align-items-center">
             <h1 class="col-12 col-sm-6 text-light">Search Results</h1>
 
-            <form class="col-12 col-sm-6" action="search_results.php" method="GET">
-                <div class="input-group">
-                    <input type="text" name="query" class="form-control" placeholder="Search by title, author, year, or category" required>
+            <form class="col-12 col-md-6" action="search_results.php" method="GET">
+                <!-- Search Section with Dropdown and Input -->
+                <div class="col-md col-12 d-flex py-2 px-0 flex-column">
+                    <!-- Dropdown for Search Type -->
+                    <div class="input-group">
+                        <select class="form-select" name="search_type" id="searchType" aria-label="Search Type">
+                            <option value="keyword">Keyword</option>
+                            <option value="title">Title</option>
+                            <option value="author">Author</option>
+                            <option value="year">Year</option>
+                            <option value="category">Category</option>
+                        </select>
+
+                        <!-- Search Input Field -->
+                        <input type="text" style="width: 40%;" name="query" id="searchQuery" class="form-control"
+                            placeholder="Enter search term" required>
+
+                    <!-- Search Button -->
                     <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+
                 </div>
             </form>
         </div>
@@ -253,22 +298,33 @@ $conn->close();
         <?php if ($result->num_rows > 0): ?>
             <div class="row">
                 <?php while ($row = $result->fetch_assoc()): ?>
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-6 mb-2">
-                        <div class="card h-100">
-                            <img src="<?php echo !empty($row['image2']) ? "../Admin/uploads/" . htmlspecialchars($row['image2']) : 'default-cover.jpg'; ?>"
-                                class="card-img-top" alt="Book Cover">
-                            <div class="card-body">
-                                <h5 class="card-title"><?php echo htmlspecialchars($row['Title']); ?></h5>
-                                <p class="card-text"><strong>Author:</strong> <?php echo htmlspecialchars($row['Author']); ?></p>
-                                <p class="card-text"><strong>Year:</strong> <?php echo htmlspecialchars($row['bookYear']); ?></p>
-                                <p class="card-text"><strong>Category:</strong> <?php echo htmlspecialchars($row['bookCategory']); ?></p>
-                                <a href="bookloc.html?bookId=<?php echo htmlspecialchars($row['bookId']); ?>"
-                                    class="btn btn-primary">Details</a>
+                    <div class="col-md-6 col-12 mb-2">
+                        <a href="bookloc.html?bookId=<?php echo htmlspecialchars($row['bookId']); ?>" class="text-decoration-none text-reset">
+                            <div class="card h-100" style="background-color: rgba(255, 255, 255, 0.8); backdrop-filter: blur(5px);"> <!-- Adjust the RGBA values for your desired color and opacity -->
+                                <div class="row g-0">
+                                    <!-- Book Cover -->
+                                    <div class="col-4 d-flex justify-content-center align-items-center">
+                                        <img src="<?php echo !empty($row['image2']) ? "../Admin/uploads/" . htmlspecialchars($row['image2']) : 'default-cover.jpg'; ?>" 
+                                            class="img-fluid rounded shadow" alt="Book Cover" style="width: 90%; height: 200px; object-fit: cover; max-height: 200px; margin: 10px;">
+                                    </div>
+                                    <!-- Book Details -->
+                                    <div class="col-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><?php echo htmlspecialchars($row['Title']); ?></h5>
+                                            <p class="card-text"><strong>Author:</strong> <?php echo htmlspecialchars($row['Author']); ?></p>
+                                            <p class="card-text"><strong>Year:</strong> <?php echo htmlspecialchars($row['bookYear']); ?></p>
+                                            <p class="card-text"><strong>Category:</strong> <?php echo htmlspecialchars($row['bookCategory']); ?></p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 <?php endwhile; ?>
             </div>
+
+
+
 
             <!-- Pagination -->
             <nav>
@@ -297,9 +353,6 @@ $conn->close();
             <div class="alert alert-warning">No results found for "<?php echo htmlspecialchars($query); ?>"</div>
         <?php endif; ?>
     </div>
-
-
-
 
     <!-- Footer -->
     <footer class="text-center text-lg-start bg-light text-muted mt-5">
@@ -418,7 +471,6 @@ $conn->close();
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-
         document.addEventListener('DOMContentLoaded', function () {
             // Handle Accept button click
             document.getElementById('acceptBtn').addEventListener('click', function () {

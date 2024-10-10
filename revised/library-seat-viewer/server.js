@@ -128,6 +128,6 @@ app.get('/user', (req, res) => {
 });
 
 // Start the server
-server.listen(3000, () => {
-  console.log('Server is running on http://localhost:3000');
+server.listen(3000, '192.168.254.124', () => {
+  console.log('Server is running on http://192.168.254.124:3000');
 });

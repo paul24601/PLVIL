@@ -117,9 +117,7 @@ $db = new DBConnection();
             </div>
         </div>
     </div>
-
-
-
+    
     <!-- Modal for adding new book -->
     <div class="modal fade" id="addBook" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">

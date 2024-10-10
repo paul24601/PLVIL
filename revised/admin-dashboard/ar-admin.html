@@ -28,10 +28,6 @@
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                </div>
             </form>
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -62,7 +58,7 @@
                             <!-- Systems -->
                             <div class="sb-sidenav-menu-heading">Systems</div>
                             <!-- Books -->
-                            <a class="nav-link" href="book-admin.html">
+                            <a class="nav-link" href="book-admin.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
                                 Books
                             </a>
@@ -97,7 +93,7 @@
                         </ol>
                         <div class="container m-5">
                             <h2>Upload Images for Book Elements</h2>
-                            <form action="upload.php" method="POST" enctype="multipart/form-data">
+                            <form action="../AR/upload.php" method="POST" enctype="multipart/form-data">
                                 <div class="mb-3">
                                     <label for="book1-title" class="form-label">Book Title Image</label>
                                     <input type="file" id="book1-title" name="book1-title" class="form-control short-input" accept="image/*">

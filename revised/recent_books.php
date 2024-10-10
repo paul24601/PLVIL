@@ -9,8 +9,8 @@ class Book {
         $this->conn = $db->getConnection();
     }
 
-    public function getRecentBooks($limit = 6) {
-        $sql = "SELECT * FROM book ORDER BY bookId DESC, bookId DESC LIMIT ?";
+    public function getRecentBooks($limit = 12) {
+        $sql = "SELECT * FROM book ORDER BY bookId DESC LIMIT ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param('i', $limit);
         $stmt->execute();

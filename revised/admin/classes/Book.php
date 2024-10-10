@@ -33,7 +33,7 @@ public function saveBook($post) {
         $image2Name = '';
         if (isset($_FILES['image1']) && $_FILES['image1']['size'] > 0 && isset($_FILES['image2']) && $_FILES['image2']['size'] > 0) {
             // Handle file uploads for images
-            $targetDir = $_SERVER['DOCUMENT_ROOT'] . '/PLVIL/Admin/uploads/';
+            $targetDir = $_SERVER['DOCUMENT_ROOT'] . '/PLVIL/revised/Admin/uploads/';
             $image1Name = basename($_FILES["image1"]["name"]);
             $image2Name = basename($_FILES["image2"]["name"]);
             $image1Path = $targetDir . $image1Name;
@@ -68,7 +68,7 @@ public function saveBook($post) {
         $image1Name = '';
         $image2Name = '';
         if (isset($_FILES['image1']) && $_FILES['image1']['size'] > 0 && isset($_FILES['image2']) && $_FILES['image2']['size'] > 0) {
-            $targetDir = $_SERVER['DOCUMENT_ROOT'] . '/PLVIL/Admin/uploads/';
+            $targetDir = $_SERVER['DOCUMENT_ROOT'] . '/PLVIL/revised/Admin/uploads/';
             $image1Name = basename($_FILES["image1"]["name"]);
             $image2Name = basename($_FILES["image2"]["name"]);
             $image1Path = $targetDir . $image1Name;
@@ -114,8 +114,8 @@ public function deleteBook($deleteId) {
     // Get the book details before deleting
     $bookDetails = $this->getBookById($deleteId);
     if ($bookDetails) {
-        $image1Path = $_SERVER['DOCUMENT_ROOT'] . '/PLVIL/Admin/uploads/' . $bookDetails['image1'];
-        $image2Path = $_SERVER['DOCUMENT_ROOT'] . '/PLVIL/Admin/uploads/' . $bookDetails['image2'];
+        $image1Path = $_SERVER['DOCUMENT_ROOT'] . '/PLVIL/revised/Admin/uploads/' . $bookDetails['image1'];
+        $image2Path = $_SERVER['DOCUMENT_ROOT'] . '/PLVIL/revised/Admin/uploads/' . $bookDetails['image2'];
         
         // Delete the image files from the server
         if (file_exists($image1Path)) {
