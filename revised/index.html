@@ -13,6 +13,7 @@
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
@@ -89,14 +90,6 @@
             overflow-y: auto;
         }
 
-        .offcanvas {
-            background-color: rgba(255, 255, 255, 0.5);
-            /* White with 70% opacity */
-            backdrop-filter: blur(10px);
-            /* Optional: Adds a blur effect to the background */
-        }
-
-
         .logo {
             width: 300px;
         }
@@ -137,6 +130,18 @@
             font-weight: bold;
             /* Make active link bold */
         }
+
+        .custom-popover .popover-body {
+            max-width: 200px;
+            /* Adjust this width as needed */
+            padding: 10px;
+            /* Optional: increase padding */
+            font-size: 1.1em;
+            /* Optional: increase font size */
+            background-color: rgba(255, 255, 255, .5);
+            border-radius: 5px;
+            border: 0;
+        }
     </style>
 </head>
 
@@ -164,11 +169,10 @@
                 <span class="fw-bolder text-dark fs-4 d-md-none d-block PLVIL-title">PLVIL</span>
                 <span class="fw-bolder text-dark fs-4 d-none d-md-block PLVIL-title">PLV: Interactive Library</span>
             </a>
-            <!-- Toggler -->
-            <button class="navbar-toggler d-md-none p-0" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu" aria-expanded="false"
-                aria-label="Toggle Navigation">
-                <span class="navbar-toggler-icon"></span>
+            <!-- Toggler Button with Font Awesome Icon -->
+            <button class="navbar-toggler d-md-none border-0" type="button" data-bs-toggle="popover"
+                data-bs-placement="bottom" data-bs-html="true" aria-expanded="false" aria-label="Toggle Navigation">
+                <i class="fas fa-bars fa-lg"></i> <!-- Modern hamburger icon -->
             </button>
             <!-- nav -->
             <div class="collapse navbar-collapse justify-content-end align-center d-none d-md-flex" id="main-nav">
@@ -181,8 +185,7 @@
                             data-bs-target="#arModal">AR Scan</a>
                     </li>
                     <li class="class-item">
-                        <a href="library-seat-viewer/CHAIRS/chairs-user.html"
-                            class="me-4 fs-6 text-dark fw-medium nav-link">Chairs</a>
+                        <a href="chairs-user.html" class="me-4 fs-6 text-dark fw-medium nav-link">Chairs</a>
                     </li>
                     <li class="class-item">
                         <a href="about.html" class="me-2 fs-6 text-dark fw-medium nav-link">About</a>
@@ -242,32 +245,6 @@
                         data-bs-dismiss="modal">Decline</button>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Offcanvas Menu -->
-    <div class="offcanvas offcanvas-end d-md-none" tabindex="-1" id="offcanvasMenu"
-        aria-labelledby="offcanvasMenuLabel">
-        <div class="offcanvas-header">
-            <h5 id="offcanvasMenuLabel">Menu</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <ul class="navbar-nav">
-                <li class="class-item">
-                    <a href="index.html" class="fs-6 text-dark fw-bold nav-link active">Home</a>
-                </li>
-                <li class="class-item">
-                    <a href="#" class="fs-6 text-dark fw-bold nav-link" data-bs-toggle="modal"
-                        data-bs-target="#arModal">AR Scan</a>
-                </li>
-                <li class="class-item">
-                    <a href="Admin/chairs-user.html" class="fs-6 text-dark fw-bold nav-link">Chairs</a>
-                </li>
-                <li class="class-item">
-                    <a href="about.html" class="fs-6 text-dark fw-bold nav-link active">About</a>
-                </li>
-            </ul>
         </div>
     </div>
 
@@ -351,7 +328,7 @@
                 <div class="col-4 col-lg-2 white-line"></div>
                 <div class="col-4 col-lg-7 blue-line"></div>
             </div>
-            
+
             <!-- Category Dropdown and See All Link -->
             <div class="my-3 d-flex justify-content-between align-items-center">
                 <select id="categorySelect" class="form-select custom-dropdown me-2 w-25" aria-label="Select Category">
@@ -373,22 +350,21 @@
         </div>
     </div>
 
-    <!-- Featured Title -->
+    <!-- Featured Section -->
     <div class="container mt-5">
         <h2 class="text-white text-center mb-4">Featured</h2>
 
         <!-- Carousel Container -->
         <div class="carousel-container position-relative">
-            <!-- Card Carousel -->
             <div id="featuredCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner" id="carouselInner">
-                    <!-- Cards will be inserted dynamically based on screen size -->
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#featuredCarousel" data-bs-slide="prev">
+                <div class="carousel-inner" id="carouselInner"></div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#featuredCarousel"
+                    data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#featuredCarousel" data-bs-slide="next">
+                <button class="carousel-control-next" type="button" data-bs-target="#featuredCarousel"
+                    data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
@@ -396,20 +372,22 @@
         </div>
     </div>
 
-    <!-- Modal for card details -->
-    <div class="modal fade" id="cardModal" tabindex="-1" aria-labelledby="cardModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+    <!-- Modal HTML Structure -->
+    <div class="modal fade" id="cardModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
-                <!-- Modal Image -->
-                <img id="modalImage" class="card-img-top" src="" alt="Card Image">
-                <!-- Modal Body -->
-                <div class="modal-body">
-                    <h5 id="modalTitle" class="modal-title">Card Title</h5>
-                    <p id="modalText">Card Summary</p>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Modal Title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <!-- Modal Footer -->
-                <div id="modalFooter" class="modal-footer">
-                    <!-- Dynamic footer content (e.g., buttons, links) will be inserted here -->
+                <div class="modal-body">
+                    <img id="modalImage" src="" alt="Modal Image" class="img-fluid mb-3" />
+                    <p id="modalText">Modal Text</p>
+                </div>
+                <div class="modal-footer">
+                    <!-- Button that can be customized dynamically -->
+                    <a id="modalButton" href="#" class="btn btn-primary">More Info</a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -426,101 +404,52 @@
             </div>
             <!-- Right -->
             <div>
-                <a href="#" class="me-4 text-reset">
+                <a href="https://www.facebook.com/profile.php?id=100064626706651"
+                    class="me-4 text-reset text-decoration-none">
                     <i class="fab fa-facebook-f"></i>
                 </a>
-                <a href="#" class="me-4 text-reset">
+                <a href="#" class="me-4 text-reset text-decoration-none">
                     <i class="fab fa-twitter"></i>
                 </a>
-                <a href="#" class="me-4 text-reset">
-                    <i class="fab fa-google"></i>
-                </a>
-                <a href="#" class="me-4 text-reset">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="#" class="me-4 text-reset">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="#" class="me-4 text-reset">
+                <a href="#" class="me-4 text-reset text-decoration-none">
                     <i class="fab fa-github"></i>
                 </a>
             </div>
         </section>
-        <!-- Section: Links  -->
-        <section class="">
-            <div class="container text-center text-md-start mt-5">
-                <!-- Grid row -->
-                <div class="row mt-3">
-                    <!-- Grid column -->
-                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                        <!-- Content -->
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            <i class="fas fa-gem me-3"></i>PLV: Interactive Library
-                        </h6>
-                        <p>
-                            The PLVIL project brings the library closer to students through interactive tools like AR,
-                            making knowledge more accessible.
-                        </p>
-                    </div>
-                    <!-- Grid column -->
 
-                    <!-- Grid column -->
-                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                        <!-- Links -->
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            Quick Links
-                        </h6>
-                        <p>
-                            <a href="index.html" class="text-reset">Home</a>
-                        </p>
-                        <p>
-                            <a href="about.html" class="text-reset">About</a>
-                        </p>
-                        <p>
-                            <a href="browse.html" class="text-reset">Browse Books</a>
-                        </p>
-                        <p>
-                            <a href="#" class="text-reset" data-bs-toggle="modal" data-bs-target="#arModal">AR Scan</a>
-                        </p>
-                    </div>
-                    <!-- Grid column -->
-
-                    <!-- Grid column -->
-                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                        <!-- Links -->
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            Useful links
-                        </h6>
-                        <p>
-                            <a href="terms.html" class="text-reset">Terms of Service</a>
-                        </p>
-                        <p>
-                            <a href="privacy.html" class="text-reset">Privacy Policy</a>
-                        </p>
-                        <p>
-                            <a href="#" class="text-reset">Support</a>
-                        </p>
-                        <p>
-                            <a href="#" class="text-reset">Help</a>
-                        </p>
-                    </div>
-                    <!-- Grid column -->
-
-                    <!-- Grid column -->
-                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                        <!-- Links -->
-                        <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-                        <p><i class="fas fa-home me-3"></i> Valenzuela City, Metro Manila</p>
-                        <p><i class="fas fa-envelope me-3"></i> library@plvil.ph</p>
-                        <p><i class="fas fa-phone me-3"></i> + 63 123 456 7890</p>
-                        <p><i class="fas fa-print me-3"></i> + 63 123 456 7891</p>
-                    </div>
-                    <!-- Grid column -->
+        <!-- Section: Links -->
+        <section class="container text-center text-md-start mt-5">
+            <div class="row mt-3">
+                <!-- About -->
+                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        <i class="fas fa-book me-3"></i>PLV: Interactive Library
+                    </h6>
+                    <p>
+                        The PLVIL project brings the library closer to students through interactive tools like AR,
+                        making knowledge more accessible.
+                    </p>
                 </div>
-                <!-- Grid row -->
+
+                <!-- Quick Links -->
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <h6 class="text-uppercase fw-bold mb-4">Quick Links</h6>
+                    <p><a href="index.html" class="text-reset">Home</a></p>
+                    <p><a href="about.html" class="text-reset">About</a></p>
+                    <p><a href="search_results.php?search_type=keyword&query=+" class="text-reset">Browse Books</a></p>
+                    <p><a href="#" class="text-reset" data-bs-toggle="modal" data-bs-target="#arModal">AR Scan</a></p>
+                </div>
+
+                <!-- Contact -->
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                    <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+                    <p><i class="fas fa-home me-3"></i>Maysan, Valenzuela, Philippines</p>
+                    <p><i class="fas fa-envelope me-3"></i> library@plvil.ph</p>
+                    <p><i class="fas fa-phone me-3"></i> + 63 123 456 7890</p>
+                    <p><i class="fas fa-print me-3"></i> + 63 123 456 7891</p>
+                </div>
             </div>
         </section>
-        <!-- Section: Links  -->
 
         <!-- Copyright -->
         <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
@@ -834,7 +763,7 @@
                         for (let i = 0; i < totalSlides; i++) {
                             const carouselItem = document.createElement('div');
                             carouselItem.classList.add('carousel-item', i === 0 ? 'active' : ''); // Set the first item as active
-                            
+
                             const rowDiv = document.createElement('div');
                             rowDiv.classList.add('row', `row-cols-${booksPerSlide}`, 'g-3');
 
@@ -886,144 +815,179 @@
         });
     </script>
 
-    <!-- featured -->
+    <!-- Featured Section Script -->
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var cards = [
-                {
-                    title: "Workshop",
-                    text: "Meron ka bang talent o hobbies na gusto i-share sa kapwa mo PLVians?",
-                    image: "assets/img/featured1.jpg"
-                },
-                {
-                    title: "NLP E-Resources Portal",
-                    text: "Sharing again this post from the National Library of the Philippines.",
-                    image: "assets/img/featured2.jpg"
-                },
-                {
-                    title: "Event Highlight",
-                    text: "Catch the highlights from our latest event!",
-                    image: "https://via.placeholder.com/600x400?text=Event+Highlight"
-                },
-                {
-                    title: "New Library Books",
-                    text: "Check out the latest additions to our library!",
-                    image: "https://via.placeholder.com/600x400?text=New+Library+Books"
-                },
-                {
-                    title: "Community Service",
-                    text: "Learn about our community service initiatives.",
-                    image: "https://via.placeholder.com/600x400?text=Community+Service"
-                },
-                {
-                    title: "Upcoming Workshops",
-                    text: "Don't miss out on our upcoming workshops.",
-                    image: "https://via.placeholder.com/600x400?text=Upcoming+Workshops"
-                }
-            ];
-        
-            var carouselInner = document.getElementById("carouselInner");
-        
-            function createCarouselItems(cardsPerSlide) {
-                carouselInner.innerHTML = "";  // Clear existing slides
-                var slideIndex = 0;
-        
-                for (var i = 0; i < cards.length; i += cardsPerSlide) {
-                    var carouselItem = document.createElement("div");
-                    carouselItem.classList.add("carousel-item");
-                    if (slideIndex === 0) carouselItem.classList.add("active");  // Make the first slide active
-        
-                    var row = document.createElement("div");
-                    row.classList.add("row");
-        
-                    for (var j = i; j < i + cardsPerSlide && j < cards.length; j++) {
-                        var col = document.createElement("div");
-                        col.classList.add("col-12", "col-md-6", "col-lg-4", "mb-4");
-        
-                        var card = document.createElement("div");
-                        card.classList.add("card");
-                        card.setAttribute("data-bs-toggle", "modal");
-                        card.setAttribute("data-bs-target", "#cardModal");
-                        card.setAttribute("data-title", cards[j].title);
-                        card.setAttribute("data-text", cards[j].text);
-                        card.setAttribute("data-image", cards[j].image);
-                        card.setAttribute("data-footer", "<a href='#' class='btn btn-primary'>More Info</a>");
-        
-                        var img = document.createElement("img");
-                        img.src = cards[j].image;
-                        img.classList.add("card-img-top", "img-fluid");
-                        img.alt = "Card Image";
-                        img.style.objectFit = "cover";
-                        img.style.height = "200px";
-        
-                        var cardBody = document.createElement("div");
-                        cardBody.classList.add("card-body");
-        
-                        var cardTitle = document.createElement("h5");
-                        cardTitle.classList.add("card-title", "text-dark");
-                        cardTitle.textContent = cards[j].title;
-        
-                        var cardText = document.createElement("p");
-                        cardText.classList.add("card-text");
-                        cardText.textContent = cards[j].text + " ";
-                        
-                        var moreInfoLink = document.createElement("a");
-                        moreInfoLink.href = "#";
-                        moreInfoLink.classList.add("btn", "btn-primary");
-                        moreInfoLink.textContent = "More Info";
-        
-                        cardText.appendChild(moreInfoLink);
-                        cardBody.appendChild(cardTitle);
-                        cardBody.appendChild(cardText);
-                        card.appendChild(img);
-                        card.appendChild(cardBody);
-                        col.appendChild(card);
-                        row.appendChild(col);
+        document.addEventListener("DOMContentLoaded", function () {
+            // Fetch featured items using AJAX
+            fetch('get-featured-items.php')
+                .then(response => response.json())
+                .then(data => {
+                    var cards = data;  // Use the fetched data as the cards array
+                    var carouselInner = document.getElementById("carouselInner");
+
+                    function createCarouselItems(cardsPerSlide) {
+                        carouselInner.innerHTML = "";  // Clear existing slides
+                        var slideIndex = 0;
+
+                        for (var i = 0; i < cards.length; i += cardsPerSlide) {
+                            var carouselItem = document.createElement("div");
+                            carouselItem.classList.add("carousel-item");
+                            if (slideIndex === 0) carouselItem.classList.add("active");
+
+                            var row = document.createElement("div");
+                            row.classList.add("row");
+
+                            for (var j = i; j < i + cardsPerSlide && j < cards.length; j++) {
+                                var col = document.createElement("div");
+                                col.classList.add("col-12", "col-md-6", "col-lg-4", "mb-4");
+
+                                var card = document.createElement("div");
+                                card.classList.add("card");
+                                card.setAttribute("data-bs-toggle", "modal");
+                                card.setAttribute("data-bs-target", "#cardModal");
+                                card.setAttribute("data-title", cards[j].title);
+                                card.setAttribute("data-text", cards[j].summary);
+                                card.setAttribute("data-image", cards[j].image_url);
+                                card.setAttribute("data-more-info-link", cards[j].more_info_link);
+                                card.setAttribute("data-additional-info", cards[j].additional_info);
+
+                                var img = document.createElement("img");
+                                img.src = cards[j].image_url;
+                                img.classList.add("card-img-top", "img-fluid");
+                                img.alt = "Card Image";
+                                img.style.objectFit = "cover";
+                                img.style.height = "200px";
+
+                                var cardBody = document.createElement("div");
+                                cardBody.classList.add("card-body");
+
+                                var cardTitle = document.createElement("h5");
+                                cardTitle.classList.add("card-title", "text-dark");
+                                cardTitle.textContent = cards[j].title;
+
+                                var cardText = document.createElement("p");
+                                cardText.classList.add("card-text");
+                                cardText.textContent = cards[j].summary;
+
+                                cardBody.appendChild(cardTitle);
+                                cardBody.appendChild(cardText);
+                                card.appendChild(img);
+                                card.appendChild(cardBody);
+                                col.appendChild(card);
+                                row.appendChild(col);
+                            }
+
+                            carouselItem.appendChild(row);
+                            carouselInner.appendChild(carouselItem);
+                            slideIndex++;
+                        }
                     }
-        
-                    carouselItem.appendChild(row);
-                    carouselInner.appendChild(carouselItem);
-                    slideIndex++;
-                }
-            }
-        
-            function adjustCarouselItems() {
-                var screenWidth = window.innerWidth;
-        
-                if (screenWidth >= 992) {
-                    createCarouselItems(3);  // Large screens (lg)
-                } else if (screenWidth >= 768) {
-                    createCarouselItems(2);  // Medium screens (md)
-                } else {
-                    createCarouselItems(1);  // Small screens (sm)
-                }
-            }
-        
-            window.addEventListener("resize", adjustCarouselItems);
-            adjustCarouselItems();  // Initial call to set the correct layout
-        
-            // Handle modal content dynamically
-            var cardModal = document.getElementById("cardModal");
-            cardModal.addEventListener('show.bs.modal', function(event) {
-                var button = event.relatedTarget;
-                var title = button.getAttribute("data-title");
-                var text = button.getAttribute("data-text");
-                var image = button.getAttribute("data-image");
-                var footer = button.getAttribute("data-footer");
-        
-                var modalTitle = document.getElementById("modalTitle");
-                var modalText = document.getElementById("modalText");
-                var modalImage = document.getElementById("modalImage");
-                var modalFooter = document.getElementById("modalFooter");
-        
-                modalTitle.textContent = title;
-                modalText.textContent = text;
-                modalImage.src = image;
-                modalFooter.innerHTML = footer;  // Insert the footer content (button/link) dynamically
-            });
+
+                    function adjustCarouselItems() {
+                        var screenWidth = window.innerWidth;
+
+                        if (screenWidth >= 992) {
+                            createCarouselItems(3);
+                        } else if (screenWidth >= 768) {
+                            createCarouselItems(2);
+                        } else {
+                            createCarouselItems(1);
+                        }
+                    }
+
+                    window.addEventListener("resize", adjustCarouselItems);
+                    adjustCarouselItems();  // Initial call to set the correct layout
+
+                    // Handle modal content dynamically
+                    var cardModal = document.getElementById("cardModal");
+                    cardModal.addEventListener('show.bs.modal', function (event) {
+                        var button = event.relatedTarget;
+                        var title = button.getAttribute("data-title");
+                        var text = button.getAttribute("data-text");
+                        var image = button.getAttribute("data-image");
+                        var additionalInfo = button.getAttribute("data-additional-info"); // Retrieve additional_info
+                        var moreInfoLink = button.getAttribute("data-more-info-link");
+
+                        var modalTitle = document.getElementById("modalTitle");
+                        var modalText = document.getElementById("modalText");
+                        var modalImage = document.getElementById("modalImage");
+                        var modalButton = document.getElementById("modalButton");
+
+                        modalTitle.textContent = title;
+                        modalText.innerHTML = `<p>${text}</p><p>${additionalInfo}</p>`; // Include additional_info
+                        modalImage.src = image;
+                        modalButton.href = moreInfoLink;
+                    });
+                })
+                .catch(error => console.error('Error fetching featured items:', error));
         });
     </script>
-     
+
+    <!-- popover navbar -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navContent = `
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link text-dark">
+                            <i class="fas fa-home me-2"></i>Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" id="arScanButton" class="nav-link text-dark">
+                            <i class="fas fa-camera me-2"></i>AR Scan
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="chairs-user.html" class="nav-link text-dark">
+                            <i class="fas fa-chair me-2"></i>Chairs
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link text-dark">
+                            <i class="fas fa-info-circle me-2"></i>About
+                        </a>
+                    </li>
+                </ul>
+            `;
+
+            const popoverTrigger = document.querySelector('[data-bs-toggle="popover"]');
+            const popover = new bootstrap.Popover(popoverTrigger, {
+                content: navContent,
+                html: true,
+                container: 'body',
+                customClass: 'custom-popover'
+            });
+
+            // Track popover visibility
+            let popoverVisible = false;
+
+            popoverTrigger.addEventListener('click', function () {
+                popoverVisible = !popoverVisible; // Toggle visibility flag
+            });
+
+            document.addEventListener('click', function (e) {
+                // Hide popover on next click outside of the popoverTrigger if it is visible
+                if (popoverVisible && !popoverTrigger.contains(e.target)) {
+                    popover.hide();
+                    popoverVisible = false; // Reset visibility flag
+                }
+            });
+
+            // Event listener to open the modal
+            document.addEventListener('click', function (e) {
+                if (e.target && e.target.id === 'arScanButton') {
+                    const arModal = new bootstrap.Modal(document.getElementById('arModal'));
+                    arModal.show();
+                }
+            });
+        });
+
+    </script>
+
+
+
+
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

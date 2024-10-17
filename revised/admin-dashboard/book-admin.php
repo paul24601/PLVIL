@@ -2,6 +2,23 @@
 include $_SERVER['DOCUMENT_ROOT'] . '/PLVIL/Admin/classes/book.php';
 $db = new DBConnection();
 ?>
+<?php
+session_start();
+if (!isset($_SESSION['userType'])) {
+    header('Location: login.html');
+    exit();
+}
+
+$userType = $_SESSION['userType'];
+if ($userType === 'student-admin') {
+    header('Location: index.php?warning=restricted'); // Redirect with warning
+    exit();
+}
+
+$userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
+?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,9 +41,17 @@ $db = new DBConnection();
             margin-bottom: 20px;
         }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const userType = localStorage.getItem('userType');
+            if (!userType) {
+                window.location.href = "login.html";
+            }
+        });
+    </script>
 </head>
 
-<body class="sb-nav-fixed">
+<body class="sb-nav-fixed" data-user-type="<?php echo $userType; ?>">
     <!-- Navbar -->
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
@@ -45,11 +70,11 @@ $db = new DBConnection();
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
                     aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                    <li><a class="dropdown-item" href="../index.html">Landing Page</a></li>
                     <li>
                         <hr class="dropdown-divider" />
                     </li>
-                    <li><a class="dropdown-item" href="login.html">Logout</a></li>
+                    <li><a class="dropdown-item" href="logout.php">Log Out</a></li>
                 </ul>
             </li>
         </ul>
@@ -77,21 +102,25 @@ $db = new DBConnection();
                         </a>
 
                         <!-- Chairs -->
-                        <a class="nav-link" href="chair-admin.html">
+                        <a class="nav-link" href="chair-admin.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-chair"></i></div>
                             Chairs
                         </a>
 
                         <!-- AR -->
-                        <a class="nav-link" href="ar-admin.html">
+                        <a class="nav-link" href="ar-admin.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-eye"></i></div>
                             Augmented Reality
+                        </a>
+                        <a class="nav-link" href="featured-admin.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-star"></i></div>
+                            Featured Items
                         </a>
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">Logged in as:</div>
-                    Aeron Paul Daliva
+                    <span id="username"><?php echo $userName; ?></span>
                 </div>
             </nav>
         </div>
@@ -106,7 +135,7 @@ $db = new DBConnection();
                     </ol>
 
                     <!-- table -->
-                    <div class="card mb-4">
+                    <div class="card mb-4 shadow">
                         <div class="card-body">
                             <div class="row mb-3">
                                 <div class="col-12 col-md-6 mb-3 add-book">
@@ -244,12 +273,12 @@ $db = new DBConnection();
                                             </div>
                                             <div class="input-group mb-3">
                                                 <span style=" width: 160px;" class="input-group-text">Edition</span>
-                                                <input type="text" name="bookEdition" class="form-control" required
+                                                <input type="number" name="bookEdition" class="form-control" required
                                                     placeholder="Enter Edition" required>
                                             </div>
                                             <div class="input-group mb-3">
                                                 <span style=" width: 160px;" class="input-group-text">Year</span>
-                                                <input type="text" name="bookYear" class="form-control" required
+                                                <input type="number" id="year" min="1900" step="1" name="bookYear" class="form-control"
                                                     placeholder="Enter Year" required>
                                             </div>
                                             <div class="input-group mb-3">
@@ -368,13 +397,14 @@ $db = new DBConnection();
                                                 <span style=" width: 160px;" class="input-group-text"
                                                     for="bookEditionEdit">Book
                                                     Edition</span>
-                                                <input type="text" class="form-control" id="bookEditionEdit"
+                                                <input type="number" class="form-control" id="bookEditionEdit"
                                                     name="bookEdition" required>
                                             </div>
                                             <div class="input-group mb-3">
                                                 <span style=" width: 160px;" class="input-group-text"
                                                     for="bookYearEdit">Year</span>
-                                                <input type="text" class="form-control" id="bookYearEdit"
+                                                <input type="number" min="1900" step="1" class="form-control"
+                                                placeholder="Enter Year" class="form-control" id="bookYearEdit"
                                                     name="bookYear" required>
                                             </div>
                                             <div class="input-group mb-3">
@@ -573,7 +603,7 @@ $db = new DBConnection();
             $('.deleteButton').on('click', function (e) {
                 var confirmDelete = confirm("Are you sure you want to delete this book?");
                 if (confirmDelete) {
-                    $.post('/PLVIL/revised/Adminclasses/Book.php', { deleteId: e.target.id }, function (data) {
+                    $.post('/PLVIL/revised/Admin/classes/Book.php', { deleteId: e.target.id }, function (data) {
                         var data = JSON.parse(data);
                         if (data.type === 'success') {
                             showAlert(data.message, 'success');
@@ -632,6 +662,30 @@ $db = new DBConnection();
                 "ordering": true,      // Enable column sorting
                 "info": true           // Show table information
             });
+        });        
+    </script>
+
+    <script>
+        const currentYear = new Date().getFullYear();
+        
+        const yearInput = document.getElementById('year');
+        yearInput.setAttribute('max', currentYear);
+        
+        const bookYearInput = document.getElementById('bookYearEdit');
+        bookYearInput.setAttribute('max', currentYear);
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const userType = document.body.getAttribute('data-user-type');
+
+            // Hide the Books section if the user is a student-admin
+            if (userType === 'student-admin') {
+                const booksSectionLink = document.getElementById('books-section-link');
+                if (booksSectionLink) {
+                    booksSectionLink.style.display = 'none';
+                }
+            }
         });
     </script>
 

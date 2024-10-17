@@ -84,6 +84,13 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Results | PLVIL</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
     <style>
         body {
             background-image: url(assets/img/books.png);
@@ -91,6 +98,7 @@ $conn->close();
             /* Center the image */
             background-attachment: fixed;
             background-size: cover;
+            font-family: 'Roboto', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
         }
 
         .navbar {
@@ -116,10 +124,20 @@ $conn->close();
             background-color: #e2e2e2;
         }
 
+        /* Initial state */
         .custom-navbar {
-            background-color: rgba(255, 255, 255, 0.6);
+            background-color: rgba(255, 255, 255, .9);
+            /* Translucent background */
+            transition: background-color 0.3s ease-in-out;
+            /* Smooth transition */
             backdrop-filter: blur(10px);
-            /* Optional: Adds a blur effect to the background */
+        }
+
+        /* Opaque state */
+        .custom-navbar.scrolled {
+            background-color: rgba(255, 255, 255, .5);
+            /* Fully opaque background */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .scroll-box {
@@ -138,6 +156,41 @@ $conn->close();
         .pagination {
             justify-content: center;
         }
+
+
+
+        /* Navbar link hover effect */
+        .navbar-nav .nav-link {
+            transition: transform 0.3s ease;
+            /* Smooth transition for scaling */
+            padding: 10px 15px;
+            /* Ensure spacing around the links */
+        }
+
+        .navbar-nav .nav-link:hover {
+            transform: scale(1.1);
+            /* Slightly increase size on hover */
+            font-weight: bold;
+            /* Make active link bold */
+        }
+
+        /* Active link: Make the active link bold */
+        .navbar-nav .nav-link.active {
+            font-weight: bold;
+            /* Make active link bold */
+        }
+
+        .custom-popover .popover-body {
+            max-width: 200px;
+            /* Adjust this width as needed */
+            padding: 10px;
+            /* Optional: increase padding */
+            font-size: 1.1em;
+            /* Optional: increase font size */
+            background-color: rgba(255, 255, 255, .5);
+            border-radius: 5px;
+            border: 0;
+        }
     </style>
 </head>
 
@@ -151,32 +204,31 @@ $conn->close();
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-md sticky-top custom-navbar">
-        <div class="container-lg">
+        <div class="container-fluid px-2 px-md-5 py-2">
             <a href="index.html" class="navbar-brand">
-                <span class="fw-bold text-dark fs-5 d-lg-none d-block PLVIL-title">PLVIL</span>
-                <span class="fw-bold text-dark fs-5 d-none d-lg-block PLVIL-title">PLV: Interactive Library</span>
+                <span class="fw-bolder text-dark fs-4 d-md-none d-block PLVIL-title">PLVIL</span>
+                <span class="fw-bolder text-dark fs-4 d-none d-md-block PLVIL-title">PLV: Interactive Library</span>
             </a>
-            <!-- Toggler -->
-            <button class="navbar-toggler d-md-none p-0" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu" aria-expanded="false"
-                aria-label="Toggle Navigation">
-                <span class="navbar-toggler-icon"></span>
+            <!-- Toggler Button with Font Awesome Icon -->
+            <button class="navbar-toggler d-md-none border-0" type="button" data-bs-toggle="popover"
+                data-bs-placement="bottom" data-bs-html="true" aria-expanded="false" aria-label="Toggle Navigation">
+                <i class="fas fa-bars fa-lg"></i> <!-- Modern hamburger icon -->
             </button>
+            <!-- nav -->
             <div class="collapse navbar-collapse justify-content-end align-center d-none d-md-flex" id="main-nav">
                 <ul class="navbar-nav">
                     <li class="class-item">
-                        <a href="index.html" class="ms-3 fs-6 text-dark fw-bold nav-link active">Home</a>
+                        <a href="index.html" class="me-4 fs-6 text-dark fw-medium nav-link active">Home</a>
                     </li>
                     <li class="class-item">
-                        <a href="#" class="fs-6 text-dark fw-bold nav-link" data-bs-toggle="modal"
+                        <a href="#" class="me-4 fs-6 text-dark fw-medium nav-link" data-bs-toggle="modal"
                             data-bs-target="#arModal">AR Scan</a>
                     </li>
                     <li class="class-item">
-                        <a href="library-seat-viewer/CHAIRS/chairs-user.html"
-                            class="fs-6 text-dark fw-bold nav-link">Chairs</a>
+                        <a href="chairs-user.html" class="me-4 fs-6 text-dark fw-medium nav-link">Chairs</a>
                     </li>
                     <li class="class-item">
-                        <a href="about.html" class="fs-6 text-dark fw-bold nav-link active">About</a>
+                        <a href="about.html" class="me-2 fs-6 text-dark fw-medium nav-link">About</a>
                     </li>
                 </ul>
             </div>
@@ -284,8 +336,8 @@ $conn->close();
                         <input type="text" style="width: 40%;" name="query" id="searchQuery" class="form-control"
                             placeholder="Enter search term" required>
 
-                    <!-- Search Button -->
-                    <button type="submit" class="btn btn-primary">Search</button>
+                        <!-- Search Button -->
+                        <button type="submit" class="btn btn-primary">Search</button>
                     </div>
 
                 </div>
@@ -293,27 +345,36 @@ $conn->close();
         </div>
 
         <!-- Show "Showing X results out of Y books for 'query'" -->
-        <p class="text-light">Showing <?php echo $total_results_displayed; ?> results out of <?php echo $total_records; ?> books for "<?php echo htmlspecialchars($query); ?>"</p>
-        
+        <p class="text-light">Showing <?php echo $total_results_displayed; ?> results out of
+            <?php echo $total_records; ?> books for "<?php echo htmlspecialchars($query); ?>"
+        </p>
+
         <?php if ($result->num_rows > 0): ?>
             <div class="row">
                 <?php while ($row = $result->fetch_assoc()): ?>
                     <div class="col-md-6 col-12 mb-2">
-                        <a href="bookloc.html?bookId=<?php echo htmlspecialchars($row['bookId']); ?>" class="text-decoration-none text-reset">
-                            <div class="card h-100" style="background-color: rgba(255, 255, 255, 0.8); backdrop-filter: blur(5px);"> <!-- Adjust the RGBA values for your desired color and opacity -->
+                        <a href="bookloc.html?bookId=<?php echo htmlspecialchars($row['bookId']); ?>"
+                            class="text-decoration-none text-reset">
+                            <div class="card h-100"
+                                style="background-color: rgba(255, 255, 255, 0.8); backdrop-filter: blur(5px);">
+                                <!-- Adjust the RGBA values for your desired color and opacity -->
                                 <div class="row g-0">
                                     <!-- Book Cover -->
                                     <div class="col-4 d-flex justify-content-center align-items-center">
-                                        <img src="<?php echo !empty($row['image2']) ? "../Admin/uploads/" . htmlspecialchars($row['image2']) : 'default-cover.jpg'; ?>" 
-                                            class="img-fluid rounded shadow" alt="Book Cover" style="width: 90%; height: 200px; object-fit: cover; max-height: 200px; margin: 10px;">
+                                        <img src="<?php echo !empty($row['image2']) ? "../Admin/uploads/" . htmlspecialchars($row['image2']) : 'default-cover.jpg'; ?>"
+                                            class="img-fluid rounded shadow" alt="Book Cover"
+                                            style="width: 90%; height: 200px; object-fit: cover; max-height: 200px; margin: 10px;">
                                     </div>
                                     <!-- Book Details -->
                                     <div class="col-8">
                                         <div class="card-body">
                                             <h5 class="card-title"><?php echo htmlspecialchars($row['Title']); ?></h5>
-                                            <p class="card-text"><strong>Author:</strong> <?php echo htmlspecialchars($row['Author']); ?></p>
-                                            <p class="card-text"><strong>Year:</strong> <?php echo htmlspecialchars($row['bookYear']); ?></p>
-                                            <p class="card-text"><strong>Category:</strong> <?php echo htmlspecialchars($row['bookCategory']); ?></p>
+                                            <p class="card-text"><strong>Author:</strong>
+                                                <?php echo htmlspecialchars($row['Author']); ?></p>
+                                            <p class="card-text"><strong>Year:</strong>
+                                                <?php echo htmlspecialchars($row['bookYear']); ?></p>
+                                            <p class="card-text"><strong>Category:</strong>
+                                                <?php echo htmlspecialchars($row['bookCategory']); ?></p>
                                         </div>
                                     </div>
                                 </div>
@@ -364,101 +425,52 @@ $conn->close();
             </div>
             <!-- Right -->
             <div>
-                <a href="#" class="me-4 text-reset">
+                <a href="https://www.facebook.com/profile.php?id=100064626706651"
+                    class="me-4 text-reset text-decoration-none">
                     <i class="fab fa-facebook-f"></i>
                 </a>
-                <a href="#" class="me-4 text-reset">
+                <a href="#" class="me-4 text-reset text-decoration-none">
                     <i class="fab fa-twitter"></i>
                 </a>
-                <a href="#" class="me-4 text-reset">
-                    <i class="fab fa-google"></i>
-                </a>
-                <a href="#" class="me-4 text-reset">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="#" class="me-4 text-reset">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="#" class="me-4 text-reset">
+                <a href="#" class="me-4 text-reset text-decoration-none">
                     <i class="fab fa-github"></i>
                 </a>
             </div>
         </section>
-        <!-- Section: Links  -->
-        <section class="">
-            <div class="container text-center text-md-start mt-5">
-                <!-- Grid row -->
-                <div class="row mt-3">
-                    <!-- Grid column -->
-                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                        <!-- Content -->
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            <i class="fas fa-gem me-3"></i>PLV: Interactive Library
-                        </h6>
-                        <p>
-                            The PLVIL project brings the library closer to students through interactive tools like AR,
-                            making knowledge more accessible.
-                        </p>
-                    </div>
-                    <!-- Grid column -->
 
-                    <!-- Grid column -->
-                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                        <!-- Links -->
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            Quick Links
-                        </h6>
-                        <p>
-                            <a href="index.html" class="text-reset">Home</a>
-                        </p>
-                        <p>
-                            <a href="about.html" class="text-reset">About</a>
-                        </p>
-                        <p>
-                            <a href="browse.html" class="text-reset">Browse Books</a>
-                        </p>
-                        <p>
-                            <a href="#" class="text-reset" data-bs-toggle="modal" data-bs-target="#arModal">AR Scan</a>
-                        </p>
-                    </div>
-                    <!-- Grid column -->
-
-                    <!-- Grid column -->
-                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                        <!-- Links -->
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            Useful links
-                        </h6>
-                        <p>
-                            <a href="terms.html" class="text-reset">Terms of Service</a>
-                        </p>
-                        <p>
-                            <a href="privacy.html" class="text-reset">Privacy Policy</a>
-                        </p>
-                        <p>
-                            <a href="#" class="text-reset">Support</a>
-                        </p>
-                        <p>
-                            <a href="#" class="text-reset">Help</a>
-                        </p>
-                    </div>
-                    <!-- Grid column -->
-
-                    <!-- Grid column -->
-                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                        <!-- Links -->
-                        <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-                        <p><i class="fas fa-home me-3"></i> Valenzuela City, Metro Manila</p>
-                        <p><i class="fas fa-envelope me-3"></i> library@plvil.ph</p>
-                        <p><i class="fas fa-phone me-3"></i> + 63 123 456 7890</p>
-                        <p><i class="fas fa-print me-3"></i> + 63 123 456 7891</p>
-                    </div>
-                    <!-- Grid column -->
+        <!-- Section: Links -->
+        <section class="container text-center text-md-start mt-5">
+            <div class="row mt-3">
+                <!-- About -->
+                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        <i class="fas fa-book me-3"></i>PLV: Interactive Library
+                    </h6>
+                    <p>
+                        The PLVIL project brings the library closer to students through interactive tools like AR,
+                        making knowledge more accessible.
+                    </p>
                 </div>
-                <!-- Grid row -->
+
+                <!-- Quick Links -->
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <h6 class="text-uppercase fw-bold mb-4">Quick Links</h6>
+                    <p><a href="index.html" class="text-reset">Home</a></p>
+                    <p><a href="about.html" class="text-reset">About</a></p>
+                    <p><a href="search_results.php?search_type=keyword&query=+" class="text-reset">Browse Books</a></p>
+                    <p><a href="#" class="text-reset" data-bs-toggle="modal" data-bs-target="#arModal">AR Scan</a></p>
+                </div>
+
+                <!-- Contact -->
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                    <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+                    <p><i class="fas fa-home me-3"></i>Maysan, Valenzuela, Philippines</p>
+                    <p><i class="fas fa-envelope me-3"></i> library@plvil.ph</p>
+                    <p><i class="fas fa-phone me-3"></i> + 63 123 456 7890</p>
+                    <p><i class="fas fa-print me-3"></i> + 63 123 456 7891</p>
+                </div>
             </div>
         </section>
-        <!-- Section: Links  -->
 
         <!-- Copyright -->
         <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
@@ -466,7 +478,85 @@ $conn->close();
             <a class="text-reset fw-bold" href="#">PLV: Interactive Library</a>
         </div>
     </footer>
-    <!-- Footer -->
+
+    <!-- custom navbar -->
+    <script>
+        // Add a scroll event listener
+        window.addEventListener('scroll', function () {
+            // Select the navbar
+            var navbar = document.querySelector('.custom-navbar');
+
+            // Add or remove the 'scrolled' class based on scroll position
+            if (window.scrollY > 10) { // Adjust the value '50' as needed
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+
+    <!-- popover navbar -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navContent = `
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link text-dark">
+                            <i class="fas fa-home me-2"></i>Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" id="arScanButton" class="nav-link text-dark">
+                            <i class="fas fa-camera me-2"></i>AR Scan
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="chairs-user.html" class="nav-link text-dark">
+                            <i class="fas fa-chair me-2"></i>Chairs
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link text-dark">
+                            <i class="fas fa-info-circle me-2"></i>About
+                        </a>
+                    </li>
+                </ul>
+            `;
+
+            const popoverTrigger = document.querySelector('[data-bs-toggle="popover"]');
+            const popover = new bootstrap.Popover(popoverTrigger, {
+                content: navContent,
+                html: true,
+                container: 'body',
+                customClass: 'custom-popover'
+            });
+
+            // Track popover visibility
+            let popoverVisible = false;
+
+            popoverTrigger.addEventListener('click', function () {
+                popoverVisible = !popoverVisible; // Toggle visibility flag
+            });
+
+            document.addEventListener('click', function (e) {
+                // Hide popover on next click outside of the popoverTrigger if it is visible
+                if (popoverVisible && !popoverTrigger.contains(e.target)) {
+                    popover.hide();
+                    popoverVisible = false; // Reset visibility flag
+                }
+            });
+
+            // Event listener to open the modal
+            document.addEventListener('click', function (e) {
+                if (e.target && e.target.id === 'arScanButton') {
+                    const arModal = new bootstrap.Modal(document.getElementById('arModal'));
+                    arModal.show();
+                }
+            });
+        });
+
+    </script>
+
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

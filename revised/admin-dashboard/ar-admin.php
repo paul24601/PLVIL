@@ -1,3 +1,15 @@
+<?php
+session_start();
+if (!isset($_SESSION['userType'])) {
+    header('Location: login.html');
+    exit();
+}
+
+$userType = $_SESSION['userType'];
+$userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -18,8 +30,16 @@
                 display: block;
             }
         </style>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const userType = localStorage.getItem('userType');
+                if (!userType) {
+                    window.location.href = "login.html";
+                }
+            });
+        </script>
     </head>
-    <body class="sb-nav-fixed">
+    <body class="sb-nav-fixed" data-user-type="<?php echo $userType; ?>">
         <!-- Navbar -->
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
@@ -33,11 +53,15 @@
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="login.html">Logout</a></li>
-                    </ul>
+                    
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="../index.html">Landing Page</a></li>
+                    <li>
+                        <hr class="dropdown-divider" />
+                    </li>
+                    <li><a class="dropdown-item" href="logout.php">Log Out</a></li>
+                </ul>
+            </li>
                 </li>
             </ul>
         </nav>
@@ -56,29 +80,35 @@
                             </a>
                             
                             <!-- Systems -->
-                            <div class="sb-sidenav-menu-heading">Systems</div>
-                            <!-- Books -->
-                            <a class="nav-link" href="book-admin.php">
+                            <div class="sb-sidenav-menu-heading">Systems</div>                            
+
+                            <!-- Books Section (Only for Library Admin) -->
+                            <a class="nav-link" id="books-section-link" href="book-admin.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
                                 Books
                             </a>
                             
                             <!-- Chairs -->
-                            <a class="nav-link" href="chair-admin.html">
+                            <a class="nav-link" href="chair-admin.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chair"></i></div>
                                 Chairs
                             </a>
                             
                             <!-- AR -->
-                            <a class="nav-link"  href="ar-admin.html">
+                            <a class="nav-link"  href="ar-admin.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-eye"></i></div>
                                 Augmented Reality
+                            </a>
+                            
+                            <a class="nav-link" href="featured-admin.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-star"></i></div>
+                                Featured Items
                             </a>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        Aeron Paul Daliva
+                        <span id="username"><?php echo $userName; ?></span>
                     </div>
                 </nav>
             </div>
@@ -91,36 +121,40 @@
                             <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
                             <li class="breadcrumb-item active">Augmented Reality</li>
                         </ol>
-                        <div class="container m-5">
-                            <h2>Upload Images for Book Elements</h2>
-                            <form action="../AR/upload.php" method="POST" enctype="multipart/form-data">
-                                <div class="mb-3">
-                                    <label for="book1-title" class="form-label">Book Title Image</label>
-                                    <input type="file" id="book1-title" name="book1-title" class="form-control short-input" accept="image/*">
-                                    <img id="book1-title-preview" class="preview-img" src="#" alt="Book Title Image Preview" style="display: none;">
+                        <div class="card mb-3 shadow">
+                            <div class="card-body">
+                                <div class="container-fluid mb-3">
+                                    <h2>Upload Images for Book Elements</h2>
+                                    <form action="../AR/upload.php" method="POST" enctype="multipart/form-data">
+                                        <div class="mb-3">
+                                            <label for="book1-title" class="form-label">Book Title Image</label>
+                                            <input type="file" id="book1-title" name="book1-title" class="form-control short-input" accept="image/*">
+                                            <img id="book1-title-preview" class="preview-img" src="#" alt="Book Title Image Preview" style="display: none;">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="book1-auth" class="form-label">Author Image</label>
+                                            <input type="file" id="book1-auth" name="book1-auth" class="form-control short-input" accept="image/*">
+                                            <img id="book1-auth-preview" class="preview-img" src="#" alt="Author Image Preview" style="display: none;">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="book1-gen" class="form-label">Genre Image</label>
+                                            <input type="file" id="book1-gen" name="book1-gen" class="form-control short-input" accept="image/*">
+                                            <img id="book1-gen-preview" class="preview-img" src="#" alt="Genre Image Preview" style="display: none;">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="book1-syn" class="form-label">Synopsis Image</label>
+                                            <input type="file" id="book1-syn" name="book1-syn" class="form-control short-input" accept="image/*">
+                                            <img id="book1-syn-preview" class="preview-img" src="#" alt="Synopsis Image Preview" style="display: none;">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="book1-lang" class="form-label">Language Image</label>
+                                            <input type="file" id="book1-lang" name="book1-lang" class="form-control short-input" accept="image/*">
+                                            <img id="book1-lang-preview" class="preview-img" src="#" alt="Language Image Preview" style="display: none;">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Upload Images</button>
+                                    </form>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="book1-auth" class="form-label">Author Image</label>
-                                    <input type="file" id="book1-auth" name="book1-auth" class="form-control short-input" accept="image/*">
-                                    <img id="book1-auth-preview" class="preview-img" src="#" alt="Author Image Preview" style="display: none;">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="book1-gen" class="form-label">Genre Image</label>
-                                    <input type="file" id="book1-gen" name="book1-gen" class="form-control short-input" accept="image/*">
-                                    <img id="book1-gen-preview" class="preview-img" src="#" alt="Genre Image Preview" style="display: none;">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="book1-syn" class="form-label">Synopsis Image</label>
-                                    <input type="file" id="book1-syn" name="book1-syn" class="form-control short-input" accept="image/*">
-                                    <img id="book1-syn-preview" class="preview-img" src="#" alt="Synopsis Image Preview" style="display: none;">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="book1-lang" class="form-label">Language Image</label>
-                                    <input type="file" id="book1-lang" name="book1-lang" class="form-control short-input" accept="image/*">
-                                    <img id="book1-lang-preview" class="preview-img" src="#" alt="Language Image Preview" style="display: none;">
-                                </div>
-                                <button type="submit" class="btn btn-primary">Upload Images</button>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </main>
@@ -147,6 +181,22 @@
                         preview.style.display = 'none';
                     }
                 });
+            });
+
+            
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const userType = document.body.getAttribute('data-user-type');
+
+                // Hide the Books section if the user is a student-admin
+                if (userType === 'student-admin') {
+                    const booksSectionLink = document.getElementById('books-section-link');
+                    if (booksSectionLink) {
+                        booksSectionLink.style.display = 'none';
+                    }
+                }
             });
         </script>
 
