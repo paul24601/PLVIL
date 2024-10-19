@@ -7,6 +7,12 @@
   <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
   <script src="https://raw.githack.com/fcor/arjs-gestures/master/dist/gestures.js"></script>
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/three.js/build/ar.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AR Scan</title>
@@ -46,6 +52,7 @@
     body {
       margin: 0;
       overflow: hidden;
+      font-family: 'Roboto', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     }
 
     .overlay {
@@ -72,8 +79,12 @@
     }
 
     .navbar {
-      justify-content: flex-end;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
     }
+
 
     .custom-popover .popover-body {
       max-width: 200px;
@@ -86,6 +97,51 @@
       border-radius: 5px;
       border: 0;
     }
+
+    /* Initial state */
+    .custom-navbar {
+      background-color: rgba(255, 255, 255, .5);
+      /* Translucent background */
+      transition: background-color 0.3s ease-in-out;
+      /* Smooth transition */
+      backdrop-filter: blur(10px);
+    }
+
+
+    /* Ensure navbar is on top */
+    .navbar {
+      z-index: 1000;
+      /* Set a high z-index to keep it on top */
+      position: relative;
+      /* Make sure the z-index applies */
+    }
+
+    /* Ensure the popover is on top */
+    .custom-popover {
+      z-index: 1001;
+      /* Slightly higher than navbar to avoid conflicts */
+    }
+
+    /* Optional: Ensure the modal is also on top */
+    .modal {
+      z-index: 1050;
+      /* Ensure modal is above everything */
+    }
+
+    /* Navbar link hover effect */
+    .navbar-nav .nav-link {
+        transition: transform 0.3s ease;
+        /* Smooth transition for scaling */
+        padding: 10px 15px;
+        /* Ensure spacing around the links */
+    }
+
+    .navbar-nav .nav-link:hover {
+        transform: scale(1.1);
+        /* Slightly increase size on hover */
+        font-weight: bold;
+        /* Make active link bold */
+    }
   </style>
 </head>
 
@@ -93,16 +149,40 @@
   <!-- Responsive Overlay element using Bootstrap -->
   <div class="overlay container-fluid">
     <!-- Navbar -->
-    <nav class="navbar sticky-top custom-navbar">
-      <div class="container-lg d-flex justify-content-end">
+    <nav class="navbar navbar-light bg-light navbar-expand-md sticky-top custom-navbar">
+      <div class="container-fluid px-2 px-md-5 py-2">
+        <a href="../index.html" class="navbar-brand">
+          <span class="fw-bolder text-dark fs-4 d-md-none d-block PLVIL-title">PLVIL</span>
+          <span class="fw-bo``lder text-dark fs-4 d-none d-md-block PLVIL-title">PLV: Interactive Library</span>
+        </a>
         <!-- Toggler Button with Font Awesome Icon -->
         <button class="navbar-toggler d-md-none border-0" type="button" data-bs-toggle="popover"
           data-bs-placement="bottom" data-bs-html="true" aria-expanded="false" aria-label="Toggle Navigation">
-          <i class="fas fa-bars fa-lg"></i> <!-- Modern hamburger icon -->
+          <i class="fas fa-bars fa-lg text-dark"></i> <!-- Modern hamburger icon -->
         </button>
+        <!-- nav -->
+        <div class="collapse navbar-collapse justify-content-end align-center d-none d-md-flex" id="main-nav">
+          <ul class="navbar-nav">
+            <li class="class-item">
+              <a href="../index.html" class="me-4 fs-6 text-dark fw-medium nav-link active">Home</a>
+            </li>
+            <li class="class-item">
+              <a href="#" class="me-4 fs-6 text-dark fw-medium nav-link">AR Scan</a>
+            </li>
+            <li class="class-item">
+              <a href="../chairs-user.html" class="me-4 fs-6 text-dark fw-medium nav-link">Chairs</a>
+            </li>
+            <li class="class-item">
+              <a href="../about.html" class="me-2 fs-6 text-dark fw-medium nav-link">About</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
+
+
   </div>
+
 
   <a-scene embedded
     arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 4x4_BCH_13_5_5;"
@@ -276,28 +356,6 @@
 
     <a-entity camera cursor="fuse: false; rayOrigin:mouse;"></a-entity>
   </a-scene>
-
-
-
-  <!-- Modal -->
-  <div class="modal fade" id="arModal" tabindex="-1" aria-labelledby="arModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="arModalLabel">Augmented Reality Consent</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          Do you accept the terms and conditions for using Augmented Reality?
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Decline</button>
-          <button type="button" class="btn btn-primary" onclick="acceptAR()">Accept</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -314,7 +372,7 @@
       const navContent = `
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a href="index.html" class="nav-link text-dark">
+                    <a href="../index.html" class="nav-link text-dark">
                         <i class="fas fa-home me-2"></i>Home
                     </a>
                 </li>
@@ -324,12 +382,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="chairs-user.html" class="nav-link text-dark">
+                    <a href="../chairs-user.html" class="nav-link text-dark">
                         <i class="fas fa-chair me-2"></i>Chairs
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="about.html" class="nav-link text-dark">
+                    <a href="../about.html" class="nav-link text-dark">
                         <i class="fas fa-info-circle me-2"></i>About
                     </a>
                 </li>

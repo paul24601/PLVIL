@@ -353,6 +353,26 @@
             <a class="text-reset fw-bold" href="#">PLV: Interactive Library</a>
         </div>
     </footer>
+    <script>
+        //modal
+        document.addEventListener('DOMContentLoaded', function () {
+            // Handle Accept button click
+            document.getElementById('acceptBtn').addEventListener('click', function () {
+                // Show confirmation message
+                alert('Thank you for your cooperation and participation in the PLVIL project. If you have any questions or concerns regarding this consent form or the AR feature, please do not hesitate to contact us.');
+
+                // Redirect to AR scan page after a short delay
+                setTimeout(function () {
+                    window.location.href = 'AR/ar-scan.html';
+                }, 1000); // Delay of 1 second
+            });
+
+            // Handle Decline button click (close modal by default)
+            document.getElementById('declineBtn').addEventListener('click', function () {
+                $('#arModal').modal('hide');
+            });
+        });
+    </script>
 
     <!-- popover navbar -->
     <script>
