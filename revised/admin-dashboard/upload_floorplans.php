@@ -95,7 +95,7 @@ foreach ($fileNames as $inputName => $fileName) {
 
                 // Redirect to chair-admin.html after a short delay
                 setTimeout(function() {
-                    window.location.href = 'chair-admin.html';
+                    window.location.href = 'chair-admin.php';
                     sessionStorage.removeItem('pageReloaded');
 
                 }, 1000);

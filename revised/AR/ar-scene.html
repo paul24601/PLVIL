@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+  <script src="https://raw.githack.com/fcor/arjs-gestures/master/dist/gestures.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/three.js/build/ar.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AR Scene</title>
+  <script>
+    document.querySelectorAll('audio').forEach(audioEl => {
+      audioEl.pause();
+      audioEl.currentTime = 0;
+    });
+    
+    // Function to add a timestamp to the image URLs to prevent caching
+    function updateImageSrc() {
+      var currentTime = new Date().getTime(); // Get current time in milliseconds
+
+      // Update the src attribute of images
+      document.getElementById('book1-title').src = 'assets/argraphics/book1info/b1title.png?' + currentTime;
+      document.getElementById('book1-auth').src = 'assets/argraphics/book1info/b1auth.png?' + currentTime;
+      document.getElementById('book1-gen').src = 'assets/argraphics/book1info/b1gen.png?' + currentTime;
+      document.getElementById('book1-syn').src = 'assets/argraphics/book1info/b1syn.png?' + currentTime;
+      document.getElementById('book1-lang').src = 'assets/argraphics/book1info/b1lang.png?' + currentTime;
+
+      document.getElementById('book2-title').src = 'assets/argraphics/book2info/b2title.png?' + currentTime;
+      document.getElementById('book2-auth').src = 'assets/argraphics/book2info/b2auth.png?' + currentTime;
+      document.getElementById('book2-gen').src = 'assets/argraphics/book2info/b2gen.png?' + currentTime;
+      document.getElementById('book2-syn').src = 'assets/argraphics/book2info/b2syn.png?' + currentTime;
+      document.getElementById('book2-lang').src = 'assets/argraphics/book2info/b2lang.png?' + currentTime;
+
+      document.getElementById('book3-title').src = 'assets/argraphics/book3info/b3title.png?' + currentTime;
+      document.getElementById('book3-auth').src = 'assets/argraphics/book3info/b3auth.png?' + currentTime;
+      document.getElementById('book3-gen').src = 'assets/argraphics/book3info/b3gen.png?' + currentTime;
+      document.getElementById('book3-syn').src = 'assets/argraphics/book3info/b3syn.png?' + currentTime;
+      document.getElementById('book3-lang').src = 'assets/argraphics/book3info/b3lang.png?' + currentTime;
+    }
+
+    // Call the function to update image URLs when the page loads
+    window.onload = updateImageSrc;
+  </script>
+</head>
+
+<body>
+  <a-scene embedded
+    arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 4x4_BCH_13_5_5;"
+    renderer="logarithmicDepthBuffer: true;" xr-mode-ui="enabled: false" gesture-detector id="scene">
+
+    <a-assets>
+
+      <a-sound autoplay="false" id="sound1" src="assets/Intro to PLVIL.wav"></a-sound>
+      <a-sound autoplay="false" id="sound2" src="assets/Intro to AR.wav"></a-sound>
+      <a-sound autoplay="false" id="sound3" src="assets/Intro to Highlights.wav"></a-sound>
+      <video loop="true" id="plvil-vid" src="assets/vids/PLVIL.mp4" autoplay="false" muted="true"></video>
+      <video loop="true" mute id="pio-vid" src="assets/vids/PIO.mp4"></video>
+      <video loop="true" mute id="plvil-square" src="assets/vids/plvil-square.mp4"></video>
+      <video loop="true" mute id="book-trailer" src="assets/vids/PIO.mp4"></video>
+      <img id="image1" src="assets/slides/1.png">
+      <img id="image2" src="assets/slides/2.png">
+      <img id="image3" src="assets/slides/3.png">
+      <img id="image4" src="assets/slides/4.png">
+      <img id="image5" src="assets/slides/5.png">
+
+      <a-asset-item id="3d-plvil" src="assets/PLVIL.glb"></a-asset-item>
+      <a-asset-item id="3d-pio" src="assets/PIO.glb"></a-asset-item>
+
+      <!-- books -->
+      <!-- dekada -->
+      <img id="bookoftheweek" src="assets/argraphics/Bookoftheweek.png" alt="Book of the Week">
+      <img id="book1-title" src="assets/argraphics/book1info/b1title.png" alt="Book 1 Title">
+      <img id="book1-auth" src="assets/argraphics/book1info/b1auth.png" alt="Book 1 Author">
+      <img id="book1-gen" src="assets/argraphics/book1info/b1gen.png" alt="Book 1 Genre">
+      <img id="book1-syn" src="assets/argraphics/book1info/b1syn.png" alt="Book 1 Synopsis">
+      <img id="book1-lang" src="assets/argraphics/book1info/b1lang.png" alt="Book 1 Language">
+
+      <!-- goyo -->
+      <img id="book2-title" src="assets/argraphics/book2info/b2title.png" alt="Book 2 Title">
+      <img id="book2-auth" src="assets/argraphics/book2info/b2auth.png" alt="Book 2 Author">
+      <img id="book2-gen" src="assets/argraphics/book2info/b2gen.png" alt="Book 2 Genre">
+      <img id="book2-syn" src="assets/argraphics/book2info/b2syn.png" alt="Book 2 Synopsis">
+      <img id="book2-lang" src="assets/argraphics/book2info/b2lang.png" alt="Book 2 Language">
+
+      <!-- sounder -->
+      <img id="book3-title" src="assets/argraphics/book3info/b3title.png" alt="Book 3 Title">
+      <img id="book3-auth" src="assets/argraphics/book3info/b3auth.png" alt="Book 3 Author">
+      <img id="book3-gen" src="assets/argraphics/book3info/b3gen.png" alt="Book 3 Genre">
+      <img id="book3-syn" src="assets/argraphics/book3info/b3syn.png" alt="Book 3 Synopsis">
+      <img id="book3-lang" src="assets/argraphics/book3info/b3lang.png" alt="Book 3 Language">
+    </a-assets>
+
+    <!-- PLVIL -->
+    <a-marker markerhandler="soundSrc: #sound1" type="barcode" value="31" raycaster="objects: .clickable"
+      emitevents="true" cursor="fuse: false; rayOrigin: mouse;" getsure-handler="minScale: 0.25; maxScale: 2">
+
+      <a-video autoplay src="#plvil-vid" rotation="-90 0 0" width="10" height="5" position="-9 0 0"
+        video-handler="volume: 0.05"></a-video>
+
+      <a-video autoplay src="#plvil-square" position="0 1 0" rotation="-90 0 0" width="6" height="6"
+        video-handler="volume: 0"></a-video>
+
+      <a-plane id="imagePlane" src="#image1" rotation="-90 0 0" height="5" width="10" position="9 0 0" class="clickable"
+        slideshow-toggle1 gesture-handler></a-plane>
+
+      <a-entity gltf-model="#3d-plvil" scale="7 7 7" rotation="0 0 0" position="0 1 -4.5"></a-entity>
+    </a-marker>
+
+    <!-- PIO -->
+    <a-marker markerhandler="soundSrc: #sound3" type="barcode" value="30" raycaster="objects: .clickable"
+      emitevents="true" cursor="fuse: false; rayOrigin: mouse;">
+
+      <a-video src="#pio-vid" rotation="-90 0 0" width="10" height="5" position="-9 0 0"
+        video-handler="volume: 0.05"></a-video>
+
+      <a-video src="#plvil-square" position="0 1 0" rotation="-90 0 0" width="6" height="6"
+        video-handler="volume: 0"></a-video>
+
+      <a-plane id="imagePlane" src="#image1" rotation="-90 0 0" height="5" width="10" position="9 0 0" class="clickable"
+        slideshow-toggle2 gesture-handler></a-plane>
+
+      <a-entity gltf-model="#3d-pio" scale="5 5 5" rotation="0 0 0" position="0 1 -4"></a-entity>
+    </a-marker>
+
+    <!-- BOOKS -->
+    <!-- dekada 70 -->
+    <a-marker type="barcode" value="2" raycaster="objects: .clickable" emitevents="true"
+      cursor="fuse: false; rayOrigin: mouse;">
+      <!-- book of the week -->
+      <a-plane id="" src="#bookoftheweek" rotation="-90 0 0" align="center" height="2" width="8" position="1.85 1 -2"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+      <a-plane id="" src="#book1-title" rotation="-90 0 0" align="center" height="1" width="4" position="1.85 1 -1"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+
+      <!-- left -->
+      <a-plane id="" src="#book1-auth" rotation="-90 0 0" align="center" height="1" width="4" position="-2.5 1 0.5"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+      <a-plane id="" src="#book1-gen" rotation="-90 0 0" align="center" height="1" width="5" position="-3 1 2.5"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+      <a-plane id="" src="#book1-lang" rotation="-90 0 0" align="center" height="1" width="3" position="-2 1 4.5"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+
+      <!-- right -->
+      <a-plane id="" src="#book1-syn" rotation="-90 0 0" align="center" height="5" width="5" position="6.75 1 2.5"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+
+    </a-marker>
+
+    <!-- Goyo -->
+    <a-marker type="barcode" value="3" raycaster="objects: .clickable" emitevents="true"
+      cursor="fuse: false; rayOrigin: mouse;">
+      <!-- book of the week -->
+      <a-plane id="" src="#bookoftheweek" rotation="-90 0 0" align="center" height="2" width="8" position="1.85 1 -2"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+      <a-plane id="" src="#book2-title" rotation="-90 0 0" align="center" height="1" width="3" position="1.85 1 -1"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+
+      <!-- left -->
+      <a-plane id="" src="#book2-auth" rotation="-90 0 0" align="center" height="1" width="3" position="-2 1 0.5"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+      <a-plane id="" src="#book2-gen" rotation="-90 0 0" align="center" height="1" width="4" position="-2.5 1 2.5"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+      <a-plane id="" src="#book2-lang" rotation="-90 0 0" align="center" height="1" width="2.5" position="-1.75 1 4.5"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+
+      <!-- right -->
+      <a-plane id="" src="#book2-syn" rotation="-90 0 0" align="center" height="8" width="5" position="6.75 1 3"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+
+    </a-marker>
+
+    <!-- Sounder -->
+    <a-marker type="barcode" value="4" raycaster="objects: .clickable" emitevents="true"
+      cursor="fuse: false; rayOrigin: mouse;">
+      <!-- book of the week -->
+      <a-plane id="" src="#bookoftheweek" rotation="-90 0 0" align="center" height="2" width="8" position="1.85 1 -2"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+      <a-plane id="" src="#book3-title" rotation="-90 0 0" align="center" height="1" width="3" position="1.85 1 -1"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+
+      <!-- left -->
+      <a-plane id="" src="#book3-auth" rotation="-90 0 0" align="center" height="1" width="3" position="-2 1 0.5"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+      <a-plane id="" src="#book3-gen" rotation="-90 0 0" align="center" height="1" width="4" position="-2.5 1 2.5"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+      <a-plane id="" src="#book3-lang" rotation="-90 0 0" align="center" height="1" width="2.5" position="-1.75 1 4.5"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+
+      <!-- right -->
+      <a-plane id="" src="#book3-syn" rotation="-90 0 0" align="center" height="6.5" width="5" position="6.75 1 3"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+    </a-marker>
+
+    <!-- ABNKKBSNPLAko? -->
+    <a-marker type="barcode" value="5" raycaster="objects: .clickable" emitevents="true"
+      cursor="fuse: false; rayOrigin: mouse;">
+      <!-- book of the week -->
+      <a-plane id="" src="#bookoftheweek" rotation="-90 0 0" align="center" height="2" width="8" position="1.85 1 -2"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+      <a-plane id="" src="#book3-title" rotation="-90 0 0" align="center" height="1" width="3" position="1.85 1 -1"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+
+      <!-- left -->
+      <a-plane id="" src="#book3-auth" rotation="-90 0 0" align="center" height="1" width="3" position="-2 1 0.5"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+      <a-plane id="" src="#book3-gen" rotation="-90 0 0" align="center" height="1" width="4" position="-2.5 1 2.5"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+      <a-plane id="" src="#book3-lang" rotation="-90 0 0" align="center" height="1" width="2.5" position="-1.75 1 4.5"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+
+      <!-- right -->
+      <a-plane id="" src="#book3-syn" rotation="-90 0 0" align="center" height="6.5" width="5" position="6.75 1 3"
+        opacity="0.9" class="clickable" gesture-handler></a-plane>
+    </a-marker>
+
+    <a-entity camera cursor="fuse: false; rayOrigin:mouse;"></a-entity>
+  </a-scene>
+
+
+  <script>
+    // Marker handler component
+    AFRAME.registerComponent('markerhandler', {
+      schema: {
+        soundSrc: { type: 'string' }
+      },
+      init: function () {
+        this.soundEl = document.querySelector(this.data.soundSrc);
+
+        this.el.addEventListener('markerFound', () => {
+          this.soundEl.components.sound.playSound();
+        });
+
+        this.el.addEventListener('markerLost', () => {
+          this.soundEl.components.sound.stopSound();
+        });
+      }
+    });
+
+    //Volume controller
+    AFRAME.registerComponent('video-handler', {
+      schema: {
+        volume: { type: 'number', default: 1.0 }
+      },
+      init: function () {
+        this.videoEl = document.querySelector(this.el.getAttribute('src'));
+        this.videoEl.volume = this.data.volume;
+      },
+      tick: function () {
+        if (!this.el.object3D.visible) {
+          // If marker is not visible, stop the video
+          this.videoEl.pause();
+        } else if (this.videoEl.paused) {
+          // If marker is visible and video is paused, play the video
+          this.videoEl.play();
+        }
+      }
+    });
+
+    // Slideshow toggle
+    AFRAME.registerComponent('slideshow-toggle1', {
+      init: function () {
+        var plane = this.el;
+        var images = ['#image1', '#image4', '#image5', '#image2', '#image3'];
+        var currentIndex = 0;
+
+        plane.addEventListener('click', function () {
+          currentIndex = (currentIndex + 1) % images.length;
+          plane.setAttribute('src', images[currentIndex]);
+        });
+      }
+    });
+
+    // Slideshow toggle
+    AFRAME.registerComponent('slideshow-toggle2', {
+      init: function () {
+        var plane = this.el;
+        var images = ['#image1', '#image4', '#image5', '#image2', '#image3'];
+        var currentIndex = 0;
+
+        plane.addEventListener('click', function () {
+          currentIndex = (currentIndex + 1) % images.length;
+          plane.setAttribute('src', images[currentIndex]);
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>
