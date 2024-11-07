@@ -1,5 +1,5 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] . '/PLVIL/Admin/utility/DBConnection.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/PLVIL/admin/utility/DBConnection.php';
 
 class Book {
     public $conn;
@@ -23,6 +23,7 @@ public function saveBook($post) {
     $bookEdition = $post['bookEdition'];
     $bookYear = $post['bookYear'];
     $Property = $post['Property'];
+    $CallNumber = $post['CallNumber'];
     $isbn = $post['isbn'];
 
     // Determine if updating an existing record or adding a new one
@@ -48,7 +49,7 @@ public function saveBook($post) {
         }
 
         // Update existing book record, including image paths if provided
-        $sql = "UPDATE book SET bookCategory='$bookCategory', Title='$Title', Author='$Author', columnNumber='$columnNumber', Accession='$Accession', bookEdition='$bookEdition', bookYear='$bookYear', Property='$Property', ISBN='$isbn'";
+        $sql = "UPDATE book SET bookCategory='$bookCategory', Title='$Title', Author='$Author', columnNumber='$columnNumber', Accession='$Accession', bookEdition='$bookEdition', bookYear='$bookYear', Property='$Property', CallNumber='$CallNumber', ISBN='$isbn'";
         if (!empty($image1Name) && !empty($image2Name)) {
             $sql .= ", image1='$image1Name', image2='$image2Name'";
         }
@@ -83,7 +84,7 @@ public function saveBook($post) {
         }
 
         // Insert new book record
-        $sql = "INSERT INTO book (bookCategory, Title, Author, columnNumber, Accession, bookEdition, bookYear, Property, ISBN, image1, image2) VALUES ('$bookCategory', '$Title', '$Author', '$columnNumber', '$Accession', '$bookEdition', '$bookYear', '$Property', '$isbn', '$image1Name', '$image2Name')";
+        $sql = "INSERT INTO book (bookCategory, Title, Author, columnNumber, Accession, bookEdition, bookYear, Property, CallNumber, ISBN, image1, image2) VALUES ('$bookCategory', '$Title', '$Author', '$columnNumber', '$Accession', '$bookEdition', '$bookYear', '$Property', '$CallNumber', '$isbn', '$image1Name', '$image2Name')";
         $result = $this->conn->query($sql);
 
         // Determine if the insertion was successful

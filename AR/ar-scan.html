@@ -2,142 +2,263 @@
 <html>
 
 <head>
-  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-  <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
-  <script src="https://raw.githack.com/fcor/arjs-gestures/master/dist/gestures.js"></script>
-  <script src="https://raw.githack.com/AR-js-org/AR.js/master/three.js/build/ar.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AR Scan</title>
+
+
   <style>
     body {
       margin: 0;
       overflow: hidden;
+      font-family: 'Roboto', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     }
 
-    a-scene {
-      margin: 0;
+    .overlay {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      color: white;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      border-radius: 5px;
+      z-index: 10;
+      /* Make sure it's above the AR scene */
+      max-width: 98%;
+    }
+
+    /* Styling for the navbar toggler */
+    .navbar-toggler {
+      border-color: transparent;
+      color: rgb(255, 255, 255);
+    }
+
+    .navbar-toggler-icon {
+      filter: invert(1);
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+
+    .custom-popover .popover-body {
+      max-width: 200px;
+      /* Adjust this width as needed */
+      padding: 10px;
+      /* Optional: increase padding */
+      font-size: 1.1em;
+      /* Optional: increase font size */
+      background-color: rgba(255, 255, 255, .5);
+      border-radius: 5px;
+      border: 0;
+    }
+
+    /* Initial state */
+    .custom-navbar {
+      background-color: rgba(255, 255, 255, .5);
+      /* Translucent background */
+      transition: background-color 0.3s ease-in-out;
+      /* Smooth transition */
+      backdrop-filter: blur(10px);
+    }
+
+
+    /* Ensure navbar is on top */
+    .navbar {
+      z-index: 1000;
+      /* Set a high z-index to keep it on top */
+      position: relative;
+      /* Make sure the z-index applies */
+    }
+
+    /* Ensure the popover is on top */
+    .custom-popover {
+      z-index: 1001;
+      /* Slightly higher than navbar to avoid conflicts */
+    }
+
+    /* Optional: Ensure the modal is also on top */
+    .modal {
+      z-index: 1050;
+      /* Ensure modal is above everything */
+    }
+
+    /* Navbar link hover effect */
+    .navbar-nav .nav-link {
+      transition: transform 0.3s ease;
+      /* Smooth transition for scaling */
+      padding: 10px 15px;
+      /* Ensure spacing around the links */
+    }
+
+    .navbar-nav .nav-link:hover {
+      transform: scale(1.1);
+      /* Slightly increase size on hover */
+      font-weight: bold;
+      /* Make active link bold */
+    }
+
+    /* Eye button styles */
+    .eye-button {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 1002;
+    }
+
+    .eye-button i {
+      font-size: 24px;
     }
   </style>
 </head>
 
 <body>
-  <a-scene embedded
-    arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3_HAMMING63;"
-    renderer="logarithmicDepthBuffer: true;" vr-mode-ui="enabled: false" gesture-detector id="scene">
+  <!-- Responsive Overlay element using Bootstrap -->
+  <div class="overlay container-fluid" id="main-navbar">
+    <!-- Navbar -->
+    <nav class="navbar navbar-light bg-light navbar-expand-md sticky-top custom-navbar">
+      <div class="container-fluid px-2 px-md-5 py-2">
+        <a href="../index.html" class="navbar-brand">
+          <span class="fw-bolder text-dark fs-4 d-md-none d-block PLVIL-title">PLVIL</span>
+          <span class="fw-bo``lder text-dark fs-4 d-none d-md-block PLVIL-title">PLV: Interactive Library</span>
+        </a>
+        <!-- Toggler Button with Font Awesome Icon -->
+        <button class="navbar-toggler d-md-none border-0" type="button" data-bs-toggle="popover"
+          data-bs-placement="bottom" data-bs-html="true" aria-expanded="false" aria-label="Toggle Navigation">
+          <i class="fas fa-bars fa-lg text-dark"></i> <!-- Modern hamburger icon -->
+        </button>
+        <!-- nav -->
+        <div class="collapse navbar-collapse justify-content-end align-center d-none d-md-flex" id="main-nav">
+          <ul class="navbar-nav">
+            <li class="class-item">
+              <a href="../index.html" class="me-4 fs-6 text-dark fw-medium nav-link active">Home</a>
+            </li>
+            <li class="class-item">
+              <a href="#" class="me-4 fs-6 text-dark fw-medium nav-link">AR Scan</a>
+            </li>
+            <li class="class-item">
+              <a href="../chairs-user.html" class="me-4 fs-6 text-dark fw-medium nav-link">Chairs</a>
+            </li>
+            <li class="class-item">
+              <a href="../about.html" class="me-2 fs-6 text-dark fw-medium nav-link">About</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <!-- Eye button -->
+  <button class="eye-button" id="toggle-navbar-btn">
+    <i class="fas fa-eye"></i>
+  </button>
+  <!-- Embed AR scene using iframe -->
+  <iframe src="ar-scene.html" style="border: none; width: 100%; height: 100vh;"></iframe>
 
-    <a-sound id="sound1" src="assets/Intro to PLVIL.wav"></a-sound>
-    <a-sound id="sound2" src="assets/Intro to AR.wav"></a-sound>
-    <a-sound id="sound3" src="assets/Intro to Highlights.wav"></a-sound>
-    <a-sound id="bgm" src="assets/bg-music.mp3"></a-sound>
-
-    <a-assets>
-      <video autoplay loop="true" id="plvil-vid" src="assets/vids/PLVIL.mp4"></video>
-      <video loop="true" id="pio-vid" src="assets/vids/PIO.mp4"></video>
-      <video autoplay loop="true" id="plvil-square" src="assets/vids/plvil-square.mp4"></video>
-      <img id="image1" src="assets/slides/1.png">
-      <img id="image2" src="assets/slides/2.png">
-      <img id="image3" src="assets/slides/3.png">
-      <img id="image4" src="assets/slides/4.png">
-      <img id="image5" src="assets/slides/5.png">
-      <a-asset-item id="3d-plvil" src="assets/PLVIL.glb"></a-asset-item>
-      <a-asset-item id="3d-pio" src="assets/PIO.glb"></a-asset-item>
-    </a-assets>
-
-    <a-marker markerhandler="soundSrc: #sound1" type="barcode" value="0" raycaster="objects: .clickable"
-      emitevents="true" cursor="fuse: false; rayOrigin: mouse;">
-
-      <a-video id="marker-video" src="#plvil-vid" rotation="-90 0 0" width="10" height="5" position="-9 0 0"
-      video-handler="volume: 0.05"></a-video>
-
-      <a-video id="marker-video" src="#plvil-square" position="0 1 0" rotation="-90 0 0" width="6" height="6" video-handler="volume: 0"></a-video>
-
-      <a-plane id="imagePlane" src="#image1" rotation="-90 0 0" height="5" width="10" position="9 0 0"
-      class="clickable" slideshow-toggle1 gesture-handler></a-plane>
-
-      <a-entity gltf-model="#3d-plvil" scale="7 7 7" rotation="0 0 0" position="0 1 -4.5"></a-entity>
-    </a-marker>
-
-    <a-marker markerhandler="soundSrc: #sound3" type="barcode" value="1" raycaster="objects: .clickable"
-      emitevents="true" cursor="fuse: false; rayOrigin: mouse;">
-
-      <a-video id="marker-video" src="#pio-vid" rotation="-90 0 0" width="10" height="5" position="-9 0 0"
-      video-handler="volume: 0.05"></a-video>
-
-      <a-video id="marker-video" src="#plvil-square" position="0 1 0" rotation="-90 0 0" width="6" height="6" video-handler="volume: 0"></a-video>
-
-      <a-plane id="imagePlane" src="#image1" rotation="-90 0 0" height="5" width="10" position="9 0 0"
-      class="clickable" slideshow-toggle2 gesture-handler></a-plane>
-
-      <a-entity gltf-model="#3d-pio" scale="5 5 5" rotation="0 0 0" position="0 1 -4"></a-entity>
-    </a-marker>
-
-    <a-entity camera cursor="fuse: false; rayOrigin:mouse;"></a-entity>
-  </a-scene>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Marker handler component
-    AFRAME.registerComponent('markerhandler', {
-      schema: {
-        soundSrc: { type: 'string' }
-      },
-      init: function () {
-        this.soundEl = document.querySelector(this.data.soundSrc);
+    // Toggle navbar visibility
+    document.getElementById('toggle-navbar-btn').addEventListener('click', function () {
+      const navbar = document.getElementById('main-navbar');
+      const eyeIcon = this.querySelector('i');
 
-        this.el.addEventListener('markerFound', () => {
-          this.soundEl.components.sound.playSound();
-        });
-
-        this.el.addEventListener('markerLost', () => {
-          this.soundEl.components.sound.stopSound();
-        });
+      if (navbar.style.display === 'none') {
+        navbar.style.display = 'block';
+        eyeIcon.classList.remove('fa-eye-slash');
+        eyeIcon.classList.add('fa-eye');
+      } else {
+        navbar.style.display = 'none';
+        eyeIcon.classList.remove('fa-eye');
+        eyeIcon.classList.add('fa-eye-slash');
       }
     });
+  </script>
 
-    //Volume controller
-    AFRAME.registerComponent('video-handler', {
-      schema: {
-        volume: { type: 'number', default: 1.0 }
-      },
-      init: function () {
-        this.videoEl = document.querySelector(this.el.getAttribute('src'));
-        this.videoEl.volume = this.data.volume;
-      },
-      tick: function () {
-        if (!this.el.object3D.visible) {
-          // If marker is not visible, stop the video
-          this.videoEl.pause();
-        } else if (this.videoEl.paused) {
-          // If marker is visible and video is paused, play the video
-          this.videoEl.play();
+  <!-- JavaScript for the modal -->
+  <script>
+    function acceptAR() {
+      window.location.href = "AR/ar-scan.html";
+    }
+  </script>
+
+  <!-- popover navbar -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const navContent = `
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="../index.html" class="nav-link text-dark">
+                        <i class="fas fa-home me-2"></i>Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" id="arScanButton" class="nav-link text-dark">
+                        <i class="fas fa-camera me-2"></i>AR Scan
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../chairs-user.html" class="nav-link text-dark">
+                        <i class="fas fa-chair me-2"></i>Chairs
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../about.html" class="nav-link text-dark">
+                        <i class="fas fa-info-circle me-2"></i>About
+                    </a>
+                </li>
+            </ul>
+        `;
+
+      const popoverTrigger = document.querySelector('[data-bs-toggle="popover"]');
+      const popover = new bootstrap.Popover(popoverTrigger, {
+        content: navContent,
+        html: true,
+        container: 'body',
+        customClass: 'custom-popover'
+      });
+
+      // Track popover visibility
+      let popoverVisible = false;
+
+      popoverTrigger.addEventListener('click', function () {
+        popoverVisible = !popoverVisible; // Toggle visibility flag
+      });
+
+      document.addEventListener('click', function (e) {
+        // Hide popover on next click outside of the popoverTrigger if it is visible
+        if (popoverVisible && !popoverTrigger.contains(e.target)) {
+          popover.hide();
+          popoverVisible = false; // Reset visibility flag
         }
-      }
+      });
+
+      // Event listener to open the modal
+      document.addEventListener('click', function (e) {
+        if (e.target && e.target.id === 'arScanButton') {
+          const arModal = new bootstrap.Modal(document.getElementById('arModal'));
+          arModal.show();
+        }
+      });
     });
 
-    // Slideshow toggle
-    AFRAME.registerComponent('slideshow-toggle1', {
-      init: function () {
-        var plane = this.el;
-        var images = ['#image1', '#image4', '#image5', '#image2', '#image3'];
-        var currentIndex = 0;
-
-        plane.addEventListener('click', function () {
-          currentIndex = (currentIndex + 1) % images.length;
-          plane.setAttribute('src', images[currentIndex]);
-        });
-      }
-    });
-
-    // Slideshow toggle
-    AFRAME.registerComponent('slideshow-toggle2', {
-      init: function () {
-        var plane = this.el;
-        var images = ['#image1', '#image4', '#image5', '#image2', '#image3'];
-        var currentIndex = 0;
-
-        plane.addEventListener('click', function () {
-          currentIndex = (currentIndex + 1) % images.length;
-          plane.setAttribute('src', images[currentIndex]);
-        });
-      }
-    });
   </script>
 </body>
 

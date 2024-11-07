@@ -1,47 +1,33 @@
-// Function to handle login
 function login() {
     const username = document.querySelector('input[type="text"]').value;
     const password = document.querySelector('input[type="password"]').value;
     const userType = document.getElementById('user-type').value;
 
-    // Check if username or password is empty
-    if (!username && !password) {
-        alert("Please input both username and password.");
-        return;
-    } else if (!username) {
-        alert("Please input a username.");
-        return;
-    } else if (!password) {
-        alert("Please input a password.");
-        return;
-    } else if (!userType) {
-        alert("Please select an admin type.");
+    if (!username || !password || !userType) {
+        alert("Please fill out all fields.");
         return;
     }
 
-    // Check fixed usernames and passwords for each user type
-    if (userType === "admin") {
-        if (username === "admin" && password === "iloveplvil") {
-            window.location.href = "index.html"; // Redirect to Chairs page
-            localStorage.setItem('userType', 'admin'); // Store user type in local storage
+    fetch('login.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}&userType=${encodeURIComponent(userType)}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            // Store the userType in localStorage and redirect to index.php
+            localStorage.setItem('userType', data.userType);
+            window.location.href = 'index.php'; // Redirect to index.php directly here
         } else {
-            alert("Incorrect username or password.");
+            alert('Incorrect username or password.');
         }
-    } else if (userType === "library-admin") {
-        if (username === "libraryadmin" && password === "iloveplvil") {
-            window.location.href = "index.html"; // Redirect to index page with all tabs
-            localStorage.setItem('userType', 'library-admin'); // Store user type in local storage
-        } else {
-            alert("Incorrect username or password.");
-        }
-    } else {
-        // Handle invalid selection
-        alert("Please select a valid admin type.");
-    }
+    });
 }
-
-// Event listener for login button
 document.querySelector('.button').addEventListener('click', function(event) {
-    event.preventDefault();
+    event.preventDefault(); // Prevents form submission
     login();
 });
+localStorage.removeItem('userType'); // Run this in the console or on page load in login.html

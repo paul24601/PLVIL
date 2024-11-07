@@ -4,134 +4,986 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Augmented Reality (AR) Consent Form</title>
+    <title>PLVIL</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
+            background-image: url(assets/img/books.png);
+            background-position: center;
+            /* Center the image */
+            background-attachment: fixed;
+            background-size: cover;
+            font-family: 'Roboto', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+        }
+
+        .navbar {
             padding: 0;
-            background-color: #f4f4f4;
+        }
+
+        .header-line {
+            height: 5px;
+            width: 100%;
+            margin: auto;
+            padding: 0;
+        }
+
+        .blue-line {
+            background-color: #007bff;
+        }
+
+        .black-line {
+            background-color: #000;
+        }
+
+        .white-line {
+            background-color: #e2e2e2;
+        }
+
+        /* Initial state */
+        .custom-navbar {
+            background-color: rgba(255, 255, 255, .9);
+            /* Translucent background */
+            transition: background-color 0.3s ease-in-out;
+            /* Smooth transition */
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+        }
+
+        /* Opaque state */
+        .custom-navbar.scrolled {
+            background-color: rgba(255, 255, 255, .5);
+            /* Fully opaque background */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Ensure that the container occupies the full screen height */
+        .main-sec {
+            min-height: 70vh;
+            /* 70% of the viewport height */
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
         }
 
-        .form-container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            width: 100%;
-            overflow: hidden;
+        /* For medium screens and above (Bootstrap md breakpoint) */
+        @media (max-width: 767px) {
+            .main-sec {
+                height: 91vh;
+                /* Full height for medium and smaller screens */
+            }
         }
+
 
         .scroll-box {
-            overflow-y: scroll;
-            height: 300px;
-            padding-right: 20px; /* Add space for scrollbar */
-            margin-bottom: 20px; /* Add some space at the bottom */
+            max-height: 500px;
+            overflow-y: auto;
         }
 
-        h2 {
-            margin-top: 0;
-            color: #333;
+        .logo {
+            width: 300px;
         }
 
-        h3 {
-            margin-top: 20px;
-            color: #555;
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 5%;
         }
 
-        ol {
-            padding-left: 20px;
-            color: #777;
+        .carousel-container {
+            position: relative;
         }
 
-        p {
-            color: #666;
-            line-height: 1.6;
+        .search-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            /* Translucent white background */
+            backdrop-filter: blur(5px);
+            /* Apply the blur effect */
         }
 
-        .button-container {
-            text-align: center;
+        /* Navbar link hover effect */
+        .navbar-nav .nav-link {
+            transition: transform 0.3s ease;
+            /* Smooth transition for scaling */
+            padding: 10px 15px;
+            /* Ensure spacing around the links */
         }
 
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
+        .navbar-nav .nav-link:hover {
+            transform: scale(1.1);
+            /* Slightly increase size on hover */
+            font-weight: bold;
+            /* Make active link bold */
+        }
+
+        /* Active link: Make the active link bold */
+        .navbar-nav .nav-link.active {
+            font-weight: bold;
+            /* Make active link bold */
+        }
+
+        .custom-popover .popover-body {
+            max-width: 200px;
+            /* Adjust this width as needed */
+            padding: 10px;
+            /* Optional: increase padding */
+            font-size: 1.1em;
+            /* Optional: increase font size */
+            background-color: rgba(255, 255, 255, .5);
             border-radius: 5px;
-            cursor: pointer;
-            background-color: #007bff;
-            color: #fff;
-            transition: background-color 0.3s;
-        }
-
-        button:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
-
-        button:hover {
-            background-color: #0056b3;
+            border: 0;
         }
     </style>
 </head>
 
 <body>
-    <div class="form-container">
-        <h2>Augmented Reality (AR) Consent Form</h2>
-        <div class="scroll-box">
-            <p>Dear Users,</p>
-            <p>We are excited to introduce the Augmented Reality (AR) feature as part of the PLVIL: Development of Library Management System with Book Locator and Augmented Reality Assisted Book Viewer for Pamantasan ng Lungsod ng Valenzuela (PLV) University Library. Before you proceed to use this feature, we would like to seek your consent regarding the collection and usage of certain data as required by law.</p>
-            <h3>Explanation of Augmented Reality (AR) Feature:</h3>
-            <p>The AR feature allows users to experience immersive and interactive views of selected library resources through their mobile devices. By accessing this feature, you will be able to visualize additional information, such as book details and related multimedia content, overlaid onto physical objects within the library environment.</p>
-            <h3>Consent for Camera and Speaker Access:</h3>
-            <p>In order to provide you with the AR experience, the PLVIL system requires access to your device's camera and speakers. This access is necessary to enable the AR technology to overlay digital content onto the physical environment and to deliver audiovisual feedback accordingly.</p>
-            <h3>Data Privacy Compliance:</h3>
-            <p>We are committed to protecting your privacy and ensuring compliance with the Data Privacy Act of the Philippines (Republic Act No. 10173) and its implementing rules and regulations. By providing your consent to access your device's camera and speakers for the AR feature, you acknowledge and agree to the following:</p>
-            <ol>
-                <li><strong>Purpose of Data Collection:</strong> The data collected (i.e., images captured by the camera and audio output through the speakers) will be used solely for the purpose of delivering the AR experience within the PLVIL system.</li>
-                <li><strong>Storage and Security:</strong> Any data collected will be stored securely and will not be shared with third parties without your explicit consent, except as required by law.</li>
-                <li><strong>User Control:</strong> You have the right to withdraw your consent at any time by disabling the AR feature in the PLVIL system settings. However, please note that disabling this feature will prevent you from accessing the AR content.</li>
-                <li><strong>Data Retention:</strong> Data collected for the AR feature will be retained only for as long as necessary to fulfill the purposes for which it was collected or as required by applicable laws and regulations.</li>
-            </ol>
-            <p><strong>Consent Acknowledgement:</strong> By clicking the "Accept" button below, you acknowledge that you have read and understood the information provided in this consent form. You voluntarily consent to the PLVIL system accessing your device's camera and speakers for the purpose of delivering the Augmented Reality (AR) experience. You also agree to abide by the terms outlined in this consent form and understand your rights regarding data privacy under the Data Privacy Act of the Philippines.</p>
-            <p>Thank you for your cooperation and participation in the PLVIL project. If you have any questions or concerns regarding this consent form or the AR feature, please do not hesitate to contact us.</p>
+    <!-- Background video 
+    <div class="video-bg-overlay">
+        <video autoplay muted id="bg-video">
+            <source id="bg-video-source" src="assets/bg-vid1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    -->
+
+    <!--Header-->
+    <div class="container-fluid row header-line">
+        <div class="col-4 col-lg-3 black-line"></div>
+        <div class="col-4 col-lg-2 white-line"></div>
+        <div class="col-4 col-lg-7 blue-line"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md sticky-top custom-navbar">
+        <div class="container-fluid px-2 px-md-5 py-2">
+            <a href="index.html" class="navbar-brand">
+                <span class="fw-bolder text-dark fs-4 d-md-none d-block PLVIL-title">PLVIL</span>
+                <span class="fw-bolder text-dark fs-4 d-none d-md-block PLVIL-title">PLV: Interactive Library</span>
+            </a>
+            <!-- Toggler Button with Font Awesome Icon -->
+            <button class="navbar-toggler d-md-none border-0" type="button" data-bs-toggle="popover"
+                data-bs-placement="bottom" data-bs-html="true" aria-expanded="false" aria-label="Toggle Navigation">
+                <i class="fas fa-bars fa-lg"></i> <!-- Modern hamburger icon -->
+            </button>
+            <!-- nav -->
+            <div class="collapse navbar-collapse justify-content-end align-center d-none d-md-flex" id="main-nav">
+                <ul class="navbar-nav">
+                    <li class="class-item">
+                        <a href="index.html" class="me-4 fs-6 text-dark fw-medium nav-link active">Home</a>
+                    </li>
+                    <li class="class-item">
+                        <a href="#" class="me-4 fs-6 text-dark fw-medium nav-link" data-bs-toggle="modal"
+                            data-bs-target="#arModal">AR Scan</a>
+                    </li>
+                    <li class="class-item">
+                        <a href="chairs-user.html" class="me-4 fs-6 text-dark fw-medium nav-link">Chairs</a>
+                    </li>
+                    <li class="class-item">
+                        <a href="about.html" class="me-2 fs-6 text-dark fw-medium nav-link">About</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="button-container">
-            <button id="acceptBtn" disabled>Accept</button>
-            <button id="declineBtn">Decline</button>
+    </nav>
+
+    <!-- AR Scan Modal -->
+    <div class="modal fade" id="arModal" tabindex="-1" aria-labelledby="arModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="arModalLabel">Augmented Reality (AR) Consent Form</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body scroll-box p-3">
+                    <p>Dear Users,</p>
+                    <p>We are excited to introduce the Augmented Reality (AR) feature as part of the PLVIL: Development
+                        of Library Management System with Book Locator and Augmented Reality Assisted Book Viewer for
+                        Pamantasan ng Lungsod ng Valenzuela (PLV) University Library. Before you proceed to use this
+                        feature, we would like to seek your consent regarding the collection and usage of certain data
+                        as required by law.</p>
+                    <h3>Explanation of Augmented Reality (AR) Feature:</h3>
+                    <p>The AR feature allows users to experience immersive and interactive views of selected library
+                        resources through their mobile devices. By accessing this feature, you will be able to visualize
+                        additional information, such as book details and related multimedia content, overlaid onto
+                        physical objects within the library environment.</p>
+                    <h3>Consent for Camera and Speaker Access:</h3>
+                    <p>In order to provide you with the AR experience, the PLVIL system requires access to your device's
+                        camera and speakers. This access is necessary to enable the AR technology to overlay digital
+                        content onto the physical environment and to deliver audiovisual feedback accordingly.</p>
+                    <h3>Data Privacy Compliance:</h3>
+                    <p>We are committed to protecting your privacy and ensuring compliance with the Data Privacy Act of
+                        the Philippines (Republic Act No. 10173) and its implementing rules and regulations. By
+                        providing your consent to access your device's camera and speakers for the AR feature, you
+                        acknowledge and agree to the following:</p>
+                    <ol>
+                        <li><strong>Purpose of Data Collection:</strong> The data collected (i.e., images captured by
+                            the camera and audio output through the speakers) will be used solely for the purpose of
+                            delivering the AR experience within the PLVIL system.</li>
+                        <li><strong>Storage and Security:</strong> Any data collected will be stored securely and will
+                            not be shared with third parties without your explicit consent, except as required by law.
+                        </li>
+                        <li><strong>User Control:</strong> You have the right to withdraw your consent at any time by
+                            disabling the AR feature in the PLVIL system settings. However, please note that disabling
+                            this feature will prevent you from accessing the AR content.</li>
+                        <li><strong>Data Retention:</strong> Data collected for the AR feature will be retained only for
+                            as long as necessary to fulfill the purposes for which it was collected or as required by
+                            applicable laws and regulations.</li>
+                    </ol>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="acceptBtn">Accept</button>
+                    <button type="button" class="btn btn-secondary" id="declineBtn"
+                        data-bs-dismiss="modal">Decline</button>
+                </div>
+            </div>
         </div>
     </div>
 
+    <!-- main section -->
+    <div class="container main-sec d-flex justify-content-center align-items-center text-light text-center">
+        <!-- Logo and Search Group -->
+        <div class="row w-100 justify-content-around align-items-center">
+            <!-- logo -->
+            <div class="col-md-4 col-12 d-flex justify-content-center">
+                <img src="assets/plv-lib-logo.png" alt="plv library logo" class="logo img-fluid my-md-0 mb-5 ">
+            </div>
+
+            <!-- Search Group -->
+            <form class="col-md-8 col-12 d-flex justify-content-between align-items-center px-3"
+                action="search_results.php" method="GET">
+                <div
+                    class="p-4 rounded-4 shadow-lg search-card d-flex w-100  align-items-center justify-content-center">
+                    <!-- Bootstrap rounded, shadow, and custom search-card class -->
+                    <div class="row w-100 align-items-center justify-content-center">
+                        <!-- Search Section with Dropdown and Input -->
+                        <div
+                            class="col-md col-12 d-flex align-items-center justify-content-center py-2 px-0 mx-2 flex-column">
+                            <!-- Dropdown for Search Type -->
+                            <div class="input-group">
+                                <select class="form-select" name="search_type" id="searchType" aria-label="Search Type">
+                                    <option value="keyword">Keyword</option>
+                                    <option value="title">Title</option>
+                                    <option value="author">Author</option>
+                                    <option value="year">Year</option>
+                                    <option value="category">Category</option>
+                                </select>
+
+                                <!-- Search Input Field -->
+                                <input type="text" style="width: 60%;" name="query" id="searchQuery"
+                                    class="form-control" placeholder="Enter search term" required>
+                            </div>
+
+                            <!-- Search Button -->
+                            <button type="submit" class="btn btn-primary w-100 mt-2">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Recent Books Section -->
+    <div class="container-fluid p-3" style="background-color: #ffffff;">
+        <div class="container">
+            <h3>Newly Added Books</h3>
+            <div class="container-fluid row header-line mb-3">
+                <div class="col-4 col-lg-3 black-line"></div>
+                <div class="col-4 col-lg-2 white-line"></div>
+                <div class="col-4 col-lg-7 blue-line"></div>
+            </div>
+            <!-- Recent Books Carousel -->
+            <div id="recentBooksCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                <div class="carousel-inner" id="recent-books-list">
+                    <!-- Dynamic book cards will be inserted here -->
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#recentBooksCarousel"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#recentBooksCarousel"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Books by Category Section -->
+    <div class="container-fluid p-3" style="background-color: #ffffff;">
+        <div class="container">
+            <h3>Books by Category</h3>
+            <div class="container-fluid row header-line">
+                <div class="col-4 col-lg-3 black-line"></div>
+                <div class="col-4 col-lg-2 white-line"></div>
+                <div class="col-4 col-lg-7 blue-line"></div>
+            </div>
+
+            <!-- Category Dropdown and See All Link -->
+            <div class="my-3 d-flex justify-content-between align-items-center">
+                <select id="categorySelect" class="form-select custom-dropdown me-2 w-25" aria-label="Select Category">
+                    <option value="" selected disabled>Select Category</option>
+                    <!-- Categories will be populated here -->
+                </select>
+
+                <a id="seeAllLink" href="#" class="text-decoration-none text-primary">See All</a>
+            </div>
+
+
+
+            <!-- Books by Selected Category Carousel -->
+            <div id="categoryCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner" id="category-books-list">
+                    <!-- Carousel items will be populated here based on selected category -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Section -->
+    <div class="container mt-5">
+        <h2 class="text-white text-center mb-4">Featured</h2>
+
+        <!-- Carousel Container -->
+        <div class="carousel-container position-relative">
+            <div id="featuredCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner" id="carouselInner"></div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#featuredCarousel"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#featuredCarousel"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal HTML Structure -->
+    <div class="modal fade" id="cardModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Modal Title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img id="modalImage" src="" alt="Modal Image" class="img-fluid mb-3" />
+                    <p id="modalText">Modal Text</p>
+                </div>
+                <div class="modal-footer">
+                    <!-- Button that can be customized dynamically -->
+                    <a id="modalButton" href="#" class="btn btn-primary">More Info</a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="text-center text-lg-start bg-light text-muted mt-5 pt-1">
+        <!-- Section: Links -->
+        <section class="container text-center text-md-start mt-5">
+            <div class="row mt-3">
+                <!-- About -->
+                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mx-4">
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        <i class="fas fa-book me-3"></i>PLV: Interactive Library
+                    </h6>
+                    <p>
+                        The PLVIL project brings the library closer to students through interactive tools like AR,
+                        making knowledge more accessible.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <h6 class="text-uppercase fw-bold mb-4">Quick Links</h6>
+                    <p><a href="index.html" class="text-reset">Home</a></p>
+                    <p><a href="about.html" class="text-reset">About</a></p>
+                    <p><a href="search_results.php?search_type=keyword&query=+" class="text-reset">Browse Books</a></p>
+                    <p><a href="#" class="text-reset" data-bs-toggle="modal" data-bs-target="#arModal">AR Scan</a></p>
+                </div>
+
+                <!-- Contact -->
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                    <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+                    <p><i class="fas fa-home me-3"></i>Maysan, Valenzuela, Philippines</p>
+                    <!-- Gmail Link (using mailto for email link) -->
+                    <p>
+                        <a href="mailto:plvlibrarymain@gmail.com" class="me-4 text-reset text-decoration-none">
+                            <i class="fas fa-envelope me-3"></i>plvlibrarymain@gmail.com
+                        </a>
+                    </p>
+                    <p><i class="fas fa-phone me-3"></i>8352-700 Loc. 134, 135</p>
+                    <!-- Facebook Link -->
+                    <p>
+                        <a href="https://www.facebook.com/profile.php?id=100064626706651" class="me-4 text-reset text-decoration-none">
+                            <i class="fab fa-facebook-f me-3"></i>Pamantasan ng Lungsod ng Valenzuela University Library
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Copyright -->
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+            © 2024 Copyright:
+            <a class="text-reset fw-bold" href="#">PLV: Interactive Library</a>
+        </div>
+    </footer>
+
+
     <script>
-        //modal handling script
-        var scrollBox = document.querySelector(".scroll-box");
-        var acceptBtn = document.getElementById("acceptBtn");
-        var declineBtn = document.getElementById("declineBtn");
+        //modal
+        document.addEventListener('DOMContentLoaded', function () {
+            // Handle Accept button click
+            document.getElementById('acceptBtn').addEventListener('click', function () {
+                // Show confirmation message
+                alert('Thank you for your cooperation and participation in the PLVIL project. If you have any questions or concerns regarding this consent form or the AR feature, please do not hesitate to contact us.');
 
-        scrollBox.addEventListener('scroll', toggleAcceptButton);
+                // Redirect to AR scan page after a short delay
+                setTimeout(function () {
+                    window.location.href = 'AR/ar-scan.html';
+                }, 1000); // Delay of 1 second
+            });
 
-        function toggleAcceptButton() {
-            // Check if user has scrolled to the bottom
-            var isScrolledToBottom = scrollBox.scrollHeight - scrollBox.scrollTop === scrollBox.clientHeight;
-            // Enable or disable the Accept button based on scroll position
-            acceptBtn.disabled = !isScrolledToBottom;
-        }
+            // Handle Decline button click (close modal by default)
+            document.getElementById('declineBtn').addEventListener('click', function () {
+                $('#arModal').modal('hide');
+            });
+        });
 
-        acceptBtn.onclick = function () {
-            window.location.href = "AR/ar-scan.html";
-            // Proceed to the main content or another page
-        }
+        //fetch recent books
+        document.addEventListener("DOMContentLoaded", function () {
+            // Automatically load the recent books on page load
+            fetchRecentBooks();
 
-        declineBtn.onclick = function () {
-            window.location.href = "./index.php";
-        }
+            function fetchRecentBooks() {
+                fetch('recent_books.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        displayBooks(data);
+
+                        if (data.length < 6) {
+                            fetchAdditionalBooks(6 - data.length);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching books:', error);
+                    });
+            }
+
+            function displayBooks(books) {
+                const bookList = document.getElementById('recent-books-list');
+                if (bookList) {
+                    bookList.innerHTML = ''; // Clear previous books
+
+                    // Get current screen width
+                    let colsLg = 6; // For lg screens
+                    let colsMd = 3; // For md screens
+                    let colsSm = 2; // For sm screens
+
+                    // Group books into carousel items
+                    let booksPerSlide;
+                    if (window.innerWidth >= 992) {
+                        booksPerSlide = 6;  // lg: 6 books per slide
+                    } else if (window.innerWidth >= 768) {
+                        booksPerSlide = 3;  // md: 3 books per slide
+                    } else {
+                        booksPerSlide = 2;  // sm: 1 book per slide
+                    }
+
+                    for (let i = 0; i < books.length; i += booksPerSlide) {
+                        const carouselItem = document.createElement('div');
+                        carouselItem.classList.add('carousel-item');
+                        if (i === 0) {
+                            carouselItem.classList.add('active'); // Make the first item active
+                        }
+
+                        const row = document.createElement('div');
+                        row.classList.add('row', `row-cols-${colsSm}`, `row-cols-md-${colsMd}`, `row-cols-lg-${colsLg}`, 'g-3');
+
+                        for (let j = 0; j < booksPerSlide; j++) {
+                            let book = books[i + j];
+                            if (!book) {
+                                book = {
+                                    Title: 'Coming Soon',
+                                    Author: 'Unknown',
+                                    image2: 'placeholder.jpg' // Use a placeholder image
+                                };
+                            }
+
+                            const bookCard = `
+                    <div class="col">
+                        <div class="card p-1 text-center h-100 border-0">
+                            <img src="admin/uploads/${book.image2}" class="card-img-top shadow rounded" style="max-height: 400px; max-width: 100%;" alt="${book.Title}">
+                            <div class="card-body">
+                                <div class="card-title pt-1 fw-bold fs-5">${book.Title}</div>
+                                <a href="bookloc.html?bookId=${book.bookId}" class="text-decoration-none stretched-link fw-light text-black">${book.Author}</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                            row.innerHTML += bookCard;
+                        }
+
+                        carouselItem.appendChild(row);
+                        bookList.appendChild(carouselItem);
+                    }
+                }
+            }
+
+            window.addEventListener('resize', fetchRecentBooks); // Re-fetch and adjust on screen resize
+
+            document.addEventListener('DOMContentLoaded', function () {
+                var carousel = document.querySelector('#recentBooksCarousel');
+                var carouselInstance = new bootstrap.Carousel(carousel, {
+                    interval: false,  // Disable automatic sliding
+                    wrap: true        // Allow cycling through the carousel items
+                });
+
+                var items = document.querySelectorAll('#recent-books-list .carousel-item');
+                var itemCount = items.length;
+
+                // Add event listeners to the next and previous buttons
+                document.querySelector('.carousel-control-next').addEventListener('click', function () {
+                    carouselInstance.next();
+                });
+
+                document.querySelector('.carousel-control-prev').addEventListener('click', function () {
+                    carouselInstance.prev();
+                });
+            });
+
+
+        });
     </script>
 
+    <!-- count visitor -->
+    <script>
+        // Send a request to track visitor data
+        fetch('track-visitor.php')
+            .then(response => response.text())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+    </script>
+
+    <!-- modals -->
+    <script>
+        // JavaScript to handle dynamic content for the modal
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', function () {
+                const title = this.getAttribute('data-title');
+                const text = this.getAttribute('data-text');
+                const image = this.getAttribute('data-image');
+                const footer = this.getAttribute('data-footer');
+                document.getElementById('modalTitle').textContent = title;
+                document.getElementById('modalText').textContent = text;
+                document.getElementById('modalImage').src = image;
+                document.getElementById('modalFooter').innerHTML = footer;
+            });
+        });
+    </script>
+
+    <!-- video bg -->
+    <script>
+        // List of video files
+        const videos = [
+            'assets/bg-vid1.mp4',
+            'assets/bg-vid2.mp4',
+            'assets/bg-vid3.mp4',
+            'assets/bg-vid4.mp4',
+            'assets/bg-vid5.mp4'
+        ];
+
+        // Function to shuffle the videos array
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        // Shuffle the videos array
+        shuffleArray(videos);
+
+        // Initial video index
+        let currentVideoIndex = 0;
+
+        // Get the video element and its source
+        const videoElement = document.getElementById('bg-video');
+        const videoSource = document.getElementById('bg-video-source');
+
+        // Function to change the video
+        function changeVideo() {
+            // Increment the video index
+            currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+
+            // Set the new video source
+            videoSource.src = videos[currentVideoIndex];
+
+            // Load the new video
+            videoElement.load();
+            videoElement.play();
+        }
+
+        // Change video every 3 seconds
+        videoElement.addEventListener('loadedmetadata', () => {
+            setTimeout(changeVideo, 3000); // Change every 3 seconds
+        });
+
+        // Start the video playback
+        changeVideo();
+    </script>
+
+    <!-- custom navbar -->
+    <script>
+        // Add a scroll event listener
+        window.addEventListener('scroll', function () {
+            // Select the navbar
+            var navbar = document.querySelector('.custom-navbar');
+
+            // Add or remove the 'scrolled' class based on scroll position
+            if (window.scrollY > 10) { // Adjust the value '50' as needed
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+
+    <!-- JavaScript to change placeholder dynamically -->
+    <script>
+        const searchTypeDropdown = document.getElementById('searchType');
+        const searchQueryInput = document.getElementById('searchQuery');
+
+        searchTypeDropdown.addEventListener('change', function () {
+            let placeholderText;
+
+            switch (this.value) {
+                case 'title':
+                    placeholderText = 'Enter book title';
+                    break;
+                case 'author':
+                    placeholderText = 'Enter author name';
+                    break;
+                case 'year':
+                    placeholderText = 'Enter publication year';
+                    break;
+                case 'category':
+                    placeholderText = 'Enter book category';
+                    break;
+                case 'keyword':
+                default:
+                    placeholderText = 'Enter search term';
+                    break;
+            }
+
+            // Update the placeholder of the input field
+            searchQueryInput.placeholder = placeholderText;
+        });
+    </script>
+
+    <!-- categories -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const categorySelect = document.getElementById('categorySelect');
+            const categoryBooksList = document.getElementById('category-books-list');
+            const seeAllLink = document.getElementById('seeAllLink'); // Ensure this link is defined in your HTML
+            let selectedCategory = "Literature"; // Default category
+
+            // Fetch categories and populate the dropdown
+            fetch('categories.php')
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(category => {
+                        const option = document.createElement('option');
+                        option.value = category;
+                        option.textContent = category;
+                        categorySelect.appendChild(option);
+                    });
+                    // Fetch books for the default category "Literature"
+                    fetchBooksByCategory(selectedCategory);
+                    // Set initial See All link
+                    seeAllLink.href = `search_results.php?search_type=category&query=${encodeURIComponent(selectedCategory)}`;
+                })
+                .catch(error => console.error('Error fetching categories:', error));
+
+            // Fetch books based on selected category
+            categorySelect.addEventListener('change', function () {
+                selectedCategory = this.value; // Store the selected category
+                fetchBooksByCategory(selectedCategory);
+                // Update the See All link's href
+                seeAllLink.href = `search_results.php?search_type=category&query=${encodeURIComponent(selectedCategory)}`;
+            });
+
+            // Function to fetch and display books by category
+            function fetchBooksByCategory(category) {
+                categoryBooksList.innerHTML = ''; // Clear previous books
+
+                fetch(`categories.php?category=${encodeURIComponent(category)}`)
+                    .then(response => response.json())
+                    .then(books => {
+                        // Adjust the number of books per slide based on screen size
+                        let booksPerSlide = getBooksPerSlide();
+
+                        const totalSlides = Math.ceil(books.length / booksPerSlide);
+
+                        for (let i = 0; i < totalSlides; i++) {
+                            const carouselItem = document.createElement('div');
+                            carouselItem.classList.add('carousel-item', i === 0 ? 'active' : ''); // Set the first item as active
+
+                            const rowDiv = document.createElement('div');
+                            rowDiv.classList.add('row', `row-cols-${booksPerSlide}`, 'g-3');
+
+                            for (let j = 0; j < booksPerSlide; j++) {
+                                const bookIndex = i * booksPerSlide + j;
+                                if (bookIndex < books.length) {
+                                    const book = books[bookIndex];
+                                    const bookCard = `
+                                        <div class="col">
+                                            <div class="card p-1 text-center h-100 border-0">
+                                                <img src="admin/uploads/${book.image2}" class="card-img-top shadow rounded" alt="${book.Title}">
+                                                <div class="card-body">
+                                                    <div class="card-title pt-1 fw-bold fs-5">${book.Title}</div>
+                                                    <a href="bookloc.html?bookId=${book.bookId}" class="text-decoration-none stretched-link text-black fw-light">${book.Author}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `;
+                                    rowDiv.innerHTML += bookCard;
+                                }
+                            }
+
+                            carouselItem.appendChild(rowDiv);
+                            categoryBooksList.appendChild(carouselItem);
+                        }
+                    })
+                    .catch(error => console.error('Error fetching books:', error));
+            }
+
+            // Function to determine the number of books per slide based on screen size
+            function getBooksPerSlide() {
+                if (window.innerWidth >= 992) {
+                    return 6;  // lg: 6 books per slide
+                } else if (window.innerWidth >= 768) {
+                    return 3;  // md: 3 books per slide
+                } else {
+                    return 2;  // sm: 2 books per slide
+                }
+            }
+
+            // Debounce function to optimize resize event
+            let resizeTimeout;
+            window.addEventListener('resize', function () {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    fetchBooksByCategory(selectedCategory); // Refetch and adjust layout on resize
+                }, 200); // Adjust the debounce time as needed (200 ms is a common choice)
+            });
+        });
+    </script>
+
+    <!-- Featured Section Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Fetch featured items using AJAX
+            fetch('get-featured-items.php')
+                .then(response => response.json())
+                .then(data => {
+                    var cards = data;  // Use the fetched data as the cards array
+                    var carouselInner = document.getElementById("carouselInner");
+
+                    function createCarouselItems(cardsPerSlide) {
+                        carouselInner.innerHTML = "";  // Clear existing slides
+                        var slideIndex = 0;
+
+                        for (var i = 0; i < cards.length; i += cardsPerSlide) {
+                            var carouselItem = document.createElement("div");
+                            carouselItem.classList.add("carousel-item");
+                            if (slideIndex === 0) carouselItem.classList.add("active");
+
+                            var row = document.createElement("div");
+                            row.classList.add("row");
+
+                            for (var j = i; j < i + cardsPerSlide && j < cards.length; j++) {
+                                var col = document.createElement("div");
+                                col.classList.add("col-12", "col-md-6", "col-lg-4", "mb-4");
+
+                                var card = document.createElement("div");
+                                card.classList.add("card");
+                                card.setAttribute("data-bs-toggle", "modal");
+                                card.setAttribute("data-bs-target", "#cardModal");
+                                card.setAttribute("data-title", cards[j].title);
+                                card.setAttribute("data-text", cards[j].summary);
+                                card.setAttribute("data-image", cards[j].image_url);
+                                card.setAttribute("data-more-info-link", cards[j].more_info_link);
+                                card.setAttribute("data-additional-info", cards[j].additional_info);
+
+                                var img = document.createElement("img");
+                                img.src = cards[j].image_url;
+                                img.classList.add("card-img-top", "img-fluid");
+                                img.alt = "Card Image";
+                                img.style.objectFit = "cover";
+                                img.style.height = "200px";
+
+                                var cardBody = document.createElement("div");
+                                cardBody.classList.add("card-body");
+
+                                var cardTitle = document.createElement("h5");
+                                cardTitle.classList.add("card-title", "text-dark");
+                                cardTitle.textContent = cards[j].title;
+
+                                var cardText = document.createElement("p");
+                                cardText.classList.add("card-text");
+                                cardText.textContent = cards[j].summary;
+
+                                cardBody.appendChild(cardTitle);
+                                cardBody.appendChild(cardText);
+                                card.appendChild(img);
+                                card.appendChild(cardBody);
+                                col.appendChild(card);
+                                row.appendChild(col);
+                            }
+
+                            carouselItem.appendChild(row);
+                            carouselInner.appendChild(carouselItem);
+                            slideIndex++;
+                        }
+                    }
+
+                    function adjustCarouselItems() {
+                        var screenWidth = window.innerWidth;
+
+                        if (screenWidth >= 992) {
+                            createCarouselItems(3);
+                        } else if (screenWidth >= 768) {
+                            createCarouselItems(2);
+                        } else {
+                            createCarouselItems(1);
+                        }
+                    }
+
+                    window.addEventListener("resize", adjustCarouselItems);
+                    adjustCarouselItems();  // Initial call to set the correct layout
+
+                    // Handle modal content dynamically
+                    var cardModal = document.getElementById("cardModal");
+                    cardModal.addEventListener('show.bs.modal', function (event) {
+                        var button = event.relatedTarget;
+                        var title = button.getAttribute("data-title");
+                        var text = button.getAttribute("data-text");
+                        var image = button.getAttribute("data-image");
+                        var additionalInfo = button.getAttribute("data-additional-info"); // Retrieve additional_info
+                        var moreInfoLink = button.getAttribute("data-more-info-link");
+
+                        var modalTitle = document.getElementById("modalTitle");
+                        var modalText = document.getElementById("modalText");
+                        var modalImage = document.getElementById("modalImage");
+                        var modalButton = document.getElementById("modalButton");
+
+                        modalTitle.textContent = title;
+                        modalText.innerHTML = `<p>${text}</p><p>${additionalInfo}</p>`; // Include additional_info
+                        modalImage.src = image;
+                        modalButton.href = moreInfoLink;
+                    });
+                })
+                .catch(error => console.error('Error fetching featured items:', error));
+        });
+    </script>
+
+    <!-- popover navbar -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navContent = `
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link text-dark">
+                            <i class="fas fa-home me-2"></i>Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" id="arScanButton" class="nav-link text-dark">
+                            <i class="fas fa-camera me-2"></i>AR Scan
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="chairs-user.html" class="nav-link text-dark">
+                            <i class="fas fa-chair me-2"></i>Chairs
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link text-dark">
+                            <i class="fas fa-info-circle me-2"></i>About
+                        </a>
+                    </li>
+                </ul>
+            `;
+
+            const popoverTrigger = document.querySelector('[data-bs-toggle="popover"]');
+            const popover = new bootstrap.Popover(popoverTrigger, {
+                content: navContent,
+                html: true,
+                container: 'body',
+                customClass: 'custom-popover'
+            });
+
+            // Track popover visibility
+            let popoverVisible = false;
+
+            popoverTrigger.addEventListener('click', function () {
+                popoverVisible = !popoverVisible; // Toggle visibility flag
+            });
+
+            document.addEventListener('click', function (e) {
+                // Hide popover on next click outside of the popoverTrigger if it is visible
+                if (popoverVisible && !popoverTrigger.contains(e.target)) {
+                    popover.hide();
+                    popoverVisible = false; // Reset visibility flag
+                }
+            });
+
+            // Event listener to open the modal
+            document.addEventListener('click', function (e) {
+                if (e.target && e.target.id === 'arScanButton') {
+                    const arModal = new bootstrap.Modal(document.getElementById('arModal'));
+                    arModal.show();
+                }
+            });
+        });
+
+    </script>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="js/index.js"></script>
 </body>
 
 </html>
