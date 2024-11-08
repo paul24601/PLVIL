@@ -261,7 +261,11 @@ $result = $conn->query($sql);
                                                     alt="<?php echo htmlspecialchars($row['title']); ?>"
                                                     style="height: 50px;"></td>
                                             <td><?php echo htmlspecialchars($row['additional_info']); ?></td>
-                                            <td><?php echo htmlspecialchars($row['more_info_link']); ?></td>
+                                            <td>
+                                                <a href="<?php echo htmlspecialchars($row['more_info_link']); ?>" target="_blank">
+                                                    <?php echo htmlspecialchars($row['more_info_link']); ?>
+                                                </a>
+                                            </td>
                                             <td>
                                                 <!-- Edit and Delete Actions -->
                                                 <button class="btn btn-warning btn-sm"

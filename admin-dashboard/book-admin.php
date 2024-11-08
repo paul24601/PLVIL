@@ -40,6 +40,44 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
         #datatablesSimple_length {
             margin-bottom: 20px;
         }
+
+        .add-book-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            width: 40px; /* Square width */
+            height: 40px; /* Square height */
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            transition: width 0.3s ease, padding 0.3s ease; /* Transition for smooth expansion */
+            overflow: hidden;
+        }
+
+        /* Hide text initially */
+        .add-book-button .add-text {
+            opacity: 0;
+            max-width: 0;
+            white-space: nowrap;
+            margin-left: 8px;
+            transition: opacity 0.3s ease, max-width 0.3s ease;
+        }
+
+        /* Expand button and reveal text on hover */
+        .add-book-button:hover {
+            width: auto; /* Expands width to fit content */
+            padding: 8px 12px;
+        }
+
+        .add-book-button:hover .add-text {
+            opacity: 1;
+            max-width: 100px; /* Set a maximum width for the text */
+        }
+
+
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -134,30 +172,17 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
                         <li class="breadcrumb-item active">Books</li>
                     </ol>
 
+                    
+                    <div class="add-book">
+                        <button class="btn btn-success btn-md add-book-button" data-bs-toggle="modal" data-bs-target="#addBook">
+                            <i class="fa-solid fa-plus ps-2"></i>
+                            <span class="add-text">Add New Book</span>
+                        </button>
+                    </div>
+
                     <!-- table -->
                     <div class="card mb-4 shadow">
                         <div class="card-body">
-                            <div class="row mb-3">
-                                <div class="col-12 col-md-6 mb-3 add-book">
-                                    <button class=" w-100 btn btn-success btn-md" data-bs-toggle="modal" data-bs-target="#addBook">
-                                        <i class="fa-solid fa-plus"></i> Add New Book
-                                    </button>
-                                </div>
-
-                                <div class="col-12 col-md-6 mb-3 search">
-                                    <div class="input-group">
-                                        <select id="searchType" class="form-select">
-                                            <option value="title">Title</option>
-                                            <option value="author">Author</option>
-                                            <option value="year">Year</option>
-                                            <option value="category">Category</option>
-                                        </select>
-                                        <input type="text" class="form-control w-50" id="searchInput"
-                                            placeholder="Search...">
-                                    </div>
-                                </div>
-
-                            </div>
 
                             <!-- Table Section -->
                             <div class="table-responsive">
@@ -261,10 +286,20 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
                                                     placeholder="Enter Book Author" required>
                                             </div>
                                             <div class="input-group mb-3">
-                                                <span style=" width: 160px;" class="input-group-text">Shelves
-                                                    Number</span>
-                                                <input type="text" name="columnNumber" class="form-control" required
-                                                    placeholder="Enter Shelves Number" required>
+                                                <span style=" width: 160px;" class="input-group-text">Shelves Number</span>
+                                                <select name="columnNumber" class="form-select" required>
+                                                    <option selected disabled>Choose Shelf Number...</option>
+                                                    <option value="1">Shelf 1</option>
+                                                    <option value="2">Shelf 2</option>
+                                                    <option value="3">Shelf 3</option>
+                                                    <option value="4">Shelf 4</option>
+                                                    <option value="5">Shelf 5</option>
+                                                    <option value="6">Shelf 6</option>
+                                                    <option value="7">Shelf 7</option>
+                                                    <option value="8">Shelf 8</option>
+                                                    <option value="9">Shelf 9</option>
+                                                    <option value="10">Shelf 10</option>
+                                                </select>
                                             </div>
                                             <div class="input-group mb-3">
                                                 <span style=" width: 160px;" class="input-group-text">Accession</span>
@@ -381,11 +416,20 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
                                                     required>
                                             </div>
                                             <div class="input-group mb-3">
-                                                <span style=" width: 160px;" class="input-group-text"
-                                                    for="columnNumberEdit">Shelves
-                                                    Number</span>
-                                                <input type="text" class="form-control" id="columnNumberEdit"
-                                                    name="columnNumber" required>
+                                                <span style=" width: 160px;" class="input-group-text" for="columnNumberEdit">Shelves Number</span>
+                                                <select class="form-select" id="columnNumberEdit" name="columnNumber" required>
+                                                    <option selected disabled>Choose Shelf Number...</option>
+                                                    <option value="1">Shelf 1</option>
+                                                    <option value="2">Shelf 2</option>
+                                                    <option value="3">Shelf 3</option>
+                                                    <option value="4">Shelf 4</option>
+                                                    <option value="5">Shelf 5</option>
+                                                    <option value="6">Shelf 6</option>
+                                                    <option value="7">Shelf 7</option>
+                                                    <option value="8">Shelf 8</option>
+                                                    <option value="9">Shelf 9</option>
+                                                    <option value="10">Shelf 10</option>
+                                                </select>
                                             </div>
                                             <div class="input-group mb-3">
                                                 <span style=" width: 160px;" class="input-group-text"
@@ -542,7 +586,7 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
                     $('#bookCategoryEdit').val(bookData.bookCategory);
                     $('#TitleEdit').val(bookData.Title);
                     $('#AuthorEdit').val(bookData.Author);
-                    $('#columnNumberEdit').val(bookData.columnNumber);
+                    $('#columnNumberEdit').val(bookData.columnNumber); // This will set the selected option based on bookData
                     $('#AccessionEdit').val(bookData.Accession);
                     $('#bookEditionEdit').val(bookData.bookEdition);
                     $('#bookYearEdit').val(bookData.bookYear);
