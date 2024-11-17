@@ -2,7 +2,7 @@
 // Database credentials
 $servername = "localhost";
 $username = "root";
-$password = '$Admin123plvil';
+$password = "Admin123@plvil";
 $dbname = "admin_library";
 
 ini_set('display_errors', 1);

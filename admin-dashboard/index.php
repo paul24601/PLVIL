@@ -18,7 +18,7 @@ if (isset($_GET['warning']) && $_GET['warning'] === 'restricted') {
 // Database credentials
 $servername = "localhost";
 $username = "root";
-$password = '$Admin123plvil';
+$password = "Admin123@plvil";
 $dbname = "admin_library";
 
 // Create connection

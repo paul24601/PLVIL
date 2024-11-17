@@ -2,7 +2,7 @@
 class DBConnection {
     private $server = "localhost";
     private $username = "root";
-    private $password = '$Admin123plvil';
+    private $password = "Admin123@plvil";
     private $db = "admin_library";
 
     public $conn;

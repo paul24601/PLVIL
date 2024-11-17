@@ -12,7 +12,7 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
 // Database connection
 $servername = "localhost";
 $username = "root";
-$password = '$Admin123plvil';
+$password = "Admin123@plvil";
 $dbname = "admin_library";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
