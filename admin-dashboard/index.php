@@ -16,7 +16,7 @@ if (isset($_GET['warning']) && $_GET['warning'] === 'restricted') {
 
 <?php
 // Database credentials
-$servername = "http://157.230.254.206/";
+$servername = "157.230.254.206";
 $username = "root";
 $password = "$Admin123plvil";
 $dbname = "admin_library";
