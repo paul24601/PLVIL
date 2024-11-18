@@ -1,5 +1,5 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] . '/PLVIL/admin/utility/DBConnection.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/admin/utility/DBConnection.php';
 
 class Book {
     public $conn;
