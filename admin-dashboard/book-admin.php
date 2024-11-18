@@ -220,9 +220,9 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
                                             <tr>
                                                 <td><?php echo $book['bookId']; ?></td> <!-- Display the Book ID -->
                                                 <td><?php echo $book['bookCategory']; ?></td>
-                                                <td><img src="/Admin/uploads/<?php echo $book['image1']; ?>"
+                                                <td><img src="/admin/uploads/<?php echo $book['image1']; ?>"
                                                         alt="Book Stem" style="width: 100px; height: 100px;"></td>
-                                                <td><img src="/Admin/uploads/<?php echo $book['image2']; ?>"
+                                                <td><img src="/admin/uploads/<?php echo $book['image2']; ?>"
                                                         alt="Front Cover" style="width: 100px; height: 100px;"></td>
                                                 <td><?php echo $book['Title']; ?></td>
                                                 <td><?php echo $book['Author']; ?></td>
