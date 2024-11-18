@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if a file is uploaded
     if (isset($_FILES['image_file']) && $_FILES['image_file']['error'] === UPLOAD_ERR_OK) {
         // Set the upload directory to the specified path
-        $upload_dir = '/PLVIL/assets/uploads/';
+        $upload_dir = '/assets/uploads/';
         $absolute_upload_dir = $_SERVER['DOCUMENT_ROOT'] . $upload_dir;
 
         if (!is_dir($absolute_upload_dir)) {

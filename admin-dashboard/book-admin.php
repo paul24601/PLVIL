@@ -220,9 +220,9 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
                                             <tr>
                                                 <td><?php echo $book['bookId']; ?></td> <!-- Display the Book ID -->
                                                 <td><?php echo $book['bookCategory']; ?></td>
-                                                <td><img src="/PLVIL/Admin/uploads/<?php echo $book['image1']; ?>"
+                                                <td><img src="/Admin/uploads/<?php echo $book['image1']; ?>"
                                                         alt="Book Stem" style="width: 100px; height: 100px;"></td>
-                                                <td><img src="/PLVIL/Admin/uploads/<?php echo $book['image2']; ?>"
+                                                <td><img src="/Admin/uploads/<?php echo $book['image2']; ?>"
                                                         alt="Front Cover" style="width: 100px; height: 100px;"></td>
                                                 <td><?php echo $book['Title']; ?></td>
                                                 <td><?php echo $book['Author']; ?></td>
@@ -547,7 +547,7 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
 
                 // Make an AJAX request to add a new book
                 $.ajax({
-                    url: '/PLVIL/Admin/classes/Book.php',
+                    url: '/admin/classes/Book.php',
                     type: 'POST',
                     data: formData,
                     processData: false,
@@ -584,7 +584,7 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
                 $('#editBookId').val(bookId); // Set the book ID in the hidden input field
 
                 // Fetch book details by ID
-                $.post('/PLVIL/Admin/classes/Book.php', { getBookById: bookId }, function (data) {
+                $.post('/admin/classes/Book.php', { getBookById: bookId }, function (data) {
                     var bookData = JSON.parse(data);
                     // Populate edit modal fields with fetched data
                     $('#bookCategoryEdit').val(bookData.bookCategory);
@@ -621,7 +621,7 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
 
                 // Make AJAX request to update the book details
                 $.ajax({
-                    url: '/PLVIL/Admin/classes/Book.php',
+                    url: '/admin/classes/Book.php',
                     type: 'POST',
                     data: formData,
                     processData: false,
@@ -651,7 +651,7 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
             $('.deleteButton').on('click', function (e) {
                 var confirmDelete = confirm("Are you sure you want to delete this book?");
                 if (confirmDelete) {
-                    $.post('/PLVIL/Admin/classes/Book.php', { deleteId: e.target.id }, function (data) {
+                    $.post('/admin/classes/Book.php', { deleteId: e.target.id }, function (data) {
                         var data = JSON.parse(data);
                         if (data.type === 'success') {
                             showAlert(data.message, 'success');
