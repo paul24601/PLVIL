@@ -1,6 +1,6 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'] . '/PLVIL/Admin/utility/DBConnection.php');
-include $_SERVER['DOCUMENT_ROOT'].'/PLVIL/Admin/classes/Book.php';
+include_once($_SERVER['DOCUMENT_ROOT'] . '/admin/utility/DBConnection.php');
+include $_SERVER['DOCUMENT_ROOT'].'/admin/classes/Book.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
