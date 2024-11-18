@@ -305,7 +305,7 @@ $conn->close();
                         data-bs-target="#arModal">AR Scan</a>
                 </li>
                 <li class="class-item">
-                    <a href="Admin/chairs-user.html" class="fs-6 text-dark fw-bold nav-link">Chairs</a>
+                    <a href="admin/chairs-user.html" class="fs-6 text-dark fw-bold nav-link">Chairs</a>
                 </li>
                 <li class="class-item">
                     <a href="about.html" class="fs-6 text-dark fw-bold nav-link active">About</a>
@@ -361,7 +361,7 @@ $conn->close();
                                 <div class="row g-0">
                                     <!-- Book Cover -->
                                     <div class="col-4 d-flex justify-content-center align-items-center">
-                                        <img src="<?php echo !empty($row['image2']) ? "../Admin/uploads/" . htmlspecialchars($row['image2']) : 'default-cover.jpg'; ?>"
+                                        <img src="<?php echo !empty($row['image2']) ? "../admin/uploads/" . htmlspecialchars($row['image2']) : 'default-cover.jpg'; ?>"
                                             class="img-fluid rounded shadow" alt="Book Cover"
                                             style="width: 90%; height: 200px; object-fit: cover; max-height: 200px; margin: 10px;">
                                     </div>

@@ -262,7 +262,7 @@
                         data-bs-target="#arModal">AR Scan</a>
                 </li>
                 <li class="class-item">
-                    <a href="Admin/chairs-user.html" class="fs-6 text-dark fw-bold nav-link">Chairs</a>
+                    <a href="admin/chairs-user.html" class="fs-6 text-dark fw-bold nav-link">Chairs</a>
                 </li>
                 <li class="class-item">
                     <a href="about.html" class="fs-6 text-dark fw-bold nav-link active">About</a>
@@ -422,7 +422,7 @@
             }
 
             function fetchBookDetails(bookId) {
-                fetch('Admin/bookloc_backend.php', {
+                fetch('admin/bookloc_backend.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -433,7 +433,7 @@
                     .then(data => {
                         if (data) {
                             document.getElementById('book-title').textContent = data.Title;
-                            document.getElementById('book-image').src = 'Admin/uploads/' + data.image1;
+                            document.getElementById('book-image').src = 'admin/uploads/' + data.image1;
 
                             // Determine the column number
                             const columnNumber = parseInt(data.columnNumber);
@@ -491,7 +491,7 @@
                             <div class="card h-100 shadow-lg border-none" style="background-color: rgba(255, 255, 255, 0.8); backdrop-filter: blur(5px);">
                                 <div class="row g-0">
                                     <div class="col-4">
-                                        <img src="Admin/uploads/${book.image2}" class="img-fluid rounded-start" alt="${book.Title}"
+                                        <img src="admin/uploads/${book.image2}" class="img-fluid rounded-start" alt="${book.Title}"
                                              style="width: 90%; height: 200px; object-fit: cover; max-height: 200px;">
                                     </div>
                                     <div class="col-8">
