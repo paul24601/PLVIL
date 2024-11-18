@@ -1,6 +1,6 @@
 <?php
 session_start();
-$pdo = new PDO('mysql:host=localhost;dbname=admin_library', 'root', '');
+$pdo = new PDO('mysql:host=localhost;dbname=admin_library', 'root', 'Admin123@plvil');
 
 $action = $_GET['action'];
 $section = $_GET['section'] ?? null;
