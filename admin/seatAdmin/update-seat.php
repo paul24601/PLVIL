@@ -3,7 +3,7 @@
 class SeatUpdater {
     private $servername = "localhost";
     private $username = "root";
-    private $password = "";
+    private $password = "Admin123@plvil";
     private $dbname = "library_seat_viewer";
     private $conn;
 

@@ -2,7 +2,7 @@
 // Database connection details
 $servername = "localhost"; // replace with your server name
 $username = "root"; // replace with your MySQL username
-$password = ""; // replace with your MySQL password
+$password = "Admin123@plvil"; // replace with your MySQL password
 $dbname = "production_data"; // replace with your database name
 
 // Create connection
