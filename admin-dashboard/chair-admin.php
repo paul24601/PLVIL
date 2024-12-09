@@ -160,7 +160,7 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
                                 <!-- Image Container with Single Bottom Button -->
                                 <div class="position-relative text-center mb-3" style="display: inline-block; max-width: 100%;">
                                     <!-- Image Display -->
-                                    <img id="floorPlanImage" src="../assets/floor-plan/ground_floor.png" alt="Library Floor Plan" style="max-width: 100%; height: auto; position: relative;">
+                                    <img id="floorPlanImage" src="../assets/floor-plan/ground_floor.png?timestamp=<?php echo time(); ?>" alt="Library Floor Plan" style="max-width: 100%; height: auto; position: relative;">
                                     
                                     <!-- Toggle Button (Overlay, Bottom Center) -->
                                     <button id="toggleButton" class="minimal-btn position-absolute" style="bottom: 10px; left: 50%; transform: translateX(-50%);" onclick="toggleImage()">&#9650;</button>
@@ -319,34 +319,27 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
             
             // Paths to the images
             let currentImageIndex = 0; // Start with the first image (index 0)
-            const images = [
-                "../assets/floor-plan/ground_floor.png",  // Default path for the first floor
-                "../assets/floor-plan/second_floor.png"  // Default path for the second floor
-            ];
 
-            // Assign preview handlers to file inputs
-            document.getElementById("groundFloorImage").addEventListener('change', function(event) {
-                previewImage(event, 0);
-            });
-            document.getElementById("secondFloorImage").addEventListener('change', function(event) {
-                previewImage(event, 1);
-            });
+// Dynamically generate image paths with a timestamp to prevent caching
+const images = [
+    `../assets/floor-plan/ground_floor.png?timestamp=${new Date().getTime()}`,
+    `../assets/floor-plan/second_floor.png?timestamp=${new Date().getTime()}`
+];
 
+// Function to update the displayed image and button icon
+function updateImage() {
+    document.getElementById("floorPlanImage").src = images[currentImageIndex];
+    
+    // Update button icon: Down (&#9660;) when on the first image, Up (&#9650;) on the second
+    const toggleButton = document.getElementById("toggleButton");
+    toggleButton.innerHTML = currentImageIndex === 0 ? "&#9650;" : "&#9660;";
+}
 
-            // Function to update the displayed image and button icon
-            function updateImage() {
-                document.getElementById("floorPlanImage").src = images[currentImageIndex];
-                
-                // Update button icon: Down (&#9660;) when on the first image, Up (&#9650;) on the second
-                const toggleButton = document.getElementById("toggleButton");
-                toggleButton.innerHTML = currentImageIndex === 0 ? "&#9650;" : "&#9660;";
-            }
-
-            // Toggle between the first and second image
-            function toggleImage() {
-                currentImageIndex = currentImageIndex === 0 ? 1 : 0;
-                updateImage();
-            }
+// Toggle between the first and second image
+function toggleImage() {
+    currentImageIndex = currentImageIndex === 0 ? 1 : 0;
+    updateImage();
+}
 
             // Toggle edit mode visibility
             function toggleEditMode() {

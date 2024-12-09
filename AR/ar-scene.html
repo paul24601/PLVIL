@@ -94,40 +94,40 @@
 
     <!-- PLVIL -->
     <a-marker markerhandler="soundSrc: #sound1" type="barcode" value="31" raycaster="objects: .clickable"
-      emitevents="true" cursor="fuse: false; rayOrigin: mouse;" getsure-handler="minScale: 0.25; maxScale: 2">
+      emitevents="true" cursor="fuse: false; rayOrigin: mouse;">
 
-      <a-video autoplay src="#plvil-vid" rotation="-90 0 0" width="10" height="5" position="-9 0 0"
-        video-handler="volume: 0.05"></a-video>
+      <a-video autoplay src="#plvil-vid" rotation="-90 0 0" width="4" height="2" position="-3.5 0 0" class="clickable"
+        video-handler="volume: 0.05" gesture-handler></a-video>
 
-      <a-video autoplay src="#plvil-square" position="0 1 0" rotation="-90 0 0" width="6" height="6"
-        video-handler="volume: 0"></a-video>
+      <a-video autoplay src="#plvil-square" position="0 1 0" rotation="-90 0 0" width="2.5" height="2.5" class="clickable"
+        video-handler="volume: 0" gesture-handler></a-video>
 
-      <a-plane id="imagePlane" src="#image1" rotation="-90 0 0" height="5" width="10" position="9 0 0" class="clickable"
+      <a-plane id="imagePlane" src="#image1" rotation="-90 0 0" height="2" width="4" position="3.5 0 0" class="clickable"
         slideshow-toggle1 gesture-handler></a-plane>
 
-      <a-entity gltf-model="#3d-plvil" scale="7 7 7" rotation="0 0 0" position="0 1 -4.5"></a-entity>
+      <a-entity gltf-model="#3d-plvil" scale="3 3 3" rotation="0 0 0" position="0 1 -2" class="clickable" gesture-handler></a-entity>
     </a-marker>
 
     <!-- PIO -->
     <a-marker markerhandler="soundSrc: #sound3" type="barcode" value="30" raycaster="objects: .clickable"
-      emitevents="true" cursor="fuse: false; rayOrigin: mouse;">
+      emitevents="true" cursor="fuse: false; rayOrigin: mouse;" getsure-handler="minScale: 0.25; maxScale: 2">
 
-      <a-video src="#pio-vid" rotation="-90 0 0" width="10" height="5" position="-9 0 0"
-        video-handler="volume: 0.05"></a-video>
+      <a-video src="#pio-vid" rotation="-90 0 0" width="4" height="2" position="-3.5 0 0"
+        video-handler="volume: 0.05" gesture-handler></a-video>
 
-      <a-video src="#plvil-square" position="0 1 0" rotation="-90 0 0" width="6" height="6"
-        video-handler="volume: 0"></a-video>
+      <a-video src="#plvil-square" position="0 1 0" rotation="-90 0 0" width="2.5" height="2.5"
+        video-handler="volume: 0" gesture-handler></a-video>
 
-      <a-plane id="imagePlane" src="#image1" rotation="-90 0 0" height="5" width="10" position="9 0 0" class="clickable"
+      <a-plane id="imagePlane" src="#image1" rotation="-90 0 0" height="2" width="4" position="3.5 0 0" class="clickable"
         slideshow-toggle2 gesture-handler></a-plane>
 
-      <a-entity gltf-model="#3d-pio" scale="5 5 5" rotation="0 0 0" position="0 1 -4"></a-entity>
+      <a-entity gltf-model="#3d-pio" scale="3 3 3" rotation="0 0 0" position="0 1 -2" gesture-handler></a-entity>
     </a-marker>
 
     <!-- BOOKS -->
     <!-- dekada 70 -->
     <a-marker type="barcode" value="2" raycaster="objects: .clickable" emitevents="true"
-      cursor="fuse: false; rayOrigin: mouse;">
+      cursor="fuse: false; rayOrigin: mouse;" getsure-handler="minScale: 0.25; maxScale: 2">
       <!-- book of the week -->
       <a-plane id="" src="#bookoftheweek" rotation="-90 0 0" align="center" height="2" width="8" position="1.85 1 -2"
         opacity="0.9" class="clickable" gesture-handler></a-plane>

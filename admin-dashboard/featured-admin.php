@@ -30,23 +30,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $more_info_link = $_POST['more_info_link'];
 
     // Check if a file is uploaded
-    if (isset($_FILES['image_file']) && $_FILES['image_file']['error'] === UPLOAD_ERR_OK) {
-        // Set the upload directory to the specified path
-        $upload_dir = '/assets/uploads/';
-        $absolute_upload_dir = $_SERVER['DOCUMENT_ROOT'] . $upload_dir;
+   if (isset($_FILES['image_file']) && $_FILES['image_file']['error'] === UPLOAD_ERR_OK) {
+    $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
+    $max_size = 2 * 1024 * 1024; // 2 MB
 
-        if (!is_dir($absolute_upload_dir)) {
-            mkdir($absolute_upload_dir, 0777, true);
-        }
+    $file_type = mime_content_type($_FILES['image_file']['tmp_name']);
+    $file_size = $_FILES['image_file']['size'];
 
-        $file_name = basename($_FILES['image_file']['name']);
-        $file_path = $absolute_upload_dir . $file_name;
-
-        // Move uploaded file to the designated directory
-        if (move_uploaded_file($_FILES['image_file']['tmp_name'], $file_path)) {
-            $image_url = $upload_dir . $file_name; // Use the relative path as image URL
-        }
+    if (!in_array($file_type, $allowed_types)) {
+        die("Invalid file type. Only JPG, PNG, and GIF are allowed.");
     }
+
+    if ($file_size > $max_size) {
+        die("File is too large. Maximum size is 2 MB.");
+    }
+
+    $upload_dir = '/assets/uploads/';
+    $absolute_upload_dir = $_SERVER['DOCUMENT_ROOT'] . $upload_dir;
+
+    if (!is_dir($absolute_upload_dir)) {
+        mkdir($absolute_upload_dir, 0777, true);
+    }
+
+    $file_name = basename($_FILES['image_file']['name']);
+    $file_path = $absolute_upload_dir . $file_name;
+
+    if (move_uploaded_file($_FILES['image_file']['tmp_name'], $file_path)) {
+        $image_url = $upload_dir . $file_name; // Use relative path for the URL
+    } else {
+        die("Failed to move uploaded file.");
+    }
+}
 
     if (isset($_POST['add'])) {
         $conn->query("INSERT INTO featured_items (title, summary, image_url, additional_info, more_info_link) 

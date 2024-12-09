@@ -1,8 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 include $_SERVER['DOCUMENT_ROOT'] . '/admin/classes/Book.php';
 $db = new DBConnection();
 ?>
@@ -704,13 +700,15 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
 
     <script>
         $(document).ready(function () {
-            $('#datatablesSimple').DataTable({
-                "paging": true,        // Enable pagination
-                "searching": true,     // Enable search
-                "ordering": true,      // Enable column sorting
-                "info": true           // Show table information
-            });
-        });        
+    $('#datatablesSimple').DataTable({
+        "paging": true,        // Enable pagination
+        "searching": true,     // Enable search
+        "ordering": true,      // Enable column sorting
+        "info": true,          // Show table information
+        "order": [[0, "desc"]] // Sort by the first column (Book ID) in descending order
+    });
+});        
+
     </script>
 
     <script>

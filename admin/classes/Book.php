@@ -11,7 +11,6 @@ class Book {
 
     // Method to save a book (add or update)
 public function saveBook($post) {
-    // Check if bookId is provided for an update operation
     $bookId = isset($post['bookId']) ? $post['bookId'] : '';
 
     // Extract book details from POST data
@@ -26,74 +25,56 @@ public function saveBook($post) {
     $CallNumber = $post['CallNumber'];
     $isbn = $post['isbn'];
 
-    // Determine if updating an existing record or adding a new one
+    $targetDir = $_SERVER['DOCUMENT_ROOT'] . '/admin/uploads/';
+    $dateInputted = date('Y-m-d'); // Current date for naming
+
     if (!empty($bookId)) {
-        // Existing book, check if new images are provided
+        // Existing book logic
         $image1Name = '';
         $image2Name = '';
-        if (isset($_FILES['image1']) && $_FILES['image1']['size'] > 0 && isset($_FILES['image2']) && $_FILES['image2']['size'] > 0) {
-            // Handle file uploads for images
-            $targetDir = $_SERVER['DOCUMENT_ROOT'] . '/admin/uploads/';
-            $image1Name = basename($_FILES["image1"]["name"]);
-            $image2Name = basename($_FILES["image2"]["name"]);
+        if (isset($_FILES['image1']) && $_FILES['image1']['size'] > 0) {
+            $image1Name = $this->generateFileName($Title, 'cover', $dateInputted, $_FILES['image1']['name']);
             $image1Path = $targetDir . $image1Name;
+            move_uploaded_file($_FILES["image1"]["tmp_name"], $image1Path);
+        }
+        if (isset($_FILES['image2']) && $_FILES['image2']['size'] > 0) {
+            $image2Name = $this->generateFileName($Title, 'stem', $dateInputted, $_FILES['image2']['name']);
             $image2Path = $targetDir . $image2Name;
-
-            // Move uploaded files to the upload directory
-            if (move_uploaded_file($_FILES["image1"]["tmp_name"], $image1Path) &&
-                move_uploaded_file($_FILES["image2"]["tmp_name"], $image2Path)) {
-                // Files uploaded successfully, continue with database update
-            } else {
-                return json_encode(array('type' => 'fail', 'message' => 'Failed to upload images.'));
-            }
+            move_uploaded_file($_FILES["image2"]["tmp_name"], $image2Path);
         }
 
-        // Update existing book record, including image paths if provided
         $sql = "UPDATE book SET bookCategory='$bookCategory', Title='$Title', Author='$Author', columnNumber='$columnNumber', Accession='$Accession', bookEdition='$bookEdition', bookYear='$bookYear', Property='$Property', CallNumber='$CallNumber', ISBN='$isbn'";
-        if (!empty($image1Name) && !empty($image2Name)) {
-            $sql .= ", image1='$image1Name', image2='$image2Name'";
-        }
+        if (!empty($image1Name)) $sql .= ", image1='$image1Name'";
+        if (!empty($image2Name)) $sql .= ", image2='$image2Name'";
         $sql .= " WHERE bookId=$bookId";
-        $result = $this->conn->query($sql);
 
-        // Determine if the update was successful
-        if ($result) {
-            return json_encode(array('type' => 'success', 'message' => 'Book successfully updated.'));
-        } else {
-            return json_encode(array('type' => 'fail', 'message' => 'Unable to update book details.'));
-        }
+        $result = $this->conn->query($sql);
+        return $result ? json_encode(['type' => 'success', 'message' => 'Book successfully updated.']) : json_encode(['type' => 'fail', 'message' => 'Unable to update book details.']);
     } else {
-        // Insert new book record
-        // Handle file uploads for images if they exist
+        // New book logic
         $image1Name = '';
         $image2Name = '';
-        if (isset($_FILES['image1']) && $_FILES['image1']['size'] > 0 && isset($_FILES['image2']) && $_FILES['image2']['size'] > 0) {
-            $targetDir = $_SERVER['DOCUMENT_ROOT'] . '/admin/uploads/';
-            $image1Name = basename($_FILES["image1"]["name"]);
-            $image2Name = basename($_FILES["image2"]["name"]);
+        if (isset($_FILES['image1']) && $_FILES['image1']['size'] > 0) {
+            $image1Name = $this->generateFileName($Title, 'cover', $dateInputted, $_FILES['image1']['name']);
             $image1Path = $targetDir . $image1Name;
+            move_uploaded_file($_FILES["image1"]["tmp_name"], $image1Path);
+        }
+        if (isset($_FILES['image2']) && $_FILES['image2']['size'] > 0) {
+            $image2Name = $this->generateFileName($Title, 'stem', $dateInputted, $_FILES['image2']['name']);
             $image2Path = $targetDir . $image2Name;
-
-            // Move uploaded files to the upload directory
-            if (move_uploaded_file($_FILES["image1"]["tmp_name"], $image1Path) &&
-                move_uploaded_file($_FILES["image2"]["tmp_name"], $image2Path)) {
-                // Files uploaded successfully, continue with database insertion
-            } else {
-                return json_encode(array('type' => 'fail', 'message' => 'Failed to upload images.'));
-            }
+            move_uploaded_file($_FILES["image2"]["tmp_name"], $image2Path);
         }
 
-        // Insert new book record
         $sql = "INSERT INTO book (bookCategory, Title, Author, columnNumber, Accession, bookEdition, bookYear, Property, CallNumber, ISBN, image1, image2) VALUES ('$bookCategory', '$Title', '$Author', '$columnNumber', '$Accession', '$bookEdition', '$bookYear', '$Property', '$CallNumber', '$isbn', '$image1Name', '$image2Name')";
         $result = $this->conn->query($sql);
-
-        // Determine if the insertion was successful
-        if ($result) {
-            return json_encode(array('type' => 'success', 'message' => 'Book successfully added.'));
-        } else {
-            return json_encode(array('type' => 'fail', 'message' => 'Unable to add book details.'));
-        }
+        return $result ? json_encode(['type' => 'success', 'message' => 'Book successfully added.']) : json_encode(['type' => 'fail', 'message' => 'Unable to add book details.']);
     }
+}
+
+private function generateFileName($title, $type, $date, $originalName) {
+    $extension = pathinfo($originalName, PATHINFO_EXTENSION);
+    $sanitizedTitle = preg_replace('/[^a-zA-Z0-9_-]/', '_', $title); // Sanitize title
+    return $sanitizedTitle . '_' . $type . '_' . $date . '.' . $extension;
 }
 
             // Method to retrieve all books

@@ -9,7 +9,7 @@
 <body>
 
 <?php
-$targetDir = "assets/argraphics/book1info/";
+$targetDir = "/var/www/html/PLVIL/AR/assets/argraphics/book1info/";
 $fileNames = [
     'book1-title' => 'b1title.png',
     'book1-auth' => 'b1auth.png',
