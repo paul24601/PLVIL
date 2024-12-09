@@ -24,7 +24,7 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
     <link href="css/styles.css" rel="stylesheet" />
     
     <!-- For High-Resolution Icons -->
-    <link rel="icon" href="assets/plvil-logo.svg" type="image/svg+xml">
+    <link rel="icon" href="../assets/plvil-logo.svg" type="image/svg+xml">
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <style>
         .preview-img {
