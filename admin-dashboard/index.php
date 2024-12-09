@@ -50,6 +50,8 @@ $result = $conn->query($sql);
     <!-- DataTables Responsive CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
     <link href="css/styles.css" rel="stylesheet" />
+    <!-- For High-Resolution Icons -->
+    <link rel="icon" href="assets/plvil-logo.svg" type="image/svg+xml">
     <style>
         
         #datatablesSimple_length {

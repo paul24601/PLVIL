@@ -101,6 +101,8 @@ $result = $conn->query($sql);
     <title>Dashboard - PLVIL Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
+    <!-- For High-Resolution Icons -->
+    <link rel="icon" href="assets/plvil-logo.svg" type="image/svg+xml">
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
