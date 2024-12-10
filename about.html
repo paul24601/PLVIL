@@ -13,7 +13,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
-        
+
     <!-- For High-Resolution Icons -->
     <link rel="icon" href="assets/plvil-logo.svg" type="image/svg+xml">
     <style>
@@ -93,7 +93,7 @@
             font-size: 20px;
             margin: 0 10px;
         }
-        
+
         /* Navbar link hover effect */
         .navbar-nav .nav-link {
             transition: transform 0.3s ease;
@@ -114,7 +114,7 @@
             font-weight: bold;
             /* Make active link bold */
         }
-        
+
         /* Initial state */
         .custom-navbar {
             background-color: rgba(255, 255, 255, .9);
@@ -130,11 +130,14 @@
             /* Fully opaque background */
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        
+
         .custom-popover .popover-body {
-            max-width: 200px; /* Adjust this width as needed */
-            padding: 10px; /* Optional: increase padding */
-            font-size: 1.1em; /* Optional: increase font size */
+            max-width: 200px;
+            /* Adjust this width as needed */
+            padding: 10px;
+            /* Optional: increase padding */
+            font-size: 1.1em;
+            /* Optional: increase font size */
             background-color: rgba(255, 255, 255, .5);
             border-radius: 5px;
             border: 0;
@@ -158,9 +161,8 @@
                 <span class="fw-bolder text-dark fs-4 d-none d-md-block PLVIL-title">PLV: Interactive Library</span>
             </a>
             <!-- Toggler Button with Font Awesome Icon -->
-            <button class="navbar-toggler d-md-none border-0" type="button" data-bs-toggle="popover" 
-            data-bs-placement="bottom" data-bs-html="true" aria-expanded="false" 
-            aria-label="Toggle Navigation">
+            <button class="navbar-toggler d-md-none border-0" type="button" data-bs-toggle="popover"
+                data-bs-placement="bottom" data-bs-html="true" aria-expanded="false" aria-label="Toggle Navigation">
                 <i class="fas fa-bars fa-lg"></i> <!-- Modern hamburger icon -->
             </button>
             <!-- nav -->
@@ -174,8 +176,7 @@
                             data-bs-target="#arModal">AR Scan</a>
                     </li>
                     <li class="class-item">
-                        <a href="chairs-user.html"
-                            class="me-4 fs-6 text-dark fw-medium nav-link">Chairs</a>
+                        <a href="chairs-user.html" class="me-4 fs-6 text-dark fw-medium nav-link">Chairs</a>
                     </li>
                     <li class="class-item">
                         <a href="about.html" class="me-2 fs-6 text-dark fw-medium nav-link active">About</a>
@@ -183,7 +184,7 @@
                 </ul>
             </div>
         </div>
-        </nav>
+    </nav>
 
     <!-- AR Scan Modal -->
     <div class="modal fade" id="arModal" tabindex="-1" aria-labelledby="arModalLabel" aria-hidden="true">
@@ -337,46 +338,92 @@
 
     </div>
 
-    <div class="container">
-        <div class="row my-5">
-            <div class="col-lg-12">
-                <h2 class="text-light">Meet the Team</h2>
-            </div>
-
-            <!-- Team Member 1 -->
-            <div class="col-lg-4 mb-4">
-                <div class="card h-100 text-center">
-                    <img class="card-img-top" src="https://via.placeholder.com/150" alt="Team Member Image">
+    <div class="container my-5">
+        <h2 class="text-light text-center mb-4">Meet the Team</h2>
+    
+        <!-- Grid Container -->
+        <div class="row justify-content-center g-4">
+            <!-- Staff Member 1 -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 text-center">
+                <div class="card h-100">
+                    <img src="assets/lib-staffs/Emerie De Jose.png" class="card-img-top img-fluid" alt="Emerie De Jose">
                     <div class="card-body">
-                        <h5 class="card-title">John Doe</h5>
-                        <p class="card-text">Founder & CEO</p>
+                        <h5 class="card-title">Emerie De Jose</h5>
+                        <p class="card-text">University Librarian</p>
                     </div>
                 </div>
             </div>
-
-            <!-- Team Member 2 -->
-            <div class="col-lg-4 mb-4">
-                <div class="card h-100 text-center">
-                    <img class="card-img-top" src="https://via.placeholder.com/150" alt="Team Member Image">
+    
+            <!-- Staff Member 2 -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 text-center">
+                <div class="card h-100">
+                    <img src="assets/lib-staffs/Maryann Roldan .png" class="card-img-top img-fluid" alt="Maryann Roldan">
                     <div class="card-body">
-                        <h5 class="card-title">Jane Smith</h5>
-                        <p class="card-text">Chief Technology Officer</p>
+                        <h5 class="card-title">Maryann Roldan</h5>
+                        <p class="card-text">Library Admin</p>
                     </div>
                 </div>
             </div>
-
-            <!-- Team Member 3 -->
-            <div class="col-lg-4 mb-4">
-                <div class="card h-100 text-center">
-                    <img class="card-img-top" src="https://via.placeholder.com/150" alt="Team Member Image">
+    
+            <!-- Staff Member 3 -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 text-center">
+                <div class="card h-100">
+                    <img src="assets/lib-staffs/Karlo Jae Cacayuran.png" class="card-img-top img-fluid" alt="Karlo Jae Cacayuran">
                     <div class="card-body">
-                        <h5 class="card-title">Alex Johnson</h5>
-                        <p class="card-text">Head of Operations</p>
+                        <h5 class="card-title">Karlo Jae Cacayuran</h5>
+                        <p class="card-text">Library Staff</p>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Staff Member 4 -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 text-center">
+                <div class="card h-100">
+                    <img src="assets/lib-staffs/Dennis Abainza.png" class="card-img-top img-fluid" alt="Dennis Abainza">
+                    <div class="card-body">
+                        <h5 class="card-title">Dennis Abainza</h5>
+                        <p class="card-text">Position 4</p>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Staff Member 5 -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 text-center">
+                <div class="card h-100">
+                    <img src="assets/lib-staffs/Marlon Bautista.png" class="card-img-top img-fluid" alt="Marlon Bautista">
+                    <div class="card-body">
+                        <h5 class="card-title">Marlon Bautista</h5>
+                        <p class="card-text">Position 5</p>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Staff Member 6 -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 text-center">
+                <div class="card h-100">
+                    <img src="assets/lib-staffs/Rennielyn Pagulayan.png" class="card-img-top img-fluid" alt="Rennielyn Pagulayan">
+                    <div class="card-body">
+                        <h5 class="card-title">Rennielyn Pagulayan</h5>
+                        <p class="card-text">Position 6</p>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Staff Member 7 -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 text-center">
+                <div class="card h-100">
+                    <img src="assets/lib-staffs/Terrence Luchana.png" class="card-img-top img-fluid" alt="Terrence Luchana">
+                    <div class="card-body">
+                        <h5 class="card-title">Terrence Luchana</h5>
+                        <p class="card-text">Position 7</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
+    
+
 
 
     <!-- Footer -->
@@ -417,7 +464,8 @@
                     <p><i class="fas fa-phone me-3"></i>8352-700 Loc. 134, 135</p>
                     <!-- Facebook Link -->
                     <p>
-                        <a href="https://www.facebook.com/profile.php?id=100064626706651" class="me-4 text-reset text-decoration-none">
+                        <a href="https://www.facebook.com/profile.php?id=100064626706651"
+                            class="me-4 text-reset text-decoration-none">
                             <i class="fab fa-facebook-f me-3"></i>Pamantasan ng Lungsod ng Valenzuela University Library
                         </a>
                     </p>
@@ -435,7 +483,7 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
-    
+
     <!-- popover navbar -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -497,7 +545,7 @@
         });
 
     </script>
-    
+
     <!-- custom navbar -->
     <script>
         // Add a scroll event listener
@@ -513,7 +561,7 @@
             }
         });
     </script>
-    
+
     <script>
 
         document.addEventListener('DOMContentLoaded', function () {
