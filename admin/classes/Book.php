@@ -130,6 +130,89 @@ public function deleteBook($deleteId) {
 }
 
 
+public function archiveBook($bookId) {
+    // Fetch book details
+    $bookDetails = $this->getBookById($bookId);
+
+    if ($bookDetails) {
+        // Insert into archived_books
+        $sqlArchive = "INSERT INTO archived_books 
+            (bookId, bookCategory, Title, Author, columnNumber, Accession, bookEdition, bookYear, Property, CallNumber, isbn, image1, image2) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $this->conn->prepare($sqlArchive);
+        $stmt->bind_param(
+            "isssisiiissss",
+            $bookDetails['bookId'], $bookDetails['bookCategory'], $bookDetails['Title'], $bookDetails['Author'],
+            $bookDetails['columnNumber'], $bookDetails['Accession'], $bookDetails['bookEdition'], $bookDetails['bookYear'],
+            $bookDetails['Property'], $bookDetails['CallNumber'], $bookDetails['isbn'], $bookDetails['image1'], $bookDetails['image2']
+        );
+
+        if ($stmt->execute()) {
+            // Delete from books table
+            $sqlDelete = "DELETE FROM book WHERE bookId = ?";
+            $deleteStmt = $this->conn->prepare($sqlDelete);
+            $deleteStmt->bind_param("i", $bookId);
+            $deleteStmt->execute();
+
+            return json_encode(['type' => 'success', 'message' => 'Book archived successfully.']);
+        } else {
+            return json_encode(['type' => 'error', 'message' => 'Failed to archive book.']);
+        }
+    } else {
+        return json_encode(['type' => 'error', 'message' => 'Book not found.']);
+    }
+}
+
+public function restoreBook($bookId) {
+    // Fetch book details from archive
+    $sql = "SELECT * FROM archived_books WHERE bookId = ?";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("i", $bookId);
+    $stmt->execute();
+    $archivedBook = $stmt->get_result()->fetch_assoc();
+
+    if ($archivedBook) {
+        // Restore to books table
+        $sqlRestore = "INSERT INTO book 
+            (bookId, bookCategory, Title, Author, columnNumber, Accession, bookEdition, bookYear, Property, CallNumber, isbn, image1, image2) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmtRestore = $this->conn->prepare($sqlRestore);
+        $stmtRestore->bind_param(
+            "isssisiiissss",
+            $archivedBook['bookId'], $archivedBook['bookCategory'], $archivedBook['Title'], $archivedBook['Author'],
+            $archivedBook['columnNumber'], $archivedBook['Accession'], $archivedBook['bookEdition'], $archivedBook['bookYear'],
+            $archivedBook['Property'], $archivedBook['CallNumber'], $archivedBook['isbn'], $archivedBook['image1'], $archivedBook['image2']
+        );
+
+        if ($stmtRestore->execute()) {
+            // Remove from archived_books
+            $sqlDeleteArchive = "DELETE FROM archived_books WHERE bookId = ?";
+            $stmtDelete = $this->conn->prepare($sqlDeleteArchive);
+            $stmtDelete->bind_param("i", $bookId);
+            $stmtDelete->execute();
+
+            return json_encode(['type' => 'success', 'message' => 'Book restored successfully.']);
+        } else {
+            return json_encode(['type' => 'error', 'message' => 'Failed to restore book.']);
+        }
+    } else {
+        return json_encode(['type' => 'error', 'message' => 'Archived book not found.']);
+    }
+}
+
+public function cleanArchivedBooks() {
+    // Delete entries older than 30 days
+    $sql = "DELETE FROM archived_books WHERE archivedAt < NOW() - INTERVAL 30 DAY";
+    $result = $this->conn->query($sql);
+
+    if ($result) {
+        return json_encode(['type' => 'success', 'message' => 'Old archived books cleaned up successfully.']);
+    } else {
+        return json_encode(['type' => 'error', 'message' => 'Failed to clean up archived books.']);
+    }
+}
+
+
 $book = new Book();
 
 // Save book details
@@ -149,6 +232,24 @@ if (isset($_POST['getBookById'])) {
     $bookId = $_POST['getBookById'];
     $bookDetails = $book->getBookById($bookId);
     echo json_encode($bookDetails);
+}
+
+// Archive book
+if (isset($_POST['archiveBookId'])) {
+    $archiveBook = $book->archiveBook($_POST['archiveBookId']);
+    echo $archiveBook;
+}
+
+// Restore book
+if (isset($_POST['restoreBookId'])) {
+    $restoreBook = $book->restoreBook($_POST['restoreBookId']);
+    echo $restoreBook;
+}
+
+// Clean archived books
+if (isset($_POST['cleanArchivedBooks'])) {
+    $cleanArchivedBooks = $book->cleanArchivedBooks();
+    echo $cleanArchivedBooks;
 }
 
 
