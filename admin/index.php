@@ -1,5 +1,5 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/PLVIL/Admin/classes/book.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/admin/classes/book.php';
 $db = new DBConnection();
 ?>
 

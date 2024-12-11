@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/PLVIL/Admin/utility/DBConnection.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/utility/DBConnection.php';
 
 class Book {
     public $conn;
