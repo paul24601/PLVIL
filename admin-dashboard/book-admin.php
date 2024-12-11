@@ -48,17 +48,14 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
             bottom: 20px;
             right: 20px;
             z-index: 1000;
-            width: 40px;
-            /* Square width */
-            height: 40px;
-            /* Square height */
+            width: 40px; /* Square width */
+            height: 40px; /* Square height */
             border-radius: 5px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 14px;
-            transition: width 0.3s ease, padding 0.3s ease;
-            /* Transition for smooth expansion */
+            transition: width 0.3s ease, padding 0.3s ease; /* Transition for smooth expansion */
             overflow: hidden;
         }
 
@@ -73,16 +70,16 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
 
         /* Expand button and reveal text on hover */
         .add-book-button:hover {
-            width: auto;
-            /* Expands width to fit content */
+            width: auto; /* Expands width to fit content */
             padding: 8px 12px;
         }
 
         .add-book-button:hover .add-text {
             opacity: 1;
-            max-width: 100px;
-            /* Set a maximum width for the text */
+            max-width: 100px; /* Set a maximum width for the text */
         }
+
+
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -177,10 +174,9 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
                         <li class="breadcrumb-item active">Books</li>
                     </ol>
 
-
+                    
                     <div class="add-book">
-                        <button class="btn btn-success btn-md add-book-button" data-bs-toggle="modal"
-                            data-bs-target="#addBook">
+                        <button class="btn btn-success btn-md add-book-button" data-bs-toggle="modal" data-bs-target="#addBook">
                             <i class="fa-solid fa-plus ps-2"></i>
                             <span class="add-text">Add New Book</span>
                         </button>
@@ -192,8 +188,7 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
 
                             <!-- Table Section -->
                             <div class="table-responsive">
-                                <table class="table table-hover table-bordered display nowrap border"
-                                    id="datatablesSimple">
+                                <table class="table table-hover table-bordered display nowrap border" id="datatablesSimple">
                                     <thead class="table-bordered table-light">
                                         <tr>
                                             <th class="text-center" width="5%">Book ID</th>
@@ -223,8 +218,8 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
                                             <tr>
                                                 <td><?php echo $book['bookId']; ?></td> <!-- Display the Book ID -->
                                                 <td><?php echo $book['bookCategory']; ?></td>
-                                                <td><img src="/admin/uploads/<?php echo $book['image1']; ?>" alt="Book Stem"
-                                                        style="width: 100px; height: 100px;"></td>
+                                                <td><img src="/admin/uploads/<?php echo $book['image1']; ?>"
+                                                        alt="Book Stem" style="width: 100px; height: 100px;"></td>
                                                 <td><img src="/admin/uploads/<?php echo $book['image2']; ?>"
                                                         alt="Front Cover" style="width: 100px; height: 100px;"></td>
                                                 <td><?php echo $book['Title']; ?></td>
@@ -243,18 +238,6 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
                                                     <button class="btn btn-danger btn-sm deleteButton"
                                                         id="<?php echo $book['bookId'] ?>"><i
                                                             class="fa-regular fa-trash-can"></i> Delete</button>
-                                                    <!-- Archive Button -->
-                                                    <button class="btn btn-warning archiveButton"
-                                                        data-id="<?php echo $book['bookId']; ?>">
-                                                        <i class="fa-solid fa-archive"></i> Archive
-                                                    </button>
-
-                                                    <!-- Restore Button (For Archived Books) -->
-                                                    <button class="btn btn-success restoreButton"
-                                                        data-id="<?php echo $archivedBook['bookId']; ?>">
-                                                        <i class="fa-solid fa-rotate-left"></i> Restore
-                                                    </button>
-
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
@@ -305,8 +288,7 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
                                                     placeholder="Enter Book Author" required>
                                             </div>
                                             <div class="input-group mb-3">
-                                                <span style=" width: 160px;" class="input-group-text">Shelves
-                                                    Number</span>
+                                                <span style=" width: 160px;" class="input-group-text">Shelves Number</span>
                                                 <select name="columnNumber" class="form-select" required>
                                                     <option selected disabled>Choose Shelf Number...</option>
                                                     <option value="1">Shelf 1</option>
@@ -333,8 +315,8 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
                                             </div>
                                             <div class="input-group mb-3">
                                                 <span style=" width: 160px;" class="input-group-text">Year</span>
-                                                <input type="number" id="year" min="1900" step="1" name="bookYear"
-                                                    class="form-control" placeholder="Enter Year" required>
+                                                <input type="number" id="year" min="1900" step="1" name="bookYear" class="form-control"
+                                                    placeholder="Enter Year" required>
                                             </div>
                                             <div class="input-group mb-3">
                                                 <span style=" width: 160px; align-text: center;"
@@ -436,10 +418,8 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
                                                     required>
                                             </div>
                                             <div class="input-group mb-3">
-                                                <span style=" width: 160px;" class="input-group-text"
-                                                    for="columnNumberEdit">Shelves Number</span>
-                                                <select class="form-select" id="columnNumberEdit" name="columnNumber"
-                                                    required>
+                                                <span style=" width: 160px;" class="input-group-text" for="columnNumberEdit">Shelves Number</span>
+                                                <select class="form-select" id="columnNumberEdit" name="columnNumber" required>
                                                     <option selected disabled>Choose Shelf Number...</option>
                                                     <option value="1">Shelf 1</option>
                                                     <option value="2">Shelf 2</option>
@@ -470,7 +450,7 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
                                                 <span style=" width: 160px;" class="input-group-text"
                                                     for="bookYearEdit">Year</span>
                                                 <input type="number" min="1900" step="1" class="form-control"
-                                                    placeholder="Enter Year" class="form-control" id="bookYearEdit"
+                                                placeholder="Enter Year" class="form-control" id="bookYearEdit"
                                                     name="bookYear" required>
                                             </div>
                                             <div class="input-group mb-3">
@@ -507,8 +487,7 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger"
-                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                                         <button type="button" class="btn btn-primary" id="saveEditBookBtn">Save
                                             changes</button>
                                     </div>
@@ -717,56 +696,29 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
                 });
             });
 
-            $('.archiveButton').on('click', function () {
-                const bookId = $(this).data('id');
-                if (confirm('Are you sure you want to archive this book?')) {
-                    $.post('/admin/classes/Book.php', { archiveBookId: bookId }, function (response) {
-                        const data = JSON.parse(response);
-                        alert(data.message);
-                        if (data.type === 'success') {
-                            location.reload();
-                        }
-                    });
-                }
-            });
-
-            $('.restoreButton').on('click', function () {
-                const bookId = $(this).data('id');
-                if (confirm('Are you sure you want to restore this book?')) {
-                    $.post('/admin/classes/Book.php', { restoreBookId: bookId }, function (response) {
-                        const data = JSON.parse(response);
-                        alert(data.message);
-                        if (data.type === 'success') {
-                            location.reload();
-                        }
-                    });
-                }
-            });
-
-
         });
 
     </script>
 
     <script>
         $(document).ready(function () {
-            $('#datatablesSimple').DataTable({
-                "paging": true,        // Enable pagination
-                "searching": true,     // Enable search
-                "ordering": true,      // Enable column sorting
-                "info": true,          // Show table information
-                "order": [[0, "desc"]] // Sort by the first column (Book ID) in descending order
-            });
-        });
+    $('#datatablesSimple').DataTable({
+        "paging": true,        // Enable pagination
+        "searching": true,     // Enable search
+        "ordering": true,      // Enable column sorting
+        "info": true,          // Show table information
+        "order": [[0, "desc"]] // Sort by the first column (Book ID) in descending order
+    });
+});        
 
     </script>
 
     <script>
         const currentYear = new Date().getFullYear();
-
+        
         const yearInput = document.getElementById('year');
         yearInput.setAttribute('max', currentYear);
-
+        
         const bookYearInput = document.getElementById('bookYearEdit');
         bookYearInput.setAttribute('max', currentYear);
     </script>
