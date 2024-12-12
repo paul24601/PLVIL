@@ -29,6 +29,9 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Dashboard - PLVIL Admin</title>
     <link href="css/styles.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <!-- For High-Resolution Icons -->
     <link rel="icon" href="../assets/plvil-logo.svg" type="image/svg+xml">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
@@ -49,23 +52,30 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
     <script>
         $(document).ready(function () {
-            $("#bookCategoryInput").autocomplete({
-                source: function (request, response) {
-                    $.ajax({
-                        url: '/admin/classes/fetchCategories.php', // Backend endpoint
-                        dataType: 'json',
-                        data: { term: request.term }, // User's input
-                        success: function (data) {
-                            response(data); // Provide suggestions
-                        },
-                        error: function () {
-                            console.error('Failed to fetch categories.');
-                        }
-                    });
+    $("#bookCategoryInput").autocomplete({
+        source: function (request, response) {
+            console.log("Requesting autocomplete for:", request.term); // Debugging
+            $.ajax({
+                url: '/admin/classes/fetchCategories.php', // Endpoint
+                dataType: 'json',
+                data: { term: request.term }, // User's input
+                success: function (data) {
+                    console.log("Autocomplete suggestions:", data); // Debugging
+                    response(data); // Pass suggestions to autocomplete
                 },
-                minLength: 2, // Start suggesting after typing 2 characters
+                error: function () {
+                    console.error("Failed to fetch categories.");
+                }
             });
-        });
+        },
+        minLength: 1, // Start after 1 characters
+        select: function (event, ui) {
+            console.log("Selected item:", ui.item.value); // Log selected item
+        }
+    });
+
+
+});
     </script>
 
 
@@ -78,7 +88,7 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
             position: fixed;
             bottom: 20px;
             right: 20px;
-            z-index: 1000;
+            z-index: 50;
             width: 40px;
             /* Square width */
             height: 40px;
@@ -119,13 +129,21 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
             max-height: 200px;
             overflow-y: auto;
             overflow-x: hidden;
-            z-index: 1051 !important;
+            z-index: 9999 !important;
             /* Ensure it appears above modal */
             background-color: white;
             /* Match the modal's background color */
             border: 1px solid #ccc;
             padding: 5px;
         }
+.dropdown-menu {
+    z-index: 1055; /* Ensure dropdown appears above other elements */
+}
+
+.sb-topnav {
+    position: relative; /* Prevents dropdown from being clipped */
+}
+
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
