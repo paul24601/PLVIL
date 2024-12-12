@@ -113,10 +113,6 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
                         <a class="nav-link" href="featured-admin.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-star"></i></div>
                             Featured Items
-                        </a>                        
-<a class="nav-link" href="archived-books.php">
-                            <div class="sb-nav-link-icon"><i class="fas fa-box-archive"></i></div>
-                            Archive
                         </a>
                     </div>
                 </div>
