@@ -718,16 +718,52 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
 
     <script>
         $(document).ready(function () {
-            $('#datatablesSimple').DataTable({
-                "paging": true,        // Enable pagination
-                "responsive": true,
-                "searching": true,     // Enable search
-                "ordering": true,      // Enable column sorting
-                "info": true,          // Show table information
-                "order": [[0, "desc"]] // Sort by the first column (Book ID) in descending order
-            });
-        });
+    const table = $('#datatablesSimple').DataTable({
+        paging: true,        
+        responsive: true,
+        searching: true,     
+        ordering: true,      
+        info: true,          
+        order: [[0, "desc"]] 
+    });
 
+    // Delegate the click event to the table body
+    $('#datatablesSimple tbody').on('click', '.editButton', function () {
+        const bookId = $(this).attr('id'); 
+        $('#editBookId').val(bookId); 
+        // Fetch and handle book edit functionality
+        $.post('/admin/classes/Book.php', { getBookById: bookId }, function (data) {
+            const bookData = JSON.parse(data);
+            $('#bookCategoryEdit').val(bookData.bookCategory);
+            $('#TitleEdit').val(bookData.Title);
+            $('#AuthorEdit').val(bookData.Author);
+            $('#columnNumberEdit').val(bookData.columnNumber);
+            $('#AccessionEdit').val(bookData.Accession);
+            $('#bookEditionEdit').val(bookData.bookEdition);
+            $('#bookYearEdit').val(bookData.bookYear);
+            $('#PropertyEdit').val(bookData.Property);
+            $('#callNumberEdit').val(bookData.callNumber);
+            $('#isbnEdit').val(bookData.isbn);
+            $('#editBookModal').modal('show');
+        });
+    });
+
+    $('#datatablesSimple tbody').on('click', '.deleteButton', function () {
+        const confirmDelete = confirm("Are you sure you want to delete this book?");
+        if (confirmDelete) {
+            const bookId = $(this).attr('id');
+            $.post('/admin/classes/Book.php', { deleteId: bookId }, function (data) {
+                const response = JSON.parse(data);
+                if (response.type === 'success') {
+                    alert('Book deleted successfully');
+                    table.row($(this).parents('tr')).remove().draw();
+                } else {
+                    alert('Failed to delete the book.');
+                }
+            });
+        }
+    });
+});
     </script>
 
     <script>
