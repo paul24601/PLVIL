@@ -29,8 +29,8 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Dashboard - PLVIL Admin</title>
     <link href="css/styles.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- For High-Resolution Icons -->
     <link rel="icon" href="../assets/plvil-logo.svg" type="image/svg+xml">
@@ -52,30 +52,30 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
     <script>
         $(document).ready(function () {
-            $("#bookCategoryInput").autocomplete({
-                source: function (request, response) {
-                    console.log("Requesting autocomplete for:", request.term); // Debugging
-                    $.ajax({
-                        url: '/admin/classes/fetchCategories.php', // Endpoint
-                        dataType: 'json',
-                        data: { term: request.term }, // User's input
-                        success: function (data) {
-                            console.log("Autocomplete suggestions:", data); // Debugging
-                            response(data); // Pass suggestions to autocomplete
-                        },
-                        error: function () {
-                            console.error("Failed to fetch categories.");
-                        }
-                    });
+    $("#bookCategoryInput").autocomplete({
+        source: function (request, response) {
+            console.log("Requesting autocomplete for:", request.term); // Debugging
+            $.ajax({
+                url: '/admin/classes/fetchCategories.php', // Endpoint
+                dataType: 'json',
+                data: { term: request.term }, // User's input
+                success: function (data) {
+                    console.log("Autocomplete suggestions:", data); // Debugging
+                    response(data); // Pass suggestions to autocomplete
                 },
-                minLength: 1, // Start after 1 characters
-                select: function (event, ui) {
-                    console.log("Selected item:", ui.item.value); // Log selected item
+                error: function () {
+                    console.error("Failed to fetch categories.");
                 }
             });
+        },
+        minLength: 1, // Start after 1 characters
+        select: function (event, ui) {
+            console.log("Selected item:", ui.item.value); // Log selected item
+        }
+    });
 
 
-        });
+});
     </script>
 
 
@@ -136,16 +136,14 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
             border: 1px solid #ccc;
             padding: 5px;
         }
+.dropdown-menu {
+    z-index: 1055; /* Ensure dropdown appears above other elements */
+}
 
-        .dropdown-menu {
-            z-index: 1055;
-            /* Ensure dropdown appears above other elements */
-        }
+.sb-topnav {
+    position: relative; /* Prevents dropdown from being clipped */
+}
 
-        .sb-topnav {
-            position: relative;
-            /* Prevents dropdown from being clipped */
-        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -435,7 +433,7 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
                         </div>
 
                         <input type="hidden" id="editBookId">
-                        <!-- Edit Modal -->
+                        <!-- Add an edit modal -->
                         <div class="modal fade" id="editBookModal" tabindex="-1" role="dialog"
                             aria-labelledby="editBookModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -447,53 +445,102 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form id="editBookForm" enctype="multipart/form-data">
-                                            <input type="hidden" id="editBookId" name="bookId">
+                                        <form id="editBookForm">
+                                            <input type="hidden" id="editBookId">
                                             <div class="input-group mb-3">
                                                 <label class="input-group-text" for="bookCategoryEdit">Category</label>
-                                                <input type="text" class="form-control" id="bookCategoryEdit"
-                                                    name="bookCategory" required>
+                                                <input type="text" class="form-control" id="bookCategoryEdit" name="bookCategory" required>
                                             </div>
                                             <div class="input-group mb-3">
-                                                <label class="input-group-text" for="callNumberEdit">Call Number</label>
+                                                <span style=" width: 160px;" class="input-group-text"
+                                                    for="TitleEdit">Title</span>
+                                                <input type="text" class="form-control" id="TitleEdit" name="Title"
+                                                    required>
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <span style=" width: 160px;" class="input-group-text"
+                                                    for="AuthorEdit">Author</span>
+                                                <input type="text" class="form-control" id="AuthorEdit" name="Author"
+                                                    required>
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <span style=" width: 160px;" class="input-group-text"
+                                                    for="columnNumberEdit">Shelves Number</span>
+                                                <select class="form-select" id="columnNumberEdit" name="columnNumber"
+                                                    required>
+                                                    <option selected disabled>Choose Shelf Number...</option>
+                                                    <option value="1">Shelf 1</option>
+                                                    <option value="2">Shelf 2</option>
+                                                    <option value="3">Shelf 3</option>
+                                                    <option value="4">Shelf 4</option>
+                                                    <option value="5">Shelf 5</option>
+                                                    <option value="6">Shelf 6</option>
+                                                    <option value="7">Shelf 7</option>
+                                                    <option value="8">Shelf 8</option>
+                                                    <option value="9">Shelf 9</option>
+                                                    <option value="10">Shelf 10</option>
+                                                </select>
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <span style=" width: 160px;" class="input-group-text"
+                                                    for="AccessionEdit">Accession</span>
+                                                <input type="text" class="form-control" id="AccessionEdit"
+                                                    name="Accession" required>
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <span style=" width: 160px;" class="input-group-text"
+                                                    for="bookEditionEdit">Book
+                                                    Edition</span>
+                                                <input type="number" class="form-control" id="bookEditionEdit"
+                                                    name="bookEdition" required>
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <span style=" width: 160px;" class="input-group-text"
+                                                    for="bookYearEdit">Year</span>
+                                                <input type="number" min="1900" step="1" class="form-control"
+                                                    placeholder="Enter Year" class="form-control" id="bookYearEdit"
+                                                    name="bookYear" required>
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <span style=" width: 160px;" class="input-group-text"
+                                                    for="PropertyEdit">Property</span>
+                                                <input type="text" class="form-control" id="PropertyEdit"
+                                                    name="Property" required>
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <span style=" width: 160px;" class="input-group-text"
+                                                    for="callNumberEdit">Call
+                                                    Number</span>
                                                 <input type="text" class="form-control" id="callNumberEdit"
                                                     name="CallNumber" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label>Current Book Stem:</label>
-                                                <img id="bookStemPreview" src="" alt="Book Stem"
-                                                    style="width: 100px; height: 100px;">
+                                                <img id="bookStemPreview" src="" alt="Book Stem" style="width: 100px; height: 100px;">
                                             </div>
                                             <div class="input-group mb-3">
-                                                <label class="input-group-text" for="bookStemEdit">Upload New Book
-                                                    Stem</label>
-                                                <input type="file" class="form-control" id="bookStemEdit" name="image1"
-                                                    accept="image/*">
+                                                <label class="input-group-text" for="bookStemEdit">Upload New Book Stem</label>
+                                                <input type="file" class="form-control" id="bookStemEdit" name="image1" accept="image/*">
                                             </div>
                                             <div class="mb-3">
                                                 <label>Current Front Cover:</label>
-                                                <img id="frontCoverPreview" src="" alt="Front Cover"
-                                                    style="width: 100px; height: 100px;">
+                                                <img id="frontCoverPreview" src="" alt="Front Cover" style="width: 100px; height: 100px;">
                                             </div>
                                             <div class="input-group mb-3">
-                                                <label class="input-group-text" for="frontCoverEdit">Upload New Front
-                                                    Cover</label>
-                                                <input type="file" class="form-control" id="frontCoverEdit"
-                                                    name="image2" accept="image/*">
+                                                <label class="input-group-text" for="frontCoverEdit">Upload New Front Cover</label>
+                                                <input type="file" class="form-control" id="frontCoverEdit" name="image2" accept="image/*">
                                             </div>
-                                            <!-- Add other form fields as needed -->
                                         </form>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger"
-                                            data-bs-dismiss="modal">Cancel</button>
+                                            data-bs-dismiss="modal">Close</button>
                                         <button type="button" class="btn btn-primary" id="saveEditBookBtn">Save
-                                            Changes</button>
+                                            changes</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </main>
@@ -595,10 +642,7 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
                     $('#PropertyEdit').val(bookData.Property);
                     $('#callNumberEdit').val(bookData.callNumber);
                     $('#isbnEdit').val(bookData.isbn);
-        
-                    // Update image previews
-                    $('#bookStemPreview').attr('src', '/admin/uploads/' + bookData.image1);
-                    $('#frontCoverPreview').attr('src', '/admin/uploads/' + bookData.image2);
+
 
                     // Show the edit modal
                     $('#editBookModal').modal('show');
