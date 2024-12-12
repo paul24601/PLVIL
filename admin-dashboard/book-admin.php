@@ -248,10 +248,6 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
                                                         id="<?php echo $book['bookId']; ?>">
                                                         <i class="fa-regular fa-trash-can"></i> Delete
                                                     </button>
-                                                    <button class="btn btn-warning btn-sm archiveButton"
-                                                        id="<?php echo $book['bookId']; ?>">
-                                                        <i class="fa-solid fa-archive"></i> Archive
-                                                    </button>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
@@ -676,23 +672,6 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
                             }, 1500);
                         } else {
                             showAlert(data.message, 'danger');
-                        }
-                    });
-                }
-            });
-
-            // Archive book
-            $('.archiveButton').on('click', function () {
-                var confirmArchive = confirm("Are you sure you want to archive this book?");
-                if (confirmArchive) {
-                    var bookId = $(this).attr('id');
-                    $.post('/admin/classes/Book.php', { archiveId: bookId }, function (response) {
-                        var data = JSON.parse(response);
-                        if (data.type === 'success') {
-                            alert(data.message);
-                            location.reload();
-                        } else {
-                            alert('Error: ' + data.message);
                         }
                     });
                 }
