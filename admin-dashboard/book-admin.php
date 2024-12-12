@@ -270,22 +270,8 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
                                     <div class="modal-body">
                                         <form id="addBookForm" method="POST" enctype="multipart/form-data">
                                             <div class="input-group mb-3">
-                                                <label style=" width: 160px;" class="input-group-text"
-                                                    for="inputGroupSelect01">Book
-                                                    Category</label>
-                                                <select class="form-select" id="bookCategory" name="bookCategory"
-                                                    required>
-                                                    <option selected selected disabled>Choose Category...</option>
-                                                    <option value="Literature">Literature</option>
-                                                    <option value="Education">Education</option>
-                                                    <option value="Novel">Novel</option>
-                                                    <option value="Entertainment">Entertainment</option>
-                                                    <option value="Technology">Technology</option>
-                                                    <option value="Engineering">Engineering</option>
-                                                    <option value="Laws">Laws</option>
-                                                    <option value="Architecture">Architecture</option>
-                                                    <option value="Fiction">Fiction</option>
-                                                </select>
+                                                <label style="width: 160px;" class="input-group-text" for="bookCategoryInput">Book Category</label>
+                                                <input type="text" class="form-control" id="bookCategoryInput" name="bookCategory" placeholder="Type to search..." required>
                                             </div>
                                             <div class="input-group mb-3">
                                                 <span style=" width: 160px;" class="input-group-text">Title</span>
@@ -789,6 +775,28 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
             }
         });
     </script>
+
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script>
+    $(document).ready(function () {
+        // Initialize autocomplete on the book category input field
+        $("#bookCategoryInput").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: '/admin/classes/fetchCategories.php', // Backend endpoint
+                    dataType: 'json',
+                    data: { term: request.term }, // Pass the user's input to the server
+                    success: function (data) {
+                        response(data); // Provide the suggestions to the autocomplete widget
+                    },
+                });
+            },
+            minLength: 2, // Start suggesting after the user types 2 characters
+        });
+    });
+</script>
+
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
