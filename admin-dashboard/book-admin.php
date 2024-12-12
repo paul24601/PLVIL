@@ -38,7 +38,7 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <style>
         #datatablesSimple_length {
@@ -85,13 +85,6 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
             max-width: 100px;
             /* Set a maximum width for the text */
         }
-        .ui-autocomplete {
-            max-height: 200px;
-            overflow-y: auto;
-            overflow-x: hidden;
-            z-index: 1051 !important; /* Ensure it appears above modal */
-        }
-
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -277,8 +270,11 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
                                     <div class="modal-body">
                                         <form id="addBookForm" method="POST" enctype="multipart/form-data">
                                             <div class="input-group mb-3">
-                                                <label style=" width: 160px;" class="input-group-text" for="inputGroupSelect01">Book Category</label>
-                                                <select class="form-select" id="bookCategory" name="bookCategory" required>
+                                                <label style=" width: 160px;" class="input-group-text"
+                                                    for="inputGroupSelect01">Book
+                                                    Category</label>
+                                                <select class="form-select" id="bookCategory" name="bookCategory"
+                                                    required>
                                                     <option selected selected disabled>Choose Category...</option>
                                                     <option value="Literature">Literature</option>
                                                     <option value="Education">Education</option>
@@ -793,27 +789,6 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
             }
         });
     </script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-    
-    <script>
-        $(document).ready(function () {
-            // Autocomplete for category input
-            $("#bookCategoryInput").autocomplete({
-                source: function (request, response) {
-                    $.ajax({
-                        url: '/admin/classes/fetchCategories.php',
-                        dataType: 'json',
-                        data: { term: request.term },
-                        success: function (data) {
-                            response(data);
-                        },
-                    });
-                },
-                minLength: 2, // Start searching after typing 2 characters
-            });
-        });
-    </script>
-
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
