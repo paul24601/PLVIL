@@ -136,6 +136,25 @@ class Book
             return null;
         }
     }
+
+    // Method to fetch distinct book categories for autocomplete
+    public function getCategories($term)
+    {
+        $sql = "SELECT DISTINCT bookCategory FROM book WHERE bookCategory LIKE ? ORDER BY bookCategory ASC LIMIT 10";
+        $stmt = $this->conn->prepare($sql);
+        $searchTerm = '%' . $term . '%';
+        $stmt->bind_param('s', $searchTerm);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $categories = [];
+        while ($row = $result->fetch_assoc()) {
+            $categories[] = $row['bookCategory'];
+        }
+
+        return $categories;
+    }
+
 }
 
 

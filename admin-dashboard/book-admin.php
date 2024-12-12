@@ -271,7 +271,7 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
                                         <form id="addBookForm" method="POST" enctype="multipart/form-data">
                                             <div class="input-group mb-3">
                                                 <label style="width: 160px;" class="input-group-text" for="bookCategoryInput">Book Category</label>
-                                                <input type="text" class="form-control" id="bookCategoryInput" name="bookCategory" placeholder="Type to search..." required>
+                                                <input type="text" class="form-control" id="bookCategoryInput" name="bookCategory" placeholder="Enter Book Category" required>
                                             </div>
                                             <div class="input-group mb-3">
                                                 <span style=" width: 160px;" class="input-group-text">Title</span>
@@ -775,27 +775,27 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
             }
         });
     </script>
-
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+
 <script>
     $(document).ready(function () {
-        // Initialize autocomplete on the book category input field
         $("#bookCategoryInput").autocomplete({
             source: function (request, response) {
                 $.ajax({
-                    url: '/admin/classes/fetchCategories.php', // Backend endpoint
+                    url: '/admin/classes/fetchCategories.php', // Endpoint to fetch categories
                     dataType: 'json',
-                    data: { term: request.term }, // Pass the user's input to the server
+                    data: { term: request.term }, // Send user's input as a query parameter
                     success: function (data) {
-                        response(data); // Provide the suggestions to the autocomplete widget
+                        response(data); // Populate the autocomplete dropdown
                     },
                 });
             },
-            minLength: 2, // Start suggesting after the user types 2 characters
+            minLength: 2, // Start searching after 2 characters
         });
     });
 </script>
+
 
 
     <!-- jQuery -->
