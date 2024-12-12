@@ -175,23 +175,7 @@ if (isset($_POST['deleteId'])) {
 // Fetch book details by ID
 if (isset($_POST['getBookById'])) {
     $bookId = $_POST['getBookById'];
-    $book = $bookObj->getBookById($bookId);
-    echo json_encode([
-        'bookId' => $book['bookId'],
-        'bookCategory' => $book['bookCategory'],
-        'Title' => $book['Title'],
-        'Author' => $book['Author'],
-        'columnNumber' => $book['columnNumber'],
-        'Accession' => $book['Accession'],
-        'bookEdition' => $book['bookEdition'],
-        'bookYear' => $book['bookYear'],
-        'Property' => $book['Property'],
-        'CallNumber' => $book['CallNumber'],
-        'isbn' => $book['isbn'],
-        'image1' => $book['image1'], // Book Stem image
-        'image2' => $book['image2'], // Front Cover image
-    ]);
-    exit();
+    $bookDetails = $book->getBookById($bookId);
+    echo json_encode($bookDetails);
 }
-
 ?>

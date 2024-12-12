@@ -514,21 +514,23 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
                                                 <input type="text" class="form-control" id="callNumberEdit"
                                                     name="CallNumber" required>
                                             </div>
-                                            <div class="mb-3">
-                                                <label>Current Book Stem:</label>
-                                                <img id="bookStemPreview" src="" alt="Book Stem" style="width: 100px; height: 100px;">
+                                            <div class="input-group mb-3">
+                                                <span style=" width: 160px;" class="input-group-text"
+                                                    for="isbnEdit">ISBN/ISSN</span>
+                                                <input type="text" class="form-control" id="isbnEdit" name="isbn"
+                                                    required>
                                             </div>
                                             <div class="input-group mb-3">
-                                                <label class="input-group-text" for="bookStemEdit">Upload New Book Stem</label>
-                                                <input type="file" class="form-control" id="bookStemEdit" name="image1" accept="image/*">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label>Current Front Cover:</label>
-                                                <img id="frontCoverPreview" src="" alt="Front Cover" style="width: 100px; height: 100px;">
+                                                <label class="input-group-text" for="inputGroupFile01">Image Book
+                                                    Stem</label>
+                                                <input type="file" class="form-control" id="inputGroupFile03"
+                                                    name="image1" accept="image/*">
                                             </div>
                                             <div class="input-group mb-3">
-                                                <label class="input-group-text" for="frontCoverEdit">Upload New Front Cover</label>
-                                                <input type="file" class="form-control" id="frontCoverEdit" name="image2" accept="image/*">
+                                                <label class="input-group-text" for="inputGroupFile02">Image Front
+                                                    Cover</label>
+                                                <input type="file" class="form-control" id="inputGroupFile04"
+                                                    name="image2" accept="image/*">
                                             </div>
                                         </form>
                                     </div>
