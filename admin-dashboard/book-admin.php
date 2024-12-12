@@ -34,12 +34,41 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
-
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <!-- Load jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Load jQuery UI -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+
+    <!-- Load other JS libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#bookCategoryInput").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: '/admin/classes/fetchCategories.php', // Backend endpoint
+                        dataType: 'json',
+                        data: { term: request.term }, // User's input
+                        success: function (data) {
+                            response(data); // Provide suggestions
+                        },
+                        error: function () {
+                            console.error('Failed to fetch categories.');
+                        }
+                    });
+                },
+                minLength: 2, // Start suggesting after typing 2 characters
+            });
+        });
+    </script>
+
+
     <style>
         #datatablesSimple_length {
             margin-bottom: 20px;
@@ -270,8 +299,10 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
                                     <div class="modal-body">
                                         <form id="addBookForm" method="POST" enctype="multipart/form-data">
                                             <div class="input-group mb-3">
-                                                <label style="width: 160px;" class="input-group-text" for="bookCategoryInput">Book Category</label>
-                                                <input type="text" class="form-control" id="bookCategoryInput" name="bookCategory" placeholder="Enter Book Category" required>
+                                                <label style="width: 160px;" class="input-group-text"
+                                                    for="bookCategoryInput">Book Category</label>
+                                                <input type="text" class="form-control" id="bookCategoryInput"
+                                                    name="bookCategory" placeholder="Enter Book Category" required>
                                             </div>
                                             <div class="input-group mb-3">
                                                 <span style=" width: 160px;" class="input-group-text">Title</span>
@@ -704,52 +735,52 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
 
     <script>
         $(document).ready(function () {
-    const table = $('#datatablesSimple').DataTable({
-        paging: true,        
-        responsive: true,
-        searching: true,     
-        ordering: true,      
-        info: true,          
-        order: [[0, "desc"]] 
-    });
+            const table = $('#datatablesSimple').DataTable({
+                paging: true,
+                responsive: true,
+                searching: true,
+                ordering: true,
+                info: true,
+                order: [[0, "desc"]]
+            });
 
-    // Delegate the click event to the table body
-    $('#datatablesSimple tbody').on('click', '.editButton', function () {
-        const bookId = $(this).attr('id'); 
-        $('#editBookId').val(bookId); 
-        // Fetch and handle book edit functionality
-        $.post('/admin/classes/Book.php', { getBookById: bookId }, function (data) {
-            const bookData = JSON.parse(data);
-            $('#bookCategoryEdit').val(bookData.bookCategory);
-            $('#TitleEdit').val(bookData.Title);
-            $('#AuthorEdit').val(bookData.Author);
-            $('#columnNumberEdit').val(bookData.columnNumber);
-            $('#AccessionEdit').val(bookData.Accession);
-            $('#bookEditionEdit').val(bookData.bookEdition);
-            $('#bookYearEdit').val(bookData.bookYear);
-            $('#PropertyEdit').val(bookData.Property);
-            $('#callNumberEdit').val(bookData.callNumber);
-            $('#isbnEdit').val(bookData.isbn);
-            $('#editBookModal').modal('show');
-        });
-    });
+            // Delegate the click event to the table body
+            $('#datatablesSimple tbody').on('click', '.editButton', function () {
+                const bookId = $(this).attr('id');
+                $('#editBookId').val(bookId);
+                // Fetch and handle book edit functionality
+                $.post('/admin/classes/Book.php', { getBookById: bookId }, function (data) {
+                    const bookData = JSON.parse(data);
+                    $('#bookCategoryEdit').val(bookData.bookCategory);
+                    $('#TitleEdit').val(bookData.Title);
+                    $('#AuthorEdit').val(bookData.Author);
+                    $('#columnNumberEdit').val(bookData.columnNumber);
+                    $('#AccessionEdit').val(bookData.Accession);
+                    $('#bookEditionEdit').val(bookData.bookEdition);
+                    $('#bookYearEdit').val(bookData.bookYear);
+                    $('#PropertyEdit').val(bookData.Property);
+                    $('#callNumberEdit').val(bookData.callNumber);
+                    $('#isbnEdit').val(bookData.isbn);
+                    $('#editBookModal').modal('show');
+                });
+            });
 
-    $('#datatablesSimple tbody').on('click', '.deleteButton', function () {
-        const confirmDelete = confirm("Are you sure you want to delete this book?");
-        if (confirmDelete) {
-            const bookId = $(this).attr('id');
-            $.post('/admin/classes/Book.php', { deleteId: bookId }, function (data) {
-                const response = JSON.parse(data);
-                if (response.type === 'success') {
-                    alert('Book deleted successfully');
-                    table.row($(this).parents('tr')).remove().draw();
-                } else {
-                    alert('Failed to delete the book.');
+            $('#datatablesSimple tbody').on('click', '.deleteButton', function () {
+                const confirmDelete = confirm("Are you sure you want to delete this book?");
+                if (confirmDelete) {
+                    const bookId = $(this).attr('id');
+                    $.post('/admin/classes/Book.php', { deleteId: bookId }, function (data) {
+                        const response = JSON.parse(data);
+                        if (response.type === 'success') {
+                            alert('Book deleted successfully');
+                            table.row($(this).parents('tr')).remove().draw();
+                        } else {
+                            alert('Failed to delete the book.');
+                        }
+                    });
                 }
             });
-        }
-    });
-});
+        });
     </script>
 
     <script>
@@ -775,28 +806,7 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
             }
         });
     </script>
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-
-<script>
-    $(document).ready(function () {
-        $("#bookCategoryInput").autocomplete({
-            source: function (request, response) {
-                $.ajax({
-                    url: '/admin/classes/fetchCategories.php', // Endpoint to fetch categories
-                    dataType: 'json',
-                    data: { term: request.term }, // Send user's input as a query parameter
-                    success: function (data) {
-                        response(data); // Populate the autocomplete dropdown
-                    },
-                });
-            },
-            minLength: 2, // Start searching after 2 characters
-        });
-    });
-</script>
-
-
-
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- DataTables JS -->
@@ -807,7 +817,7 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
         crossorigin="anonymous"></script>
-        <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
 
 </body>
 
