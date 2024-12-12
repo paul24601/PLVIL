@@ -642,7 +642,7 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
                     $('#bookEditionEdit').val(bookData.bookEdition);
                     $('#bookYearEdit').val(bookData.bookYear);
                     $('#PropertyEdit').val(bookData.Property);
-                    $('#callNumberEdit').val(bookData.callNumber);
+                    $('#callNumberEdit').val(bookData.CallNumber);
                     $('#isbnEdit').val(bookData.isbn);
 
 
