@@ -114,6 +114,18 @@ $userName = $userType === 'student-admin' ? 'Student Admin' : 'Library Admin';
             max-width: 100px;
             /* Set a maximum width for the text */
         }
+
+        .ui-autocomplete {
+            max-height: 200px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            z-index: 1051 !important;
+            /* Ensure it appears above modal */
+            background-color: white;
+            /* Match the modal's background color */
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
